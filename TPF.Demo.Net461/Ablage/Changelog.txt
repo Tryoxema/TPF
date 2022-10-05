@@ -1,0 +1,456 @@
+﻿--- 0.6.3 ---
+-Neue Controls
+--Dashboard
+	Das Dashboard ist ein ItemsControl welches als ItemContainer die neue Widget-Klasse verwendet.
+	Widget ist ein HeaderedContentControl welches über die Properties Top und Left im Dashboard positioniert wird.
+	Über die HorizontalSlots und VerticalSlots Properties wird die gesamtgrößer des Widgets im Dashboard festgelegt.
+	Im Dashboard wird mit den Properties SlotHeight und SlotWidth die Größe eines einzelnen Slots bestimmt.
+	Zusätzlich wird über die Gap-Property der Abstand zwischen den einzelnen Slots festgelegt.
+	Alle Widgets können innerhalb des Dashboards mithilfe von Drag&Drop frei positioniert werden, sofern die AllowDrag-Property auf true steht.
+--DataBar
+	Das DataBar-Control ist ein Element, mit dem man einen einzelnen Wert innerhalb eines Wertebereichs visuell darstellen kann.
+	Das Control besitzt eine Minimum und eine Maximum-Property, mit der man einen Wertebereich angeben kann.
+	Über die OriginValue-Property wird der Ursprungspunkt innerhalb des Wertebereichs festgelegt, von dem aus der Balken anfangen soll.
+	Die Value-Property bestimmt dann den tatsächlichen Wert, für den der Balken vom Ursprungspunkt aus gezeichnet wird.
+	Sollte der Wert der Value-Property den Wert aus Minimum unterschreiten, oder den Wert aus Maximum überschreiten, endet der Balken an der entsprechenden Stelle im Standard mit einer Spitze.
+	Dieses Verhalten kann über die UseBarShapeOutOfRangeMarker-Property deaktiviert werden und über die OutOfRangeMarkerType-Property kann die Form des Balkenendes ausgewählt werden.
+	Zusätzlich stellt DataBar die OverflowTemplate und UnderflowTemplate-Properties zur verfügung, die auch je nach Wert angezeigt werden können.
+	Sollte Value größer als OriginValue sein, wird der Balken mit dem Brush aus PositiveValueBrush gezeichnet, falls er kleiner ist mit NegativeValueBrush.
+	Das exakt gleiche Verhalten gibt es auch für den BorderBrush des Balkens und wird über die PositiveValueBarBorderBrush und NegativeValueBarBorderBrush-Properties gesteuert.
+	Den Ursprungspunkt kann man ebenfalls Visuell darstellen, indem man die OriginAxisVisibility-Property auf Visible setzt.
+	Weiter kann man das aussehen des Ursprungspunkts über die OriginAxisBrush und OriginAxisStyle-Properties konfigurieren.
+	Das Aussehen des Balkens selbst ist auch über mehrere Properties umfangreich konfigurierbar.
+	Über die BarHeightFactor-Property wird der Anteil festgelegt, den der Balken an der Gesamtgröße des Controls hat.
+	Mit der BarStrokeThickness lässt sich die Dicke des Rahmens des Balkens bestimmen und über BarStyle kann man einen Style für die weitere Konfiguration angeben.
+	Das DataBar-Control kommt auch zusätzlich mit einem Label, welches den aktuellen Wert an einer Auswahl an Positionen anzeigen kann.
+	Die Position des Labels wird über die LabelPosition-Property gesteuert, zusammen mit der LabelOffset-Property.
+	Über die LabelVisibility-Property kann gesteuert werden, ob das Label angezeigt werden soll oder nicht.
+	Mit LabelFormatString kann der Text des Labels zusätzlich noch formatiert werden und alle weiteren Anpassungen können über die LabelStyle-Property gemacht werden.
+--StackedDataBar
+	Das StackedDataBar-Control ist ein Element, mit dem man mehrere Werte in einem gestapelten Balken darstellen kann.
+	Über die ItemsSource-Property werden dem Control Daten zur verfügung gestellt und mithilfe der ValuePath-Property wird bestimmt, wo der Wert zu finden ist, der das Element repräsentieren soll.
+	Alle Werte werden dann in einem gestapelten Balken dargestellt, sofern sie innerhalb des Minimum-Maximum-Bereichs liegen.
+	Das Aussehen des Balkens selbst ist über mehrere Properties umfangreich konfigurierbar.
+	Über die BarHeightFactor-Property wird der Anteil festgelegt, den der Balken an der Gesamtgröße des Controls hat.
+	Mit der BarStrokeThickness lässt sich die Dicke des Rahmens des Balkens bestimmen und über BarStyle kann man einen Style für die weitere Konfiguration angeben.
+	Die BarBrushes-Property und die BarBorderBrushes-Property stellen eine Ansammlung an Brushes dar die genutzt werden, um den einzelnen Teilen des Balkens ihre Farbe zu geben.
+	Hierbei werden die Balkenteile nach Reihenfolge innerhalb der ItemsSource mit den Brushes aus den Collections versorgt.
+	Sollte es hierbei mehr Balkenteile als Brushes geben, wird wieder beim ersten Brush angefangen.
+	Es stehen im Standard die beiden Collections "BlueBrushCollection" und "PurpleBrushCollection" als Statische Ressourcen bereit.
+	Das Control besitzt genauso wie das DataBar-Control die Funktionalität eine Axe für den Nullpunkt des Balkens einzublenden und zu konfigurieren.
+	Diese Axe stellt hierbei immer den Punkt des Wertes 0 dar und wo der sich innerhalb des Balkens befindet.
+	Sollten Minimum oder Maximum unterschritten/überschritten werden, werden Elemente entstrechend der OverflowTemplate-Property und der UnderflowTemplate-Property eingeblendet.
+	Des weiteren kann über die ToolTipTemplate-Property ein DataTemplate festgelegt werden, welches als ToolTip der einzelnen Balkenteile verwendet wird.
+	Dieser ToolTip hat das entsprechende DataBarDataItem als DataContext über das dann direkt auf die Value-Property zugegriffen werden kann oder über DataItem auf das zu grunde liegende Item aus der ItemsSource.
+--StackedFullDataBar
+	Das StackedFullDataBar-Control ist eine Variation des StackedDataBar-Controls, welches allerdings kein Minimum und Maximum benutzt um seine Werte darzustellen.
+	Stattdessen werden alle Werte als ihr Absolutwert aufaddiert und relativ zueinander entsprechend der größe der Werte dargestellt.
+	Das StackedFullDataBar-Element eignet sich so hervorragend, um eine Verteilung von Anteilen zwischen einzelnen Elementen darzustellen.
+	Das Aussehen des Balkens selbst ist über mehrere Properties umfangreich konfigurierbar.
+	Über die BarHeightFactor-Property wird der Anteil festgelegt, den der Balken an der Gesamtgröße des Controls hat.
+	Mit der BarStrokeThickness lässt sich die Dicke des Rahmens des Balkens bestimmen und über BarStyle kann man einen Style für die weitere Konfiguration angeben.
+	Die BarBrushes-Property und die BarBorderBrushes-Property stellen eine Ansammlung an Brushes dar die genutzt werden, um den einzelnen Teilen des Balkens ihre Farbe zu geben.
+	Hierbei werden die Balkenteile nach Reihenfolge innerhalb der ItemsSource mit den Brushes aus den Collections versorgt.
+	Sollte es hierbei mehr Balkenteile als Brushes geben, wird wieder beim ersten Brush angefangen.
+	Es stehen im Standard die beiden Collections "BlueBrushCollection" und "PurpleBrushCollection" als Statische Ressourcen bereit.
+	Des weiteren kann über die ToolTipTemplate-Property ein DataTemplate festgelegt werden, welches als ToolTip der einzelnen Balkenteile verwendet wird.
+	Dieser ToolTip hat das entsprechende DataBarDataItem als DataContext über das dann direkt auf die Value-Property zugegriffen werden kann oder über DataItem auf das zu grunde liegende Item aus der ItemsSource.
+
+-Veränderte sonstige Klassen
+--DragDropState
+	Die Klasse DragDropState wurde erweitert um die Methoden GetPosition und SetDragEventArgs.
+	Über SetDragEventArgs kann dem DragDropState ein DragEventArgs-Objekt übergeben werden, welches dann intern für die Auswertung von GetPosition genutzt wird.
+	Über GetPosition kann man die relative Position der Maus zu einem gewissen IInputElement bekommen.
+	Falls über SetDragEventArgs dem DragDropState ein DragEventArgs-Objekt mitgegeben wurde, wird dessem Methode GetPosition aufgerufen, an sonsten die Methode der Mouse-Klasse.
+--DragDropHelper
+	Die Methode CreateState wurde um einen Parameter für DragEventArgs erweitert.
+--ISkin, alle davon erbenden Klassen und ResourceManager:
+	Neue Property SecondaryBrush
+    Neue Property SecondaryBorderBrush
+    Neue Property SecondaryMouseOverBrush
+    Neue Property SecondarySelectedBrush
+    Neue Property SecondaryPressedBrush
+    Neue Property SecondaryAccentBrush
+    Neue Property SecondaryMouseOverAccentBrush
+    Neue Property SecondaryFocusedAccentBrush
+    Neue Property SecondaryPressedAccentBrush
+    Neue Property SecondaryHeaderBrush
+    Neue Property SecondaryProgressBarBrush
+
+-Sonstige Änderungen
+--Neue Styles
+	Es wurden neue Styles für Standard WPF Controls eingefügt.
+	Bei diesen Controls handelt es sich um Label und Expander
+
+--- 0.6.2 ---
+-Veränderte Controls
+--TaskBoard
+	Das TaskBoard hat eine umfangreiche Überarbeitung erhalten um das gesamte Control zu verbessern und mehr Features zu ermöglichen.
+	Über das TaskBoard können z.B. Aufgaben auf eine übersichtliche Art und weise organisiert werden.
+	Dazu kann man eine Liste mit den Objekten an die ItemsSource-Property des TaskBoard-Controls binden und über die ColumnMappingPath-Property in Spalten unterteilen.
+	Diese Spalten können entweder selber definiert werden über die Columns-Property oder mithilfe der AutoGenerateColumns-Property automatisch generiert werden.
+	Sofern man AutoGenerateColumns auf true gesetzt hat, wird pro neuer TaskBoardColumn das AutoGeneratingColumn Event ausgelöst und kann genutzt werden, um die resultierende Spalte besser zu kontrollieren.
+	Für jedes Item in der ItemsSource des TaskBoards wird ein TaskBoardItem generiert und einer TaskBoardColumn zugewiesen.
+	Zur visuellen Darstellung wird im Standard ein TaskBoardCard-Objekt genutzt was für die Benutzung mit der bereitgestellten Klasse TaskBoardCardData gemacht wurde.
+	Die Darstellung kann über die Properties ItemTemplate, ItemTemplateSelector, ItemContainerStyle und ItemContainerStyleSelector nach Bedarf angepasst werden.
+	Über die Property IndicatorMapping kann mithilfe der BrushMap-Klasse ein Mapping für farbliche Zustände der TaskBoardCard angelegt werden, um eine schönere Visuelle zuordnung von Objekten zu ermöglichen.
+	Diese BrushMapCollection wird von der TaskBoardCard-Klasse automatisch genutzt wenn sie sich in einem TaskBoard befindet um mithilfe des Wertes in der Type-Property einen Wert für die IndicatorBrush-Property zu bestimmen.
+	Das TaskBoard besitzt außerdem einen umfangreich konfigurierbaren Header, der oberhalb des Spalten-Bereichs eingeblendet wird, wenn die HeaderVisibility-Property entsprechend gesetzt wird.
+	Die Spalten des TaskBoards kann man zwar auch einzeln konfigurieren, bei der Spaltenbreite ist es allerdings empfohlen diese über die ColumnWidth und CollapsedColumnWidth Properties des TaskBoards zu machen.
+	Um den Abstand zwischen den einzelnen TaskBoardColumns zu verändern kann man die ColumnGap-Property nutzen.
+	Bei der TaskBoardColumn selbst wird grundlegend erstmal über die Value-Property bestimmt, welche Objekte in diese Spalte eingeordnet werden sollen, in zusammenhang mit der ColumnMappingPath-Property des TaskBoards.
+	Auch hier ist eine umfangreiche Konfiguration des Headers der Spalte möglich und Spalten können sogar eingeklappt werden und besitzen dann einen eigenen Header, kontrolliert über die CollapsedHeaderTemplate-Property.
+	Ein weiteres Feature der TaskBoardColumn ist die Maximum-Property, die im Standard bei einer Angabe eines Wertes > 0 ebenfalls informativ im Header angezeigt wird, für etwas Selbstkontrolle bei der Verteilung.
+	Diese Property schränkt die Anzahl der Objekte innerhalb der Spalte allerdings nicht ein, sondern ist zum Teil für das Bestimmen der StateIndicator-Property gedacht.
+	Hierbei handelt es sich um einen Visuellen Indikator für den Zustand einer Spalte, der über die StateIndicatorSelector-Property der Column oder der ColumnStateIndicatorSelector-Property des TaskBoards bestimmt wird.
+	Verwendet wird dafür ein TaskBoardColumnStateIndicatorSelector, der in der Methode SelectIndicatorBrush den entsprechenden Brush auswählt.
+	Das Standard-Verhalten dieser Methode ist, bei überschreiten des Maximums den SolidColorBrush Brushes.Crimson auszuwählen und in allen anderen Fällen keinen Brush.
+	Für das umsortieren von Objekten zwischen den Spalten durch den Benutzer wird die eingebaute Drag&Drop-Funktionalität genutzt.
+	Diese benutzt das DragDrop-Framework um über die DragDropBehavior-Property mit einem Objekt vom Typ TaskBoardDragDropBehavior den gesamten Vorgang zu kontrollieren.
+	Zusätzlich werden die DragVisualProvider und DropVisualProvider Properties genutzt um eine visuelle Darstellung dieses Prozesses zu konfigurieren.
+	Am Ende des Drag&Drop-Vorgangs werden die Events CardDragEnding und CardDragEnded ausgelöst, die über die Änderung an dem bewegten Item informieren.
+	Das TaskBoard stellt des weiteren die RoutedEvents CardClicked und CardDoubleClicked zur Verfügung, über die man bei Klicks auf ein TaskBoardItem benachrichtig wird.
+--SearchTextBox
+	Die SearchTextBox wurde um die neue Property DrowDownWidth erweitert.
+	Hierbei handelt es sich um eine Property vom Typ GridLength, über die die Breite des DropDown-Popups gesteuert werden kann.
+	Die Property DropDownMinWidth wurde im zuge dieser Anpassungen zu einer Readonly-Property umgebaut.
+	Der Standardwert wür DrowDownWidth ist Auto, wodurch das Popup mindestens die Breite des Elements hat, aber mit den Suchergebnissen auch wächst.
+
+-Neue sonstige Klassen
+--NotifyObject
+	Das NotifyObject ist eine Basisklasse für den Fall, dass man einfach nur eine Implementation von INotifyPropertyChanged benötigt und sich etwas Code sparen möchte.
+	Es gibt 2 Funktionen für das Auslösen des PropertyChanged-Events: SetProperty und OnPropertyChanged.
+	OnPropertyChanged ist für den Fall das man einfach nur eine PropertyChanged-Nachricht für eine Property senden möchte: OnPropertyChanged("PropertyName").
+	SetProperty ist für den Fall, dass man eine Kurzform haben möchte um einen Wert z.B. innerhalb des set-Blocks zu setzen und bei Änderung eine PropertyChanged-Nachricht senden möchte.
+	Außerdem ist das Angeben des Property-Namens bei SetProperty optional, da über das CallerMemberName-Attribut dieser automatisch gefüllt wird: set { SetProperty(ref _propertyName, value); }
+--IntToVisibilityConverter
+	Der IntToVisibilityConverter ist ein IValueConverter der einen beliebigen Integer nimmt und in einen Wert vom Typ System.Windows.Visibility konvertiert.
+	Hierbei sind alle Werte größer als 0 Visibility.Visible und alle Werte 0 und kleiner sind Visibility.Collapsed.
+--IntToBooleanConverter
+	Der IntToBooleanConverter ist ein IValueConverter der einen beliebigen Integer nimmt und in einen bool-Wert konvertiert.
+	Hierbei sind alle Werte größer als 0 true und alle Werte 0 und kleiner sind false.
+
+-Veränderte sonstige Klassen
+--MathParser
+	Der MathParser der vorher nur intern von der NumericRangeBox genutzt wurde ist nun als public markiert und in den Namespace TPF.Calculation verschoben worden.
+	Zusätzlich wurde der MathParser erweitert um mit Parametern umgehen zu können.
+	Parameter werden zusätzlich mit der auszuwertenden Formel an die Parse-Methode übergeben als MathParserParameter-Objekte.
+	Falls ein Parameter doppelt angegeben wird, ignoriert der MathParser alle doppelten Werte. 
+	Alle Parameter die in der Formel angegeben sind und nicht an die Funktion übergeben werden, lösen Fehler aus.
+
+--- 0.6.1 ---
+-Neue Controls
+--HighlightingTextBlock
+	Der HighlightingTextBlock ist ein Control was eine Version des normalen TextBlocks darstellt, die um eine Highlighting-Funktion erweitert wurde.
+	Die wichtigsten Properties des TextBlocks sind auch beim HighlightingTextBlock vorhanden, zusammen mit weiteren Properties für das Highlighting.
+	Über Text wird ganz normal der Text festgelegt und über HighlightText wird dann der Text angegeben, welcher innerhalb des normalen Texts hervorgehoben werden soll.
+	Hierbei gibt es 3 Möglichkeiten für das Highlighting: Bold, Underline und Brush.
+	Bei Bold wird der entsprechende Teil Fett markiert, bei Underline unterstrichen und bei Brush wird der Text mit den Werten der Properties HighlightingForeground und HighlightingBackground dargestellt.
+	Durch die Property IgnoreCase kann man angeben ob Groß- und Kleinschreibung ignoriert werden soll oder nicht.
+--TabControl
+	Das TPF-TabControl ist eine erweiterte Version des normalen WPF-TabControls welches dieses um weitere Funktionalitäten ergänzt.
+	Über die neue Property ShowCloseButton kann in jedem TabItem ein Button eingeblendet werden, über den der Tab geschlossen werden kann.
+	Das von diesem Button genutzte Command kann in der statischen Klasse TabItemCommands unter dem Namen "Close" gefunden werden.
+	Wenn ein TabItem geschlossen wird, wird zuerst das Closing-Event ausgelöst, über das der Vorgang abgebrochen werden kann und danach das Closed-Event.
+	Außerdem gibt es über die Property ShowPinButton die Möglichkeit, einen Button einzublenden über den einzelne Tabs angepinnt oder wieder gelöst werden können.
+	Angepinnte TabItems werden in der Reihenfolge nach vorne befördert und dort hintereinander eingeordnet.
+	Wenn ein TabItem angepinnt wird löst es zuerst das PreviewTabPinned-Event aus, über das der Vorgang abgebrochen werden kann und danach das TabPinned-Event.
+	Beim Lösen eines TabItems wird zuerst das PreviewTabUnpinned-Event aus, über das der Vorgang abgebrochen werden kann und danach das TabUnpinned-Event.
+	Das von diesem Button genutzte Command kann in der statischen Klasse TabItemCommands unter dem Namen "TogglePin" gefunden werden.
+	Des weiteren kann über die Property CloseTabOnMiddleMouseButtonDown festgelegt werden, ob sich TabItems schließen sollen, wenn die mittlere Maustaste gedrückt wird.
+	Dieses Verhalten kann genau wie ShowCloseButton und ShowPinButton auf TabControl-Ebene sowie auf TabItem-Ebene festgelegt werden.
+	Über das setzen der Property AllowDragReorder kann bestimmt werden, ob die Reihenfolge der TabItems über Drag&Drop verändert werden kann.
+	Hierbei können nur angepinnte Items oder nicht angepinnte Items untereinander bewegt werden, ein nicht angepinntes Item kann nicht vor ein angepinntes Item bewegt werden.
+	Das TabControl stellt auch eine Möglichkeit zur Verfügung über die Property ShowAddButton einen Button anzeigen zu lassen, der für das Hinzufügen neuer TabItems gedacht ist.
+	Die tatsächliche Funktionalität wird dann über das AddButtonClicked-Event des TabControls gesteuert, um dem Benutzer maximale Konfigurierbarkeit zu geben.
+	Mithilfe der Property AddButtonContentTemplate kann das ContentTemplate des AddButtons überschrieben werden, um das Aussehen einfach anpassen zu können.
+	Zusätzlich kann auch über die Property ShowDropDownButton ein weiterer Button eingeblendet werden, der ein DropDown-Menü mit allen nicht versteckten TabItems öffnet.
+	Über dieses DropDown-Menü können die TabItems entweder ausgewählt oder geschlossen werden, sofern es für dieses TabItem erlaubt ist.
+	Auch bei diesem Button kann über eine Property DropDownButtonContentTemplate das ContentTemplate des DropDownButtons überschrieben werden.
+	Das TabItem besitzt außerdem eine Icon-Property, mit der zusätzlicher Content links neben dem Header plaziert werden kann.
+	Zusätzlich besitzt das TabItem die Property HeaderToolTip, über die ein ToolTip festgelegt werden kann, der nur auf dem Header angezeigt wird und nicht wenn man mit der Maus im ItemContent drin ist.
+
+-Veränderte Controls
+--ChromelessWindow
+	Das ChromelessWindow unterstützt nun die Funktion, bei einem Maximierten Fenster über Drag-Bewegung an der Titelleiste das Fenster aus dem Maximized-Zustand direkt zu bewegen.
+	Des weiteren wurde ein Fehler bei Multi-Monitor Setup behoben, wodurch das Fenster nicht korrekt dargestellt wurde bei unterschiedlichem Scaling.
+
+-Veränderte Sonstige Klassen:
+--ISkin, alle davon erbenden Klassen und ResourceManager:
+	Neue Property ScrollBarBackgroundBrush
+	Neue Property ScrollBarBrush
+	Neue Property ScrollBarMouseOverBrush
+	Neue Property ScrollBarPressedBrush
+
+-Sonstige Änderungen:
+--RangeObservableCollection
+	Die RangeObservableCollection würde um die neue Property ResetOnChange erweitert, die Standardmäßig auf true gesetzt ist und bestimmt, ob bei AddRange, InsertRange oder RemoveRange
+	als NotifyCollectionChangedAction entweder Reset oder entsprechend Add/Remove gesendet wird. Dies ist, um die Kompatibilität dieser Funktionen mit Standard WPF Controls wie der ListBox zu gewähren.
+--Styles gefixt
+	Die Styles für alle Eingabefelder berücksichtigen nun korrekt VerticalContentAlignment um z.B. mehrzeilige Textboxen korrekt gestalten zu können.
+--Converter
+	Der TPF.Converter-Namespace ist nun Teil des XML-Namespaces um die eingebauten Converter einfacher nutzen zu können.
+--Neue Styles
+	Es wurden neue Styles für Standard WPF Controls eingefügt.
+	Bei diesen Controls handelt es sich um ScrollBar, ScrollViewer, GroupBox, PasswordBox, GridSplitter und RepeatButton
+
+--- 0.6.0 ---
+-Neue Controls
+--DialogHost
+	Der DialogHost ist ein ContentControl mit dem Zweck, über dem enthaltenen Content ein Dialog-Fenster anzeigen zu können.
+	Es werden Events und über DependencyProperty festlegbare Callbacks für DialogOpened, DialogClosing und DialogClosed bereitgestellt, um auf alle wichtigen Situationen reagieren zu können.
+	DialogOpened und die zugehörigen Callbacks werden aufgerufen, wenn ein Dialog geöffnet wurde.
+	DialogClosing und die zugehörigen Callbacks werden aufgerufen, wenn ein Dialog geschlossen werden soll und liefern die Möglichkeit, diesen Vorgang auch noch abzubrechen.
+	DialogClosed und die zugehörigen Callbacks werden aufgerufen, wenn ein Dialog geschlossen wurde und liefern die Möglichkeit, den zurückgegebenen Wert und den DialogContent auszulesen.
+	Ein Dialog kann über mehrere Möglichkeiten gesetzt und aufgerufen werden, um größtmögliche Flexibilität liefern zu können.
+	Die eingebauten Möglichkeiten sind die Folgenden:
+	-Die statische Methode DialogHost.Show() kann genutzt werden, um bestimmten Content anzuzeigen, mit der Möglichkeit einen bestimmten DialogHost über seine Id anzusprechen und diverse Callbacks anzugeben.
+	-Die IsDialogOpen-DependencyProperty kann direkt gesetzt werden, um den in der DialogContent-Property angegebenen Dialog anzuzeigen.
+	-Das OpenDialog-RoutedCommand kann genutzt werden um einen Dialog zu öffnen, wobei optional über den CommandParameter der Content festgelegt werden kann.
+	-Die Extension-Methode Show(), die direkt auf eine Instanz von DialogHost aufgerufen werden kann, mit allen Optionen von DialogHost.Show(), außer der HostId.
+	-Die Extension-Methode ShowParentDialog, die auf jedes DependencyObject aufgerufen werden kann und die einen Dialog in dem ersten DialogHost anzeigt, der in dem VisualTree über dem DependencyObject liegt.
+	-Die Extension-Methode ShowChildDialog, die auf jedes DependencyObject aufgerufen werden kann und die einen Dialog in dem ersten DialogHost anzeigt, der in dem VisualTree innerhalb dem DependencyObject liegt.
+	 Hierbei ist auch die angabe einer HostId möglich, um einen bestimmten DialogHost anzusprechen
+--ChromelessWindow
+	Das ChromelessWindow ist eine umfangreiche Erweiterung für WPFs Window-Klasse, die den Standard-Style komplett entfernt, damit das Fenster wesentlich freier gestaltbar ist.
+	Durch die BorderBrushWhenActive-Property kann das Fenster einen anderen Rahmen haben wärend es das aktive Fenster ist, damit dieses Fenster Visuell noch besser erkennbar ist.
+	Der größte Teil der neuen Funktionalität bezieht sich auf das Konfigurieren der Titel-Leiste des Fensters.
+	Den Anfang hierbei machen die neuen Properties ShowIcon und IconMargin, mit denen noch größere Kontrolle auf die erscheinung des Fenster-Icons ausgeübt werden kann.
+	Als nächstes besitzt das ChromelessWindow eine Sammlung an Properties um den Titel-Text des Fensters zu konfigurieren.
+	Hierbei handelt es sich um die Properties ShowTitle, TitleMargin, TitleAlignment, TitleFontFamily, und TitleFontSize.
+	Der Bereich der Buttons um den Zustand des Fensters zu kontrollieren ist ebenfalls mit neuen Properties veränderbar.
+	Für diesen Bereich wurden die Properties MinimizeButtonStyle, MaximizeButtonStyle, RestoreButtonStyle, CloseButtonStyle, ShowMinimizeButton, ShowMaximizeButton und ButtonsAreaMargin eingefügt.
+	Des weiteren kann die Titel-Leiste mit weiteren Elementen erweitert werden, um dort zusätzliche Funktionalität hinzuzufügen.
+	Hierfür gibt es den LeftExtraTitleContent und RightExtraTitleContent mit den Zugehörigen ContentTemplate- und ContentTemplateSelector-Properties.
+	Der Bereich für LeftExtraTitleContent befindet sich zwischen den Bereichen für das Icon und den Title, wärend der RightExtraTitleContent zwischen Title und den Buttons sitzt.
+	Die Zustände des ChromelessWindows sind über die RoutedUICommands MinimizeWindow, MaximizeWindow, RestoreWindow und CloseWindow ebenfalls steuerbar, sollte dies benötigt werden.
+	Zuletzt gibt es noch die Möglichkeit über die Property ExtendContentAreaIntoTitleBar den verwendbaren Bereich des Fensters zu maximieren. 
+	Hierfür wird die TitleBar bis auf die Buttons zur Steuerung des Fenster-Zustands komplett ausgeblendet und ist somit ebenfalls verwendbarer Bereich.
+
+-Veränderte Controls
+--HamburgerMenu
+	Dem HamburgerMenu wurde ein ItemClicked-Event hinzugefügt, um die Funktionalität und Einsatzmöglichkeiten zu erhöhen.
+	Dieses Event wird zusammen mit dem neuen Click-Event der HamburgerMenuItems jedes mal ausgelöst, wenn ein HamburgerMenuItem, welches kein Header oder Separator ist, angeklickt wird.
+--SplitButton
+	Der SplitButton wurde erweitert sodass er wärend er den Fokus hat nun bei betätigen der Enter-Taste das Click-Event auslöst und über die Pfeiltaste nach unten das DropDown-Menü öffnet.
+
+-Sonstige Änderungen:
+--ResourceKeys überarbeitet
+	Die ResourceKeys von Styles und Templates würden um die Präfixe WPF. und TPF. erweitert, um Konflikte mit anderen Styles zu verhindern, wie z.B. aus anderen Libraries oder eigenen Styles.
+	Dies kann durchaus ein Breaking Change für bestehenden Code sein.
+--RecourceLink überarbeitet
+	Die ResourceLink-Klasse in ihrer bisherigen Funktionsweise hat ein Binding zu dem Wert des RecourceManagers hergestellt, dessen Namen dem angegebenen String entspricht.
+	Nun wurde die Funktionalität hinzugefügt, über ein neues Enum "RecourceKeys" und die zugehörige Property "Key" von IntelliSense die möglichen Ressourcen vorgeschlagen zu bekommen.
+	Die Schreibweise dieser neuen Variante sieht folgendermaßen aus: {tpf:ResourceLink Key=TextBrush}
+--Neue Styles
+	Es wurden neue Styles für Standard WPF Controls eingefügt.
+	Bei diesen Controls handelt es sich um ToolTip, CheckBox, ListBox und ListBoxItem.
+--Notification erweitert
+	Es ist nun möglich beim Erstellen einer neuen Notification beim Hinzufügen eines Buttons über .WithButton() anstatt den Content eine NotificationButtonConfiguration zu übergeben.
+	Über diese neue Klasse ist es möglich Content, ContentTemplate, Foreground und Background für einen bestimmten Button getrennt von den für alle Buttons geltenden Properties festzulegen.
+	Hierbei werden nur die Werte überschrieben die auch in dem Configuration-Objekt gesetzt wurden.
+
+--- 0.5.5 ---
+-Neue Controls
+--ProgressButton
+	Der ProgressButton ist eine erweiterte Implementierung des Buttons, wodurch die Funktionen eines Buttons und die einer ProgressBar in einem Element vereint wurden.
+	Über den ProgressButton kann man dadurch direkt an dem Button selbst den Fortschritt einer Aufgabe anzeigen, die durch das Klicken des Buttons gestartet wurde.
+
+-Veränderte Controls
+--HamburgerMenu
+	Das HamburgerMenu-Control wurde start überarbeitet, um das benutzen von Sub-Items zu erlauben und mehrere Arten der Darstellung nutzen zu können. 
+	Um das umsetzen zu können, wurde die Basisklasse von Selector zu ItemsControl runter gesetzt, da Selector das gewünschte verhalten nicht richtig abbilden konnte.
+	Dem HamburgerMenu wurde die neue Property DisplayMode hinzugefügt, die einem die Auswahl aus 3 Modi für die Darstellung erlaubt: Minimal, Compact und Expanded.
+	Der Standard ist Compact und in diesem Modus wird das eingeklappte Menü permanent an der Linken Seite angezeigt und beim ausklappen, wird das Menü über den Content drüber gelegt.
+	In Expanded wird das Menü erstmal ausgeklappt angezeigt und bietet die Möglichkeit zum einklappen. In diesem Modus belegt das Menü tatsächlich den Platz anstatt nur drüber gelegt zu werden.
+	Im Modus Minimal sieht man nur den Header-Bereich mit dem Button um das Menü aufzuklappen. Hierbei wird das Menü dann ausgeklappt eingeblendet und wie bei Compact nur über den Content drüber gelegt.
+	Desweiteren ist es nun möglich, einem HamburgerMenuItem Sub-Items zuzuweisen, um eine hierarchische Struktur aufbauen zu können.
+	Ebenfalls neu ist die Role-Property des HamburgerMenuItems, durch die man dem Item eine von 3 Rollen geben kann: Item, Header oder Separator.
+	Diese Rollen bestimmen das Aussehen und die Funktionalität des Items.
+	Header ist ein nicht auswählbares Element, was nur im ausgeklappten Zustand sichtbar ist.
+	Separator ist ein Element, welches als einfacher Trennstrich in der Struktur zum organisieren dient.
+	Item ist das klassische HamburgerMenuItem, welches Content besitzen kann, der im Content-Bereich des HamburgerMenu-Controls angezeigt wird und nun ebenfalls Sub-Items.
+
+--- 0.5.4 ---
+-Neue Controls
+--ToggleSwitchButton
+	Der ToggleSwitchButton ist eine erweiterte Implemetierung des ToggleButtons, um ein Schalter-ähnliches Verhalten für einen ToggleButton zu liefern, 
+	welches vor allem auf Mobilgeräten in Einstellungen verwendet wird.
+--PasswordBox
+	Die PasswordBox ist eine eigene Implementierung der PasswordBox, die auf der WatermarkTextBox basiert und sie um die Funktionen erweitert, die man von einer PasswordBox erwartet.
+	Zusätzlich zu den Standard-Features der PasswordBox kann dadurch ebenfalls die Watermark-Funktionalität genutzt werden.
+	Des weiteren besitzt die PasswordBox die Möglichkeit einen Button einzublenden, über den man das Passwort sichtbar machen kann, solange der Button gedrückt wird.
+
+-Veränderte Controls
+--ProgressBar
+	Die ProgressBar wurde überarbeitet und erbt nun nicht mehr von der WPF ProgressBar. Sie erbt nun von ProgressBarBase, welche von ContentControl erbt.
+	Durch diese Änderung kann die ProgressBar nun von sich aus Content unterstützen. Das Template wurde überarbeitet und besteht nun aus einem etwas anderen Aufbau.
+	Des weiteren wurde die Property Value der normalen ProgressBar gegen die neue Property Progress ausgetauscht und eine weitere Property namens SecondaryProgress eingefügt.
+	Die beiden Progress-Properties haben jeweils eine zugehörige Brush-Property, mit der man die Farbe des entsprechenden Fortschritts bestimmen kann.
+	Die Properties BorderThickness und CornerRadius sind nun ebenfalls für die Progress-Properties korrekt implementiert und werden nun korrekt dargestellt
+--RadialProgressBar
+	Die RadialProgressBar wurde komplett überarbeitet und erbt nun auch von ProgressBarBase und unterstützt dementsprechend nun auch den Indeterminate-Modus.
+	Das Template hat sich ebenfalls sehr groß geändert und besteht nur noch aus 3 Path-Objekten und einem ContentPresenter.
+	Des weiteren sind nun ebenfalls die SecondaryProgress-Properties vorhanden über die neue Basisklasse, wie in der normalen ProgressBar.
+	Über StartAngle und EndAngle wird nun eine Form unterstützt, die kein kompletter Kreis ist.
+	Durch die TrackRadius- und IndicatorRadius-Properties können die Größen der einzelnen Teile bestimmt werden, um in dem Bereich auch absolute Freiheit über das Layout zu bekommen.
+
+-Veränderte Sonstige Klassen:
+--ISkin, alle davon erbenden Klassen und ResourceManager:
+	Neue Property HyperlinkBrush
+	Neue Property HyperlinkVisitedBrush
+
+-Sonstige Änderungen:
+--.Net5-Support
+	Ab Version 0.5.4 ist TPF nun für .Net Framework 4.6.1 sowie für .Net 5 verfügbar
+
+--- 0.5.3 ---
+-Neue Controls
+--Calculator
+	Der Calculator ist ein simples Taschenrechner-Control, was alle Grundfunktionen eines klassischen Taschenrechners besitzt.
+	Fast alle Funktionen sind dank Tastaturunterstützung komplett ohne Maus nutzbar, um eine schnellere Eingabe zu ermöglichen.
+	Neben den Grundrechenarten besitzt der Taschenrechner ein paar weitere Funktionen, wie die Wurzelberechnung, sowie eine Speicherfunktion und eine Historie der aktuellen Rechnung.
+
+-Veränderte Controls
+--NumericRangeBox
+	Die Property SelectAllOnFocus wurde ausgetauscht gegen SelectionOnFocus. Mit dieser neuen Property hat man nun viel mehr Kontrolle darüber, was beim Fokus automatisch ausgewählt wird.
+--WatermarkTextBox
+	Die Property SelectionOnFocus wurde hinzugefügt. Mit dieser neuen Property hat man nun viel mehr Kontrolle darüber, was beim Fokus automatisch ausgewählt wird.
+	Zusätzlich wurde die ReadOnly-Property IsWatermarkVisible eingefügt, um mit der anderen neuen Property WatermarkBehavior ein flexibleres Verhalten des Wasserzeichens abbilden zu können.
+	Es ist nun möglich das Wasserzeichen nicht nur mit der Eingabe von Text zu verstecken, sondern auch beim Fokusieren.
+--TaskBoard
+	Der Drag&Drop-Prozess des TaskBoards wurde vollkommen überarbeitet.
+	Dem TaskBoard wurden die Properties DragDropBehavior, DragVisualProvider und DropVisualProvider hinzugefügt.
+	Über diese neuen Properties kann das TaskBoard ganz einfach auf das DragDrop-System zugreifen und das gesamte Verhalten und Aussehen konfigurieren.
+--ColorEditor
+	Der ColorEditor besitzt nun eine EyeDropper-Funktion, womit ganz einfach eine Farbe mit der Maus von überall auf dem Computer ausgewählt werden kann.
+	Dadurch wird es dem Benutzer erspart, über eine andere Quelle einen Farbcode rausfinden zu müssen, bevor er in dem ColorEditor benutzt werden kann.
+
+-Veränderte Sonstige Klassen:
+--DragVisualProviderData
+	Es gibt nun die Möglichkeit, die Opacity-Property zu setzen, die in dem DragVisualProvider verwendet werden kann.
+	Der DefaultDragVisualProvider greift automatisch auf diese Property zu.
+--DragDropHelper
+	Es wurde die neue Funktion ShouldShowDropVisual hinzugefügt, um bessere Kontrolle über den DropVisualProvider zu erlangen.
+
+--- 0.5.2 ---
+-Neue Controls
+--Divider
+	Der Divider ist ein Simples Control um einfach horizontale Trenner mit Content oder einen simplen vertikalen Trenner einzubauen.
+--StepProgressBar
+	Die StepProgressBar ist ein Control zum abbilden von Fortschritt in mehreren Schritten.
+	Ein klassischer Anwendungsfall ist das Nachverfolgen der einzelnen Schritte einer Bestellung bei einem Händler.
+	Das Control ermöglicht ein volkommenes Konfigurieren des Aussehens, sowie ein Horizontales oder Vertikales Layout der einzelnen Schritte und das Anzeigen von Beschreibenden Texten.
+
+-Veränderte Controls
+--Poptip
+	Der Poptip geht nun nicht mehr auf, wenn er keinen Content mehr hat, um ein leeres, inhaltsloses Rechteck zu verhindern
+--NumericRangeBox
+	Der Input der NumericRangeBox im AllowCalculations-Modus wurde so abgesichert, dass das Eingeben von mehreren Dezimal-Trennzeichen innerhalb der selben Zahl über die Tastatur nicht mehr möglich ist
+--Badge
+	Das Badge-Control wurde komplett überarbeitet, um einen flexibleren und simpleren Einsatz zu ermöglichen.
+	Statt wie vorher ein Wrapper um ein anderes Control zu sein, was zusätzlich noch einmal alle Properties für den Badge-Content besaß,
+	ist es nun ein Control, dass einzelstehend wie ein normales ContentControl verwendet werden kann, aber auch über eine AttachedProperty jedem anderen Element angehangen werden kann.
+	Die einzige Vorraussetzung zum Anhängen, ist das vorhandensein eines AdornerDecorators oder ScrollContentPresenters im VisualTree über dem Element, dem das Control angehangen werden soll.
+	Für den Fall, dass das Control einem anderen angehangen wird, übernimmt es automatisch den DataContext des Elements, dem es angehangen wird.
+	Es ist nun auch möglich, das Badge-Control anzuzeigen, obwohl der Content null ist, da die Sichtbarkeit nun vollständig über die Visibility-Property geregelt wird 
+	und nicht mehr automatisch ohne möglichkeit einzugreifen, ohne den Style komplett zu überschreiben.
+	Des weiteren kann das Badge-Control nun volkommen frei an einem anderen Control positioniert werden, anstatt auf ein paar vordefinierte Positionen beschränkt zu sein.
+	Hierfür gibt es mehrere HorizontalAlignment und VerticalAlignment Properties, sowie die Möglichkeit über 4 Position Properties die Position volkommen frei zu kontrollieren.
+	Durch dieses Rework wird das Badge-Control auch nicht mehr abgeschnitten, wenn sich neben dem Control direkt ein anderes befindet.
+
+--- 0.5.1 ---
+-Neue Controls:
+--UniformGrid
+	Eine alternative Implementierung des UniformGrids, das es in WPF schon gibt mit ein paar zusätzlichen Features für eine höhere Konfigurierbarkeit.
+--Poptip
+	Eine Alternative zum klassischen ToolTip. Ein Control mit dem man an einem beliebigen FrameworkElement an 12 unterschiedlichen Positionen beliebigen Content darstellen kann.
+	Der Poptip ist wie ein ToolTip, nur mit einem anderen Ein- und Ausblendeverhalten, sowie einer Festen Position relativ zum Element, dem der Poptip zugewiesen ist.
+	Über die entsprechenden Attached Properties ist es möglich allen Elementen die von FrameworkElement erben einen Poptip anzuhängen und mit ihm z.B. zusätzliche Informationen darzustellen.
+--Calendar
+	Eine umfangreiche Implementierung eines Kalendar-Controls mit größerem Funktionsumfang und sehr hoher Konfigurierbarkeit.
+	Dieses Calendar-Control bietet so ziemlich alles was von einem Kalendar benötigt wird und noch ein paar Bonus-Features, so wie die SpecialDates-Collection die es einem ermöglicht,
+	einzelne Tage besonders hervorzuheben oder über die SetToolTip-Funktion einzelnen Tagen einen ToolTip zu versehen, um z.B. zusammen mit den SpecialDates Hinweise an besonderen Tagen zu hinterlegen.
+	Der Kalendar hat die 3 Auswahlmodi Single, Multiple und Extended, um so ziemlich jeden Anwendungszweck abzudecken. Zusätzlich kann man konfigurieren, ob man Tage, Monate oder Jahre auswählen möchte.
+	Des weiteren bietet das Calendar-Control Tastaturunterstützung für einige seiner Funktionen wie z.B. über die Taste Pos1/Home den ersten Tag des aktuellen Monats auszuwählen, mit PageUp und PageDown
+	die aktuell angezeigte Seite zu ändern und noch vieles anderes. Der angezeigte und auswählbare Datums-Bereich ist über Properties volkommen konfigurierbar und in der Monats-Ansicht gibt es noch zusätzliche Optionen,
+	wie z.B. Wochentage oder Kalendarwochen anzeigen zu lassen. Es ist außerdem möglich, die Auswahl von ganz bestimmten Tagen zu verhindern und so ziemlich alles aus- und einzublenden wie man es haben möchte.
+
+-Veränderte Controls
+--SearchTextBox
+	Es ist nun möglich, die minimale und maximale Breite des Dropdowns zu Konfigurieren
+	Es ist nun möglich, die maximale Höhe des Dropdowns zu Konfigurieren
+	Besitzt nun die Properties NoResultsContent und NoResultsContentTemplate um dem Benutzer leichter vermitteln zu können, dass die Suche kein Ergebnis geliefert hat
+	Es gibt nun die Möglichkeit, einen Query-Button einzublenden. Über die QueryButtonCommand-Property kann eine eigene Funktion an diesen Button gebunden werden,
+	Standard-Command ist das SubmitQuery-Command, welches die Suche manuell startet
+
+-Veränderte Sonstige Klassen:
+--DependencyObjectExtension
+	Es wurden 2 neue Extension-Methoden für DependencyObject hinzugefügt.
+	1. FindParentByName<T> ist eine Methode, die den VisualTree nach oben her durchsucht und ein Parent des gewünschten Typs mit dem geforderten Namen zurückgibt.
+	2. FindChildByName<T> ist eine Methode, die den VisualTree nach unten hin durchsucht und ein ChildElement des gewünschten Typs mit dem geforderten Namen zurückgibt.
+	Beide Methoden akzeptieren einen Ziel-Typen der mindestens ein FrameworkElement sein muss, da die Name-Property vorhanden sein muss.
+
+--- 0.5.0 ---
+-Neue Controls:
+--Card
+	Ein ContentControl was vom MaterialDesign inspiriert wurde und einen CornerRadius mit Clipping zur Verfügung stellt
+--MaterialControl
+	Ein Design-Control, dass für den Einsatz in Styles von Controls mit Benutzer-Interaktion gemacht wurde und einen konfigurierbaren Ripple-Effekt zur Verfügung stellt.
+	Dieses Control sollte in Styles als Container für den Content selbst genutzt werden, also für enthaltene ContentControls oder ContentPresenter
+--FluentControl
+	Ein Design-Control, dass eine Erweiterung des MaterialControls darstellt und Einsatz in Styles von Controls mit Benutzer-Interaktion gemacht wurde.
+	Das Control stellt den selben Ripple-Effekt wie das MaterialControl zur Verfügung, sowie ein dem Mauszeiger folgenden Leuchte-Effekt und eine Border, die nur präsent ist, wenn der Mauszeiger in der nähe ist.
+--SimplePanel
+	Eine Implementation der Panel-Klasse, die einfach nur das Platzierungsverhalten von Grid, Dinge übereinander zu Platzieren, nachstellt, 
+	ohne die ganzen Extra-Features die Grid zur Verfügung stellt und den damit verbundenen mehraufwand bei den Berechnungen.
+	Also ganz kurz: Ein performantes Panel, wenn man einfach nur Elemente übereinander legen will
+
+-Neue Sonstige Klassen:
+--MaterialElement:
+	Stellt Properties für das benutzen des MaterialControls als AttachedProperties zur Verfügung.
+--MouseTracker
+	Eine Klasse die zum aktivieren eines Positions-Trackers auf UIElementen gemacht wurde
+--RevealBrushExtension
+	Eine MarkupExtension, die einen RadialGradientBrush erstellt, der anhand der Position des MouseTrackers bewegt wird und für den Reveal-Effekt des Fluent-Designs gedacht ist
+	Um den RevealBrush korrekt benutzen zu können, muss auf einem Container in dem sich das Element befindet der MouseTracker aktiviert werden und die Fläche um das Element was den Brush benutzen soll
+	muss ein Hintergrundfarbe besitzen, Transparent ist allerdings komplett in ordnung, die Background-Property darf einfach nur nicht null sein
+--DragDrop
+	Eine neue Möglichkeit, Drag&Drop-Vorgänge zwischen Controls zu verwalten. 
+	DragDrop ist eine abstrakte Klasse, die zum verwalten der Interaktionen zwischen den 3 Klassen DragDropBehavior, DragDropHelper und DragDropState.
+	Als Beispielimplementation sind die Klassen für den ListBoxDragDrop mitgeliefert.
+	Zusätzlich gibt es die Möglichkeit, über DragVisualProvider und DropVisualProvider ein visuelles Feedback für den Benutzer zu liefern.
+	DragVisualProvider erschafft ein DragVisual, was sich beim Draggen mit der Maus mitbewegt. 
+	Falls kein eigener angegeben wird, greift der DefaultDragVisualProvider. Dieser erschafft ein Abbild der bewegten ItemContainer.
+	DropVisualProvider erstellt und bewegt einen Marker, der die Stelle markieren soll, an der die neuen Items eingefügt werden.
+
+-Veränderte Controls:
+--Shadow:
+	Besitzt nun die AnimationDuration-Property, die den Animationszeitraum der Darken-Property festlegt.
+	Besitzt nun einen Style, der die Background-Property vom TemplateParent übernimmt, sofern sie nicht angegeben wurde.
+--NumericRangeBox
+	Wurde erweitert um die NumericValueType-Property, welche den Typen des aktuellen Wertes angibt. Die Werte sind Null|Zero|Positive|Negative|NaN|PositiveInfinity|NegativeInfinity
+	Besitzt nun 6 neue Properties zum verändern der Textfarbe im zusammenhang mit dem aktuellen Wert.
+	Die neuen Properties sind PositiveForegrount, NegativeForeground, ZeroForeground und die zugehörigen Apply...-Properties mit denen festgelegt wird, ob die festgelegten Farben auch angewendet werden sollen.
+--Verschiedene Controls
+	Bei vielen Controls wurden Grids an stellen wo deren Fortschrittliche Funktionen nicht benötigt wurde gegen das neue SimplePanel ausgetauscht
+
+-Veränderte Sonstige Klassen:
+--ShadowElement:
+	Neue Property AnimationDuration
+--ISkin, alle davon erbenden Klassen und ResourceManager:
+	Neue Property RippleOpacity
+	Neue Property RippleBrush
+--DragDropManager
+	Der DragDropManager besitzt nun die 2 neuen Events DragDropCompleted und DragDropCanceled.
+	Es wurden die Properties Orientation, MinimumHorizontalDragDistance und MinimumVerticalDragDistance hinzugefügt.
+	Orientation sagt dem DragDropManager, in welcher Richtung die Items in einem ItemsControl ausgerichtet sind.
+	MinimumHorizontalDragDistance und MinimumVerticalDragDistance sind die Pixel, die ein Element bewegt werden muss, bevor der DragDrop-Vorgang gestartet wird.
+
+--- 0.4.3 ---
+-Neue Controls:
+--SplitButton
+	Ein mehrteiliger Button, der einen Klickbaren Button und einen DropDown-Bereich für weiteren Content darstellt.
+--Rating
+	Ein Control was zum einfachen einbauen einer Bewertungs-Funktion gemacht ist.
+	Das Aussehen der einzelnen Teile, sowie ihre Anzahl sind frei Konfigurierbar und es gibt ebenfalls einen ReadOnly-Modus.

@@ -1,0 +1,52 @@
+﻿<UserControl x:Class="TPF.Demo.Net461.Views.StepProgressBarView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:tpf="http://schemas.tpf.com/xaml/presentation"
+             DataContext="{Binding RelativeSource={RelativeSource Self}}"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Label Content="StepProgressBar" Foreground="{tpf:ResourceLink Key=TextBrush}" HorizontalAlignment="Center"/>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <tpf:StepProgressBar Orientation="Horizontal" IndicatorClicked="StepProgressBar_IndicatorClicked" SelectedIndex="{Binding Value, ElementName=StepBarIndexField}" x:Name="StepBar">
+                <tpf:StepItem Content="Step 1"/>
+                <tpf:StepItem Content="Step 2"/>
+                <tpf:StepItem Content="Step 3"/>
+                <tpf:StepItem Content="Step 4"/>
+            </tpf:StepProgressBar>
+
+            <tpf:Shadow Grid.Column="1" ShadowDepth="Depth2" Margin="2" Background="{tpf:ResourceLink Key=PrimaryBrush}"/>
+            <Border Margin="2" BorderThickness="1" BorderBrush="{tpf:ResourceLink Key=BorderBrush}" Grid.Column="1">
+                <StackPanel>
+                    <Label Content="Settings" Foreground="{tpf:ResourceLink Key=TextBrush}" HorizontalAlignment="Center" FontSize="20"/>
+                    <Separator/>
+                    <StackPanel Margin="5 2">
+                        <TextBlock Text="SelectedIndex" Foreground="{tpf:ResourceLink Key=TextBrush}"/>
+                        <tpf:NumericRangeBox Value="0" x:Name="StepBarIndexField" Minimum="-1" Maximum="3" NumberDecimalDigits="0"/>
+                    </StackPanel>
+                    <StackPanel Margin="5 2">
+                        <TextBlock Text="Orientation" Foreground="{tpf:ResourceLink Key=TextBrush}"/>
+                        <tpf:ComboBox SelectedValue="{Binding Orientation, ElementName=StepBar}" ItemsSource="{Binding Orientations}"/>
+                    </StackPanel>
+                    <StackPanel Margin="5 2">
+                        <TextBlock Text="ItemSpacing" Foreground="{tpf:ResourceLink Key=TextBrush}"/>
+                        <tpf:NumericRangeBox Value="{Binding ItemSpacing, ElementName=StepBar}" Minimum="10" NumberDecimalDigits="0"/>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>

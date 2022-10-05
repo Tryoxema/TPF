@@ -1,0 +1,98 @@
+﻿---Input/Editor---
+[X] NumericTextBox
+[X] WatermarkTextBox
+[X] SearchTextBox
+[X] PasswordBox
+[X] ComboBox
+[ ] MultiColumnComboBox
+[ ] MaskedInputBox
+[X] Calculator
+[X] Slider
+[ ] RangeSlider
+[ ] ColorPicker
+[X] ColorEditor
+[ ] Timespan-Editor
+[ ] Node-Editor
+[ ] Image-Editor
+[X] HighlightingTextBlock
+[ ] Keyboard
+---Buttons---
+[X] Button
+[X] PathButton
+[X] ToggleSwitchButton
+[X] DropDownButton
+[X] SplitButton
+[X] HyperlinkButton
+[X] ProgressButton
+[X] Tile
+---Navigation/Menüs---
+[X] TabControl
+[X] HamburgerMenu
+[X] RadialMenu
+[ ] NavigationBar
+[ ] RibbonMenu
+[ ] ContextMenu
+[ ] SplitView
+[ ] Wizard
+[ ] Breadcrumb
+---Layout---
+[X] ChromelessWindow
+[ ] DockingControl
+[X] Dashboard
+[X] RadialPanel
+[X] SimplePanel
+[X] UniformGrid
+[ ] Carousel
+[X] Card
+[X] Divider
+---Interaktivität---
+[X] BusyIndicator
+[X] ProgressBar
+[X] RadialProgressBar
+[X] StepProgressBar
+[X] Rating
+[X] Notification
+[ ] DesktopAlert
+[ ] ToolTip???
+[X] Poptip
+[ ] Flyout
+[ ] Callout
+[X] DialogHost
+[X] Badge
+[ ] HubTile
+[X] DragDrop
+---Datum/Kalender/Planung---
+[ ] DatePicker
+[ ] DateTimePicker
+[ ] TimePicker
+[X] Calendar
+[ ] Clock
+[X] TaskBoard
+[ ] Scheduler
+---Daten-Management---
+[ ] DataGrid
+[ ] DataPager
+[ ] ListBox
+[ ] PropertyGrid
+---Daten-Auswertung/Diagramme---
+[ ] BarCode
+[ ] DataAxis
+[X] DataBar
+[ ] SparkLine
+[ ] ChartView
+[ ] ChartView3D
+[ ] TimeLine
+[ ] PlotView
+[ ] Legend
+[ ] LinearGauge
+[ ] RadialGauge
+---Design---
+[X] Shadow
+[X] MaterialControl
+[X] FluentControl
+[X] Reveal-System
+[X] Skins
+[X] ResourceManager
+[ ] Themes
+---Misc---
+[X] Shield

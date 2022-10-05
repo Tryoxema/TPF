@@ -1,0 +1,75 @@
+﻿<UserControl x:Class="TPF.Demo.Net461.Views.CalendarView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:controls="clr-namespace:TPF.Demo.Net461.Controls"
+             xmlns:tpf="http://schemas.tpf.com/xaml/presentation"
+             xmlns:converter="clr-namespace:TPF.Demo.Net461.Converter"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <converter:VisibliltyToBooleanConverter x:Key="VisibliltyToBooleanConverter"/>
+        <DataTemplate x:Key="SpecialDateRedTemplate">
+            <StackPanel>
+                <Rectangle Fill="Red" Height="4" MinWidth="12"/>
+                <TextBlock Text="{Binding}" HorizontalAlignment="Center"/>
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate x:Key="SpecialDateBlueTemplate">
+            <StackPanel>
+                <Rectangle Fill="DodgerBlue" Height="4" MinWidth="12"/>
+                <TextBlock Text="{Binding}" HorizontalAlignment="Center"/>
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate x:Key="SpecialDateGreenTemplate">
+            <StackPanel>
+                <Rectangle Fill="ForestGreen" Height="4" MinWidth="12"/>
+                <TextBlock Text="{Binding}" HorizontalAlignment="Center"/>
+            </StackPanel>
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Label Content="Calendar" Foreground="{tpf:ResourceLink Key=TextBrush}" HorizontalAlignment="Center"/>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="2*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <tpf:Calendar Grid.Column="0" HorizontalAlignment="Center" VerticalAlignment="Center" x:Name="DemoCalendar"/>
+
+            <tpf:Shadow Grid.Column="1" ShadowDepth="Depth2" Margin="2" Background="{tpf:ResourceLink Key=PrimaryBrush}"/>
+            <Border Margin="2" BorderThickness="1" BorderBrush="{tpf:ResourceLink Key=BorderBrush}" Grid.Column="1">
+                <StackPanel>
+                    <Label Content="Settings" Foreground="{tpf:ResourceLink Key=TextBrush}" HorizontalAlignment="Center" FontSize="20"/>
+                    <Separator/>
+                    <StackPanel Margin="5 2">
+                        <TextBlock Text="Rows" Foreground="{tpf:ResourceLink Key=TextBrush}"/>
+                        <tpf:NumericRangeBox Value="{Binding Rows, ElementName=DemoCalendar, Mode=TwoWay}" Minimum="1" Maximum="4" NumberDecimalDigits="0"/>
+                    </StackPanel>
+                    <StackPanel Margin="5 2">
+                        <TextBlock Text="Columns" Foreground="{tpf:ResourceLink Key=TextBrush}"/>
+                        <tpf:NumericRangeBox Value="{Binding Columns, ElementName=DemoCalendar, Mode=TwoWay}" Minimum="1" Maximum="4" NumberDecimalDigits="0"/>
+                    </StackPanel>
+
+                    <CheckBox Margin="5 2" Foreground="{tpf:ResourceLink Key=TextBrush}" Content="IsReadOnly" IsChecked="{Binding IsReadOnly, ElementName=DemoCalendar, Mode=TwoWay}"/>
+                    <CheckBox Margin="5 2" Foreground="{tpf:ResourceLink Key=TextBrush}" Content="AreWeekNamesVisible" IsChecked="{Binding AreWeekNamesVisible, ElementName=DemoCalendar, Mode=TwoWay}"/>
+                    <CheckBox Margin="5 2" Foreground="{tpf:ResourceLink Key=TextBrush}" Content="AreWeekNumbersVisible" IsChecked="{Binding AreWeekNumbersVisible, ElementName=DemoCalendar, Mode=TwoWay}"/>
+                    <CheckBox Margin="5 2" Foreground="{tpf:ResourceLink Key=TextBrush}" Content="IsTodayHighlighted" IsChecked="{Binding IsTodayHighlighted, ElementName=DemoCalendar, Mode=TwoWay}"/>
+                    <CheckBox Margin="5 2" Content="HeaderVisible" Foreground="{tpf:ResourceLink Key=TextBrush}"
+                              IsChecked="{Binding HeaderVisibility, ElementName=DemoCalendar, Mode=TwoWay, Converter={StaticResource VisibliltyToBooleanConverter}}"/>
+                    <CheckBox Margin="5 2" Content="ViewsHeaderVisible" Foreground="{tpf:ResourceLink Key=TextBrush}"
+                              IsChecked="{Binding ViewsHeaderVisibility, ElementName=DemoCalendar, Mode=TwoWay, Converter={StaticResource VisibliltyToBooleanConverter}}"/>
+                    <CheckBox Margin="5 2" Content="SpecialDates Demo" Foreground="{tpf:ResourceLink Key=TextBrush}" Checked="CheckBox_Checked" Unchecked="CheckBox_Unchecked"/>
+                </StackPanel>
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>

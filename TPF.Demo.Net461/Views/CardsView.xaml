@@ -1,0 +1,63 @@
+﻿<UserControl x:Class="TPF.Demo.Net461.Views.CardsView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:tpf="http://schemas.tpf.com/xaml/presentation"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Label Content="Card" Foreground="{tpf:ResourceLink Key=TextBrush}" HorizontalAlignment="Center"/>
+
+        <StackPanel Margin="10 0 0 0" Grid.Row="1" Orientation="Horizontal">
+            <tpf:Card Width="120" Height="200" CornerRadius="2">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="40"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="40"/>
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Text="Titel" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+
+                    <Border Grid.Row="1" Background="LightGray" BorderThickness="0 1" BorderBrush="{tpf:ResourceLink Key=BorderBrush}">
+                        <TextBlock Text="Bild" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black"/>
+                    </Border>
+
+                    <TextBlock Grid.Row="2" Text="Irgend ein Text der etwas beschreibt" TextWrapping="Wrap" Margin="3 0"/>
+                </Grid>
+            </tpf:Card>
+            <tpf:Card Width="120" Height="200" Margin="10 0">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+
+                    <Border Grid.Row="0" Background="LightGray" BorderThickness="0 0 0 1" BorderBrush="{tpf:ResourceLink Key=BorderBrush}">
+                        <TextBlock Text="Bild" VerticalAlignment="Center" HorizontalAlignment="Center" Foreground="Black"/>
+                    </Border>
+
+                    <StackPanel Grid.Row="1" Margin="5">
+                        <TextBlock Text="Titel" FontWeight="Bold" VerticalAlignment="Center"/>
+                        <TextBlock Text="Irgend ein Text der etwas beschreibt" TextWrapping="Wrap"/>
+                    </StackPanel>
+                </Grid>
+            </tpf:Card>
+            <tpf:Card Width="120" Height="30" Background="{tpf:ResourceLink Key=HeaderBrush}" Foreground="{tpf:ResourceLink Key=SelectedTextBrush}">
+                <TextBlock Text="Langweiliger Text" VerticalAlignment="Center" Margin="5"/>
+            </tpf:Card>
+            <tpf:Card Width="120" Height="50" Margin="10 0" CornerRadius="{Binding Value, ElementName=CornerRadiusInputBox}">
+                <StackPanel Margin="4 2">
+                    <TextBlock Text="CornerRadius"/>
+                    <tpf:NumericRangeBox x:Name="CornerRadiusInputBox" Value="5" NumberDecimalDigits="0" Minimum="0"/>
+                </StackPanel>
+            </tpf:Card>
+        </StackPanel>
+    </Grid>
+</UserControl>
