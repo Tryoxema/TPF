@@ -76,7 +76,7 @@
 [ ] PropertyGrid
 ---Daten-Auswertung/Diagramme---
 [ ] BarCode
-[ ] DataAxis
+[X] DataAxis
 [X] DataBar
 [ ] SparkLine
 [ ] ChartView
@@ -96,3 +96,4 @@
 [ ] Themes
 ---Misc---
 [X] Shield
+[ ] SplashScreen

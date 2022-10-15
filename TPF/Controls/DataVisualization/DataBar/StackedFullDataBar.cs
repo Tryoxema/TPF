@@ -261,6 +261,8 @@ namespace TPF.Controls
 
         private void AddDataBarDataItems(IEnumerable items)
         {
+            if (items == null) return;
+
             foreach (var item in items)
             {
                 var dataItem = new DataBarDataItem()
@@ -275,6 +277,8 @@ namespace TPF.Controls
 
         private void RemoveDataBarDataItems(IEnumerable items)
         {
+            if (items == null) return;
+
             foreach (var item in items)
             {
                 var dataItem = DataBarDataItems.FirstOrDefault(x => x.DataItem == item);

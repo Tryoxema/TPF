@@ -228,7 +228,7 @@ namespace TPF.Controls.Specialized.DataBar
             foreach (var item in items)
             {
                 var visualItem = FindContainerFromDataItem(item);
-
+                BindingOperations.ClearAllBindings(visualItem);
                 Children.Remove(visualItem);
             }
         }

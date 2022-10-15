@@ -1,4 +1,19 @@
-﻿--- 0.6.3 ---
+﻿--- 0.6.4 ---
+-Neue Controls
+--DataAxis
+	Das DataAxis-Control ist ein Element, welches als Unterstützung für das StackedDataBar-Control entwickelt wurde.
+	Über die Minimum- und Maximum-Properties wird dem Control der darzustellende Zahlenraum mitgeteilt und über viele weitere Properties kann diese Darstellung konfiguriert werden.
+	Die Property TickInterval bestimmt den Abstand der einzelnen Ticks, die von dem Control gemalt werden.
+	Bei den Ticks kann dann über die MajorTickFrequency konfiguriert werden, in welchem Abstand ein Tick als MajorTick dargestellt wird.
+	Mithilfe der LabelMode-Property wird zudem genutzt um rauszufinden, welche Logik für die MajorTicks angewendet werden soll.
+	Für den Fall das diese Property auf MajorTick steht, wird die MajorTickFrequency genutzt, um Ticks in dem bestimmten Intervall als MajorTick darzustellen.
+	Sollte sich die LabelMode-Property auf dem Wert None befinden, werden gar keine MajorTicks generiert.
+	Bei allen anderen Werten werden Minimum und Maximum ebenfalls automatisch als MajorTicks dargestellt.
+	Ein MajorTick unterscheidet seine Größe und die Darstellung über einen zusätzlichen TextBlock, der seinen Wert darstellt, von den normalen Ticks.
+	Die Properties MajorTickLength und MinorTickLength bestimmen dabei die Länge der einzelnen Ticks.
+	Über die TickBrush-Property kann ebenfalls die Farbe der Axe unabhängig von den Textblöcken angepasst werden.
+
+--- 0.6.3 ---
 -Neue Controls
 --Dashboard
 	Das Dashboard ist ein ItemsControl welches als ItemContainer die neue Widget-Klasse verwendet.
