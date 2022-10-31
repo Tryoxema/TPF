@@ -20,8 +20,8 @@ namespace TPF.Internal
             {
                 var propertyName = pathParts[i];
 
-                int brackStart = propertyName.IndexOf("[");
-                int brackEnd = propertyName.IndexOf("]");
+                var brackStart = propertyName.IndexOf("[");
+                var brackEnd = propertyName.IndexOf("]");
 
                 var property = currentType.GetProperty(brackStart > 0 ? propertyName.Substring(0, brackStart) : propertyName);
                 result = property.GetValue(result, null);
@@ -67,7 +67,7 @@ namespace TPF.Internal
 
         internal static TValue GetDictionaryElement<TKey, TValue>(IDictionary<TKey, TValue> dictionary, object index)
         {
-            TKey key = (TKey)Convert.ChangeType(index, typeof(TKey), null);
+            var key = (TKey)Convert.ChangeType(index, typeof(TKey), null);
             return dictionary[key];
         }
 

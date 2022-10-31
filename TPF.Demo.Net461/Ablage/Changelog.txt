@@ -13,6 +13,12 @@
 	Die Properties MajorTickLength und MinorTickLength bestimmen dabei die Länge der einzelnen Ticks.
 	Über die TickBrush-Property kann ebenfalls die Farbe der Axe unabhängig von den Textblöcken angepasst werden.
 
+-Veränderte sonstige Klassen
+--DataBarDataItem
+	Die DataBarDataItem-Klasse erbt nun nicht mehr von NotifyObject sondern von der neuen Klasse DataVisualizationItemBase.
+	Diese neue Basisklasse stellt die Methode GetValueFromPath zur verfügung, über die ein Wert anhand seines Pfades aus dem enthaltenen DataItem geholt werden kann.
+	GetValueFromPath nutzt hierbei eine viel effizientere Methode als Reflection, um den Wert schneller zur verfügung zu stellen.
+
 --- 0.6.3 ---
 -Neue Controls
 --Dashboard

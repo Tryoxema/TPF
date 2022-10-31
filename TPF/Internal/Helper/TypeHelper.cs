@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using System.Globalization;
 
 namespace TPF.Internal
 {
@@ -28,6 +29,29 @@ namespace TPF.Internal
             if (listType.IsGenericType) return listType.GenericTypeArguments[0];
             else if (list.Count > 0) return list[0].GetType();
             else return null;
+        }
+
+        internal static bool TryConvert(object value, Type type, out object returnValue)
+        {
+            try
+            {
+                var sourceType = value.GetType();
+                var typeConverter = type.GetTypeConverter();
+
+                if (typeConverter != null && typeConverter.CanConvertFrom(sourceType))
+                {
+                    returnValue = typeConverter.ConvertFrom(value);
+                    return true;
+                }
+
+                returnValue = Convert.ChangeType(value, type.GetNonNullableType(), CultureInfo.CurrentCulture);
+                return true;
+            }
+            catch (Exception)
+            {
+                returnValue = null;
+                return false;
+            }
         }
     }
 }
