@@ -101,6 +101,10 @@
                             <tpf:StackedFullDataBar Height="20" ItemsSource="{Binding DataBarTests}" ValuePath="Value" BarBrushes="{StaticResource PurpleBrushCollection}" VerticalAlignment="Top"/>
                             <tpf:DataAxis Orientation="Vertical" Margin="0 10"/>
                         </StackPanel>
+
+                        <StackPanel Grid.Column="1">
+                            <tpf:LinearSparkline ItemsSource="{Binding SparklineTests}" XValuePath="X" YValuePath="Y" Width="200" Height="40" ShowAxis="True"/>
+                        </StackPanel>
                     </Grid>
                 </Grid>
             </tpf:TabItem>
@@ -282,7 +286,9 @@
                                 <tpf:Rating Value="4.3"/>
                             </StackPanel>
                         </tpf:Widget>
-                        <tpf:Widget Top="1" Left="2"/>
+                        <tpf:Widget Top="1" Left="2">
+                            <tpf:LinearSparkline ItemsSource="{Binding SparklineTests}" XValuePath="X" YValuePath="Y" Width="120" Height="50" ShowAxis="True" ShowNormalRange="True" NormalRangeTop="5" NormalRangeBottom="0"/>
+                        </tpf:Widget>
                         <tpf:Widget HorizontalSlots="2" VerticalSlots="2">
                             <tpf:Calendar/>
                         </tpf:Widget>
@@ -342,8 +348,15 @@
                 </StackPanel>
             </StatusBarItem>
             <StatusBarItem>
-                <tpf:SearchTextBox Width="200" Searching="SearchTextBox_Searching" ItemSelected="SearchTextBox_ItemSelected" SearchPath="DisplayName" DisplayMemberPath="DisplayName" 
-                                   DropDownDirection="Top" ClearAfterSelection="True" SearchMode="Event" NoResultsContent="Kein Ergebnis"/>
+                <tpf:SearchTextBox Width="200" Searching="SearchTextBox_Searching" ItemSelected="SearchTextBox_ItemSelected" SearchPath="DisplayName" 
+                                   DropDownDirection="Top" ClearAfterSelection="True" SearchMode="Event" NoResultsContent="Kein Ergebnis">
+                    <tpf:SearchTextBox.ItemTemplate>
+                        <DataTemplate>
+                            <tpf:HighlightingTextBlock Text="{Binding DisplayName}" IgnoreCase="True" HighlightText="{Binding Value, RelativeSource={RelativeSource AncestorType=tpf:SearchTextBox}}"
+                                                       Foreground="{Binding (TextElement.Foreground), RelativeSource={RelativeSource AncestorType=ContentPresenter}}"/>
+                        </DataTemplate>
+                    </tpf:SearchTextBox.ItemTemplate>
+                </tpf:SearchTextBox>
             </StatusBarItem>
             <StatusBarItem>
                 <StackPanel Orientation="Horizontal">

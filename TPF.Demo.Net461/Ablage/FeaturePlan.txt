@@ -78,7 +78,10 @@
 [ ] BarCode
 [X] DataAxis
 [X] DataBar
-[ ] SparkLine
+[X] LinearSparkLine
+[ ] AreaSparkLine
+[ ] ColumnSparkLine
+[ ] WinLossSparkLine
 [ ] ChartView
 [ ] ChartView3D
 [ ] TimeLine

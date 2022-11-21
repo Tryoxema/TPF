@@ -38,6 +38,13 @@ namespace TPF.Demo.Net461
             DataBarTests.Add(new DataBarTest(5));
             DataBarTests.Add(new DataBarTest(9));
             DataBarTests.Add(new DataBarTest(6));
+
+            var random = new Random();
+
+            for (int i = 0; i < 20; i++)
+            {
+                SparklineTests.Add(new SparklineTest(i, random.Next(-10, 10)));
+            }
         }
 
         #region SetProperty
@@ -87,6 +94,12 @@ namespace TPF.Demo.Net461
         public ObservableCollection<DataBarTest> DataBarTests
         {
             get { return _dataBarTests ?? (_dataBarTests = new ObservableCollection<DataBarTest>()); }
+        }
+
+        ObservableCollection<SparklineTest> _sparklineTests;
+        public ObservableCollection<SparklineTest> SparklineTests
+        {
+            get { return _sparklineTests ?? (_sparklineTests = new ObservableCollection<SparklineTest>()); }
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -163,7 +176,7 @@ namespace TPF.Demo.Net461
         }
     }
 
-    public class DataBarTest
+    public class DataBarTest : NotifyObject
     {
         public DataBarTest(double value)
         {
@@ -171,8 +184,41 @@ namespace TPF.Demo.Net461
             Name = "Test";
         }
 
-        public double Value { get; set; }
+        double _value;
+        public double Value
+        {
+            get { return _value; }
+            set { SetProperty(ref _value, value); }
+        }
 
-        public string Name { get; set; }
+        string _name;
+        public string Name
+        {
+            get { return _name; }
+            set { SetProperty(ref _name, value); }
+        }
+    }
+
+    public class SparklineTest : NotifyObject
+    {
+        public SparklineTest(double x, double y)
+        {
+            X = x;
+            Y = y;
+        }
+
+        double _x;
+        public double X
+        {
+            get { return _x; }
+            set { SetProperty(ref _x, value); }
+        }
+
+        double _y;
+        public double Y
+        {
+            get { return _y; }
+            set { SetProperty(ref _y, value); }
+        }
     }
 }

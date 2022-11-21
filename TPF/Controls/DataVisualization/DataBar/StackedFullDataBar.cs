@@ -271,6 +271,8 @@ namespace TPF.Controls
                     ValuePath = ValuePath
                 };
 
+                dataItem.PropertyChanged += DataItem_PropertyChanged;
+
                 DataBarDataItems.Add(dataItem);
             }
         }
@@ -283,7 +285,19 @@ namespace TPF.Controls
             {
                 var dataItem = DataBarDataItems.FirstOrDefault(x => x.DataItem == item);
 
-                if (dataItem != null) DataBarDataItems.Remove(dataItem);
+                if (dataItem != null)
+                {
+                    dataItem.PropertyChanged -= DataItem_PropertyChanged;
+                    DataBarDataItems.Remove(dataItem);
+                }
+            }
+        }
+
+        private void DataItem_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "Value")
+            {
+                CalculateBars();
             }
         }
 

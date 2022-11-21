@@ -5647,4 +5647,25 @@
         </Setter>
     </Style>
     <Style TargetType="dataaxis:DataAxisLabelsControl" BasedOn="{StaticResource TPF.DataAxisLabelsControlStyle}"/>
+    
+    <!--LinearSparkline-->
+    <Style TargetType="tpf:LinearSparkline" x:Key="TPF.LinearSparklineStyle">
+        <Setter Property="AxisBrush" Value="{tpf:ResourceLink Key=GlyphBrush}"/>
+        <Setter Property="LineBrush" Value="{tpf:ResourceLink Key=AccentBrush}"/>
+        <Setter Property="NormalRangeBrush" Value="{tpf:ResourceLink Key=BorderBrush}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="tpf:LinearSparkline">
+                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                        <tpf:SimplePanel>
+                            <Path x:Name="PART_NormalRange" Fill="{TemplateBinding NormalRangeBrush}"/>
+                            <Polyline Stroke="{TemplateBinding LineBrush}" Points="{TemplateBinding LinePoints}" Style="{TemplateBinding LineStyle}"/>
+                            <Line x:Name="PART_Axis" Stroke="{TemplateBinding AxisBrush}" StrokeThickness="1"/>
+                        </tpf:SimplePanel>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="tpf:LinearSparkline" BasedOn="{StaticResource TPF.LinearSparklineStyle}"/>
 </ResourceDictionary>

@@ -12,6 +12,24 @@
 	Ein MajorTick unterscheidet seine Größe und die Darstellung über einen zusätzlichen TextBlock, der seinen Wert darstellt, von den normalen Ticks.
 	Die Properties MajorTickLength und MinorTickLength bestimmen dabei die Länge der einzelnen Ticks.
 	Über die TickBrush-Property kann ebenfalls die Farbe der Axe unabhängig von den Textblöcken angepasst werden.
+--LinearSparkline
+	Das LinearSparkline-Control ist ein Element, welches zum Darstellen von Zahlentrends entwickelt wurde.
+	Die XValuePath-Property steuert die Position des Datenpunkts auf der X-Achse, ist allerdings optional.
+	Wenn die Property leer gelassen wird, werden die Elemente nach Reihenfolge in der ItemsSource angeordnet.
+	Über die YValuePath-Property wird der Wert auf der Y-Achse gesteuert.
+	Ein Wert für die Y-Achse ist für die Darstellung des Datenpunktes benötigt, über die EmptyPointBehavior-Property kann hierbei dann gesteuert werden, wie mit leeren Y-Werten umgegangen wird.
+	Es gibt die Optionen leere Datenpunkte zu ignorieren, sie als 0 darzustellen oder auf den Durchschnittswert zwischen dem vorherigen und dem nächsten Punkt zu setzen.
+	Mit der ShowAxis-Property kann eine Linie auf der X-Achse eingeblendet werden, die den Wert der AxisValue-Property darstellt.
+	Die Farbe dieser Linie kann über die AxisBrush-Property gesteuert werden.
+	Die tatsächliche Datenlinie kann über die Properties LineBrush und LineStyle in der Darstellung konfiguriert werden.
+	Zusätzlich kann eine NormalRange über die ShowNormalRange-Property eingeblendet werden und über die Properties NormalRangeTop und NormalRangeBottom eingestellt werden.
+	Über die NormalRangeBrush-Property kann die Farbe dieser NormalRange eingestellt werden.
+
+-Neue sonstige Klassen
+--SkinChanger
+	Die SkinChanger-Klasse ist ein Hilfsmittel, mit dem man in einem ResourceDictionary wie Generic.xaml den Skin ändern kann, damit er im Designer entsprechend dargestellt wird.
+--DoubleRange
+	Die DoubleRange ist eine struct die für das Darstellen eines Zahlenbereichs des double-Typens gemacht wurde und die Hilfsmethoden Contains und GetRelativePoint zur verfügung stellt.
 
 -Veränderte sonstige Klassen
 --DataBarDataItem

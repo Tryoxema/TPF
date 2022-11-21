@@ -696,9 +696,6 @@ namespace TPF.Controls
 
             var selectedItem = ItemsListBox.SelectedItem;
 
-            // Wenn SelectedItem ein ListBoxItem ist, dann wird davon ausgegangen, dass der Inhalt in der Tag-Property steht, wenn diese gefüllt ist
-            if (selectedItem is ListBoxItem listBoxItem && listBoxItem.Tag != null) selectedItem = listBoxItem.Tag;
-
             string value;
 
             var type = selectedItem.GetType();
@@ -710,13 +707,14 @@ namespace TPF.Controls
             else value = PropertyHelper.GetPropertyValueFromPath<string>(selectedItem, SearchPath);
 
             ItemSelected?.Invoke(this, new ItemSelectedEventArgs(selectedItem, value));
+
             if (ClearAfterSelection) Value = null;
             else
             {
                 SetControlValue(value, false);
                 FilteredItems = null;
                 IsDropDownOpen = false;
-                if (TextBox != null) TextBox.CaretIndex = Math.Max(value.Length, 0);
+                if (TextBox != null && value != null) TextBox.CaretIndex = Math.Max(value.Length, 0);
             }
         }
 
