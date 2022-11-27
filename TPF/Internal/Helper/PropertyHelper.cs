@@ -8,7 +8,7 @@ namespace TPF.Internal
     {
         internal static object GetPropertyValueFromPath(object value, string path)
         {
-            if (value == null || path == null) return null;
+            if (value == null || string.IsNullOrWhiteSpace(path)) return null;
 
             var currentType = value.GetType();
 
