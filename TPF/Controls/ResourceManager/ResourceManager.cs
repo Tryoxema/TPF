@@ -79,6 +79,26 @@ namespace TPF.Controls
         }
         #endregion
 
+        #region MouseOverTextBrush DependencyProperty
+        public static readonly DependencyProperty MouseOverTextBrushProperty = DependencyProperty.Register(nameof(MouseOverTextBrush), typeof(Brush), typeof(ResourceManager));
+
+        public Brush MouseOverTextBrush
+        {
+            get { return (Brush)GetValue(MouseOverTextBrushProperty); }
+            set { SetValue(MouseOverTextBrushProperty, value); }
+        }
+        #endregion
+
+        #region PressedTextBrush DependencyProperty
+        public static readonly DependencyProperty PressedTextBrushProperty = DependencyProperty.Register(nameof(PressedTextBrush), typeof(Brush), typeof(ResourceManager));
+
+        public Brush PressedTextBrush
+        {
+            get { return (Brush)GetValue(PressedTextBrushProperty); }
+            set { SetValue(PressedTextBrushProperty, value); }
+        }
+        #endregion
+
         #region SelectedTextBrush DependencyProperty
         public static readonly DependencyProperty SelectedTextBrushProperty = DependencyProperty.Register(nameof(SelectedTextBrush), typeof(Brush), typeof(ResourceManager));
 
@@ -369,6 +389,26 @@ namespace TPF.Controls
         }
         #endregion
 
+        #region SecondaryMouseOverTextBrush DependencyProperty
+        public static readonly DependencyProperty SecondaryMouseOverTextBrushProperty = DependencyProperty.Register(nameof(SecondaryMouseOverTextBrush), typeof(Brush), typeof(ResourceManager));
+
+        public Brush SecondaryMouseOverTextBrush
+        {
+            get { return (Brush)GetValue(SecondaryMouseOverTextBrushProperty); }
+            set { SetValue(SecondaryMouseOverTextBrushProperty, value); }
+        }
+        #endregion
+
+        #region SecondaryPressedTextBrush DependencyProperty
+        public static readonly DependencyProperty SecondaryPressedTextBrushProperty = DependencyProperty.Register(nameof(SecondaryPressedTextBrush), typeof(Brush), typeof(ResourceManager));
+
+        public Brush SecondaryPressedTextBrush
+        {
+            get { return (Brush)GetValue(SecondaryPressedTextBrushProperty); }
+            set { SetValue(SecondaryPressedTextBrushProperty, value); }
+        }
+        #endregion
+
         #region SecondaryAccentBrush DependencyProperty
         public static readonly DependencyProperty SecondaryAccentBrushProperty = DependencyProperty.Register(nameof(SecondaryAccentBrush), typeof(Brush), typeof(ResourceManager));
 
@@ -454,6 +494,8 @@ namespace TPF.Controls
             RippleOpacity = skin.RippleOpacity;
             ApplicationBackground = skin.ApplicationBackground;
             TextBrush = skin.TextBrush;
+            MouseOverTextBrush = skin.MouseOverTextBrush;
+            PressedTextBrush = skin.PressedTextBrush;
             SelectedTextBrush = skin.SelectedTextBrush;
             ReadOnlyTextBrush = skin.ReadOnlyTextBrush;
             GlyphBrush = skin.GlyphBrush;
@@ -483,6 +525,8 @@ namespace TPF.Controls
             SecondaryMouseOverBrush = skin.SecondaryMouseOverBrush;
             SecondarySelectedBrush = skin.SecondarySelectedBrush;
             SecondaryPressedBrush = skin.SecondaryPressedBrush;
+            SecondaryMouseOverTextBrush = skin.MouseOverTextBrush;
+            SecondaryPressedTextBrush = skin.PressedTextBrush;
             SecondaryAccentBrush = skin.SecondaryAccentBrush;
             SecondaryMouseOverAccentBrush = skin.SecondaryMouseOverAccentBrush;
             SecondaryFocusedAccentBrush = skin.SecondaryFocusedAccentBrush;

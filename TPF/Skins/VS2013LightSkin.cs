@@ -1,50 +1,51 @@
-﻿using System;
-using System.Windows.Media;
-
-namespace TPF.Skins
+﻿namespace TPF.Skins
 {
     public class VS2013LightSkin : SkinBase
     {
         private VS2013LightSkin()
         {
             Name = "VS2013Light";
-            ApplicationBackground = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFFFFF"));
-            TextBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#000000"));
-            SelectedTextBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFFFFF"));
-            ReadOnlyTextBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#717171"));
-            GlyphBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#717171"));
-            InputBackgroundBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFFFFF"));
-            PrimaryBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#EEEEF2"));
-            SelectedBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#007ACC"));
-            PressedBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#007ACC"));
-            DisabledBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#F5F5F5"));
-            BorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#CCCEDB"));
-            MouseOverBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#C9DEF5"));
-            AccentBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#3399FF"));
-            MouseOverAccentBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#007ACC"));
-            FocusedAccentBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#007ACC"));
-            PressedAccentBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#007ACC"));
-            HeaderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#007ACC"));
-            ErrorBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FF3333"));
-            ProgressBarBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#3399FF"));
-            RippleBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#FFFFFF"));
-            HyperlinkBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#0066FF"));
-            HyperlinkVisitedBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#0061A3"));
-            ScrollBarBackgroundBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#E8E8EC"));
-            ScrollBarBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#C2C3C9"));
-            ScrollBarMouseOverBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#686868"));
-            ScrollBarPressedBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#5B5B5B"));
-            SecondaryBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#F5F5F5"));
-            SecondaryBorderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#CCCEDB"));
-            SecondaryMouseOverBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#C9DEF5"));
-            SecondarySelectedBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#007ACC"));
-            SecondaryPressedBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#007ACC"));
-            SecondaryAccentBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#007ACC"));
-            SecondaryMouseOverAccentBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#007ACC"));
-            SecondaryFocusedAccentBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#007ACC"));
-            SecondaryPressedAccentBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#007ACC"));
-            SecondaryHeaderBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#007ACC"));
-            SecondaryProgressBarBrush = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#C9DEF5"));
+            ApplicationBackground = BrushFromString("#FFFFFF");
+            TextBrush = BrushFromString("#000000");
+            MouseOverTextBrush = BrushFromString("#000000");
+            PressedTextBrush = BrushFromString("#FFFFFF");
+            SelectedTextBrush = BrushFromString("#FFFFFF");
+            ReadOnlyTextBrush = BrushFromString("#717171");
+            GlyphBrush = BrushFromString("#717171");
+            InputBackgroundBrush = BrushFromString("#FFFFFF");
+            PrimaryBrush = BrushFromString("#EEEEF2");
+            SelectedBrush = BrushFromString("#007ACC");
+            PressedBrush = BrushFromString("#007ACC");
+            DisabledBrush = BrushFromString("#F5F5F5");
+            BorderBrush = BrushFromString("#CCCEDB");
+            MouseOverBrush = BrushFromString("#C9DEF5");
+            AccentBrush = BrushFromString("#3399FF");
+            MouseOverAccentBrush = BrushFromString("#007ACC");
+            FocusedAccentBrush = BrushFromString("#007ACC");
+            PressedAccentBrush = BrushFromString("#007ACC");
+            HeaderBrush = BrushFromString("#007ACC");
+            ErrorBrush = BrushFromString("#FF3333");
+            ProgressBarBrush = BrushFromString("#3399FF");
+            RippleBrush = BrushFromString("#FFFFFF");
+            HyperlinkBrush = BrushFromString("#0066FF");
+            HyperlinkVisitedBrush = BrushFromString("#0061A3");
+            ScrollBarBackgroundBrush = BrushFromString("#E8E8EC");
+            ScrollBarBrush = BrushFromString("#C2C3C9");
+            ScrollBarMouseOverBrush = BrushFromString("#686868");
+            ScrollBarPressedBrush = BrushFromString("#5B5B5B");
+            SecondaryBrush = BrushFromString("#F5F5F5");
+            SecondaryBorderBrush = BrushFromString("#CCCEDB");
+            SecondaryMouseOverBrush = BrushFromString("#C9DEF5");
+            SecondarySelectedBrush = BrushFromString("#007ACC");
+            SecondaryPressedBrush = BrushFromString("#007ACC");
+            SecondaryMouseOverTextBrush = BrushFromString("#000000");
+            SecondaryPressedTextBrush = BrushFromString("#FFFFFF");
+            SecondaryAccentBrush = BrushFromString("#007ACC");
+            SecondaryMouseOverAccentBrush = BrushFromString("#007ACC");
+            SecondaryFocusedAccentBrush = BrushFromString("#007ACC");
+            SecondaryPressedAccentBrush = BrushFromString("#007ACC");
+            SecondaryHeaderBrush = BrushFromString("#007ACC");
+            SecondaryProgressBarBrush = BrushFromString("#C9DEF5");
         }
 
         static VS2013LightSkin _instance;

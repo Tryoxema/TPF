@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows.Media;
+﻿using System.Windows.Media;
 
 namespace TPF.Skins
 {
@@ -17,6 +16,10 @@ namespace TPF.Skins
         Brush ApplicationBackground { get; set; }
         // Die Textfarbe
         Brush TextBrush { get; set; }
+        // Die Textfarbe für Elemente im MouseOver-Zustand
+        Brush MouseOverTextBrush { get; set; }
+        // Die Textfarbe für Elemente im gedrückten Zustand
+        Brush PressedTextBrush { get; set; }
         // Die Textfarbe für ausgewählte Elemente
         Brush SelectedTextBrush { get; set; }
         // Die Textfarbe für ReadOnly Elemente
@@ -75,6 +78,10 @@ namespace TPF.Skins
         Brush SecondarySelectedBrush { get; set; }
         // Eine Alternative zum PressedBrush
         Brush SecondaryPressedBrush { get; set; }
+        // Eine Alternative zum MouseOverTextBrush
+        Brush SecondaryMouseOverTextBrush { get; set; }
+        // Eine Alternative zum PressedTextBrush
+        Brush SecondaryPressedTextBrush { get; set; }
         // Eine Alternative zum AccentBrush
         Brush SecondaryAccentBrush { get; set; }
         // Eine Alternative zum MouseOverAccentBrush

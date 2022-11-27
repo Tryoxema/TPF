@@ -137,11 +137,12 @@
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="Background" TargetName="Border" Value="{tpf:ResourceLink Key=MouseOverBrush}"/>
                             <Setter Property="BorderBrush" TargetName="Border" Value="{tpf:ResourceLink Key=MouseOverAccentBrush}"/>
+                            <Setter Property="TextElement.Foreground" TargetName="Content" Value="{tpf:ResourceLink Key=MouseOverTextBrush}"/>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
                             <Setter Property="Background" TargetName="Border" Value="{tpf:ResourceLink Key=PressedBrush}"/>
                             <Setter Property="BorderBrush" TargetName="Border" Value="{tpf:ResourceLink Key=PressedAccentBrush}"/>
-                            <Setter Property="TextElement.Foreground" TargetName="Content" Value="{tpf:ResourceLink Key=SelectedTextBrush}"/>
+                            <Setter Property="TextElement.Foreground" TargetName="Content" Value="{tpf:ResourceLink Key=PressedTextBrush}"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Background" TargetName="Border" Value="{tpf:ResourceLink Key=DisabledBrush}"/>
@@ -202,11 +203,12 @@
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="Background" TargetName="Border" Value="{tpf:ResourceLink Key=MouseOverBrush}"/>
                             <Setter Property="BorderBrush" TargetName="Border" Value="{tpf:ResourceLink Key=MouseOverAccentBrush}"/>
+                            <Setter Property="TextElement.Foreground" TargetName="Content" Value="{tpf:ResourceLink Key=MouseOverTextBrush}"/>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
                             <Setter Property="Background" TargetName="Border" Value="{tpf:ResourceLink Key=PressedBrush}"/>
                             <Setter Property="BorderBrush" TargetName="Border" Value="{tpf:ResourceLink Key=PressedAccentBrush}"/>
-                            <Setter Property="TextElement.Foreground" TargetName="Content" Value="{tpf:ResourceLink Key=SelectedTextBrush}"/>
+                            <Setter Property="TextElement.Foreground" TargetName="Content" Value="{tpf:ResourceLink Key=PressedTextBrush}"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Background" TargetName="Border" Value="{tpf:ResourceLink Key=DisabledBrush}"/>
@@ -245,15 +247,17 @@
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="Background" TargetName="Border" Value="{tpf:ResourceLink Key=MouseOverBrush}"/>
                             <Setter Property="BorderBrush" TargetName="Border" Value="{tpf:ResourceLink Key=MouseOverAccentBrush}"/>
+                            <Setter Property="TextElement.Foreground" TargetName="Content" Value="{tpf:ResourceLink Key=MouseOverTextBrush}"/>
                         </Trigger>
                         <Trigger Property="IsChecked" Value="True">
                             <Setter Property="Background" TargetName="Border" Value="{tpf:ResourceLink Key=MouseOverBrush}"/>
                             <Setter Property="BorderBrush" TargetName="Border" Value="{tpf:ResourceLink Key=MouseOverAccentBrush}"/>
+                            <Setter Property="TextElement.Foreground" TargetName="Content" Value="{tpf:ResourceLink Key=MouseOverTextBrush}"/>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
                             <Setter Property="Background" TargetName="Border" Value="{tpf:ResourceLink Key=PressedBrush}"/>
                             <Setter Property="BorderBrush" TargetName="Border" Value="{tpf:ResourceLink Key=PressedAccentBrush}"/>
-                            <Setter Property="TextElement.Foreground" TargetName="Content" Value="{tpf:ResourceLink Key=SelectedTextBrush}"/>
+                            <Setter Property="TextElement.Foreground" TargetName="Content" Value="{tpf:ResourceLink Key=PressedTextBrush}"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Background" TargetName="Border" Value="{tpf:ResourceLink Key=DisabledBrush}"/>
@@ -310,11 +314,12 @@
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="Background" TargetName="BackgroundBorder" Value="{tpf:ResourceLink Key=MouseOverBrush}"/>
                             <Setter Property="BorderBrush" TargetName="BackgroundBorder" Value="{tpf:ResourceLink Key=MouseOverAccentBrush}"/>
+                            <Setter Property="Stroke" TargetName="Checkmark" Value="{tpf:ResourceLink Key=MouseOverTextBrush}"/>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
                             <Setter Property="Background" TargetName="BackgroundBorder" Value="{tpf:ResourceLink Key=PressedBrush}"/>
                             <Setter Property="BorderBrush" TargetName="BackgroundBorder" Value="{tpf:ResourceLink Key=PressedAccentBrush}"/>
-                            <Setter Property="Stroke" TargetName="Checkmark" Value="{tpf:ResourceLink Key=SelectedTextBrush}"/>
+                            <Setter Property="Stroke" TargetName="Checkmark" Value="{tpf:ResourceLink Key=PressedTextBrush}"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Background" TargetName="BackgroundBorder" Value="{tpf:ResourceLink Key=DisabledBrush}"/>
@@ -1557,11 +1562,12 @@
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="Background" TargetName="Border" Value="{tpf:ResourceLink Key=MouseOverBrush}"/>
                             <Setter Property="BorderBrush" TargetName="Border" Value="{tpf:ResourceLink Key=MouseOverAccentBrush}"/>
+                            <Setter Property="TextElement.Foreground" TargetName="Content" Value="{tpf:ResourceLink Key=MouseOverTextBrush}"/>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
                             <Setter Property="Background" TargetName="Border" Value="{tpf:ResourceLink Key=PressedBrush}"/>
                             <Setter Property="BorderBrush" TargetName="Border" Value="{tpf:ResourceLink Key=PressedAccentBrush}"/>
-                            <Setter Property="TextElement.Foreground" TargetName="Content" Value="{tpf:ResourceLink Key=SelectedTextBrush}"/>
+                            <Setter Property="TextElement.Foreground" TargetName="Content" Value="{tpf:ResourceLink Key=PressedTextBrush}"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Background" TargetName="Border" Value="{tpf:ResourceLink Key=DisabledBrush}"/>
@@ -1754,13 +1760,16 @@
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="Background" TargetName="Border" Value="{tpf:ResourceLink Key=MouseOverBrush}"/>
                             <Setter Property="BorderBrush" TargetName="Border" Value="{tpf:ResourceLink Key=MouseOverAccentBrush}"/>
+                            <Setter Property="TextElement.Foreground" TargetName="Content" Value="{tpf:ResourceLink Key=MouseOverTextBrush}"/>
+                            <Setter Property="Fill" Value="{tpf:ResourceLink Key=MouseOverTextBrush}"/>
+                            <Setter Property="Stroke" Value="{tpf:ResourceLink Key=MouseOverTextBrush}"/>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
                             <Setter Property="Background" TargetName="Border" Value="{tpf:ResourceLink Key=PressedBrush}"/>
                             <Setter Property="BorderBrush" TargetName="Border" Value="{tpf:ResourceLink Key=PressedAccentBrush}"/>
-                            <Setter Property="TextElement.Foreground" TargetName="Content" Value="{tpf:ResourceLink Key=SelectedTextBrush}"/>
-                            <Setter Property="Fill" Value="{tpf:ResourceLink Key=SelectedTextBrush}"/>
-                            <Setter Property="Stroke" Value="{tpf:ResourceLink Key=SelectedTextBrush}"/>
+                            <Setter Property="TextElement.Foreground" TargetName="Content" Value="{tpf:ResourceLink Key=PressedTextBrush}"/>
+                            <Setter Property="Fill" Value="{tpf:ResourceLink Key=PressedTextBrush}"/>
+                            <Setter Property="Stroke" Value="{tpf:ResourceLink Key=PressedTextBrush}"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Background" TargetName="Border" Value="{tpf:ResourceLink Key=DisabledBrush}"/>
@@ -1843,7 +1852,7 @@
                                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                                   Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
                                                   ContentStringFormat="{TemplateBinding ContentStringFormat}" RecognizesAccessKey="True"/>
-                                <Path Data="F0 M 0,0 L 6,0 3,4 Z" Fill="{tpf:ResourceLink Key=GlyphBrush}" IsHitTestVisible="false" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5 3"/>
+                                <Path x:Name="Symbol" Data="F0 M 0,0 L 6,0 3,4 Z" Fill="{tpf:ResourceLink Key=GlyphBrush}" IsHitTestVisible="false" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5 3"/>
                             </Grid>
                         </Border>
                         <Popup IsOpen="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" StaysOpen="False" AllowsTransparency="True" PopupAnimation="Slide" Placement="Bottom">
@@ -1863,11 +1872,14 @@
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="Background" TargetName="Border" Value="{tpf:ResourceLink Key=MouseOverBrush}"/>
                             <Setter Property="BorderBrush" TargetName="Border" Value="{tpf:ResourceLink Key=MouseOverAccentBrush}"/>
+                            <Setter Property="TextElement.Foreground" TargetName="Content" Value="{tpf:ResourceLink Key=MouseOverTextBrush}"/>
+                            <Setter Property="Fill" TargetName="Symbol" Value="{tpf:ResourceLink Key=MouseOverTextBrush}"/>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
                             <Setter Property="Background" TargetName="Border" Value="{tpf:ResourceLink Key=PressedBrush}"/>
                             <Setter Property="BorderBrush" TargetName="Border" Value="{tpf:ResourceLink Key=PressedAccentBrush}"/>
-                            <Setter Property="Foreground" Value="{tpf:ResourceLink Key=SelectedTextBrush}"/>
+                            <Setter Property="TextElement.Foreground" TargetName="Content" Value="{tpf:ResourceLink Key=PressedTextBrush}"/>
+                            <Setter Property="Fill" TargetName="Symbol" Value="{tpf:ResourceLink Key=PressedTextBrush}"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Background" TargetName="Border" Value="{tpf:ResourceLink Key=DisabledBrush}"/>
@@ -2020,6 +2032,7 @@
                     </tpf:SimplePanel>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Foreground" Value="{tpf:ResourceLink Key=MouseOverTextBrush}"/>
                             <Setter Property="Background" Value="{tpf:ResourceLink Key=MouseOverBrush}"/>
                         </Trigger>
                         <Trigger Property="IsSelected" Value="True">
@@ -2808,11 +2821,12 @@
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="Background" TargetName="ProgressBar" Value="{tpf:ResourceLink Key=MouseOverBrush}"/>
                             <Setter Property="BorderBrush" TargetName="ProgressBar" Value="{tpf:ResourceLink Key=MouseOverAccentBrush}"/>
+                            <Setter Property="Foreground" TargetName="ProgressBar" Value="{tpf:ResourceLink Key=MouseOverTextBrush}"/>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
                             <Setter Property="Background" TargetName="ProgressBar" Value="{tpf:ResourceLink Key=PressedBrush}"/>
                             <Setter Property="BorderBrush" TargetName="ProgressBar" Value="{tpf:ResourceLink Key=PressedAccentBrush}"/>
-                            <Setter Property="Foreground" TargetName="ProgressBar" Value="{tpf:ResourceLink Key=SelectedTextBrush}"/>
+                            <Setter Property="Foreground" TargetName="ProgressBar" Value="{tpf:ResourceLink Key=PressedTextBrush}"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Background" TargetName="ProgressBar" Value="{tpf:ResourceLink Key=DisabledBrush}"/>
@@ -3190,11 +3204,12 @@
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="Background" TargetName="Border" Value="{tpf:ResourceLink Key=MouseOverBrush}"/>
                             <Setter Property="BorderBrush" TargetName="Border" Value="{tpf:ResourceLink Key=MouseOverAccentBrush}"/>
+                            <Setter Property="TextElement.Foreground" TargetName="Content" Value="{tpf:ResourceLink Key=MouseOverTextBrush}"/>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
                             <Setter Property="Background" TargetName="Border" Value="{tpf:ResourceLink Key=PressedBrush}"/>
                             <Setter Property="BorderBrush" TargetName="Border" Value="{tpf:ResourceLink Key=PressedAccentBrush}"/>
-                            <Setter Property="TextElement.Foreground" TargetName="Content" Value="{tpf:ResourceLink Key=SelectedTextBrush}"/>
+                            <Setter Property="TextElement.Foreground" TargetName="Content" Value="{tpf:ResourceLink Key=PressedTextBrush}"/>
                         </Trigger>
                         <Trigger Property="IsFocused" Value="True">
                             <Setter Property="BorderBrush" TargetName="Border" Value="{tpf:ResourceLink Key=MouseOverAccentBrush}"/>
@@ -3398,6 +3413,8 @@
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="Background" TargetName="Background" Value="{tpf:ResourceLink Key=MouseOverBrush}"/>
                             <Setter Property="BorderBrush" TargetName="Background" Value="{tpf:ResourceLink Key=MouseOverAccentBrush}"/>
+                            <Setter Property="TextElement.Foreground" TargetName="Content" Value="{tpf:ResourceLink Key=MouseOverTextBrush}"/>
+                            <Setter Property="Fill" TargetName="DropDownIcon" Value="{tpf:ResourceLink Key=MouseOverTextBrush}"/>
                         </Trigger>
                         <Trigger Property="IsChecked" Value="True">
                             <Setter Property="BorderBrush" TargetName="Background" Value="{tpf:ResourceLink Key=MouseOverAccentBrush}"/>
@@ -3405,6 +3422,8 @@
                         <Trigger Property="IsPressed" Value="True">
                             <Setter Property="Background" TargetName="Background" Value="{tpf:ResourceLink Key=PressedBrush}"/>
                             <Setter Property="BorderBrush" TargetName="Background" Value="{tpf:ResourceLink Key=PressedAccentBrush}"/>
+                            <Setter Property="TextElement.Foreground" TargetName="Content" Value="{tpf:ResourceLink Key=PressedTextBrush}"/>
+                            <Setter Property="Fill" TargetName="DropDownIcon" Value="{tpf:ResourceLink Key=PressedTextBrush}"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Background" TargetName="Background" Value="{tpf:ResourceLink Key=DisabledBrush}"/>
@@ -4268,10 +4287,10 @@
                 <Setter Property="BorderBrush" Value="{tpf:ResourceLink Key=MouseOverAccentBrush}"/>
             </Trigger>
             <Trigger Property="IsPressed" Value="True">
-                <Setter TargetName="IconPresenter" Property="TextElement.Foreground" Value="{tpf:ResourceLink Key=SelectedTextBrush}"/>
-                <Setter TargetName="LabelPresenter" Property="TextElement.Foreground" Value="{tpf:ResourceLink Key=SelectedTextBrush}"/>
-                <Setter TargetName="ExpandIconPresenter" Property="TextElement.Foreground" Value="{tpf:ResourceLink Key=SelectedTextBrush}"/>
-                <Setter TargetName="CollapseIconPresenter" Property="TextElement.Foreground" Value="{tpf:ResourceLink Key=SelectedTextBrush}"/>
+                <Setter TargetName="IconPresenter" Property="TextElement.Foreground" Value="{tpf:ResourceLink Key=PressedTextBrush}"/>
+                <Setter TargetName="LabelPresenter" Property="TextElement.Foreground" Value="{tpf:ResourceLink Key=PressedTextBrush}"/>
+                <Setter TargetName="ExpandIconPresenter" Property="TextElement.Foreground" Value="{tpf:ResourceLink Key=PressedTextBrush}"/>
+                <Setter TargetName="CollapseIconPresenter" Property="TextElement.Foreground" Value="{tpf:ResourceLink Key=PressedTextBrush}"/>
                 <Setter Property="Background" Value="{tpf:ResourceLink Key=PressedBrush}"/>
                 <Setter Property="BorderBrush" Value="{tpf:ResourceLink Key=PressedAccentBrush}"/>
             </Trigger>
@@ -4483,11 +4502,12 @@
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="Background" TargetName="Border" Value="{tpf:ResourceLink Key=MouseOverBrush}"/>
                             <Setter Property="BorderBrush" TargetName="Border" Value="{tpf:ResourceLink Key=MouseOverAccentBrush}"/>
+                            <Setter Property="Foreground" Value="{tpf:ResourceLink Key=MouseOverTextBrush}"/>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
                             <Setter Property="Background" TargetName="Border" Value="{tpf:ResourceLink Key=PressedBrush}"/>
                             <Setter Property="BorderBrush" TargetName="Border" Value="{tpf:ResourceLink Key=PressedAccentBrush}"/>
-                            <Setter Property="Foreground" Value="{tpf:ResourceLink Key=SelectedTextBrush}"/>
+                            <Setter Property="Foreground" Value="{tpf:ResourceLink Key=PressedTextBrush}"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Background" TargetName="Border" Value="{tpf:ResourceLink Key=DisabledBrush}"/>
@@ -4734,11 +4754,12 @@
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="Background" TargetName="Border" Value="{tpf:ResourceLink Key=MouseOverBrush}"/>
                             <Setter Property="BorderBrush" TargetName="Border" Value="{tpf:ResourceLink Key=MouseOverBrush}"/>
+                            <Setter Property="TextElement.Foreground" TargetName="Content" Value="{tpf:ResourceLink Key=MouseOverTextBrush}"/>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
                             <Setter Property="Background" TargetName="Border" Value="{tpf:ResourceLink Key=PressedBrush}"/>
                             <Setter Property="BorderBrush" TargetName="Border" Value="{tpf:ResourceLink Key=PressedAccentBrush}"/>
-                            <Setter Property="TextElement.Foreground" TargetName="Content" Value="{tpf:ResourceLink Key=SelectedTextBrush}"/>
+                            <Setter Property="TextElement.Foreground" TargetName="Content" Value="{tpf:ResourceLink Key=PressedTextBrush}"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Opacity" TargetName="Content" Value="{tpf:ResourceLink Key=DisabledOpacity}"/>
@@ -4878,11 +4899,12 @@
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="Background" TargetName="Border" Value="{tpf:ResourceLink Key=AccentBrush}"/>
                             <Setter Property="BorderBrush" TargetName="Border" Value="{tpf:ResourceLink Key=MouseOverAccentBrush}"/>
+                            <Setter Property="TextElement.Foreground" TargetName="Content" Value="{tpf:ResourceLink Key=MouseOverTextBrush}"/>
                         </Trigger>
                         <Trigger Property="IsPressed" Value="True">
                             <Setter Property="Background" TargetName="Border" Value="{tpf:ResourceLink Key=PressedBrush}"/>
                             <Setter Property="BorderBrush" TargetName="Border" Value="{tpf:ResourceLink Key=PressedAccentBrush}"/>
-                            <Setter Property="TextElement.Foreground" TargetName="Content" Value="{tpf:ResourceLink Key=SelectedTextBrush}"/>
+                            <Setter Property="TextElement.Foreground" TargetName="Content" Value="{tpf:ResourceLink Key=PressedTextBrush}"/>
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Opacity" TargetName="Content" Value="{tpf:ResourceLink Key=DisabledOpacity}"/>

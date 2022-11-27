@@ -14,6 +14,10 @@
         ApplicationBackground,
         // Die Textfarbe
         TextBrush,
+        // Die Textfarbe für Elemente im MouseOver-Zustand
+        MouseOverTextBrush,
+        // Die Textfarbe für Elemente im gedrückten Zustand
+        PressedTextBrush,
         // Die Textfarbe für ausgewählte Elemente
         SelectedTextBrush,
         // Die Textfarbe für ReadOnly Elemente
@@ -72,6 +76,10 @@
         SecondarySelectedBrush,
         // Eine Alternative zum PressedBrush
         SecondaryPressedBrush,
+        // Eine Alternative zum MouseOverTextBrush
+        SecondaryMouseOverTextBrush,
+        // Eine Alternative zum PressedTextBrush
+        SecondaryPressedTextBrush,
         // Eine Alternative zum AccentBrush
         SecondaryAccentBrush,
         // Eine Alternative zum MouseOverAccentBrush

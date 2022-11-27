@@ -65,6 +65,36 @@ namespace TPF.Demo.Net461.Windows
         }
         #endregion
 
+        #region MouseOverTextBrush
+        private void LoadMouseOverTextBrushButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (ResourceManager.Resources.MouseOverTextBrush is SolidColorBrush brush)
+            {
+                PropertyColor = brush.Color;
+            }
+        }
+
+        private void ApplyMouseOverTextBrushButton_Click(object sender, RoutedEventArgs e)
+        {
+            ResourceManager.Resources.MouseOverTextBrush = new SolidColorBrush(PropertyColor);
+        }
+        #endregion
+
+        #region PressedTextBrush
+        private void LoadPressedTextBrushButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (ResourceManager.Resources.PressedTextBrush is SolidColorBrush brush)
+            {
+                PropertyColor = brush.Color;
+            }
+        }
+
+        private void ApplyPressedTextBrushButton_Click(object sender, RoutedEventArgs e)
+        {
+            ResourceManager.Resources.PressedTextBrush = new SolidColorBrush(PropertyColor);
+        }
+        #endregion
+
         #region SelectedTextBrush
         private void LoadSelectedTextBrushButton_Click(object sender, RoutedEventArgs e)
         {
@@ -497,6 +527,36 @@ namespace TPF.Demo.Net461.Windows
         private void ApplySecondaryPressedBrushButton_Click(object sender, RoutedEventArgs e)
         {
             ResourceManager.Resources.SecondaryPressedBrush = new SolidColorBrush(PropertyColor);
+        }
+        #endregion
+
+        #region SecondaryMouseOverTextBrush
+        private void LoadSecondaryMouseOverTextBrushButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (ResourceManager.Resources.SecondaryMouseOverTextBrush is SolidColorBrush brush)
+            {
+                PropertyColor = brush.Color;
+            }
+        }
+
+        private void ApplySecondaryMouseOverTextBrushButton_Click(object sender, RoutedEventArgs e)
+        {
+            ResourceManager.Resources.SecondaryMouseOverTextBrush = new SolidColorBrush(PropertyColor);
+        }
+        #endregion
+
+        #region SecondaryPressedTextBrush
+        private void LoadSecondaryPressedTextBrushButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (ResourceManager.Resources.SecondaryPressedTextBrush is SolidColorBrush brush)
+            {
+                PropertyColor = brush.Color;
+            }
+        }
+
+        private void ApplySecondaryPressedTextBrushButton_Click(object sender, RoutedEventArgs e)
+        {
+            ResourceManager.Resources.SecondaryPressedTextBrush = new SolidColorBrush(PropertyColor);
         }
         #endregion
 

@@ -36,6 +36,13 @@
 	Die DataBarDataItem-Klasse erbt nun nicht mehr von NotifyObject sondern von der neuen Klasse DataVisualizationItemBase.
 	Diese neue Basisklasse stellt die Methode GetValueFromPath zur verfügung, über die ein Wert anhand seines Pfades aus dem enthaltenen DataItem geholt werden kann.
 	GetValueFromPath nutzt hierbei eine viel effizientere Methode als Reflection, um den Wert schneller zur verfügung zu stellen.
+--ISkin, alle davon erbenden Klassen und ResourceManager:
+	Neue Property MouseOverTextBrush
+    Neue Property PressedTextBrush
+    Neue Property SecondaryMouseOverTextBrush
+    Neue Property SecondaryPressedTextBrush
+--SkinBase
+	SkinBase stellt nun die Methode BrushFromString zur verfügung, die einen SolidColorBrush aus einem string der eine Farbe darstellt generiert wird
 
 --- 0.6.3 ---
 -Neue Controls

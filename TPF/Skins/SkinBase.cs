@@ -23,6 +23,10 @@ namespace TPF.Skins
         public Brush ApplicationBackground { get; set; }
         // Die Textfarbe
         public Brush TextBrush { get; set; }
+        // Die Textfarbe für Elemente im MouseOver-Zustand
+        public Brush MouseOverTextBrush { get; set; }
+        // Die Textfarbe für Elemente im gedrückten Zustand
+        public Brush PressedTextBrush { get; set; }
         // Die Textfarbe für ausgewählte Elemente
         public Brush SelectedTextBrush { get; set; }
         // Die Textfarbe für ReadOnly Elemente
@@ -81,6 +85,10 @@ namespace TPF.Skins
         public Brush SecondarySelectedBrush { get; set; }
         // Eine Alternative zum PressedBrush
         public Brush SecondaryPressedBrush { get; set; }
+        // Eine Alternative zum MouseOverTextBrush
+        public Brush SecondaryMouseOverTextBrush { get; set; }
+        // Eine Alternative zum PressedTextBrush
+        public Brush SecondaryPressedTextBrush { get; set; }
         // Eine Alternative zum AccentBrush
         public Brush SecondaryAccentBrush { get; set; }
         // Eine Alternative zum MouseOverAccentBrush
@@ -93,5 +101,12 @@ namespace TPF.Skins
         public Brush SecondaryHeaderBrush { get; set; }
         // Eine Alternative zum ProgressBarBrush
         public Brush SecondaryProgressBarBrush { get; set; }
+
+        protected static SolidColorBrush BrushFromString(string color)
+        {
+            var brush = new SolidColorBrush((Color)ColorConverter.ConvertFromString(color));
+
+            return brush;
+        }
     }
 }

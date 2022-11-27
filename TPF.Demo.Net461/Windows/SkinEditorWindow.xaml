@@ -7,7 +7,7 @@
                       DataContext="{Binding RelativeSource={RelativeSource Self}}"
                       mc:Ignorable="d"
                       Title="Skin-Editor" 
-                      Height="624" Width="1000">
+                      Height="625" Width="1200">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -28,20 +28,29 @@
                 </StackPanel>
 
                 <StackPanel Margin="0 2">
-                    <TextBlock Text="ApplicationBackground" Foreground="{tpf:ResourceLink Key=TextBrush}"/>
-                    <Border BorderThickness="1" BorderBrush="Black" Height="20" Background="{tpf:ResourceLink Key=ApplicationBackground}"/>
-                    <tpf:SimplePanel Margin="0 2 0 0">
-                        <Button Content="Load" HorizontalAlignment="Left" Click="LoadApplicationBackgroundButton_Click"/>
-                        <Button Content="Apply" HorizontalAlignment="Right" Click="ApplyApplicationBackgroundButton_Click"/>
-                    </tpf:SimplePanel>
-                </StackPanel>
-
-                <StackPanel Margin="0 2">
                     <TextBlock Text="TextBrush" Foreground="{tpf:ResourceLink Key=TextBrush}"/>
                     <Border BorderThickness="1" BorderBrush="Black" Height="20" Background="{tpf:ResourceLink Key=TextBrush}"/>
                     <tpf:SimplePanel Margin="0 2 0 0">
                         <Button Content="Load" HorizontalAlignment="Left" Click="LoadTextBrushButton_Click"/>
                         <Button Content="Apply" HorizontalAlignment="Right" Click="ApplyTextBrushButton_Click"/>
+                    </tpf:SimplePanel>
+                </StackPanel>
+
+                <StackPanel Margin="0 2">
+                    <TextBlock Text="MouseOverTextBrush" Foreground="{tpf:ResourceLink Key=TextBrush}"/>
+                    <Border BorderThickness="1" BorderBrush="Black" Height="20" Background="{tpf:ResourceLink Key=MouseOverTextBrush}"/>
+                    <tpf:SimplePanel Margin="0 2 0 0">
+                        <Button Content="Load" HorizontalAlignment="Left" Click="LoadMouseOverTextBrushButton_Click"/>
+                        <Button Content="Apply" HorizontalAlignment="Right" Click="ApplyMouseOverTextBrushButton_Click"/>
+                    </tpf:SimplePanel>
+                </StackPanel>
+
+                <StackPanel Margin="0 2">
+                    <TextBlock Text="PressedTextBrush" Foreground="{tpf:ResourceLink Key=TextBrush}"/>
+                    <Border BorderThickness="1" BorderBrush="Black" Height="20" Background="{tpf:ResourceLink Key=PressedTextBrush}"/>
+                    <tpf:SimplePanel Margin="0 2 0 0">
+                        <Button Content="Load" HorizontalAlignment="Left" Click="LoadPressedTextBrushButton_Click"/>
+                        <Button Content="Apply" HorizontalAlignment="Right" Click="ApplyPressedTextBrushButton_Click"/>
                     </tpf:SimplePanel>
                 </StackPanel>
 
@@ -89,18 +98,18 @@
                         <Button Content="Apply" HorizontalAlignment="Right" Click="ApplyHyperlinkBrushButton_Click"/>
                     </tpf:SimplePanel>
                 </StackPanel>
-
-                <StackPanel Margin="0 2">
-                    <TextBlock Text="ScrollBarBrush" Foreground="{tpf:ResourceLink Key=TextBrush}"/>
-                    <Border BorderThickness="1" BorderBrush="Black" Height="20" Background="{tpf:ResourceLink Key=ScrollBarBrush}"/>
-                    <tpf:SimplePanel Margin="0 2 0 0">
-                        <Button Content="Load" HorizontalAlignment="Left" Click="LoadScrollBarBrushButton_Click"/>
-                        <Button Content="Apply" HorizontalAlignment="Right" Click="ApplyScrollBarBrushButton_Click"/>
-                    </tpf:SimplePanel>
-                </StackPanel>
             </StackPanel>
 
             <StackPanel Grid.Column="1" Margin="5 0">
+                <StackPanel Margin="0 2">
+                    <TextBlock Text="ApplicationBackground" Foreground="{tpf:ResourceLink Key=TextBrush}"/>
+                    <Border BorderThickness="1" BorderBrush="Black" Height="20" Background="{tpf:ResourceLink Key=ApplicationBackground}"/>
+                    <tpf:SimplePanel Margin="0 2 0 0">
+                        <Button Content="Load" HorizontalAlignment="Left" Click="LoadApplicationBackgroundButton_Click"/>
+                        <Button Content="Apply" HorizontalAlignment="Right" Click="ApplyApplicationBackgroundButton_Click"/>
+                    </tpf:SimplePanel>
+                </StackPanel>
+                
                 <StackPanel Margin="0 2">
                     <TextBlock Text="PrimaryBrush" Foreground="{tpf:ResourceLink Key=TextBrush}"/>
                     <Border BorderThickness="1" BorderBrush="Black" Height="20" Background="{tpf:ResourceLink Key=PrimaryBrush}"/>
@@ -170,15 +179,6 @@
                     <tpf:SimplePanel Margin="0 2 0 0">
                         <Button Content="Load" HorizontalAlignment="Left" Click="LoadHyperlinkVisitedBrushButton_Click"/>
                         <Button Content="Apply" HorizontalAlignment="Right" Click="ApplyHyperlinkVisitedBrushButton_Click"/>
-                    </tpf:SimplePanel>
-                </StackPanel>
-
-                <StackPanel Margin="0 2">
-                    <TextBlock Text="ScrollBarMouseOverBrush" Foreground="{tpf:ResourceLink Key=TextBrush}"/>
-                    <Border BorderThickness="1" BorderBrush="Black" Height="20" Background="{tpf:ResourceLink Key=ScrollBarMouseOverBrush}"/>
-                    <tpf:SimplePanel Margin="0 2 0 0">
-                        <Button Content="Load" HorizontalAlignment="Left" Click="LoadScrollBarMouseOverBrushButton_Click"/>
-                        <Button Content="Apply" HorizontalAlignment="Right" Click="ApplyScrollBarMouseOverBrushButton_Click"/>
                     </tpf:SimplePanel>
                 </StackPanel>
             </StackPanel>
@@ -257,11 +257,11 @@
                 </StackPanel>
 
                 <StackPanel Margin="0 2">
-                    <TextBlock Text="ScrollBarPressedBrush" Foreground="{tpf:ResourceLink Key=TextBrush}"/>
-                    <Border BorderThickness="1" BorderBrush="Black" Height="20" Background="{tpf:ResourceLink Key=ScrollBarPressedBrush}"/>
+                    <TextBlock Text="ScrollBarBrush" Foreground="{tpf:ResourceLink Key=TextBrush}"/>
+                    <Border BorderThickness="1" BorderBrush="Black" Height="20" Background="{tpf:ResourceLink Key=ScrollBarBrush}"/>
                     <tpf:SimplePanel Margin="0 2 0 0">
-                        <Button Content="Load" HorizontalAlignment="Left" Click="LoadScrollBarPressedBrushButton_Click"/>
-                        <Button Content="Apply" HorizontalAlignment="Right" Click="ApplyScrollBarPressedBrushButton_Click"/>
+                        <Button Content="Load" HorizontalAlignment="Left" Click="LoadScrollBarBrushButton_Click"/>
+                        <Button Content="Apply" HorizontalAlignment="Right" Click="ApplyScrollBarBrushButton_Click"/>
                     </tpf:SimplePanel>
                 </StackPanel>
             </StackPanel>
@@ -314,9 +314,27 @@
                         <Button Content="Apply" HorizontalAlignment="Right" Click="ApplySecondaryHeaderBrushButton_Click"/>
                     </tpf:SimplePanel>
                 </StackPanel>
+
+                <StackPanel Margin="0 2">
+                    <TextBlock Text="SecondaryProgressBarBrush" Foreground="{tpf:ResourceLink Key=TextBrush}"/>
+                    <Border BorderThickness="1" BorderBrush="Black" Height="20" Background="{tpf:ResourceLink Key=SecondaryProgressBarBrush}"/>
+                    <tpf:SimplePanel Margin="0 2 0 0">
+                        <Button Content="Load" HorizontalAlignment="Left" Click="LoadSecondaryProgressBarBrushButton_Click"/>
+                        <Button Content="Apply" HorizontalAlignment="Right" Click="ApplySecondaryProgressBarBrushButton_Click"/>
+                    </tpf:SimplePanel>
+                </StackPanel>
             </StackPanel>
 
             <StackPanel Grid.Row="0" Grid.Column="1" Margin="5 0">
+                <StackPanel Margin="0 2">
+                    <TextBlock Text="ScrollBarMouseOverBrush" Foreground="{tpf:ResourceLink Key=TextBrush}"/>
+                    <Border BorderThickness="1" BorderBrush="Black" Height="20" Background="{tpf:ResourceLink Key=ScrollBarMouseOverBrush}"/>
+                    <tpf:SimplePanel Margin="0 2 0 0">
+                        <Button Content="Load" HorizontalAlignment="Left" Click="LoadScrollBarMouseOverBrushButton_Click"/>
+                        <Button Content="Apply" HorizontalAlignment="Right" Click="ApplyScrollBarMouseOverBrushButton_Click"/>
+                    </tpf:SimplePanel>
+                </StackPanel>
+                
                 <StackPanel Margin="0 2">
                     <TextBlock Text="SecondarySelectedBrush" Foreground="{tpf:ResourceLink Key=TextBrush}"/>
                     <Border BorderThickness="1" BorderBrush="Black" Height="20" Background="{tpf:ResourceLink Key=SecondarySelectedBrush}"/>
@@ -345,16 +363,25 @@
                 </StackPanel>
 
                 <StackPanel Margin="0 2">
-                    <TextBlock Text="SecondaryProgressBarBrush" Foreground="{tpf:ResourceLink Key=TextBrush}"/>
-                    <Border BorderThickness="1" BorderBrush="Black" Height="20" Background="{tpf:ResourceLink Key=SecondaryProgressBarBrush}"/>
+                    <TextBlock Text="SecondaryMouseOverTextBrush" Foreground="{tpf:ResourceLink Key=TextBrush}"/>
+                    <Border BorderThickness="1" BorderBrush="Black" Height="20" Background="{tpf:ResourceLink Key=SecondaryMouseOverTextBrush}"/>
                     <tpf:SimplePanel Margin="0 2 0 0">
-                        <Button Content="Load" HorizontalAlignment="Left" Click="LoadSecondaryProgressBarBrushButton_Click"/>
-                        <Button Content="Apply" HorizontalAlignment="Right" Click="ApplySecondaryProgressBarBrushButton_Click"/>
+                        <Button Content="Load" HorizontalAlignment="Left" Click="LoadSecondaryMouseOverTextBrushButton_Click"/>
+                        <Button Content="Apply" HorizontalAlignment="Right" Click="ApplySecondaryMouseOverTextBrushButton_Click"/>
                     </tpf:SimplePanel>
                 </StackPanel>
             </StackPanel>
 
             <StackPanel Grid.Row="0" Grid.Column="2" Margin="5 0">
+                <StackPanel Margin="0 2">
+                    <TextBlock Text="ScrollBarPressedBrush" Foreground="{tpf:ResourceLink Key=TextBrush}"/>
+                    <Border BorderThickness="1" BorderBrush="Black" Height="20" Background="{tpf:ResourceLink Key=ScrollBarPressedBrush}"/>
+                    <tpf:SimplePanel Margin="0 2 0 0">
+                        <Button Content="Load" HorizontalAlignment="Left" Click="LoadScrollBarPressedBrushButton_Click"/>
+                        <Button Content="Apply" HorizontalAlignment="Right" Click="ApplyScrollBarPressedBrushButton_Click"/>
+                    </tpf:SimplePanel>
+                </StackPanel>
+                
                 <StackPanel Margin="0 2">
                     <TextBlock Text="SecondaryMouseOverAccentBrush" Foreground="{tpf:ResourceLink Key=TextBrush}"/>
                     <Border BorderThickness="1" BorderBrush="Black" Height="20" Background="{tpf:ResourceLink Key=SecondaryMouseOverAccentBrush}"/>
@@ -379,6 +406,15 @@
                     <tpf:SimplePanel Margin="0 2 0 0">
                         <Button Content="Load" HorizontalAlignment="Left" Click="LoadSecondaryPressedAccentBrushButton_Click"/>
                         <Button Content="Apply" HorizontalAlignment="Right" Click="ApplySecondaryPressedAccentBrushButton_Click"/>
+                    </tpf:SimplePanel>
+                </StackPanel>
+
+                <StackPanel Margin="0 2">
+                    <TextBlock Text="SecondaryPressedTextBrush" Foreground="{tpf:ResourceLink Key=TextBrush}"/>
+                    <Border BorderThickness="1" BorderBrush="Black" Height="20" Background="{tpf:ResourceLink Key=SecondaryPressedTextBrush}"/>
+                    <tpf:SimplePanel Margin="0 2 0 0">
+                        <Button Content="Load" HorizontalAlignment="Left" Click="LoadSecondaryPressedTextBrushButton_Click"/>
+                        <Button Content="Apply" HorizontalAlignment="Right" Click="ApplySecondaryPressedTextBrushButton_Click"/>
                     </tpf:SimplePanel>
                 </StackPanel>
             </StackPanel>

@@ -19,6 +19,7 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
             <StackPanel Grid.Column="0" Margin="5 0">
@@ -28,13 +29,18 @@
                 </StackPanel>
 
                 <StackPanel Margin="0 2">
-                    <TextBlock Text="ApplicationBackground" Foreground="{tpf:ResourceLink Key=TextBrush}"/>
-                    <Border BorderThickness="1" BorderBrush="Black" Height="20" Background="{tpf:ResourceLink Key=ApplicationBackground}"/>
+                    <TextBlock Text="TextBrush" Foreground="{tpf:ResourceLink Key=TextBrush}"/>
+                    <Border BorderThickness="1" BorderBrush="Black" Height="20" Background="{tpf:ResourceLink Key=TextBrush}"/>
                 </StackPanel>
 
                 <StackPanel Margin="0 2">
-                    <TextBlock Text="TextBrush" Foreground="{tpf:ResourceLink Key=TextBrush}"/>
-                    <Border BorderThickness="1" BorderBrush="Black" Height="20" Background="{tpf:ResourceLink Key=TextBrush}"/>
+                    <TextBlock Text="MouseOverTextBrush" Foreground="{tpf:ResourceLink Key=TextBrush}"/>
+                    <Border BorderThickness="1" BorderBrush="Black" Height="20" Background="{tpf:ResourceLink Key=MouseOverTextBrush}"/>
+                </StackPanel>
+
+                <StackPanel Margin="0 2">
+                    <TextBlock Text="PressedTextBrush" Foreground="{tpf:ResourceLink Key=TextBrush}"/>
+                    <Border BorderThickness="1" BorderBrush="Black" Height="20" Background="{tpf:ResourceLink Key=PressedTextBrush}"/>
                 </StackPanel>
 
                 <StackPanel Margin="0 2">
@@ -63,32 +69,17 @@
                 </StackPanel>
 
                 <StackPanel Margin="0 2">
-                    <TextBlock Text="ScrollBarBrush" Foreground="{tpf:ResourceLink Key=TextBrush}"/>
-                    <Border BorderThickness="1" BorderBrush="Black" Height="20" Background="{tpf:ResourceLink Key=ScrollBarBrush}"/>
-                </StackPanel>
-
-                <StackPanel Margin="0 2">
-                    <TextBlock Text="SecondaryBrush" Foreground="{tpf:ResourceLink Key=TextBrush}"/>
-                    <Border BorderThickness="1" BorderBrush="Black" Height="20" Background="{tpf:ResourceLink Key=SecondaryBrush}"/>
-                </StackPanel>
-
-                <StackPanel Margin="0 2">
-                    <TextBlock Text="SecondaryBorderBrush" Foreground="{tpf:ResourceLink Key=TextBrush}"/>
-                    <Border BorderThickness="1" BorderBrush="Black" Height="20" Background="{tpf:ResourceLink Key=SecondaryBorderBrush}"/>
-                </StackPanel>
-
-                <StackPanel Margin="0 2">
-                    <TextBlock Text="SecondaryMouseOverBrush" Foreground="{tpf:ResourceLink Key=TextBrush}"/>
-                    <Border BorderThickness="1" BorderBrush="Black" Height="20" Background="{tpf:ResourceLink Key=SecondaryMouseOverBrush}"/>
-                </StackPanel>
-
-                <StackPanel Margin="0 2">
-                    <TextBlock Text="SecondaryHeaderBrush" Foreground="{tpf:ResourceLink Key=TextBrush}"/>
-                    <Border BorderThickness="1" BorderBrush="Black" Height="20" Background="{tpf:ResourceLink Key=SecondaryHeaderBrush}"/>
+                    <TextBlock Text="HyperlinkVisitedBrush" Foreground="{tpf:ResourceLink Key=TextBrush}"/>
+                    <Border BorderThickness="1" BorderBrush="Black" Height="20" Background="{tpf:ResourceLink Key=HyperlinkVisitedBrush}"/>
                 </StackPanel>
             </StackPanel>
 
             <StackPanel Grid.Column="1" Margin="5 0">
+                <StackPanel Margin="0 2">
+                    <TextBlock Text="ApplicationBackground" Foreground="{tpf:ResourceLink Key=TextBrush}"/>
+                    <Border BorderThickness="1" BorderBrush="Black" Height="20" Background="{tpf:ResourceLink Key=ApplicationBackground}"/>
+                </StackPanel>
+                
                 <StackPanel Margin="0 2">
                     <TextBlock Text="PrimaryBrush" Foreground="{tpf:ResourceLink Key=TextBrush}"/>
                     <Border BorderThickness="1" BorderBrush="Black" Height="20" Background="{tpf:ResourceLink Key=PrimaryBrush}"/>
@@ -125,33 +116,13 @@
                 </StackPanel>
 
                 <StackPanel Margin="0 2">
-                    <TextBlock Text="HyperlinkVisitedBrush" Foreground="{tpf:ResourceLink Key=TextBrush}"/>
-                    <Border BorderThickness="1" BorderBrush="Black" Height="20" Background="{tpf:ResourceLink Key=HyperlinkVisitedBrush}"/>
+                    <TextBlock Text="ScrollBarBrush" Foreground="{tpf:ResourceLink Key=TextBrush}"/>
+                    <Border BorderThickness="1" BorderBrush="Black" Height="20" Background="{tpf:ResourceLink Key=ScrollBarBrush}"/>
                 </StackPanel>
 
                 <StackPanel Margin="0 2">
                     <TextBlock Text="ScrollBarMouseOverBrush" Foreground="{tpf:ResourceLink Key=TextBrush}"/>
                     <Border BorderThickness="1" BorderBrush="Black" Height="20" Background="{tpf:ResourceLink Key=ScrollBarMouseOverBrush}"/>
-                </StackPanel>
-
-                <StackPanel Margin="0 2">
-                    <TextBlock Text="SecondarySelectedBrush" Foreground="{tpf:ResourceLink Key=TextBrush}"/>
-                    <Border BorderThickness="1" BorderBrush="Black" Height="20" Background="{tpf:ResourceLink Key=SecondarySelectedBrush}"/>
-                </StackPanel>
-
-                <StackPanel Margin="0 2">
-                    <TextBlock Text="SecondaryPressedBrush" Foreground="{tpf:ResourceLink Key=TextBrush}"/>
-                    <Border BorderThickness="1" BorderBrush="Black" Height="20" Background="{tpf:ResourceLink Key=SecondaryPressedBrush}"/>
-                </StackPanel>
-
-                <StackPanel Margin="0 2">
-                    <TextBlock Text="SecondaryAccentBrush" Foreground="{tpf:ResourceLink Key=TextBrush}"/>
-                    <Border BorderThickness="1" BorderBrush="Black" Height="20" Background="{tpf:ResourceLink Key=SecondaryAccentBrush}"/>
-                </StackPanel>
-
-                <StackPanel Margin="0 2">
-                    <TextBlock Text="SecondaryProgressBarBrush" Foreground="{tpf:ResourceLink Key=TextBrush}"/>
-                    <Border BorderThickness="1" BorderBrush="Black" Height="20" Background="{tpf:ResourceLink Key=SecondaryProgressBarBrush}"/>
                 </StackPanel>
             </StackPanel>
 
@@ -199,6 +170,58 @@
                 <StackPanel Margin="0 2">
                     <TextBlock Text="ScrollBarPressedBrush" Foreground="{tpf:ResourceLink Key=TextBrush}"/>
                     <Border BorderThickness="1" BorderBrush="Black" Height="20" Background="{tpf:ResourceLink Key=ScrollBarPressedBrush}"/>
+                </StackPanel>
+
+                <StackPanel Margin="0 2">
+                    <TextBlock Text="SecondaryProgressBarBrush" Foreground="{tpf:ResourceLink Key=TextBrush}"/>
+                    <Border BorderThickness="1" BorderBrush="Black" Height="20" Background="{tpf:ResourceLink Key=SecondaryProgressBarBrush}"/>
+                </StackPanel>
+            </StackPanel>
+
+            <StackPanel Grid.Column="3" Margin="5 0">
+                <StackPanel Margin="0 2">
+                    <TextBlock Text="SecondaryBrush" Foreground="{tpf:ResourceLink Key=TextBrush}"/>
+                    <Border BorderThickness="1" BorderBrush="Black" Height="20" Background="{tpf:ResourceLink Key=SecondaryBrush}"/>
+                </StackPanel>
+
+                <StackPanel Margin="0 2">
+                    <TextBlock Text="SecondaryBorderBrush" Foreground="{tpf:ResourceLink Key=TextBrush}"/>
+                    <Border BorderThickness="1" BorderBrush="Black" Height="20" Background="{tpf:ResourceLink Key=SecondaryBorderBrush}"/>
+                </StackPanel>
+
+                <StackPanel Margin="0 2">
+                    <TextBlock Text="SecondaryMouseOverBrush" Foreground="{tpf:ResourceLink Key=TextBrush}"/>
+                    <Border BorderThickness="1" BorderBrush="Black" Height="20" Background="{tpf:ResourceLink Key=SecondaryMouseOverBrush}"/>
+                </StackPanel>
+
+                <StackPanel Margin="0 2">
+                    <TextBlock Text="SecondaryHeaderBrush" Foreground="{tpf:ResourceLink Key=TextBrush}"/>
+                    <Border BorderThickness="1" BorderBrush="Black" Height="20" Background="{tpf:ResourceLink Key=SecondaryHeaderBrush}"/>
+                </StackPanel>
+
+                <StackPanel Margin="0 2">
+                    <TextBlock Text="SecondarySelectedBrush" Foreground="{tpf:ResourceLink Key=TextBrush}"/>
+                    <Border BorderThickness="1" BorderBrush="Black" Height="20" Background="{tpf:ResourceLink Key=SecondarySelectedBrush}"/>
+                </StackPanel>
+
+                <StackPanel Margin="0 2">
+                    <TextBlock Text="SecondaryPressedBrush" Foreground="{tpf:ResourceLink Key=TextBrush}"/>
+                    <Border BorderThickness="1" BorderBrush="Black" Height="20" Background="{tpf:ResourceLink Key=SecondaryPressedBrush}"/>
+                </StackPanel>
+
+                <StackPanel Margin="0 2">
+                    <TextBlock Text="SecondaryMouseOverTextBrush" Foreground="{tpf:ResourceLink Key=TextBrush}"/>
+                    <Border BorderThickness="1" BorderBrush="Black" Height="20" Background="{tpf:ResourceLink Key=SecondaryMouseOverTextBrush}"/>
+                </StackPanel>
+
+                <StackPanel Margin="0 2">
+                    <TextBlock Text="SecondaryPressedTextBrush" Foreground="{tpf:ResourceLink Key=TextBrush}"/>
+                    <Border BorderThickness="1" BorderBrush="Black" Height="20" Background="{tpf:ResourceLink Key=SecondaryPressedTextBrush}"/>
+                </StackPanel>
+
+                <StackPanel Margin="0 2">
+                    <TextBlock Text="SecondaryAccentBrush" Foreground="{tpf:ResourceLink Key=TextBrush}"/>
+                    <Border BorderThickness="1" BorderBrush="Black" Height="20" Background="{tpf:ResourceLink Key=SecondaryAccentBrush}"/>
                 </StackPanel>
 
                 <StackPanel Margin="0 2">
