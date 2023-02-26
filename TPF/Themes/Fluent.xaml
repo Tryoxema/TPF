@@ -35,7 +35,6 @@
 
     <!--Shadow-->
     <Style TargetType="tpf:Shadow" x:Key="TPF.ShadowStyle">
-        <Setter Property="Background" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=Background, Mode=OneWay}"/>
         <Setter Property="ShadowDepth" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(tpf:ShadowElement.ShadowDepth), Mode=OneWay, FallbackValue=Depth0}"/>
         <Setter Property="Focusable" Value="False"/>
         <Setter Property="SnapsToDevicePixels" Value="True"/>

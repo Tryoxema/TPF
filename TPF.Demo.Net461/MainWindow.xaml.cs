@@ -24,8 +24,10 @@ namespace TPF.Demo.Net461
 
             SearchManager.Create();
 
-            Skins.Add(new ColorSkin(VS2013LightSkin.Instance, "Hell"));
-            Skins.Add(new ColorSkin(VS2013DarkSkin.Instance, "Dunkel"));
+            Skins.Add(new ColorSkin(VS2013LightSkin.Instance, "VS2013 Hell"));
+            Skins.Add(new ColorSkin(VS2013DarkSkin.Instance, "VS2013 Dunkel"));
+            Skins.Add(new ColorSkin(SmoothLightSkin.Instance, "Smooth Hell"));
+            Skins.Add(new ColorSkin(SmoothDarkSkin.Instance, "Smooth Dunkel"));
             DesignComboBox.SelectedItem = Skins.FirstOrDefault();
 
             DataBarTests.Add(new DataBarTest(5));
@@ -158,6 +160,30 @@ namespace TPF.Demo.Net461
                 .Queue();
 
             BadgeCounter = null;
+        }
+
+        private void SmoothThemeCheckBox_Checked(object sender, RoutedEventArgs e)
+        {
+            var dictionary = Application.Current.Resources.MergedDictionaries.First();
+
+            dictionary.MergedDictionaries.Remove(dictionary.MergedDictionaries.Last());
+
+            dictionary.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("/TPF.Demo.Net461;component/Themes/SmoothStyles.xaml", UriKind.RelativeOrAbsolute) });
+
+            Application.Current.Resources.MergedDictionaries.Clear();
+            Application.Current.Resources.MergedDictionaries.Add(dictionary);
+        }
+
+        private void SmoothThemeCheckBox_Unchecked(object sender, RoutedEventArgs e)
+        {
+            var dictionary = Application.Current.Resources.MergedDictionaries.First();
+
+            dictionary.MergedDictionaries.Remove(dictionary.MergedDictionaries.Last());
+
+            dictionary.MergedDictionaries.Add(new ResourceDictionary() { Source = new Uri("/TPF.Demo.Net461;component/Themes/VS2013Styles.xaml", UriKind.RelativeOrAbsolute) });
+
+            Application.Current.Resources.MergedDictionaries.Clear();
+            Application.Current.Resources.MergedDictionaries.Add(dictionary);
         }
     }
 

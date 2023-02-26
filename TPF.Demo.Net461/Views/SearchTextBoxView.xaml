@@ -34,11 +34,11 @@
                     <Separator/>
                     <StackPanel Margin="5 2">
                         <TextBlock Text="Watermark" Foreground="{tpf:ResourceLink Key=TextBrush}"/>
-                        <TextBox Text="{Binding Watermark, ElementName=DemoTextBox, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource WPF.TextBoxStyle}"/>
+                        <TextBox Text="{Binding Watermark, ElementName=DemoTextBox, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     </StackPanel>
                     <StackPanel Margin="5 2">
                         <TextBlock Text="No Results Content" Foreground="{tpf:ResourceLink Key=TextBrush}"/>
-                        <TextBox Text="{Binding NoResultsContent, ElementName=DemoTextBox, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Style="{StaticResource WPF.TextBoxStyle}"/>
+                        <TextBox Text="{Binding NoResultsContent, ElementName=DemoTextBox, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                     </StackPanel>
                     <CheckBox Margin="5 2" Content="QueryButtonVisible" Foreground="{tpf:ResourceLink Key=TextBrush}"
                               IsChecked="{Binding QueryButtonVisibility, ElementName=DemoTextBox, Mode=TwoWay, Converter={StaticResource VisibliltyToBooleanConverter}}"/>

@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 
 namespace TPF.Controls
 {
@@ -9,7 +8,7 @@ namespace TPF.Controls
         public static readonly DependencyProperty CornerRadiusProperty = DependencyProperty.RegisterAttached("CornerRadius",
             typeof(CornerRadius),
             typeof(BorderElement),
-            new FrameworkPropertyMetadata(default(CornerRadius), FrameworkPropertyMetadataOptions.Inherits));
+            new PropertyMetadata(default(CornerRadius)));
 
         public static CornerRadius GetCornerRadius(DependencyObject element)
         {
@@ -19,7 +18,7 @@ namespace TPF.Controls
         public static void SetCornerRadius(DependencyObject element, CornerRadius value)
         {
             element.SetValue(CornerRadiusProperty, value);
-        } 
+        }
         #endregion
     }
 }

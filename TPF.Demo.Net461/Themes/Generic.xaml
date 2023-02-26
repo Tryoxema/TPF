@@ -3,9 +3,9 @@
                     xmlns:controls="clr-namespace:TPF.Demo.Net461.Controls"
                     xmlns:tpf="http://schemas.tpf.com/xaml/presentation">
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="/TPF;component/Themes/Generic.xaml"/>
         <ResourceDictionary Source="/TPF;component/Resources/Glyphs.xaml"/>
         <ResourceDictionary Source="/TPF.Demo.Net461;component/Images/Images.xaml"/>
+        <ResourceDictionary Source="/TPF.Demo.Net461;component/Themes/VS2013Styles.xaml"/>
     </ResourceDictionary.MergedDictionaries>
 
     <!--Brushes-->
@@ -76,11 +76,4 @@
         <Setter Property="Background" Value="Transparent"/>
     </Style>
     <Style TargetType="controls:LayoutGrid" BasedOn="{StaticResource LayoutGridStyle}"/>
-
-    <Style TargetType="ToolTip" BasedOn="{StaticResource WPF.ToolTipStyle}"/>
-    <Style TargetType="Button" BasedOn="{StaticResource WPF.ButtonStyle}"/>
-    <Style TargetType="CheckBox" BasedOn="{StaticResource WPF.CheckBoxStyle}"/>
-    <Style TargetType="TextBox" BasedOn="{StaticResource WPF.TextBoxStyle}"/>
-    <Style TargetType="ListBox" BasedOn="{StaticResource WPF.ListBoxStyle}"/>
-    <Style TargetType="ListBoxItem" BasedOn="{StaticResource WPF.ListBoxItemStyle}"/>
 </ResourceDictionary>

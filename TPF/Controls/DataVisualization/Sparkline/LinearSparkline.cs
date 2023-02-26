@@ -133,6 +133,7 @@ namespace TPF.Controls
 
             _normalRange = GetTemplateChild("PART_NormalRange") as Path;
 
+            UpdateNormalRange();
             UpdateNormalRangeVisibility();
         }
 

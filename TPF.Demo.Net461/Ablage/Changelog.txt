@@ -1,4 +1,13 @@
-﻿--- 0.6.4 ---
+﻿--- 0.6.5 ---
+-Sonstige Änderungen
+--Neues Theme
+	Es wurde ein neues Theme "Smooth" eingefügt.
+	Bei diesem Theme handelt es sich um ein moderneres, leicht abgerundetes Design.
+	Passend zu dem Theme gibt es zwei neue Skins und "SmoothDarkSkin", die das passende Farbschema enthalten.
+	Das Theme lässt sich über die Datei Smooth.xaml einbinden, anstatt wie normal Generic.xaml.
+	ACHTUNG: Aktuell sind noch nicht alle Controls im neuen Theme unterstützt.
+
+--- 0.6.4 ---
 -Neue Controls
 --DataAxis
 	Das DataAxis-Control ist ein Element, welches als Unterstützung für das StackedDataBar-Control entwickelt wurde.

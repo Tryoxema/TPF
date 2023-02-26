@@ -1,0 +1,15 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/TPF;component/Themes/Smooth.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+    <Style TargetType="ToolTip" BasedOn="{StaticResource WPF.ToolTipStyle}"/>
+    <Style TargetType="Button" BasedOn="{StaticResource WPF.ButtonStyle}"/>
+    <Style TargetType="ToggleButton" BasedOn="{StaticResource WPF.ToggleButtonStyle}"/>
+    <Style TargetType="CheckBox" BasedOn="{StaticResource WPF.CheckBoxStyle}"/>
+    <Style TargetType="TextBox" BasedOn="{StaticResource WPF.TextBoxStyle}"/>
+    <Style TargetType="ListBox" BasedOn="{StaticResource WPF.ListBoxStyle}"/>
+    <Style TargetType="ListBoxItem" BasedOn="{StaticResource WPF.ListBoxItemStyle}"/>
+    <Style TargetType="ScrollViewer" BasedOn="{StaticResource WPF.ScrollViewerStyle}"/>
+</ResourceDictionary>
