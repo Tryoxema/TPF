@@ -10,7 +10,8 @@
                     xmlns:tabControl="clr-namespace:TPF.Controls.Specialized.TabControl"
                     xmlns:dashboard="clr-namespace:TPF.Controls.Specialized.Dashboard"
                     xmlns:databar="clr-namespace:TPF.Controls.Specialized.DataBar"
-                    xmlns:dataaxis="clr-namespace:TPF.Controls.Specialized.DataAxis">
+                    xmlns:dataaxis="clr-namespace:TPF.Controls.Specialized.DataAxis"
+                    xmlns:sparkline="clr-namespace:TPF.Controls.Specialized.Sparkline">
     <!--Brushes-->
     <RadialGradientBrush x:Key="FluentRadialGradient">
         <GradientStop Color="#59FFFFFF" Offset="0.2"/>
@@ -5684,6 +5685,12 @@
         <Setter Property="AxisBrush" Value="{tpf:ResourceLink Key=GlyphBrush}"/>
         <Setter Property="LineBrush" Value="{tpf:ResourceLink Key=AccentBrush}"/>
         <Setter Property="NormalRangeBrush" Value="{tpf:ResourceLink Key=BorderBrush}"/>
+        <Setter Property="IndicatorBrush" Value="{tpf:ResourceLink Key=SelectedBrush}"/>
+        <Setter Property="FirstPointBrush" Value="{tpf:ResourceLink Key=AccentBrush}"/>
+        <Setter Property="LastPointBrush" Value="{tpf:ResourceLink Key=AccentBrush}"/>
+        <Setter Property="HighPointBrush" Value="ForestGreen"/>
+        <Setter Property="LowPointBrush" Value="Red"/>
+        <Setter Property="NegativePointBrush" Value="Crimson"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="tpf:LinearSparkline">
@@ -5692,6 +5699,7 @@
                             <Path x:Name="PART_NormalRange" Fill="{TemplateBinding NormalRangeBrush}"/>
                             <Polyline Stroke="{TemplateBinding LineBrush}" Points="{TemplateBinding LinePoints}" Style="{TemplateBinding LineStyle}"/>
                             <Line x:Name="PART_Axis" Stroke="{TemplateBinding AxisBrush}" StrokeThickness="1"/>
+                            <sparkline:IndicatorPanel x:Name="PART_IndicatorPanel"/>
                         </tpf:SimplePanel>
                     </Border>
                 </ControlTemplate>
@@ -5699,4 +5707,18 @@
         </Setter>
     </Style>
     <Style TargetType="tpf:LinearSparkline" BasedOn="{StaticResource TPF.LinearSparklineStyle}"/>
+    <Style TargetType="sparkline:IndicatorItem" x:Key="TPF.SparklineIndicatorItemStyle">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="sparkline:IndicatorItem">
+                    <Ellipse Fill="{TemplateBinding Background}" Width="5" Height="5" ToolTipService.IsEnabled="{TemplateBinding ToolTipTemplate, Converter={StaticResource NullToBooleanConverter}}">
+                        <Ellipse.ToolTip>
+                            <ToolTip DataContext="{Binding Path=PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}" Content="{Binding }" ContentTemplate="{TemplateBinding ToolTipTemplate}"/>
+                        </Ellipse.ToolTip>
+                    </Ellipse>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="sparkline:IndicatorItem" BasedOn="{StaticResource TPF.SparklineIndicatorItemStyle}"/>
 </ResourceDictionary>

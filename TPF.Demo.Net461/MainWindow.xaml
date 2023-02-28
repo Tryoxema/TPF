@@ -116,7 +116,14 @@
                         </StackPanel>
 
                         <StackPanel Grid.Column="1">
-                            <tpf:LinearSparkline ItemsSource="{Binding SparklineTests}" XValuePath="X" YValuePath="Y" Width="200" Height="40" ShowAxis="True"/>
+                            <tpf:LinearSparkline ItemsSource="{Binding SparklineTests}" XValuePath="X" YValuePath="Y" Width="200" Height="40" ShowAxis="True" ShowIndicators="True" 
+                                                 ShowHighPointIndicators="True" ShowLowPointIndicators="True" ShowNegativePointIndicators="True" ShowFirstPointIndicator="True" ShowLastPointIndicator="True">
+                                <tpf:LinearSparkline.ToolTipTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Y}"/>
+                                    </DataTemplate>
+                                </tpf:LinearSparkline.ToolTipTemplate>
+                            </tpf:LinearSparkline>
                         </StackPanel>
                     </Grid>
                 </Grid>

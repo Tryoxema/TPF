@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Linq;
 using System.Windows;
+using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Shapes;
+using TPF.Controls.Specialized.Sparkline;
 using TPF.Internal;
 
 namespace TPF.Controls
@@ -118,6 +121,45 @@ namespace TPF.Controls
         }
         #endregion
 
+        #region IndicatorBrush DependencyProperty
+        public static readonly DependencyProperty IndicatorBrushProperty = DependencyProperty.Register("IndicatorBrush",
+            typeof(Brush),
+            typeof(LinearSparkline),
+            new PropertyMetadata(OnIndicatorPropertyChanged));
+
+        public Brush IndicatorBrush
+        {
+            get { return (Brush)GetValue(IndicatorBrushProperty); }
+            set { SetValue(IndicatorBrushProperty, value); }
+        }
+        #endregion
+
+        #region IndicatorStyle DependencyProperty
+        public static readonly DependencyProperty IndicatorStyleProperty = DependencyProperty.Register("IndicatorStyle",
+            typeof(Style),
+            typeof(LinearSparkline),
+            new PropertyMetadata(OnIndicatorPropertyChanged));
+
+        public Style IndicatorStyle
+        {
+            get { return (Style)GetValue(IndicatorStyleProperty); }
+            set { SetValue(IndicatorStyleProperty, value); }
+        }
+        #endregion
+
+        #region ShowIndicators DependencyProperty
+        public static readonly DependencyProperty ShowIndicatorsProperty = DependencyProperty.Register("ShowIndicators",
+            typeof(bool),
+            typeof(LinearSparkline),
+            new PropertyMetadata(BooleanBoxes.FalseBox, OnIndicatorPropertyChanged));
+
+        public bool ShowIndicators
+        {
+            get { return (bool)GetValue(ShowIndicatorsProperty); }
+            set { SetValue(ShowIndicatorsProperty, BooleanBoxes.Box(value)); }
+        }
+        #endregion
+
         private static void NormalRangePropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
             var instance = (LinearSparkline)sender;
@@ -126,13 +168,16 @@ namespace TPF.Controls
         }
 
         private Path _normalRange;
+        private IndicatorPanel _indicatorPanel;
 
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
 
             _normalRange = GetTemplateChild("PART_NormalRange") as Path;
+            _indicatorPanel = GetTemplateChild("PART_IndicatorPanel") as IndicatorPanel;
 
+            OnUpdateIndicators();
             UpdateNormalRange();
             UpdateNormalRangeVisibility();
         }
@@ -143,6 +188,7 @@ namespace TPF.Controls
 
             RefreshLinePoints();
             UpdateNormalRange();
+            OnUpdateIndicators();
         }
 
         protected override void OnDataChanged()
@@ -171,8 +217,10 @@ namespace TPF.Controls
 
                 if (visualDataPoints == null) return newPoints;
 
-                foreach (var dataPoint in visualDataPoints)
+                for (var i = 0; i < visualDataPoints.Count; i++)
                 {
+                    var dataPoint = visualDataPoints[i];
+
                     var relativeXPoint = XRange.GetRelativePoint(dataPoint.X);
                     var relativeYPoint = YRange.GetRelativePoint(dataPoint.Y);
 
@@ -186,6 +234,90 @@ namespace TPF.Controls
             }
 
             return newPoints;
+        }
+
+        protected override void OnUpdateIndicators()
+        {
+            if (_indicatorPanel == null) return;
+
+            if (_indicatorPanel.Children.Count > 0)
+            {
+                foreach (IndicatorItem child in _indicatorPanel.Children)
+                {
+                    BindingOperations.ClearAllBindings(child);
+                }
+
+                _indicatorPanel.Children.Clear();
+            }
+
+            var visualDataPoints = DataPoints;
+
+            if (visualDataPoints == null || visualDataPoints.Count == 0) return;
+
+            var style = IndicatorStyle;
+            var defaultBrush = IndicatorBrush;
+            var showAllIndicators = ShowIndicators;
+            var maxValue = visualDataPoints.Max(item => item.Y);
+            var minValue = visualDataPoints.Min(item => item.Y);
+
+            for (var i = 0; i < visualDataPoints.Count; i++)
+            {
+                var dataPoint = visualDataPoints[i];
+
+                var brush = defaultBrush;
+                var shouldAdd = showAllIndicators;
+                var type = IndicatorType.Normal;
+
+                if (ShowFirstPointIndicator && i == 0)
+                {
+                    brush = FirstPointBrush;
+                    shouldAdd = true;
+                    type = IndicatorType.First;
+                }
+                else if (ShowLastPointIndicator && i == visualDataPoints.Count - 1)
+                {
+                    brush = LastPointBrush;
+                    shouldAdd = true;
+                    type = IndicatorType.Last;
+                }
+                else if (ShowHighPointIndicators && dataPoint.Y == maxValue)
+                {
+                    brush = HighPointBrush;
+                    shouldAdd = true;
+                    type = IndicatorType.High;
+                }
+                else if (ShowLowPointIndicators && dataPoint.Y == minValue)
+                {
+                    brush = LowPointBrush;
+                    shouldAdd = true;
+                    type = IndicatorType.Low;
+                }
+                else if (ShowNegativePointIndicators && dataPoint.Y < 0)
+                {
+                    brush = NegativePointBrush;
+                    shouldAdd = true;
+                    type = IndicatorType.Negative;
+                }
+
+                if (!shouldAdd) continue;
+
+                var relativeXPoint = XRange.GetRelativePoint(dataPoint.X);
+                var relativeYPoint = YRange.GetRelativePoint(dataPoint.Y);
+
+                var indicator = new IndicatorItem()
+                {
+                    DataContext = dataPoint,
+                    RelativeX = relativeXPoint,
+                    RelativeY = relativeYPoint,
+                    Background = brush,
+                    Type = type,
+                    Style = style
+                };
+
+                indicator.SetBinding(IndicatorItem.ToolTipTemplateProperty, new Binding(nameof(ToolTipTemplate)) { Source = this });
+
+                _indicatorPanel.Children.Add(indicator);
+            }
         }
 
         private void UpdateNormalRangeVisibility()

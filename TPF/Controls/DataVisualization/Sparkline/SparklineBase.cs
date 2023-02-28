@@ -202,11 +202,161 @@ namespace TPF.Controls
         }
         #endregion
 
+        #region FirstPointBrush DependencyProperty
+        public static readonly DependencyProperty FirstPointBrushProperty = DependencyProperty.Register("FirstPointBrush",
+            typeof(Brush),
+            typeof(SparklineBase),
+            new PropertyMetadata(OnIndicatorPropertyChanged));
+
+        public Brush FirstPointBrush
+        {
+            get { return (Brush)GetValue(FirstPointBrushProperty); }
+            set { SetValue(FirstPointBrushProperty, value); }
+        }
+        #endregion
+
+        #region LastPointBrush DependencyProperty
+        public static readonly DependencyProperty LastPointBrushProperty = DependencyProperty.Register("LastPointBrush",
+            typeof(Brush),
+            typeof(SparklineBase),
+            new PropertyMetadata(OnIndicatorPropertyChanged));
+
+        public Brush LastPointBrush
+        {
+            get { return (Brush)GetValue(LastPointBrushProperty); }
+            set { SetValue(LastPointBrushProperty, value); }
+        }
+        #endregion
+
+        #region HighPointBrush DependencyProperty
+        public static readonly DependencyProperty HighPointBrushProperty = DependencyProperty.Register("HighPointBrush",
+            typeof(Brush),
+            typeof(SparklineBase),
+            new PropertyMetadata(OnIndicatorPropertyChanged));
+
+        public Brush HighPointBrush
+        {
+            get { return (Brush)GetValue(HighPointBrushProperty); }
+            set { SetValue(HighPointBrushProperty, value); }
+        }
+        #endregion
+
+        #region LowPointBrush DependencyProperty
+        public static readonly DependencyProperty LowPointBrushProperty = DependencyProperty.Register("LowPointBrush",
+            typeof(Brush),
+            typeof(SparklineBase),
+            new PropertyMetadata(OnIndicatorPropertyChanged));
+
+        public Brush LowPointBrush
+        {
+            get { return (Brush)GetValue(LowPointBrushProperty); }
+            set { SetValue(LowPointBrushProperty, value); }
+        }
+        #endregion
+
+        #region NegativePointBrush DependencyProperty
+        public static readonly DependencyProperty NegativePointBrushProperty = DependencyProperty.Register("NegativePointBrush",
+            typeof(Brush),
+            typeof(SparklineBase),
+            new PropertyMetadata(OnIndicatorPropertyChanged));
+
+        public Brush NegativePointBrush
+        {
+            get { return (Brush)GetValue(NegativePointBrushProperty); }
+            set { SetValue(NegativePointBrushProperty, value); }
+        }
+        #endregion
+
+        #region ShowFirstPointIndicator DependencyProperty
+        public static readonly DependencyProperty ShowFirstPointIndicatorProperty = DependencyProperty.Register("ShowFirstPointIndicator",
+            typeof(bool),
+            typeof(SparklineBase),
+            new PropertyMetadata(BooleanBoxes.FalseBox, OnIndicatorPropertyChanged));
+
+        public bool ShowFirstPointIndicator
+        {
+            get { return (bool)GetValue(ShowFirstPointIndicatorProperty); }
+            set { SetValue(ShowFirstPointIndicatorProperty, BooleanBoxes.Box(value)); }
+        }
+        #endregion
+
+        #region ShowLastPointIndicator DependencyProperty
+        public static readonly DependencyProperty ShowLastPointIndicatorProperty = DependencyProperty.Register("ShowLastPointIndicator",
+            typeof(bool),
+            typeof(SparklineBase),
+            new PropertyMetadata(BooleanBoxes.FalseBox, OnIndicatorPropertyChanged));
+
+        public bool ShowLastPointIndicator
+        {
+            get { return (bool)GetValue(ShowLastPointIndicatorProperty); }
+            set { SetValue(ShowLastPointIndicatorProperty, BooleanBoxes.Box(value)); }
+        }
+        #endregion
+
+        #region ShowHighPointIndicators DependencyProperty
+        public static readonly DependencyProperty ShowHighPointIndicatorsProperty = DependencyProperty.Register("ShowHighPointIndicators",
+            typeof(bool),
+            typeof(SparklineBase),
+            new PropertyMetadata(BooleanBoxes.FalseBox, OnIndicatorPropertyChanged));
+
+        public bool ShowHighPointIndicators
+        {
+            get { return (bool)GetValue(ShowHighPointIndicatorsProperty); }
+            set { SetValue(ShowHighPointIndicatorsProperty, BooleanBoxes.Box(value)); }
+        }
+        #endregion
+
+        #region ShowLowPointIndicators DependencyProperty
+        public static readonly DependencyProperty ShowLowPointIndicatorsProperty = DependencyProperty.Register("ShowLowPointIndicators",
+            typeof(bool),
+            typeof(SparklineBase),
+            new PropertyMetadata(BooleanBoxes.FalseBox, OnIndicatorPropertyChanged));
+
+        public bool ShowLowPointIndicators
+        {
+            get { return (bool)GetValue(ShowLowPointIndicatorsProperty); }
+            set { SetValue(ShowLowPointIndicatorsProperty, BooleanBoxes.Box(value)); }
+        }
+        #endregion
+
+        #region ShowNegativePointIndicators DependencyProperty
+        public static readonly DependencyProperty ShowNegativePointIndicatorsProperty = DependencyProperty.Register("ShowNegativePointIndicators",
+            typeof(bool),
+            typeof(SparklineBase),
+            new PropertyMetadata(BooleanBoxes.FalseBox, OnIndicatorPropertyChanged));
+
+        public bool ShowNegativePointIndicators
+        {
+            get { return (bool)GetValue(ShowNegativePointIndicatorsProperty); }
+            set { SetValue(ShowNegativePointIndicatorsProperty, BooleanBoxes.Box(value)); }
+        }
+        #endregion
+
+        #region ToolTipTemplate DependencyProperty
+        public static readonly DependencyProperty ToolTipTemplateProperty = DependencyProperty.Register("ToolTipTemplate",
+            typeof(DataTemplate),
+            typeof(SparklineBase),
+            new PropertyMetadata(null));
+
+        public DataTemplate ToolTipTemplate
+        {
+            get { return (DataTemplate)GetValue(ToolTipTemplateProperty); }
+            set { SetValue(ToolTipTemplateProperty, value); }
+        }
+        #endregion
+
         private static void MinMaxPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
             var instance = (SparklineBase)sender;
 
             instance.UpdateData();
+        }
+
+        protected static void OnIndicatorPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+        {
+            var instance = (SparklineBase)sender;
+
+            instance.UpdateIndicators();
         }
 
         private Line _axis;
@@ -479,7 +629,15 @@ namespace TPF.Controls
         protected virtual void OnDataChanged()
         {
             UpdateAxisPosition();
+            UpdateIndicators();
         }
+
+        private void UpdateIndicators()
+        {
+            OnUpdateIndicators();
+        }
+
+        protected abstract void OnUpdateIndicators();
 
         protected override void OnRenderSizeChanged(SizeChangedInfo sizeInfo)
         {
