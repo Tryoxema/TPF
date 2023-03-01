@@ -1,11 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Windows;
 
 namespace TPF.Controls.Specialized.Calendar
 {
-    public class CalendarButtonContent : System.ComponentModel.INotifyPropertyChanged
+    public class CalendarButtonContent : NotifyObject
     {
         public CalendarButtonContent()
         {
@@ -16,18 +15,6 @@ namespace TPF.Controls.Specialized.Calendar
         {
             ParentCalendar = calendar;
         }
-        
-        #region SetProperty
-        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
-
-        bool SetProperty<T>(ref T field, T value, [System.Runtime.CompilerServices.CallerMemberName] string propertyName = null)
-        {
-            if (EqualityComparer<T>.Default.Equals(field, value)) return false;
-            field = value;
-            PropertyChanged?.Invoke(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
-            return true;
-        }
-        #endregion
 
         internal Controls.Calendar ParentCalendar;
 

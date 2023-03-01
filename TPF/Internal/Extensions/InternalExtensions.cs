@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Text;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -285,7 +283,7 @@ namespace TPF.Internal
             using (var context = drawingVisual.RenderOpen())
             {
                 var brush = new VisualBrush(visual);
-                
+
                 context.DrawRectangle(brush, null, new Rect(new Point(), bounds.Size));
             }
 

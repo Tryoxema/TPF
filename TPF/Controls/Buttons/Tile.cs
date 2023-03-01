@@ -1,6 +1,4 @@
-﻿using System;
-using System.Windows;
-using System.Windows.Controls;
+﻿using System.Windows;
 
 namespace TPF.Controls
 {
@@ -51,9 +49,9 @@ namespace TPF.Controls
         #endregion
 
         #region TitleFontSize DependencyProperty
-        public static readonly DependencyProperty TitleFontSizeProperty = DependencyProperty.Register("TitleFontSize", 
-            typeof(double), 
-            typeof(Tile), 
+        public static readonly DependencyProperty TitleFontSizeProperty = DependencyProperty.Register("TitleFontSize",
+            typeof(double),
+            typeof(Tile),
             new PropertyMetadata(16.0));
 
         public double TitleFontSize

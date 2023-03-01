@@ -9,10 +9,7 @@ namespace TPF.Demo.Net461.Controls
 
         public WindowType WindowType { get; }
 
-        public WindowMetadataAttribute(string name) : this(name, WindowType.Normal)
-        {
-            
-        }
+        public WindowMetadataAttribute(string name) : this(name, WindowType.Normal) { }
 
         public WindowMetadataAttribute(string name, WindowType windowType)
         {

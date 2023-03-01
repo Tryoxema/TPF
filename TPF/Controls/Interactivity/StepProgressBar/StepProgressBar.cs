@@ -516,7 +516,7 @@ namespace TPF.Controls
 
                     Storyboard.SetTarget(animation, item);
                     Storyboard.SetTargetProperty(animation, new PropertyPath("Progress"));
-                    
+
                     story.Children.Add(animation);
 
                     timeOffset = timeOffset.Add(duration);

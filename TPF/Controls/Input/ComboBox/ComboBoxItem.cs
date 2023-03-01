@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using TPF.Internal;
@@ -28,7 +24,7 @@ namespace TPF.Controls
         {
             get { return (bool)GetValue(IsHighlightedProperty); }
             protected set { SetValue(IsHighlightedPropertyKey, BooleanBoxes.Box(value)); }
-        } 
+        }
         #endregion
 
         private ComboBox ParentComboBox

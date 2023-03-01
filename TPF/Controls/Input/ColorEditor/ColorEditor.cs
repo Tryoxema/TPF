@@ -398,13 +398,13 @@ namespace TPF.Controls
             if (HuePad != null)
             {
                 var huePoint = new Point(0, hsvColor.H / 360);
-                HuePad.RelativePositionPoint = huePoint; 
+                HuePad.RelativePositionPoint = huePoint;
             }
 
             if (SaturationPad != null)
             {
                 var saturationPoint = new Point(hsvColor.S, 1 - hsvColor.V);
-                SaturationPad.RelativePositionPoint = saturationPoint; 
+                SaturationPad.RelativePositionPoint = saturationPoint;
             }
 
             _suppressSelectorUpdate = false;

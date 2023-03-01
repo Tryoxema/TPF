@@ -18,35 +18,9 @@ namespace TPF.Demo.Net461
             InitializeComponent();
 
             Instance = this;
-
             Manager = new NotificationManager();
-            Notifications.Manager = Manager;
 
-            SearchManager.Create();
-
-            Skins.Add(new ColorSkin(VS2013LightSkin.Instance, "VS2013 Hell"));
-            Skins.Add(new ColorSkin(VS2013DarkSkin.Instance, "VS2013 Dunkel"));
-            Skins.Add(new ColorSkin(SmoothLightSkin.Instance, "Smooth Hell"));
-            Skins.Add(new ColorSkin(SmoothDarkSkin.Instance, "Smooth Dunkel"));
-            DesignComboBox.SelectedItem = Skins.FirstOrDefault();
-
-            DataBarTests.Add(new DataBarTest(5));
-            DataBarTests.Add(new DataBarTest(15));
-            DataBarTests.Add(new DataBarTest(5));
-            DataBarTests.Add(new DataBarTest(3));
-            DataBarTests.Add(new DataBarTest(18));
-            DataBarTests.Add(new DataBarTest(22));
-            DataBarTests.Add(new DataBarTest(10));
-            DataBarTests.Add(new DataBarTest(5));
-            DataBarTests.Add(new DataBarTest(9));
-            DataBarTests.Add(new DataBarTest(6));
-
-            var random = new Random();
-
-            for (int i = 0; i < 20; i++)
-            {
-                SparklineTests.Add(new SparklineTest(i, random.Next(-10, 10)));
-            }
+            Initialize();
         }
 
         #region SetProperty
@@ -61,6 +35,7 @@ namespace TPF.Demo.Net461
         }
         #endregion
 
+        #region Properties
         public static MainWindow Instance { get; private set; }
 
         public readonly NotificationManager Manager;
@@ -102,6 +77,38 @@ namespace TPF.Demo.Net461
         public ObservableCollection<SparklineTest> SparklineTests
         {
             get { return _sparklineTests ?? (_sparklineTests = new ObservableCollection<SparklineTest>()); }
+        }
+        #endregion
+
+        private void Initialize()
+        {
+            Notifications.Manager = Manager;
+
+            SearchManager.Create();
+
+            Skins.Add(new ColorSkin(VS2013LightSkin.Instance, "VS2013 Hell"));
+            Skins.Add(new ColorSkin(VS2013DarkSkin.Instance, "VS2013 Dunkel"));
+            Skins.Add(new ColorSkin(SmoothLightSkin.Instance, "Smooth Hell"));
+            Skins.Add(new ColorSkin(SmoothDarkSkin.Instance, "Smooth Dunkel"));
+            DesignComboBox.SelectedItem = Skins.FirstOrDefault();
+
+            DataBarTests.Add(new DataBarTest(5));
+            DataBarTests.Add(new DataBarTest(15));
+            DataBarTests.Add(new DataBarTest(5));
+            DataBarTests.Add(new DataBarTest(3));
+            DataBarTests.Add(new DataBarTest(18));
+            DataBarTests.Add(new DataBarTest(22));
+            DataBarTests.Add(new DataBarTest(10));
+            DataBarTests.Add(new DataBarTest(5));
+            DataBarTests.Add(new DataBarTest(9));
+            DataBarTests.Add(new DataBarTest(6));
+
+            var random = new Random();
+
+            for (int i = 0; i < 20; i++)
+            {
+                SparklineTests.Add(new SparklineTest(i, random.Next(-10, 10)));
+            }
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)

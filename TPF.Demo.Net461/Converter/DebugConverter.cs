@@ -9,6 +9,7 @@ namespace TPF.Demo.Net461.Converter
     public class DebugConverter : IValueConverter
     {
         public static DebugConverter Instance = new DebugConverter();
+
         private DebugConverter()
         {
 

@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Linq;
-using System.Collections.Generic;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Input;
@@ -53,7 +51,7 @@ namespace TPF.Controls
             set { SetValue(PressedGradientProperty, value); }
         }
         #endregion
-        
+
         internal override void OnMouseMoveExternal(MouseEventArgs e)
         {
             base.OnMouseMoveExternal(e);

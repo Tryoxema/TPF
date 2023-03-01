@@ -40,7 +40,7 @@ namespace TPF.Demo.Net461.Controls
 
                     var attribute = type.GetCustomAttribute<WindowMetadataAttribute>();
 
-                    if (attribute != null && !_allWindows.TryGetValue(type, out var windowAttribute))
+                    if (attribute != null && !_allWindows.TryGetValue(type, out var _))
                     {
                         _allWindows.Add(type, attribute);
                     }

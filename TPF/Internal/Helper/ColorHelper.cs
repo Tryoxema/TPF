@@ -7,7 +7,7 @@ namespace TPF.Internal
     {
         internal static Color ConvertHsvToRgb(double h, double s, double v)
         {
-            double r = 0, g = 0, b = 0;
+            double r, g, b;
 
             if (s == 0)
             {
@@ -89,8 +89,7 @@ namespace TPF.Internal
             v = Math.Max(Math.Max(r, g), b);
             delta = v - min;
 
-            if (v == 0.0) s = 0;
-            else s = delta / v;
+            s = v == 0.0 ? 0 : delta / v;
 
             if (s == 0) h = 0.0;
 

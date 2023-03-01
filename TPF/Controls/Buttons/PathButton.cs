@@ -1,6 +1,4 @@
-﻿using System;
-using System.Windows;
-using System.Windows.Controls;
+﻿using System.Windows;
 using System.Windows.Media;
 
 namespace TPF.Controls
@@ -11,7 +9,7 @@ namespace TPF.Controls
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(PathButton), new FrameworkPropertyMetadata(typeof(PathButton)));
         }
-        
+
         #region Data DependencyProperty
         public static readonly DependencyProperty DataProperty = DependencyProperty.Register("Data",
             typeof(Geometry),

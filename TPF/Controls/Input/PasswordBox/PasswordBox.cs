@@ -31,9 +31,9 @@ namespace TPF.Controls
         }
 
         #region PasswordChanged RoutedEvent
-        public static readonly RoutedEvent PasswordChangedEvent = EventManager.RegisterRoutedEvent("PasswordChanged", 
-            RoutingStrategy.Bubble, 
-            typeof(RoutedEventHandler), 
+        public static readonly RoutedEvent PasswordChangedEvent = EventManager.RegisterRoutedEvent("PasswordChanged",
+            RoutingStrategy.Bubble,
+            typeof(RoutedEventHandler),
             typeof(PasswordBox));
 
         public event RoutedEventHandler PasswordChanged
@@ -102,7 +102,7 @@ namespace TPF.Controls
             set
             {
                 if (value == null) value = string.Empty;
-                
+
                 SecurePassword = new SecureString();
 
                 for (int i = 0; i < value.Length; ++i)
@@ -155,7 +155,7 @@ namespace TPF.Controls
         {
             // OnPreviewKeyDown kümmert sich um \r, deshalb hier ignorieren
             if (e.Text != "\r") PasswordInsert(e.Text, CaretIndex);
-            
+
             e.Handled = true;
 
             base.OnPreviewTextInput(e);
@@ -232,7 +232,7 @@ namespace TPF.Controls
             if (!e.SourceDataObject.GetDataPresent(DataFormats.UnicodeText, true)) return;
 
             if (e.SourceDataObject.GetData(DataFormats.UnicodeText) is string text) PasswordInsert(text, CaretIndex);
-            
+
             e.CancelCommand();
         }
 
@@ -266,7 +266,7 @@ namespace TPF.Controls
         private void PasswordInsert(string text, int index)
         {
             if (text == null) return;
-            
+
             var newPassword = Password;
 
             if ((index < 0) || (index > newPassword.Length)) return;

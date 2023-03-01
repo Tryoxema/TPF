@@ -1,5 +1,4 @@
-﻿using System;
-using TPF.DragDrop.Behaviors;
+﻿using TPF.DragDrop.Behaviors;
 
 namespace TPF.Controls.Specialized.TaskBoard
 {

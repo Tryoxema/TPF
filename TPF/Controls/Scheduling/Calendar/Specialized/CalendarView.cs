@@ -1,5 +1,4 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Input;
@@ -165,7 +164,7 @@ namespace TPF.Controls.Specialized.Calendar
 
         private void Button_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
         {
-            if (ParentCalendar == null ||ParentCalendar.IsReadOnly) return;
+            if (ParentCalendar == null || ParentCalendar.IsReadOnly) return;
 
             if (sender is CalendarButton button && button.Content is CalendarButtonContent content)
             {

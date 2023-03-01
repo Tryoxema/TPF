@@ -29,7 +29,7 @@ namespace TPF.Controls
         public static readonly DependencyProperty RelativePositionPointProperty = DependencyProperty.Register("RelativePositionPoint",
             typeof(Point),
             typeof(Pad),
-            new PropertyMetadata(new Point(0,0), OnRelativePositionPointChanged, CoerceRelativePoint));
+            new PropertyMetadata(new Point(0, 0), OnRelativePositionPointChanged, CoerceRelativePoint));
 
         private static void OnRelativePositionPointChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
@@ -87,7 +87,7 @@ namespace TPF.Controls
                 else if (point.X > ActualWidth - 1) point.X = ActualWidth - 1;
 
                 if (point.Y < 0) point.Y = 0;
-                else if (point.Y > ActualHeight - 1) point.Y = ActualHeight - 1; 
+                else if (point.Y > ActualHeight - 1) point.Y = ActualHeight - 1;
             }
             else
             {

@@ -630,7 +630,7 @@ namespace TPF.Controls
                     }
                     else
                     {
-                        SelectPrevious(); 
+                        SelectPrevious();
                         e.Handled = true;
                     }
                     break;
@@ -1033,7 +1033,7 @@ namespace TPF.Controls
             // SelectionBoxItem ist im Edit-Modus null
             SelectionBoxItem = null;
             SelectionBoxItemTemplate = null;
-            
+
             if (SelectedItems.Count == 0) Text = null;
             else if (AllowMultiSelection)
             {
@@ -1293,7 +1293,7 @@ namespace TPF.Controls
                 separator.IsEnabled = false;
                 separator.HorizontalContentAlignment = HorizontalAlignment.Stretch;
             }
-        } 
+        }
         #endregion
     }
 }

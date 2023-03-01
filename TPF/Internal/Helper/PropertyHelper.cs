@@ -55,7 +55,7 @@ namespace TPF.Internal
         {
             var propertyValue = GetPropertyValueFromPath(value, path);
 
-            if (propertyValue == null) return default(T);
+            if (propertyValue == null) return default;
 
             return (T)propertyValue;
         }

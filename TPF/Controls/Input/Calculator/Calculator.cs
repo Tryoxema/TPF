@@ -178,7 +178,7 @@ namespace TPF.Controls
                 DisplayedValue = "ERROR";
                 return;
             }
-            
+
             // History füllen anhand von FrozenHistory, ExecutedFunctions und InputValue
             var history = FrozenHistory;
 
@@ -473,7 +473,7 @@ namespace TPF.Controls
                     }
 
                     instance.InputValue = new CalculatorValue(instance.DecimalSeparator, inputValue);
-                    
+
                 }
                 else if (e.Parameter is TwoValueOperation twoValueOperation)
                 {
