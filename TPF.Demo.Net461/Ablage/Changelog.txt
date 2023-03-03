@@ -1,4 +1,23 @@
 ﻿--- 0.6.5 ---
+-Veränderte Controls
+--SparklineBase
+	Die Basisklasse der Sparkline-Controls wurde um diverse Properties erweitert, um Indikatoren an den einzelnen Datenpunkten darzustellen.
+	Es wurden folgende Brushes hinzugefügt: FirstPointBrush, LastPointBrush, HighPointBrush, LowPointBrush, NegativePointBrush
+	Dazu wurden folgende bool-Properties zum Ein- und Ausblenden hinzugefügt: ShowFirstPointIndicator, ShowLastPointIndicator, ShowHighPointIndicators, ShowLowPointIndicators, ShowNegativePointIndicators
+	Zusätzlich wurde noch die ToolTipTemplate-Property hinzugefügt, die ein DataTemplate für den ToolTip der neuen Indikatoren konfiguriert.
+--LinearSparkline
+	Einige der Properties der LinearSparkline-Klasse wurden in eine neue Basisklasse ausgelagert, die LinearSparklineBase-Klasse.
+	Diese enthält die Properties LineStyle, LineBrush und LinePoints die vorher in LinearSparkline zu finden waren.
+	Zusätzlich enthält diese auch die neuen Properties IndicatorBrush, IndicatorStyle und ShowIndicators, die für das generelle Konfigurieren von Indikatoren gemacht sind.
+
+-Neue Controls
+--AreaSparkline
+	Die AreaSparkline ist eine neue Art von Sparkline, die von der Klasse LinearSparklineBase abgeleitet ist und für die zusätzliche farbliche Darstellung des Datenbereichs ist.
+	Das Control stellt den Bereich zwischen Linie und Nullpunkt farblich dar, wobei der positive und der negative Bereich einzeln konfigurierbar sind.
+	Den positiven Bereich kann man über die Properties PositiveAreaStyle und PositiveAreaBrush kontrollieren.
+	Den negativen Bereich kann man entsprechend dann über NegativeAreaStyle und NegativeAreaBrush konfigurieren.
+	Außerdem hat das Control natürlich alle Funktionen die von der Basisklasse zur Verfügung gestellt werden.
+
 -Sonstige Änderungen
 --Neues Theme
 	Es wurde ein neues Theme "Smooth" eingefügt.

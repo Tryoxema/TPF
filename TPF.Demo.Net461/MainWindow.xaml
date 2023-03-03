@@ -120,6 +120,8 @@
                                     </DataTemplate>
                                 </tpf:LinearSparkline.ToolTipTemplate>
                             </tpf:LinearSparkline>
+
+                            <tpf:AreaSparkline ItemsSource="{Binding SparklineTests}" XValuePath="X" YValuePath="Y" Width="200" Height="40" ShowAxis="True" NegativeAreaBrush="Crimson"/>
                         </StackPanel>
                     </Grid>
                 </Grid>

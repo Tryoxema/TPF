@@ -5721,4 +5721,34 @@
         </Setter>
     </Style>
     <Style TargetType="sparkline:IndicatorItem" BasedOn="{StaticResource TPF.SparklineIndicatorItemStyle}"/>
+
+    <!-- ========== AreaSparkline ========== -->
+    <Style TargetType="tpf:AreaSparkline" x:Key="TPF.AreaSparklineStyle">
+        <Setter Property="AxisBrush" Value="{tpf:ResourceLink Key=GlyphBrush}"/>
+        <Setter Property="LineBrush" Value="{tpf:ResourceLink Key=AccentBrush}"/>
+        <Setter Property="PositiveAreaBrush" Value="{tpf:ResourceLink Key=AccentBrush}"/>
+        <Setter Property="NegativeAreaBrush" Value="{tpf:ResourceLink Key=AccentBrush}"/>
+        <Setter Property="IndicatorBrush" Value="{tpf:ResourceLink Key=SelectedBrush}"/>
+        <Setter Property="FirstPointBrush" Value="{tpf:ResourceLink Key=AccentBrush}"/>
+        <Setter Property="LastPointBrush" Value="{tpf:ResourceLink Key=AccentBrush}"/>
+        <Setter Property="HighPointBrush" Value="ForestGreen"/>
+        <Setter Property="LowPointBrush" Value="Red"/>
+        <Setter Property="NegativePointBrush" Value="Crimson"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="tpf:AreaSparkline">
+                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                        <tpf:SimplePanel>
+                            <Polyline Fill="{TemplateBinding PositiveAreaBrush}" Points="{TemplateBinding AreaPoints}" Style="{TemplateBinding PositiveAreaStyle}" Clip="{TemplateBinding PositiveAreaClip}"/>
+                            <Polyline Fill="{TemplateBinding NegativeAreaBrush}" Points="{TemplateBinding AreaPoints}" Style="{TemplateBinding NegativeAreaStyle}" Clip="{TemplateBinding NegativeAreaClip}"/>
+                            <Polyline Stroke="{TemplateBinding LineBrush}" Points="{TemplateBinding LinePoints}" Style="{TemplateBinding LineStyle}"/>
+                            <Line x:Name="PART_Axis" Stroke="{TemplateBinding AxisBrush}" StrokeThickness="1"/>
+                            <sparkline:IndicatorPanel x:Name="PART_IndicatorPanel"/>
+                        </tpf:SimplePanel>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="tpf:AreaSparkline" BasedOn="{StaticResource TPF.AreaSparklineStyle}"/>
 </ResourceDictionary>
