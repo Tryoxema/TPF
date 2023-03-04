@@ -1,5 +1,4 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Windows;
 using System.Windows.Data;
 using System.Windows.Media;
@@ -7,94 +6,39 @@ using TPF.Controls.Specialized.Sparkline;
 
 namespace TPF.Controls
 {
-    public class ColumnSparkline : SparklineBase
+    public class WinLossSparkline : ColumnSparkline
     {
-        static ColumnSparkline()
+        static WinLossSparkline()
         {
-            DefaultStyleKeyProperty.OverrideMetadata(typeof(ColumnSparkline), new FrameworkPropertyMetadata(typeof(ColumnSparkline)));
+            DefaultStyleKeyProperty.OverrideMetadata(typeof(WinLossSparkline), new FrameworkPropertyMetadata(typeof(WinLossSparkline)));
         }
 
-        #region ColumnStyle DependencyProperty
-        public static readonly DependencyProperty ColumnStyleProperty = DependencyProperty.Register("ColumnStyle",
-            typeof(Style),
-            typeof(ColumnSparkline),
-            new PropertyMetadata(null));
-
-        public Style ColumnStyle
-        {
-            get { return (Style)GetValue(ColumnStyleProperty); }
-            set { SetValue(ColumnStyleProperty, value); }
-        }
-        #endregion
-
-        #region ColumnBrush DependencyProperty
-        public static readonly DependencyProperty ColumnBrushProperty = DependencyProperty.Register("ColumnBrush",
+        #region NeutralPointBrush DependencyProperty
+        public static readonly DependencyProperty NeutralPointBrushProperty = DependencyProperty.Register("NeutralPointBrush",
             typeof(Brush),
-            typeof(ColumnSparkline),
+            typeof(WinLossSparkline),
             new PropertyMetadata(null));
 
-        public Brush ColumnBrush
+        public Brush NeutralPointBrush
         {
-            get { return (Brush)GetValue(ColumnBrushProperty); }
-            set { SetValue(ColumnBrushProperty, value); }
+            get { return (Brush)GetValue(NeutralPointBrushProperty); }
+            set { SetValue(NeutralPointBrushProperty, value); }
         }
         #endregion
 
-        #region ColumnWidthFactor DependencyProperty
-        public static readonly DependencyProperty ColumnWidthFactorProperty = DependencyProperty.Register("ColumnWidthFactor",
-            typeof(double),
-            typeof(ColumnSparkline),
-            new PropertyMetadata(0.9, null, ConstrainColumnWidthFactor));
-
-        private static object ConstrainColumnWidthFactor(DependencyObject d, object baseValue)
+        protected override void UpdateAxisPosition()
         {
-            var doubleValue = (double)baseValue;
+            if (_axis == null) return;
 
-            if (doubleValue < 0) doubleValue = 0;
-            else if (doubleValue > 1) doubleValue = 1;
+            var y = ActualHeight - (ActualHeight * 0.5);
 
-            return doubleValue;
+            _axis.X1 = 0;
+            _axis.X2 = ActualWidth;
+            _axis.Y1 = y;
+            _axis.Y2 = y;
         }
 
-        public double ColumnWidthFactor
-        {
-            get { return (double)GetValue(ColumnWidthFactorProperty); }
-            set { SetValue(ColumnWidthFactorProperty, value); }
-        }
-        #endregion
-
-        protected ColumnsPanel _columnsPanel;
-
-        public override void OnApplyTemplate()
-        {
-            base.OnApplyTemplate();
-
-            _columnsPanel = GetTemplateChild("PART_ColumnsPanel") as ColumnsPanel;
-
-            RefreshColumns();
-        }
-
-        protected override void OnRenderSizeChanged(SizeChangedInfo sizeInfo)
-        {
-            base.OnRenderSizeChanged(sizeInfo);
-
-            RefreshColumns();
-        }
-
-        protected override void OnDataChanged()
-        {
-            base.OnDataChanged();
-
-            RefreshColumns();
-        }
-
-        protected virtual void RefreshColumns()
-        {
-            CalculateColumns();
-            OnUpdateIndicators();
-        }
-
-        protected virtual void CalculateColumns()
+        protected override void CalculateColumns()
         {
             if (_columnsPanel == null) return;
 
@@ -117,26 +61,32 @@ namespace TPF.Controls
 
             if (width > 0 && height > 0)
             {
+                var neutralValue = AxisValue;
+
                 for (var i = 0; i < visualDataPoints.Count; i++)
                 {
                     var dataPoint = visualDataPoints[i];
 
                     var relativeXPoint = XRange.GetRelativePoint(dataPoint.X);
 
-                    var relativeYPoint = 0d;
-                    var relativeYBase = 0d;
+                    var relativeYTop = 0d;
+                    var relativeYBottom = 0d;
 
-                    if (YRange.Delta != 0d)
+                    if (dataPoint.Y > neutralValue)
                     {
-                        relativeYPoint = YRange.GetRelativePoint(dataPoint.Y);
-
-                        if (YRange.Contains(0d)) relativeYBase = YRange.GetRelativePoint(0d);
-                        else if (YRange.Start > 0d) relativeYBase = YRange.GetRelativePoint(YRange.Start);
-                        else relativeYBase = YRange.GetRelativePoint(YRange.End);
+                        relativeYTop = 1;
+                        relativeYBottom = 0.5;
                     }
-
-                    var relativeYTop = Math.Max(relativeYPoint, relativeYBase);
-                    var relativeYBottom = Math.Min(relativeYPoint, relativeYBase);
+                    else if (dataPoint.Y < neutralValue)
+                    {
+                        relativeYTop = 0.5;
+                        relativeYBottom = 0;
+                    }
+                    else if (dataPoint.Y == neutralValue)
+                    {
+                        relativeYTop = 0.55;
+                        relativeYBottom = 0.45;
+                    }
 
                     var column = new ColumnItem()
                     {
@@ -164,6 +114,7 @@ namespace TPF.Controls
 
             var maxValue = DataPoints.Max(item => item.Y);
             var minValue = DataPoints.Min(item => item.Y);
+            var neutralValue = AxisValue;
 
             foreach (ColumnItem child in _columnsPanel.Children)
             {
@@ -196,6 +147,10 @@ namespace TPF.Controls
                 {
                     brushPropertyName = nameof(NegativePointBrush);
                     type = IndicatorType.Negative;
+                }
+                else if (dataPoint.Y == neutralValue)
+                {
+                    brushPropertyName = nameof(NeutralPointBrush);
                 }
                 else
                 {

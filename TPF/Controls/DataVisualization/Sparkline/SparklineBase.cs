@@ -358,7 +358,7 @@ namespace TPF.Controls
             instance.UpdateIndicators();
         }
 
-        private Line _axis;
+        protected Line _axis;
 
         private DoubleRange _xRange;
         protected DoubleRange XRange

@@ -17,6 +17,17 @@
 	Den positiven Bereich kann man über die Properties PositiveAreaStyle und PositiveAreaBrush kontrollieren.
 	Den negativen Bereich kann man entsprechend dann über NegativeAreaStyle und NegativeAreaBrush konfigurieren.
 	Außerdem hat das Control natürlich alle Funktionen die von der Basisklasse zur Verfügung gestellt werden.
+--ColumnSparkline
+	Die ColumnSparkline ist eine neue Art von Sparkline, die von der Klasse SparklineBase abgeleitet ist und die Datenpunkte als Balken darstellt.
+	Die Darstellung der Balken kann über die Properties ColumnStyle und ColumnBrush gesteuert werden.
+	Zusätzlich kann über die Property ColumnWidthFactor der Faktor eingestellt werden, der die Breite des Balken in dem ihm zugewiesenen Bereich steuert.
+	Der Standardwert hier ist 0.9 was bedeutet, dass der Balken 90% des Platzes für sich selbst nutzt und links und rechts jeweils 5% Platz freibleibt.
+	Außerdem hat das Control natürlich alle Funktionen die von der Basisklasse zur Verfügung gestellt werden.
+--WinLossSparkline
+	Die WinLossSparkline ist eine neue Art von Sparkline, die von der Klasse ColumnSparkline abgeleitet ist und die Datenpunkte als Balken darstellt.
+	Im Gegensatz zur ColumnSparkline werden die Balken allerdings nur als Extremwerte dargestellt, um so einen groben Überblick über die Daten zu erhalten.
+	Zusätzlich kann man über die Property NeutralPointBrush die Farbe von Datenpunkten die sich genau auf der Achse befinden gesondert einstellt.
+	Diese neutralen Werte werden besonders dargestellt, indem der entsprechende Balken genau auf der Achse liegt und 5% des positiven und 5% des negativen Bereichs einnimmt.
 
 -Sonstige Änderungen
 --Neues Theme

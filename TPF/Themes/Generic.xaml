@@ -5766,8 +5766,8 @@
                 <ControlTemplate TargetType="tpf:ColumnSparkline">
                     <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
                         <tpf:SimplePanel>
-                            <sparkline:ColumnsPanel x:Name="PART_ColumnsPanel"/>
                             <Line x:Name="PART_Axis" Stroke="{TemplateBinding AxisBrush}" StrokeThickness="1"/>
+                            <sparkline:ColumnsPanel x:Name="PART_ColumnsPanel" ColumnWidthFactor="{TemplateBinding ColumnWidthFactor}"/>
                         </tpf:SimplePanel>
                     </Border>
                 </ControlTemplate>
@@ -5789,4 +5789,11 @@
         </Setter>
     </Style>
     <Style TargetType="sparkline:ColumnItem" BasedOn="{StaticResource TPF.SparklineColumnItemStyle}"/>
+
+    <!-- ========== WinLossSparkline ========== -->
+    <Style TargetType="tpf:WinLossSparkline" BasedOn="{StaticResource TPF.ColumnSparklineStyle}" x:Key="TPF.WinLossSparklineStyle">
+        <Setter Property="NeutralPointBrush" Value="{tpf:ResourceLink Key=GlyphBrush}"/>
+        <Setter Property="ShowNegativePointIndicators" Value="True"/>
+    </Style>
+    <Style TargetType="tpf:WinLossSparkline" BasedOn="{StaticResource TPF.WinLossSparklineStyle}"/>
 </ResourceDictionary>

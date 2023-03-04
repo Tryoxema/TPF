@@ -121,15 +121,23 @@
                                 </tpf:LinearSparkline.ToolTipTemplate>
                             </tpf:LinearSparkline>
 
-                            <tpf:AreaSparkline ItemsSource="{Binding SparklineTests}" XValuePath="X" YValuePath="Y" Width="200" Height="40" ShowAxis="True" NegativeAreaBrush="Crimson"/>
+                            <tpf:AreaSparkline ItemsSource="{Binding SparklineTests}" XValuePath="X" YValuePath="Y" Width="200" Height="40" Margin="0 10 0 0" ShowAxis="True" NegativeAreaBrush="Crimson"/>
 
-                            <tpf:ColumnSparkline ItemsSource="{Binding SparklineTests}" XValuePath="X" YValuePath="Y" Width="200" Height="40" ShowAxis="True" ShowNegativePointIndicators="True">
+                            <tpf:ColumnSparkline ItemsSource="{Binding SparklineTests}" XValuePath="X" YValuePath="Y" Width="200" Height="40" Margin="0 10 0 0" ShowAxis="True" ShowNegativePointIndicators="True">
                                 <tpf:ColumnSparkline.ToolTipTemplate>
                                     <DataTemplate>
                                         <TextBlock Text="{Binding Y}"/>
                                     </DataTemplate>
                                 </tpf:ColumnSparkline.ToolTipTemplate>
                             </tpf:ColumnSparkline>
+
+                            <tpf:WinLossSparkline ItemsSource="{Binding SparklineTests}" XValuePath="X" YValuePath="Y" Width="200" Height="40" Margin="0 10 0 0" ShowAxis="True" ColumnWidthFactor="0.5">
+                                <tpf:WinLossSparkline.ToolTipTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Y}"/>
+                                    </DataTemplate>
+                                </tpf:WinLossSparkline.ToolTipTemplate>
+                            </tpf:WinLossSparkline>
                         </StackPanel>
                     </Grid>
                 </Grid>

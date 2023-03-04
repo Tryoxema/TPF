@@ -81,7 +81,7 @@
 [X] LinearSparkLine
 [X] AreaSparkLine
 [X] ColumnSparkLine
-[ ] WinLossSparkLine
+[X] WinLossSparkLine
 [ ] ChartView
 [ ] ChartView3D
 [ ] TimeLine
