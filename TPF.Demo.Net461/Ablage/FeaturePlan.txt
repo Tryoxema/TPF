@@ -79,8 +79,8 @@
 [X] DataAxis
 [X] DataBar
 [X] LinearSparkLine
-[ ] AreaSparkLine
-[ ] ColumnSparkLine
+[X] AreaSparkLine
+[X] ColumnSparkLine
 [ ] WinLossSparkLine
 [ ] ChartView
 [ ] ChartView3D

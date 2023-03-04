@@ -5751,4 +5751,42 @@
         </Setter>
     </Style>
     <Style TargetType="tpf:AreaSparkline" BasedOn="{StaticResource TPF.AreaSparklineStyle}"/>
+
+    <!-- ========== ColumnSparkline ========== -->
+    <Style TargetType="tpf:ColumnSparkline" x:Key="TPF.ColumnSparklineStyle">
+        <Setter Property="AxisBrush" Value="{tpf:ResourceLink Key=GlyphBrush}"/>
+        <Setter Property="ColumnBrush" Value="{tpf:ResourceLink Key=SelectedBrush}"/>
+        <Setter Property="FirstPointBrush" Value="{tpf:ResourceLink Key=AccentBrush}"/>
+        <Setter Property="LastPointBrush" Value="{tpf:ResourceLink Key=AccentBrush}"/>
+        <Setter Property="HighPointBrush" Value="ForestGreen"/>
+        <Setter Property="LowPointBrush" Value="Red"/>
+        <Setter Property="NegativePointBrush" Value="Crimson"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="tpf:ColumnSparkline">
+                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                        <tpf:SimplePanel>
+                            <sparkline:ColumnsPanel x:Name="PART_ColumnsPanel"/>
+                            <Line x:Name="PART_Axis" Stroke="{TemplateBinding AxisBrush}" StrokeThickness="1"/>
+                        </tpf:SimplePanel>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="tpf:ColumnSparkline" BasedOn="{StaticResource TPF.ColumnSparklineStyle}"/>
+    <Style TargetType="sparkline:ColumnItem" x:Key="TPF.SparklineColumnItemStyle">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="sparkline:ColumnItem">
+                    <Rectangle Fill="{TemplateBinding Background}" ToolTipService.IsEnabled="{TemplateBinding ToolTipTemplate, Converter={StaticResource NullToBooleanConverter}}">
+                        <Rectangle.ToolTip>
+                            <ToolTip DataContext="{Binding Path=PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}" Content="{Binding }" ContentTemplate="{TemplateBinding ToolTipTemplate}"/>
+                        </Rectangle.ToolTip>
+                    </Rectangle>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="sparkline:ColumnItem" BasedOn="{StaticResource TPF.SparklineColumnItemStyle}"/>
 </ResourceDictionary>

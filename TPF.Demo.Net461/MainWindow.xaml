@@ -122,6 +122,14 @@
                             </tpf:LinearSparkline>
 
                             <tpf:AreaSparkline ItemsSource="{Binding SparklineTests}" XValuePath="X" YValuePath="Y" Width="200" Height="40" ShowAxis="True" NegativeAreaBrush="Crimson"/>
+
+                            <tpf:ColumnSparkline ItemsSource="{Binding SparklineTests}" XValuePath="X" YValuePath="Y" Width="200" Height="40" ShowAxis="True" ShowNegativePointIndicators="True">
+                                <tpf:ColumnSparkline.ToolTipTemplate>
+                                    <DataTemplate>
+                                        <TextBlock Text="{Binding Y}"/>
+                                    </DataTemplate>
+                                </tpf:ColumnSparkline.ToolTipTemplate>
+                            </tpf:ColumnSparkline>
                         </StackPanel>
                     </Grid>
                 </Grid>
