@@ -131,7 +131,7 @@
                                 </tpf:ColumnSparkline.ToolTipTemplate>
                             </tpf:ColumnSparkline>
 
-                            <tpf:WinLossSparkline ItemsSource="{Binding SparklineTests}" XValuePath="X" YValuePath="Y" Width="200" Height="40" Margin="0 10 0 0" ShowAxis="True" ColumnWidthFactor="0.5">
+                            <tpf:WinLossSparkline ItemsSource="{Binding SparklineTests}" XValuePath="X" YValuePath="Y" Width="200" Height="40" Margin="0 10 0 0" ShowAxis="True">
                                 <tpf:WinLossSparkline.ToolTipTemplate>
                                     <DataTemplate>
                                         <TextBlock Text="{Binding Y}"/>

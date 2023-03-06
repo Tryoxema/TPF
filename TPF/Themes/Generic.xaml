@@ -2588,20 +2588,7 @@
     <Style TargetType="tpf:Tile" BasedOn="{StaticResource TPF.TileStyle}"/>
 
     <!-- ========== ProgressBar ========== -->
-    <Storyboard x:Key="MoveProgressBarRectangleStoryboard" RepeatBehavior="Forever">
-        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="RenderTransform.ScaleX" Storyboard.TargetName="MovingRectangle">
-            <EasingDoubleKeyFrame KeyTime="0" Value="0.25"/>
-            <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0.25"/>
-            <EasingDoubleKeyFrame KeyTime="0:0:2" Value="0.25"/>
-        </DoubleAnimationUsingKeyFrames>
-        <PointAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransformOrigin)" Storyboard.TargetName="MovingRectangle">
-            <EasingPointKeyFrame KeyTime="0" Value="-0.5,0.5"/>
-            <EasingPointKeyFrame KeyTime="0:0:1" Value="0.5,0.5"/>
-            <EasingPointKeyFrame KeyTime="0:0:2" Value="1.5,0.5"/>
-        </PointAnimationUsingKeyFrames>
-    </Storyboard>
     <Style TargetType="tpf:ProgressBar" x:Key="TPF.ProgressBarStyle">
-        <Setter Property="Height" Value="16"/>
         <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
@@ -2612,6 +2599,7 @@
         <Setter Property="SecondaryProgressBrush" Value="{tpf:ResourceLink Key=SecondaryProgressBarBrush}"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Height" Value="10"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="tpf:ProgressBar">
@@ -2621,34 +2609,13 @@
                             <RowDefinition Height="*"/>
                             <RowDefinition Height="Auto"/>
                         </Grid.RowDefinitions>
-                        <VisualStateManager.VisualStateGroups>
-                            <VisualStateGroup x:Name="CommonStates">
-                                <VisualState x:Name="Determinate" Storyboard="{StaticResource MoveProgressBarRectangleStoryboard}"/>
-                                <VisualState x:Name="Indeterminate" Storyboard="{StaticResource MoveProgressBarRectangleStoryboard}"/>
-                            </VisualStateGroup>
-                        </VisualStateManager.VisualStateGroups>
-                        <Border x:Name="PART_Track" Grid.Row="1" Background="{TemplateBinding Background}" CornerRadius="{TemplateBinding CornerRadius}"
-                                BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}"/>
-                        <Border x:Name="PART_SecondaryProgressIndicator" Grid.Row="1" Background="{TemplateBinding SecondaryProgressBrush}" CornerRadius="{TemplateBinding CornerRadius}"
-                                Margin="{TemplateBinding BorderThickness}" HorizontalAlignment="Left"/>
-                        <Border x:Name="PART_ProgressIndicator" Grid.Row="1" Background="{TemplateBinding ProgressBrush}" CornerRadius="{TemplateBinding CornerRadius}"
-                                Margin="{TemplateBinding BorderThickness}" HorizontalAlignment="Left"/>
-                        <tpf:SimplePanel ClipToBounds="True" Grid.Row="1">
-                            <Rectangle x:Name="MovingRectangle" Fill="{TemplateBinding GlowBrush}" RenderTransformOrigin="0.5 0.5">
-                                <Rectangle.RenderTransform>
-                                    <ScaleTransform/>
-                                </Rectangle.RenderTransform>
-                            </Rectangle>
-                        </tpf:SimplePanel>
+
+                        <Canvas x:Name="PART_SegmentsPanel" Grid.Row="1"/>
+
                         <ContentPresenter x:Name="Content" Grid.Row="1" Margin="{TemplateBinding Padding}" TextElement.Foreground="{TemplateBinding Foreground}"
                                           HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                     </Grid>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsIndeterminate" Value="True">
-                            <Setter Property="Visibility" TargetName="PART_ProgressIndicator" Value="Collapsed"/>
-                            <Setter Property="Visibility" TargetName="PART_SecondaryProgressIndicator" Value="Collapsed"/>
-                            <Setter Property="Fill" TargetName="MovingRectangle" Value="{Binding ProgressBrush, RelativeSource={RelativeSource AncestorType=tpf:ProgressBar}}"/>
-                        </Trigger>
                         <Trigger Property="ContentPosition" Value="Above">
                             <Setter Property="Grid.Row" TargetName="Content" Value="0"/>
                         </Trigger>
@@ -2798,9 +2765,7 @@
                             </Ellipse.RenderTransform>
                         </Ellipse>
                         <tpf:SimplePanel x:Name="DeterminateProgressBar" Height="10" Background="Transparent">
-                            <Border x:Name="PART_Track" Background="{TemplateBinding Background}" CornerRadius="{TemplateBinding CornerRadius}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}"/>
-                            <Border x:Name="PART_SecondaryProgressIndicator" Background="{TemplateBinding SecondaryProgressBrush}" CornerRadius="{TemplateBinding CornerRadius}" Margin="{TemplateBinding BorderThickness}" HorizontalAlignment="Left"/>
-                            <Border x:Name="PART_ProgressIndicator" Background="{TemplateBinding ProgressBrush}" CornerRadius="{TemplateBinding CornerRadius}" Margin="{TemplateBinding BorderThickness}" HorizontalAlignment="Left"/>
+                            <Canvas x:Name="PART_SegmentsPanel"/>
                         </tpf:SimplePanel>
                     </Grid>
                 </ControlTemplate>

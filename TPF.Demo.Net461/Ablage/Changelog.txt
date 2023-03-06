@@ -9,6 +9,13 @@
 	Einige der Properties der LinearSparkline-Klasse wurden in eine neue Basisklasse ausgelagert, die LinearSparklineBase-Klasse.
 	Diese enthält die Properties LineStyle, LineBrush und LinePoints die vorher in LinearSparkline zu finden waren.
 	Zusätzlich enthält diese auch die neuen Properties IndicatorBrush, IndicatorStyle und ShowIndicators, die für das generelle Konfigurieren von Indikatoren gemacht sind.
+--ProgressBar
+	Die ProgressBar wurde stark überarbeitet um das unterteilen in Segmente zu unterstützen.
+	Über die neue Property SegmentCount steuert man die Anzahl der Segmente, in die die ProgressBar unterteilt werden soll. 
+	Der Standardwert ist hierfür 1 und es wird auch immer mindestens ein Segment erstellt.
+	Mit der Property GapWidth steuert man den Abstand zwischen den einzelnen Segmenten, sofern es mehr als 1 gibt.
+	Das Template des Controls wurde aufgrund dieser Änderung stark verändert und besteht jetzt nur noch aus dem ContentPresenter und einem Canvas.
+	Dieser Canvas muss den Namen "PART_SegmentsPanel" tragen und wird als Host für die generierten Segmente verwendet.
 
 -Neue Controls
 --AreaSparkline

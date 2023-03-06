@@ -23,6 +23,10 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
             <Label Content="Determinate" Foreground="{tpf:ResourceLink Key=TextBrush}" Grid.Row="0" Margin="0 0 0 5"/>
@@ -33,6 +37,12 @@
 
             <Label Content="Secondary Progress" Foreground="{tpf:ResourceLink Key=TextBrush}" Grid.Row="4" Margin="0 0 0 5"/>
             <tpf:ProgressBar Progress="{Binding Progress}" SecondaryProgress="{Binding SecondaryProgress}" Grid.Row="5" Width="400" HorizontalAlignment="Left" Margin="5 0 0 5"/>
+
+            <Label Content="Segments" Foreground="{tpf:ResourceLink Key=TextBrush}" Grid.Row="6" Margin="0 0 0 5"/>
+            <tpf:ProgressBar Progress="{Binding Progress}" SecondaryProgress="{Binding SecondaryProgress}" Grid.Row="7" SegmentCount="4" Width="400" HorizontalAlignment="Left" Margin="5 0 0 5"/>
+
+            <Label Content="CornerRadius" Foreground="{tpf:ResourceLink Key=TextBrush}" Grid.Row="8" Margin="0 0 0 5"/>
+            <tpf:ProgressBar Progress="{Binding Progress}" SecondaryProgress="{Binding SecondaryProgress}" Grid.Row="9" SegmentCount="4" CornerRadius="4" Width="400" HorizontalAlignment="Left" Margin="5 0 0 5"/>
         </Grid>
     </Grid>
 </UserControl>
