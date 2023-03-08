@@ -2,6 +2,7 @@
 [X] NumericTextBox
 [X] WatermarkTextBox
 [X] SearchTextBox
+[ ] AutoCompleteBox
 [X] PasswordBox
 [X] ComboBox
 [ ] MultiColumnComboBox
@@ -11,6 +12,7 @@
 [ ] RangeSlider
 [ ] ColorPicker
 [X] ColorEditor
+[ ] ColorBox
 [ ] Timespan-Editor
 [ ] Node-Editor
 [ ] Image-Editor
@@ -58,6 +60,7 @@
 [ ] Flyout
 [ ] Callout
 [X] DialogHost
+[ ] Snackbar
 [X] Badge
 [ ] HubTile
 [X] DragDrop

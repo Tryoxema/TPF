@@ -3,12 +3,12 @@
   <PropertyGroup>
     <TargetFrameworks>net461;net5.0-windows</TargetFrameworks>
     <UseWPF>true</UseWPF>
-    <Version>0.6.4</Version>
+    <Version>0.6.5</Version>
     <Authors>Tim Czerwonka</Authors>
     <Company />
     <GeneratePackageOnBuild>false</GeneratePackageOnBuild>
-    <AssemblyVersion>0.6.4.0</AssemblyVersion>
-    <FileVersion>0.6.4.0</FileVersion>
+    <AssemblyVersion>0.6.5.0</AssemblyVersion>
+    <FileVersion>0.6.5.0</FileVersion>
   </PropertyGroup>
 
   <ItemGroup>
