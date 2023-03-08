@@ -5,7 +5,7 @@
         private VS2013DarkSkin()
         {
             Name = "VS2013Dark";
-            ApplicationBackground = BrushFromString("#2D2D30");
+            ApplicationBackground = BrushFromString("#2A2A2C");
             TextBrush = BrushFromString("#F1F1F1");
             MouseOverTextBrush = BrushFromString("#F1F1F1");
             PressedTextBrush = BrushFromString("#FFFFFF");

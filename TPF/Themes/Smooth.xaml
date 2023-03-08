@@ -1392,6 +1392,55 @@
     <!-- ========== Notification ========== -->
 
     <!-- ========== ProgressButton ========== -->
+    <Style TargetType="tpf:ProgressButton" x:Key="TPF.ProgressButtonStyle">
+        <Setter Property="Background" Value="{tpf:ResourceLink Key=PrimaryBrush}"/>
+        <Setter Property="BorderBrush" Value="{tpf:ResourceLink Key=BorderBrush}"/>
+        <Setter Property="Foreground" Value="{tpf:ResourceLink Key=TextBrush}"/>
+        <Setter Property="ProgressBrush" Value="{tpf:ResourceLink Key=ProgressBarBrush}"/>
+        <Setter Property="SecondaryProgressBrush" Value="{tpf:ResourceLink Key=MouseOverBrush}"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="CornerRadius" Value="4"/>
+        <Setter Property="Padding" Value="1"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="tpf:ProgressButton">
+                    <tpf:SimplePanel>
+                        <tpf:ProgressBar x:Name="ProgressBar" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}"
+                                         Foreground="{TemplateBinding Foreground}" ProgressBrush="{TemplateBinding ProgressBrush}" SecondaryProgressBrush="{TemplateBinding SecondaryProgressBrush}"
+                                         CornerRadius="{TemplateBinding CornerRadius}" Padding="{TemplateBinding Padding}" IsIndeterminate="{TemplateBinding IsIndeterminate}" Height="NaN"
+                                         HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                         Progress="{TemplateBinding Progress}" SecondaryProgress="{TemplateBinding SecondaryProgress}" Focusable="False"/>
+                        <Border x:Name="Overlay" Background="{StaticResource OverlayBrush}" Opacity="0" IsHitTestVisible="False" CornerRadius="{TemplateBinding CornerRadius}"/>
+                        <Border BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{TemplateBinding CornerRadius}">
+                            <ContentPresenter x:Name="Content" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" TextElement.Foreground="{TemplateBinding Foreground}" 
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                        
+                    </tpf:SimplePanel>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter TargetName="ProgressBar" Property="BorderBrush" Value="{tpf:ResourceLink Key=FocusedAccentBrush}"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Overlay" Property="Opacity" Value="0.2"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="Overlay" Property="Opacity" Value="0.3"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="Overlay" Property="Opacity" Value="0.3"/>
+                            <Setter TargetName="Content" Property="Opacity" Value="{tpf:ResourceLink Key=DisabledOpacity}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="tpf:ProgressButton" BasedOn="{StaticResource TPF.ProgressButtonStyle}"/>
 
     <!-- ========== StepProgressBar ========== -->
     <tpf:StepItemIndicatorTemplateSelector x:Key="StepItemIndicatorTemplateSelector">
