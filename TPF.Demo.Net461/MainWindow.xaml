@@ -313,15 +313,36 @@
                         <tpf:Widget Top="1" Left="0">
                             <StackPanel>
                                 <TextBlock Text="Zufriedenheit"/>
-                                <tpf:Rating Value="4.5"/>
+                                <tpf:Rating Value="4.5" IsReadOnly="True"/>
                                 <TextBlock Text="Qualität"/>
-                                <tpf:Rating Value="4.7"/>
+                                <tpf:Rating Value="4.7" IsReadOnly="True"/>
                                 <TextBlock Text="Termintreue"/>
-                                <tpf:Rating Value="4.3"/>
+                                <tpf:Rating Value="4.3" IsReadOnly="True"/>
                             </StackPanel>
                         </tpf:Widget>
-                        <tpf:Widget Top="1" Left="2">
-                            <tpf:LinearSparkline ItemsSource="{Binding SparklineTests}" XValuePath="X" YValuePath="Y" Width="130" Height="65" ShowAxis="True" ShowNormalRange="True" NormalRangeTop="5" NormalRangeBottom="0"/>
+                        <tpf:Widget Top="1" Left="1" VerticalContentAlignment="Stretch">
+                            <tpf:SimplePanel>
+                                <TextBlock Text="LinearSparkline" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                                <tpf:LinearSparkline ItemsSource="{Binding SparklineTests}" XValuePath="X" YValuePath="Y" Width="130" Height="65" ShowAxis="True" ShowNormalRange="True" NormalRangeTop="5" NormalRangeBottom="0" ShowIndicators="True"/>
+                            </tpf:SimplePanel>
+                        </tpf:Widget>
+                        <tpf:Widget Top="1" Left="2" VerticalContentAlignment="Stretch">
+                            <tpf:SimplePanel>
+                                <TextBlock Text="AreaSparkline" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                                <tpf:AreaSparkline ItemsSource="{Binding SparklineTests}" XValuePath="X" YValuePath="Y" Width="130" Height="65" ShowAxis="True" NegativeAreaBrush="Crimson"/>
+                            </tpf:SimplePanel>
+                        </tpf:Widget>
+                        <tpf:Widget Top="2" Left="0" VerticalContentAlignment="Stretch">
+                            <tpf:SimplePanel>
+                                <TextBlock Text="ColumnSparkline" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                                <tpf:ColumnSparkline ItemsSource="{Binding SparklineTests}" XValuePath="X" YValuePath="Y" Width="130" Height="65" ShowAxis="True" ColumnWidthFactor="0.8" ShowNegativePointIndicators="True"/>
+                            </tpf:SimplePanel>
+                        </tpf:Widget>
+                        <tpf:Widget Top="2" Left="1" VerticalContentAlignment="Stretch">
+                            <tpf:SimplePanel>
+                                <TextBlock Text="WinLossSparkline" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+                                <tpf:WinLossSparkline ItemsSource="{Binding SparklineTests}" XValuePath="X" YValuePath="Y" Width="130" Height="65" ShowAxis="True" ColumnWidthFactor="0.8"/>
+                            </tpf:SimplePanel>
                         </tpf:Widget>
                         <tpf:Widget HorizontalSlots="2" VerticalSlots="2">
                             <tpf:Calendar/>

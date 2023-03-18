@@ -108,7 +108,7 @@ namespace TPF.Controls
 
         protected override void OnUpdateIndicators()
         {
-            if (_columnsPanel == null || _columnsPanel.Children.Count == 0) return;
+            if (_columnsPanel == null || _columnsPanel.Children.Count == 0 || DataPoints.Count == 0) return;
 
             var counter = 0;
 

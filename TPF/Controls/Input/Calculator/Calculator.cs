@@ -269,7 +269,7 @@ namespace TPF.Controls
             var parameter = e.Parameter?.ToString();
 
             if (parameter == instance.DecimalSeparator || parameter == CultureInfo.CurrentCulture.NumberFormat.NumberDecimalSeparator) instance.InputValue.AddDecimalSeparator();
-            else if (int.TryParse(parameter, out var number)) instance.InputValue.AddNumber(number);
+            else if (long.TryParse(parameter, out var number)) instance.InputValue.AddNumber(number);
 
             instance.UpdateDisplay();
         }

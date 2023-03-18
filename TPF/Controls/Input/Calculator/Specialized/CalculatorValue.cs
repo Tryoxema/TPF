@@ -12,7 +12,7 @@ namespace TPF.Controls.Specialized.Calculator
             _numberFormat = (NumberFormatInfo)CultureInfo.CurrentCulture.NumberFormat.Clone();
             _numberFormat.NumberDecimalSeparator = _decimalSeparator;
 
-            var integerPart = (int)number;
+            var integerPart = (long)number;
 
             if (number == integerPart) DisplayValue = integerPart.ToString();
             else DisplayValue = number.ToString(_numberFormat);
@@ -30,7 +30,7 @@ namespace TPF.Controls.Specialized.Calculator
 
         internal bool Overwrite { get; set; }
 
-        internal void AddNumber(int number)
+        internal void AddNumber(long number)
         {
             if (Overwrite)
             {
