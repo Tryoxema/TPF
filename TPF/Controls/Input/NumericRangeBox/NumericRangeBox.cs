@@ -8,6 +8,7 @@ using System.Windows.Controls;
 using System.Collections.ObjectModel;
 using TPF.Internal;
 using TPF.Calculation;
+using System.Windows.Controls.Primitives;
 
 namespace TPF.Controls
 {
@@ -59,6 +60,32 @@ namespace TPF.Controls
         {
             get { return (double)GetValue(MaximumProperty); }
             set { SetValue(MaximumProperty, value); }
+        }
+        #endregion
+
+        #region SmallChange DependencyProperty
+        public static readonly DependencyProperty SmallChangeProperty = DependencyProperty.Register("SmallChange",
+            typeof(double),
+            typeof(NumericRangeBox),
+            new PropertyMetadata(1.0));
+
+        public double SmallChange
+        {
+            get { return (double)GetValue(SmallChangeProperty); }
+            set { SetValue(SmallChangeProperty, value); }
+        }
+        #endregion
+
+        #region LargeChange DependencyProperty
+        public static readonly DependencyProperty LargeChangeProperty = DependencyProperty.Register("LargeChange",
+            typeof(double),
+            typeof(NumericRangeBox),
+            new PropertyMetadata(10.0));
+
+        public double LargeChange
+        {
+            get { return (double)GetValue(LargeChangeProperty); }
+            set { SetValue(LargeChangeProperty, value); }
         }
         #endregion
 
@@ -200,6 +227,19 @@ namespace TPF.Controls
         {
             get { return (NumericValueType)GetValue(NumericValueTypeProperty); }
             protected set { SetValue(NumericValueTypePropertyKey, value); }
+        }
+        #endregion
+
+        #region ShowButtons DependencyProperty
+        public static readonly DependencyProperty ShowButtonsProperty = DependencyProperty.Register("ShowButtons",
+            typeof(bool),
+            typeof(NumericRangeBox),
+            new PropertyMetadata(BooleanBoxes.FalseBox));
+
+        public bool ShowButtons
+        {
+            get { return (bool)GetValue(ShowButtonsProperty); }
+            set { SetValue(ShowButtonsProperty, BooleanBoxes.Box(value)); }
         }
         #endregion
 
@@ -345,11 +385,13 @@ namespace TPF.Controls
             }
         }
 
+        private RepeatButton _increaseButton;
+        private RepeatButton _decreaseButton;
         internal TextBox TextBox;
 
-        bool _setText = true;
+        private bool _setText = true;
 
-        public readonly ReadOnlyCollection<char> AllowedOperators = Array.AsReadOnly(new[] { '+', '-', '*', '/', '^', '(', ')' });
+        public static ReadOnlyCollection<char> AllowedOperators { get; } = Array.AsReadOnly(new[] { '+', '-', '*', '/', '^', '(', ')' });
 
         public override void OnApplyTemplate()
         {
@@ -363,23 +405,48 @@ namespace TPF.Controls
                 TextBox.MouseDoubleClick -= TextBox_MouseDoubleClick;
                 TextBox.PreviewKeyDown -= TextBox_PreviewKeyDown;
                 TextBox.PreviewMouseDown -= TextBox_PreviewMouseDown;
-                TextBox.KeyDown -= TextBox_KeyDown;
                 DataObject.RemovePastingHandler(TextBox, TextBoxPasting);
             }
 
+            if (_increaseButton != null)
+            {
+                _increaseButton.Click -= IncreaseButton_Click;
+                _increaseButton.LostMouseCapture -= Button_LostMouseCapture;
+            }
+
+            if (_decreaseButton != null)
+            {
+                _decreaseButton.Click -= DecreaseButton_Click;
+                _decreaseButton.LostMouseCapture -= Button_LostMouseCapture;
+            }
+
             TextBox = GetTemplateChild("PART_TextBox") as TextBox;
+            _increaseButton = GetTemplateChild("PART_IncreaseButton") as RepeatButton;
+            _decreaseButton = GetTemplateChild("PART_DecreaseButton") as RepeatButton;
 
-            if (TextBox == null) return;
+            if (TextBox != null)
+            {
+                // Copy-Paste-Handler zum Verhindern von ungewolltem Inhalt
+                DataObject.AddPastingHandler(TextBox, TextBoxPasting);
 
-            // Copy-Paste-Handler zum Verhindern von ungewolltem Inhalt
-            DataObject.AddPastingHandler(TextBox, TextBoxPasting);
+                // EventHandler hinzufügen
+                TextBox.PreviewTextInput += TextBox_PreviewTextInput;
+                TextBox.MouseDoubleClick += TextBox_MouseDoubleClick;
+                TextBox.PreviewKeyDown += TextBox_PreviewKeyDown;
+                TextBox.PreviewMouseDown += TextBox_PreviewMouseDown;
+            }
 
-            // EventHandler hinzufügen
-            TextBox.PreviewTextInput += TextBox_PreviewTextInput;
-            TextBox.MouseDoubleClick += TextBox_MouseDoubleClick;
-            TextBox.PreviewKeyDown += TextBox_PreviewKeyDown;
-            TextBox.PreviewMouseDown += TextBox_PreviewMouseDown;
-            TextBox.KeyDown += TextBox_KeyDown;
+            if (_increaseButton != null)
+            {
+                _increaseButton.Click += IncreaseButton_Click;
+                _increaseButton.LostMouseCapture += Button_LostMouseCapture;
+            }
+
+            if (_decreaseButton != null)
+            {
+                _decreaseButton.Click += DecreaseButton_Click;
+                _decreaseButton.LostMouseCapture += Button_LostMouseCapture;
+            }
 
             FormatText();
         }
@@ -457,14 +524,7 @@ namespace TPF.Controls
 
         private void TextBox_PreviewKeyDown(object sender, KeyEventArgs e)
         {
-            if (e.IsDown && e.Key == Key.Up && Value < Maximum)
-            {
-                Value++;
-            }
-            else if (e.IsDown && e.Key == Key.Down && Value > Minimum)
-            {
-                Value--;
-            }
+            HandleKeyDown(e);
         }
 
         private void TextBox_PreviewMouseDown(object sender, MouseButtonEventArgs e)
@@ -477,11 +537,41 @@ namespace TPF.Controls
             }
         }
 
-        private void TextBox_KeyDown(object sender, KeyEventArgs e)
+        private void HandleKeyDown(KeyEventArgs e)
         {
-            if (e.Key == Key.Enter)
+            if (IsReadOnly) return;
+
+            switch (e.Key)
             {
-                ParseInputText();
+                case Key.Enter:
+                {
+                    ParseInputText();
+                    break;
+                }
+                case Key.Up:
+                {
+                    Value += SmallChange;
+                    e.Handled = true;
+                    break;
+                }
+                case Key.Down:
+                {
+                    Value -= SmallChange;
+                    e.Handled = true;
+                    break;
+                }
+                case Key.PageUp:
+                {
+                    Value += LargeChange;
+                    e.Handled = true;
+                    break;
+                }
+                case Key.PageDown:
+                {
+                    Value -= LargeChange;
+                    e.Handled = true;
+                    break;
+                }
             }
         }
 
@@ -654,6 +744,27 @@ namespace TPF.Controls
                 if (!double.TryParse(text, NumberStyles.Any, NumberFormatInfo, out var result)) e.CancelCommand();
             }
             else e.CancelCommand();
+        }
+
+        private void IncreaseButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (IsReadOnly) return;
+
+            Value += SmallChange;
+        }
+
+        private void DecreaseButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (IsReadOnly) return;
+
+            Value -= SmallChange;
+        }
+
+        private void Button_LostMouseCapture(object sender, MouseEventArgs e)
+        {
+            if (TextBox == null) return;
+
+            TextBox.Focus();
         }
     }
 }

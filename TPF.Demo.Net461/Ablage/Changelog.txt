@@ -1,5 +1,14 @@
 ﻿--- 0.6.5 ---
 -Veränderte Controls
+--NumericRangeBox
+	Das Template des Controls wurde überarbeitet, da die neue Property ShowButtons hinzugefügt wurde.
+	Über diese neue Property kann man 2 Buttons einblenden, die beim Klick den aktuellen Wert entweder erhöhen oder verringern.
+	Zusätzlich wurden die neuen Properties SmallChange und LargeChange hinzugefügt.
+	SmallChange wird in den Fällen verwendet, wo die Buttons gedrückt werden oder der Wert über die Pfeiltasten verändert wird.
+	LargeChange wird für die neue Funktion verwendet, dass der Wert nun auch über die Bild Auf/Ab-Tasten in größeren Schritten verändert werden kann.
+
+--- 0.6.5 ---
+-Veränderte Controls
 --SparklineBase
 	Die Basisklasse der Sparkline-Controls wurde um diverse Properties erweitert, um Indikatoren an den einzelnen Datenpunkten darzustellen.
 	Es wurden folgende Brushes hinzugefügt: FirstPointBrush, LastPointBrush, HighPointBrush, LowPointBrush, NegativePointBrush

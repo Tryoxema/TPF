@@ -362,20 +362,12 @@
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Foreground" Value="{tpf:ResourceLink Key=ReadOnlyTextBrush}"/>
                         </Trigger>
-                        <MultiTrigger>
-                            <MultiTrigger.Conditions>
-                                <Condition Property="IsEnabled" Value="True"/>
-                                <Condition Property="IsMouseOver" Value="True"/>
-                            </MultiTrigger.Conditions>
+                        <Trigger Property="IsMouseOver" Value="True">
                             <Setter TargetName="ControlBorder" Property="BorderBrush" Value="{tpf:ResourceLink Key=MouseOverAccentBrush}"/>
-                        </MultiTrigger>
-                        <MultiTrigger>
-                            <MultiTrigger.Conditions>
-                                <Condition Property="IsEnabled" Value="True"/>
-                                <Condition Property="IsKeyboardFocusWithin" Value="True"/>
-                            </MultiTrigger.Conditions>
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocusWithin" Value="True">
                             <Setter TargetName="ControlBorder" Property="BorderBrush" Value="{tpf:ResourceLink Key=FocusedAccentBrush}"/>
-                        </MultiTrigger>
+                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
@@ -3053,20 +3045,12 @@
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Foreground" Value="{tpf:ResourceLink Key=ReadOnlyTextBrush}"/>
                         </Trigger>
-                        <MultiTrigger>
-                            <MultiTrigger.Conditions>
-                                <Condition Property="IsEnabled" Value="True"/>
-                                <Condition Property="IsMouseOver" Value="True"/>
-                            </MultiTrigger.Conditions>
+                        <Trigger Property="IsMouseOver" Value="True">
                             <Setter TargetName="ControlBorder" Property="BorderBrush" Value="{tpf:ResourceLink Key=MouseOverAccentBrush}"/>
-                        </MultiTrigger>
-                        <MultiTrigger>
-                            <MultiTrigger.Conditions>
-                                <Condition Property="IsEnabled" Value="True"/>
-                                <Condition Property="IsKeyboardFocusWithin" Value="True"/>
-                            </MultiTrigger.Conditions>
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocusWithin" Value="True">
                             <Setter TargetName="ControlBorder" Property="BorderBrush" Value="{tpf:ResourceLink Key=FocusedAccentBrush}"/>
-                        </MultiTrigger>
+                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
@@ -3269,30 +3253,33 @@
 
     <!-- ========== NumericRangeBox ========== -->
     <Style TargetType="tpf:NumericRangeBox" x:Key="TPF.NumericRangeBoxStyle">
-        <Setter Property="IsTabStop" Value="False"/>
-        <Setter Property="SnapsToDevicePixels" Value="True"/>
-        <Setter Property="HorizontalContentAlignment" Value="Right"/>
-        <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="MinHeight" Value="20"/>
-        <Setter Property="Padding" Value="3 0"/>
-        <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="BorderBrush" Value="{tpf:ResourceLink Key=BorderBrush}"/>
         <Setter Property="Background" Value="{tpf:ResourceLink Key=InputBackgroundBrush}"/>
         <Setter Property="Foreground" Value="{tpf:ResourceLink Key=TextBrush}"/>
+        <Setter Property="HorizontalContentAlignment" Value="Right"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="PositiveForeground" Value="{tpf:ResourceLink Key=TextBrush}"/>
         <Setter Property="NegativeForeground" Value="Red"/>
         <Setter Property="ZeroForeground" Value="{tpf:ResourceLink Key=TextBrush}"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="IsTabStop" Value="False"/>
+        <Setter Property="MinHeight" Value="20"/>
+        <Setter Property="Padding" Value="3 0"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="tpf:NumericRangeBox">
-                    <tpf:SimplePanel>
-                        <Border x:Name="ControlBorder" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}"/>
-                        <Border x:Name="DisabledOverlay" IsHitTestVisible="False" Opacity="0" BorderThickness="{TemplateBinding BorderThickness}"
-                                BorderBrush="{TemplateBinding BorderBrush}" Background="{tpf:ResourceLink Key=DisabledBrush}"/>
-                        <TextBox x:Name="PART_TextBox" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-                                 IsReadOnly="{TemplateBinding IsReadOnly}" Padding="{TemplateBinding Padding}"
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Border x:Name="Background" Grid.ColumnSpan="2" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}"/>
+                        <TextBox x:Name="PART_TextBox" IsReadOnly="{TemplateBinding IsReadOnly}" Padding="{TemplateBinding Padding}"
+                                 HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
                                  FontSize="{TemplateBinding FontSize}" FontFamily="{TemplateBinding FontFamily}" FontWeight="{TemplateBinding FontWeight}" CaretBrush="{TemplateBinding Foreground}"
                                  BorderThickness="0" BorderBrush="Transparent" Foreground="{TemplateBinding Foreground}" TabIndex="{TemplateBinding TabIndex}">
                             <TextBox.Template>
@@ -3302,29 +3289,42 @@
                                 </ControlTemplate>
                             </TextBox.Template>
                         </TextBox>
-                    </tpf:SimplePanel>
+
+                        <Grid x:Name="ButtonsGrid" Grid.Column="1" Visibility="Collapsed">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="1"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <RepeatButton x:Name="PART_IncreaseButton" Grid.Row="0" Width="15" BorderThickness="1 1 1 0" Style="{StaticResource WPF.RepeatButtonStyle}" Padding="0" IsTabStop="False">
+                                <Path Width="7" Height="4" Data="M0,4 L3.5,0 7,4 z" Fill="{tpf:ResourceLink Key=GlyphBrush}"/>
+                            </RepeatButton>
+                            <Border x:Name="ButtonSeparator" Grid.Row="1" Background="{tpf:ResourceLink Key=BorderBrush}"/>
+                            <RepeatButton x:Name="PART_DecreaseButton" Grid.Row="2" Width="15" BorderThickness="1 0 1 1" Style="{StaticResource WPF.RepeatButtonStyle}" Padding="0" IsTabStop="False">
+                                <Path Width="7" Height="4" Data="M0,0 L7,0 3.5,4 z" Fill="{tpf:ResourceLink Key=GlyphBrush}"/>
+                            </RepeatButton>
+                        </Grid>
+                    </Grid>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsReadOnly" Value="True">
-                            <Setter TargetName="ControlBorder" Property="Background" Value="{tpf:ResourceLink Key=DisabledBrush}"/>
-                        </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter TargetName="DisabledOverlay" Property="Opacity" Value="1"/>
                             <Setter TargetName="PART_TextBox" Property="Opacity" Value="{tpf:ResourceLink Key=DisabledOpacity}"/>
                         </Trigger>
-                        <MultiTrigger>
-                            <MultiTrigger.Conditions>
-                                <Condition Property="IsEnabled" Value="True"/>
-                                <Condition Property="IsMouseOver" Value="True"/>
-                            </MultiTrigger.Conditions>
-                            <Setter TargetName="ControlBorder" Property="BorderBrush" Value="{tpf:ResourceLink Key=MouseOverAccentBrush}"/>
-                        </MultiTrigger>
-                        <MultiTrigger>
-                            <MultiTrigger.Conditions>
-                                <Condition Property="IsEnabled" Value="True"/>
-                                <Condition Property="IsKeyboardFocusWithin" Value="True"/>
-                            </MultiTrigger.Conditions>
-                            <Setter TargetName="ControlBorder" Property="BorderBrush" Value="{tpf:ResourceLink Key=FocusedAccentBrush}"/>
-                        </MultiTrigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Background" Property="BorderBrush" Value="{tpf:ResourceLink Key=MouseOverAccentBrush}"/>
+                            <Setter TargetName="PART_IncreaseButton" Property="BorderBrush" Value="{tpf:ResourceLink Key=MouseOverAccentBrush}"/>
+                            <Setter TargetName="PART_DecreaseButton" Property="BorderBrush" Value="{tpf:ResourceLink Key=MouseOverAccentBrush}"/>
+                            <Setter TargetName="ButtonSeparator" Property="Background" Value="{tpf:ResourceLink Key=MouseOverAccentBrush}"/>
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                            <Setter TargetName="Background" Property="BorderBrush" Value="{tpf:ResourceLink Key=MouseOverAccentBrush}"/>
+                            <Setter TargetName="PART_IncreaseButton" Property="BorderBrush" Value="{tpf:ResourceLink Key=MouseOverAccentBrush}"/>
+                            <Setter TargetName="PART_DecreaseButton" Property="BorderBrush" Value="{tpf:ResourceLink Key=MouseOverAccentBrush}"/>
+                            <Setter TargetName="ButtonSeparator" Property="Background" Value="{tpf:ResourceLink Key=MouseOverAccentBrush}"/>
+                        </Trigger>
+                        <Trigger Property="ShowButtons" Value="True">
+                            <Setter TargetName="ButtonsGrid" Property="Visibility" Value="Visible"/>
+                        </Trigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="ApplyPositiveForeground" Value="True"/>
