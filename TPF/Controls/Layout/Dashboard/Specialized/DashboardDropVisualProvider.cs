@@ -69,9 +69,12 @@ namespace TPF.Controls.Specialized.Dashboard
             var slotHeight = Dashboard?.SlotHeight ?? 0;
             var gap = Dashboard?.Gap ?? 0;
 
+            var horizontalOffset = dropInfo.TargetScrollViewer?.HorizontalOffset ?? 0;
+            var verticalOffset = dropInfo.TargetScrollViewer?.VerticalOffset ?? 0;
+
             // Den Slot berechnen den die Maus gerade belegt
-            var horizontalSlot = (int)(dropInfo.PositionInTarget.X / (slotWidth + gap));
-            var verticalSlot = (int)(dropInfo.PositionInTarget.Y / (slotHeight + gap));
+            var horizontalSlot = (int)((dropInfo.PositionInTarget.X + horizontalOffset) / (slotWidth + gap));
+            var verticalSlot = (int)((dropInfo.PositionInTarget.Y + verticalOffset) / (slotHeight + gap));
 
             // Den Slot innerhalb des Widgets bestimmen in dem der Vorgang gestartet wurde
             var horizontalItemMouseSlot = (int)(DragDropManager.DragInfo.PointInItem.X / (slotWidth + gap));

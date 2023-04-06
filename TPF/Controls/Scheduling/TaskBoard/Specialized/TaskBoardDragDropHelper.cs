@@ -107,6 +107,15 @@ namespace TPF.Controls.Specialized.TaskBoard
             return providerData;
         }
 
+        protected override ScrollViewer GetScrollViewer(UIElement host, DragEventArgs e)
+        {
+            var point = e.GetPosition(host);
+
+            var column = HitTestHelper.GetHitTestElementOfType<TaskBoardColumn>(host, point);
+
+            return column.ChildOfType<ScrollViewer>();
+        }
+
         protected override DropInfo GetDropInfoForPoint(UIElement host, Point relativePoint, DragEventArgs e)
         {
             var column = HitTestHelper.GetHitTestElementOfType<TaskBoardColumn>(host, relativePoint);
@@ -116,6 +125,8 @@ namespace TPF.Controls.Specialized.TaskBoard
                 Target = column,
                 PositionInTarget = relativePoint
             };
+
+            result.TargetScrollViewer = GetScrollViewer(host, e);
 
             if (!column.IsCollapsed)
             {

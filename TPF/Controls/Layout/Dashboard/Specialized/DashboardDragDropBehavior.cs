@@ -244,8 +244,13 @@ namespace TPF.Controls.Specialized.Dashboard
             }
 
             // Nach dem Verschieben bei allen bis dann verschobenen Widgets testen, ob sie auf ihre Originalposition zurück können
-            foreach (var pair in _movedWidgetOriginalPositions.ToList())
+            var originalPositions = _movedWidgetOriginalPositions.ToList();
+
+            // Der Vorgang muss rückwärts durchgeführt werden weil die Slots sich dann gegenseitig wieder freigeben können
+            for (var i = originalPositions.Count; i > 0; i--)
             {
+                var pair = originalPositions[i-1];
+
                 var widget = pair.Key;
 
                 var originalSlot = pair.Value;

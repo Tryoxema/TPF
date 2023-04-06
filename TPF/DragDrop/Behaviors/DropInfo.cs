@@ -1,5 +1,5 @@
-﻿using System;
-using System.Windows;
+﻿using System.Windows;
+using System.Windows.Controls;
 
 namespace TPF.DragDrop.Behaviors
 {
@@ -12,6 +12,8 @@ namespace TPF.DragDrop.Behaviors
         public UIElement Target { get; set; }
 
         public UIElement TargetItem { get; set; }
+
+        public ScrollViewer TargetScrollViewer { get; set; }
 
         public UIElement AdornedElement { get; set; }
 

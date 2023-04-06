@@ -7,6 +7,15 @@
 	SmallChange wird in den Fällen verwendet, wo die Buttons gedrückt werden oder der Wert über die Pfeiltasten verändert wird.
 	LargeChange wird für die neue Funktion verwendet, dass der Wert nun auch über die Bild Auf/Ab-Tasten in größeren Schritten verändert werden kann.
 
+-Veränderte sonstige Klassen
+--DropInfo
+	Die Klasse DropInfo hat die Property TargetScrollViewer hinzugefügt bekommen
+--DragDropHelper
+	Die Klasse DragDropHelper wurde um zwei neue Methoden erweitert, um automatisches Scrollen wärend des Drag&Drop-Vorgangs zu ermöglichen.
+	Die erste neue Methode ist GetScrollViewer, über die der ScrollViewer des Ziels ermittelt werden soll.
+	Die zweite Methode ist DoScrolling, in der der tatsächliche Scroll-Vorgang durchgeführt wird.
+	Beide Methoden sind als virtual markiert und können überschrieben werden, um ihre Verhaltensweise selber steuern zu können.
+
 --- 0.6.5 ---
 -Veränderte Controls
 --SparklineBase

@@ -113,6 +113,11 @@ namespace TPF.DragDrop.Behaviors
             else return null;
         }
 
+        protected virtual ScrollViewer GetScrollViewer(UIElement host, DragEventArgs e)
+        {
+            return host.ChildOfType<ScrollViewer>();
+        }
+
         protected virtual DropInfo GetDropInfoForPoint(UIElement host, Point relativePoint, DragEventArgs e)
         {
             var result = new DropInfo()
@@ -120,6 +125,8 @@ namespace TPF.DragDrop.Behaviors
                 Target = host,
                 PositionInTarget = relativePoint
             };
+
+            result.TargetScrollViewer = GetScrollViewer(host, e);
 
             if (host is ItemsControl itemsControl)
             {
@@ -173,6 +180,46 @@ namespace TPF.DragDrop.Behaviors
         protected virtual bool ShouldShowDropVisual(TState state)
         {
             return true;
+        }
+
+        protected virtual void DoScrolling(ScrollViewer scrollViewer, DragEventArgs e)
+        {
+            if (scrollViewer == null) return;
+
+            var position = e.GetPosition(scrollViewer);
+            var verticalScrollMargin = Math.Min(20, scrollViewer.ActualHeight / 2);
+            var horizontalScrollMargin = Math.Min(20, scrollViewer.ActualWidth / 2);
+
+            var maximumHorizontalOffset = scrollViewer.ExtentWidth - scrollViewer.ViewportWidth;
+            var maximumVerticalOffset = scrollViewer.ExtentHeight - scrollViewer.ViewportHeight;
+
+            // Horizontal
+            if (position.X < horizontalScrollMargin && scrollViewer.HorizontalOffset > 0)
+            {
+                var targetOffset = Math.Max(0, scrollViewer.HorizontalOffset - horizontalScrollMargin);
+
+                scrollViewer.ScrollToHorizontalOffset(targetOffset);
+            }
+            else if (position.X >= scrollViewer.ActualWidth - horizontalScrollMargin && scrollViewer.HorizontalOffset < maximumHorizontalOffset)
+            {
+                var targetOffset = Math.Min(maximumHorizontalOffset, scrollViewer.HorizontalOffset + horizontalScrollMargin);
+
+                scrollViewer.ScrollToHorizontalOffset(targetOffset);
+            }
+
+            // Vertikal
+            if (position.Y < verticalScrollMargin && scrollViewer.VerticalOffset > 0)
+            {
+                var targetOffset = Math.Max(0, scrollViewer.VerticalOffset - verticalScrollMargin);
+
+                scrollViewer.ScrollToVerticalOffset(targetOffset);
+            }
+            else if (position.Y >= scrollViewer.ActualHeight - verticalScrollMargin && scrollViewer.VerticalOffset < maximumVerticalOffset)
+            {
+                var targetOffset = Math.Min(maximumVerticalOffset, scrollViewer.VerticalOffset + verticalScrollMargin);
+
+                scrollViewer.ScrollToVerticalOffset(targetOffset);
+            }
         }
 
         private void OnDragInitialize(object sender, DragInitializeEventArgs e)
@@ -246,6 +293,10 @@ namespace TPF.DragDrop.Behaviors
 
                 e.Handled = true;
             }
+
+            var scrollViewer = GetScrollViewer(state.TargetControl, e);
+
+            if (scrollViewer != null) DoScrolling(scrollViewer, e);
 
             // DropVisual eventuell bewegen
             if (DropVisualProvider != null && ShouldShowDropVisual(state))
