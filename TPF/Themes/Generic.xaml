@@ -70,6 +70,9 @@
     <converter:IsLastItemConverter x:Key="IsLastItemConverter"/>
     <converter:DivideDoubleValueConverter x:Key="DivideDoubleValueConverter"/>
     <converter:IntToVisibilityConverter x:Key="IntToVisibilityConverter"/>
+    <converter:DateTimeToAngleConverter x:Key="ClockHourToAngleConverter" TimePart="Hour"/>
+    <converter:DateTimeToAngleConverter x:Key="ClockMinuteToAngleConverter" TimePart="Minute"/>
+    <converter:DateTimeToAngleConverter x:Key="ClockSecondToAngleConverter" TimePart="Second"/>
 
     <!--Default WPF Controls-->
     <!-- ========== ToolTip ========== -->
@@ -796,35 +799,6 @@
         </Setter>
     </Style>
 
-    <!-- ========== ListBox ========== -->
-    <Style TargetType="ListBox" x:Key="WPF.ListBoxStyle">
-        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
-        <Setter Property="Foreground" Value="{tpf:ResourceLink Key=TextBrush}"/>
-        <Setter Property="Background" Value="{tpf:ResourceLink Key=PrimaryBrush}"/>
-        <Setter Property="BorderBrush" Value="{tpf:ResourceLink Key=BorderBrush}"/>
-        <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="Padding" Value="1"/>
-        <Setter Property="HorizontalContentAlignment" Value="Left"/>
-        <Setter Property="VerticalContentAlignment" Value="Top"/>
-        <Setter Property="IsTabStop" Value="False"/>
-        <Setter Property="SnapsToDevicePixels" Value="True"/>
-        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
-        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
-        <Setter Property="ScrollViewer.CanContentScroll" Value="True"/>
-        <Setter Property="Template">
-            <Setter.Value>
-                <ControlTemplate TargetType="ListBox">
-                    <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
-                        <ScrollViewer Margin="0" BorderThickness="0" Padding="{TemplateBinding Padding}" Background="{TemplateBinding Background}" BorderBrush="{x:Null}" Style="{StaticResource WPF.ScrollViewerStyle}"
-                                      HorizontalScrollBarVisibility="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(ScrollViewer.HorizontalScrollBarVisibility)}"
-                                      VerticalScrollBarVisibility="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(ScrollViewer.VerticalScrollBarVisibility)}">
-                            <ItemsPresenter/>
-                        </ScrollViewer>
-                    </Border>
-                </ControlTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
     <!-- ========== ListBoxItem ========== -->
     <Style TargetType="ListBoxItem" x:Key="WPF.ListBoxItemStyle">
         <Setter Property="MinHeight" Value="20"/>
@@ -856,6 +830,36 @@
                             <Setter TargetName="Border" Property="BorderBrush" Value="{tpf:ResourceLink Key=AccentBrush}"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <!-- ========== ListBox ========== -->
+    <Style TargetType="ListBox" x:Key="WPF.ListBoxStyle">
+        <Setter Property="ItemContainerStyle" Value="{StaticResource WPF.ListBoxItemStyle}"/>
+        <Setter Property="Foreground" Value="{tpf:ResourceLink Key=TextBrush}"/>
+        <Setter Property="Background" Value="{tpf:ResourceLink Key=PrimaryBrush}"/>
+        <Setter Property="BorderBrush" Value="{tpf:ResourceLink Key=BorderBrush}"/>
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Auto"/>
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto"/>
+        <Setter Property="ScrollViewer.CanContentScroll" Value="True"/>
+        <Setter Property="HorizontalContentAlignment" Value="Left"/>
+        <Setter Property="VerticalContentAlignment" Value="Top"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="IsTabStop" Value="False"/>
+        <Setter Property="Padding" Value="1"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ListBox">
+                    <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                        <ScrollViewer Margin="0" BorderThickness="0" Padding="{TemplateBinding Padding}" Background="{TemplateBinding Background}" BorderBrush="{x:Null}" Style="{StaticResource WPF.ScrollViewerStyle}"
+                                      HorizontalScrollBarVisibility="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(ScrollViewer.HorizontalScrollBarVisibility)}"
+                                      VerticalScrollBarVisibility="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(ScrollViewer.VerticalScrollBarVisibility)}">
+                            <ItemsPresenter/>
+                        </ScrollViewer>
+                    </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -2287,6 +2291,266 @@
         </Setter>
     </Style>
     <Style TargetType="tpf:Calendar" BasedOn="{StaticResource TPF.CalendarStyle}"/>
+    
+    <!--Clock-->
+    <Style TargetType="RadioButton" x:Key="TPF.ClockMeridiemRadioButtonStyle">
+        <Setter Property="Foreground" Value="{tpf:ResourceLink Key=TextBrush}"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RadioButton">
+                    <Border x:Name="Border" Background="{TemplateBinding Background}" SnapsToDevicePixels="True">
+                        <ContentPresenter x:Name="Content" Focusable="False" Margin="{TemplateBinding Padding}" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" RecognizesAccessKey="True"
+                                          HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsFocused" Value="True">
+                            <Setter Property="BorderBrush" TargetName="Border" Value="{tpf:ResourceLink Key=MouseOverAccentBrush}"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" TargetName="Border" Value="{tpf:ResourceLink Key=MouseOverBrush}"/>
+                            <Setter Property="TextElement.Foreground" TargetName="Content" Value="{tpf:ResourceLink Key=MouseOverTextBrush}"/>
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter Property="Background" TargetName="Border" Value="{tpf:ResourceLink Key=SelectedBrush}"/>
+                            <Setter Property="TextElement.Foreground" TargetName="Content" Value="{tpf:ResourceLink Key=SelectedTextBrush}"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Background" TargetName="Border" Value="{tpf:ResourceLink Key=PressedBrush}"/>
+                            <Setter Property="TextElement.Foreground" TargetName="Content" Value="{tpf:ResourceLink Key=PressedTextBrush}"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Background" TargetName="Border" Value="{tpf:ResourceLink Key=DisabledBrush}"/>
+                            <Setter Property="Opacity" TargetName="Content" Value="{tpf:ResourceLink Key=DisabledOpacity}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="RadioButton" x:Key="TPF.ClockInputModeButtonStyle">
+        <Setter Property="Foreground" Value="{tpf:ResourceLink Key=SelectedTextBrush}"/>
+        <Setter Property="FontSize" Value="16"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RadioButton">
+                    <ContentPresenter x:Name="Content"/>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="False">
+                            <Setter TargetName="Content" Property="Opacity" Value="0.4"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="ToggleButton" x:Key="TPF.ClockButtonStyle">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{tpf:ResourceLink Key=TextBrush}"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Panel.ZIndex" Value="0"/>
+        <Setter Property="Width" Value="22"/>
+        <Setter Property="Height" Value="22"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ToggleButton">
+                    <tpf:SimplePanel>
+                        <Ellipse x:Name="Background" Fill="{TemplateBinding Background}"/>
+                        <ContentPresenter x:Name="Content" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </tpf:SimplePanel>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Background" Property="Fill" Value="{tpf:ResourceLink Key=AccentBrush}"/>
+                            <Setter TargetName="Content" Property="TextElement.Foreground" Value="{tpf:ResourceLink Key=SelectedTextBrush}"/>
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="Background" Property="Fill" Value="{tpf:ResourceLink Key=SelectedBrush}"/>
+                            <Setter TargetName="Content" Property="TextElement.Foreground" Value="{tpf:ResourceLink Key=SelectedTextBrush}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="ToggleButton" x:Key="TPF.SmallClockButtonStyle">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="{tpf:ResourceLink Key=TextBrush}"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="Panel.ZIndex" Value="1"/>
+        <Setter Property="Width" Value="10"/>
+        <Setter Property="Height" Value="10"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ToggleButton">
+                    <tpf:SimplePanel>
+                        <Ellipse x:Name="Background" Fill="{TemplateBinding Background}" ToolTip="{TemplateBinding Content}"/>
+                    </tpf:SimplePanel>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Background" Property="Fill" Value="{tpf:ResourceLink Key=AccentBrush}"/>
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="Background" Property="Fill" Value="{tpf:ResourceLink Key=SelectedBrush}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <ControlTemplate TargetType="tpf:Clock" x:Key="TPF.ClockListTemplate">
+        <Border Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="180"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <Border Grid.Row="0" Grid.ColumnSpan="3" Margin="-1" Padding="{TemplateBinding HeaderPadding}" Background="{TemplateBinding HeaderBackground}" Visibility="{TemplateBinding HeaderVisibility}">
+                    <TextBlock Text="{TemplateBinding SelectedTimeString}" Foreground="{TemplateBinding HeaderForeground}" FontSize="16" HorizontalAlignment="Center"/>
+                </Border>
+                
+                <ListBox x:Name="PART_HoursListBox" Width="60" Grid.Row="1" Grid.Column="0" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Hidden"/>
+                <ListBox x:Name="PART_MinutesListBox" Width="60" Grid.Row="1" Grid.Column="1" BorderThickness="1 0 0 0" ScrollViewer.VerticalScrollBarVisibility="Hidden"/>
+                <ListBox x:Name="PART_SecondsListBox" Width="60" Grid.Row="1" Grid.Column="2" BorderThickness="1 0 0 0" 
+                         Visibility="{TemplateBinding ShowSeconds, Converter={StaticResource BooleanToVisibilityConverter}}" ScrollViewer.VerticalScrollBarVisibility="Hidden"/>
+
+                <Border Grid.Row="2" Grid.ColumnSpan="3" BorderThickness="0 1 0 0" BorderBrush="{TemplateBinding BorderBrush}" Visibility="{TemplateBinding Is24Hours, Converter={StaticResource InvertedBooleanToVisibilityConverter}}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <RadioButton x:Name="PART_AMButton" Content="AM" Grid.Column="0" Style="{StaticResource TPF.ClockMeridiemRadioButtonStyle}"/>
+                        <RadioButton x:Name="PART_PMButton" Content="PM" Grid.Column="1" Style="{StaticResource TPF.ClockMeridiemRadioButtonStyle}"/>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Border>
+    </ControlTemplate>
+    <ControlTemplate TargetType="tpf:Clock" x:Key="TPF.ClockTemplate">
+        <Border Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Grid Width="180">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="180"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Border Grid.Row="0" Margin="-1" Padding="{TemplateBinding HeaderPadding}" Background="{TemplateBinding HeaderBackground}" Visibility="{TemplateBinding HeaderVisibility}">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                        <RadioButton x:Name="PART_HoursButton" Content="--" Foreground="{TemplateBinding HeaderForeground}" Style="{StaticResource TPF.ClockInputModeButtonStyle}"/>
+                        <TextBlock Text=":" Foreground="{TemplateBinding HeaderForeground}" FontSize="16"/>
+                        <RadioButton x:Name="PART_MinutesButton" Content="--" Foreground="{TemplateBinding HeaderForeground}" Style="{StaticResource TPF.ClockInputModeButtonStyle}"/>
+                        <TextBlock Text=":" Foreground="{TemplateBinding HeaderForeground}" FontSize="16"
+                                    Visibility="{TemplateBinding ShowSeconds, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                        <RadioButton x:Name="PART_SecondsButton" Content="--" Foreground="{TemplateBinding HeaderForeground}" Style="{StaticResource TPF.ClockInputModeButtonStyle}"
+                                      Visibility="{TemplateBinding ShowSeconds, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                        <TextBlock x:Name="PART_MeridiemTextBlock" Foreground="{TemplateBinding HeaderForeground}" FontSize="16"/>
+                    </StackPanel>
+                </Border>
+
+                <tpf:SimplePanel Grid.Row="1">
+                    <Ellipse Fill="{tpf:ResourceLink Key=BorderBrush}" Width="170" Height="170"/>
+                    <Border x:Name="HoursPointer" Width="3" Height="40" Background="{tpf:ResourceLink Key=SelectedBrush}" VerticalAlignment="Top" Margin="0 50 0 0" RenderTransformOrigin="0.5 1">
+                        <Border.RenderTransform>
+                            <RotateTransform Angle="{Binding SelectedTime, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ClockHourToAngleConverter}}"/>
+                        </Border.RenderTransform>
+                    </Border>
+                    <Border x:Name="MinutesPointer" Width="2" Height="60" Background="{tpf:ResourceLink Key=SelectedBrush}" VerticalAlignment="Top" Margin="0 30 0 0" RenderTransformOrigin="0.5 1">
+                        <Border.RenderTransform>
+                            <RotateTransform Angle="{Binding SelectedTime, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ClockMinuteToAngleConverter}}"/>
+                        </Border.RenderTransform>
+                    </Border>
+                    <Border x:Name="SecondsPointer" Width="1" Height="64" Background="{tpf:ResourceLink Key=SelectedBrush}" VerticalAlignment="Top" Margin="0 26 0 0" RenderTransformOrigin="0.5 1"
+                            Visibility="{TemplateBinding ShowSeconds, Converter={StaticResource BooleanToVisibilityConverter}}">
+                        <Border.RenderTransform>
+                            <RotateTransform Angle="{Binding SelectedTime, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ClockSecondToAngleConverter}}"/>
+                        </Border.RenderTransform>
+                    </Border>
+                    
+                    <tpf:SimplePanel x:Name="HoursPanel" Width="170" Height="170">
+                        <tpf:RadialPanel x:Name="PART_NormalHoursPanel" RadiusRatio="0.85"/>
+                        <tpf:RadialPanel x:Name="PART_ExtendedHoursPanel" RadiusRatio="0.58" Visibility="{TemplateBinding Is24Hours, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+                    </tpf:SimplePanel>
+                    <tpf:RadialPanel x:Name="PART_MinutesPanel" Width="170" Height="170" RadiusRatio="0.85"/>
+                    <tpf:RadialPanel x:Name="PART_SecondsPanel" Width="170" Height="170" RadiusRatio="0.85"/>
+                    
+                    <Ellipse Fill="{tpf:ResourceLink Key=SelectedBrush}" Width="6" Height="6"/>
+                </tpf:SimplePanel>
+                
+                <Border Grid.Row="2" Grid.ColumnSpan="3" BorderThickness="0 1 0 0" BorderBrush="{TemplateBinding BorderBrush}" Visibility="{TemplateBinding Is24Hours, Converter={StaticResource InvertedBooleanToVisibilityConverter}}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <RadioButton x:Name="PART_AMButton" Content="AM" Grid.Column="0" Style="{StaticResource TPF.ClockMeridiemRadioButtonStyle}"/>
+                        <RadioButton x:Name="PART_PMButton" Content="PM" Grid.Column="1" Style="{StaticResource TPF.ClockMeridiemRadioButtonStyle}"/>
+                    </Grid>
+                </Border>
+            </Grid>
+        </Border>
+        
+        <ControlTemplate.Triggers>
+            <Trigger Property="ActiveInputMode" Value="Hours">
+                <Setter TargetName="HoursPanel" Property="Visibility" Value="Visible"/>
+                <Setter TargetName="PART_MinutesPanel" Property="Visibility" Value="Collapsed"/>
+                <Setter TargetName="PART_SecondsPanel" Property="Visibility" Value="Collapsed"/>
+                <Setter TargetName="HoursPointer" Property="Opacity" Value="1"/>
+                <Setter TargetName="MinutesPointer" Property="Opacity" Value="0.4"/>
+                <Setter TargetName="SecondsPointer" Property="Opacity" Value="0.4"/>
+            </Trigger>
+            <Trigger Property="ActiveInputMode" Value="Minutes">
+                <Setter TargetName="HoursPanel" Property="Visibility" Value="Collapsed"/>
+                <Setter TargetName="PART_MinutesPanel" Property="Visibility" Value="Visible"/>
+                <Setter TargetName="PART_SecondsPanel" Property="Visibility" Value="Collapsed"/>
+                <Setter TargetName="HoursPointer" Property="Opacity" Value="0.4"/>
+                <Setter TargetName="MinutesPointer" Property="Opacity" Value="1"/>
+                <Setter TargetName="SecondsPointer" Property="Opacity" Value="0.4"/>
+            </Trigger>
+            <Trigger Property="ActiveInputMode" Value="Seconds">
+                <Setter TargetName="HoursPanel" Property="Visibility" Value="Collapsed"/>
+                <Setter TargetName="PART_MinutesPanel" Property="Visibility" Value="Collapsed"/>
+                <Setter TargetName="PART_SecondsPanel" Property="Visibility" Value="Visible"/>
+                <Setter TargetName="HoursPointer" Property="Opacity" Value="0.4"/>
+                <Setter TargetName="MinutesPointer" Property="Opacity" Value="0.4"/>
+                <Setter TargetName="SecondsPointer" Property="Opacity" Value="1"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+    <Style TargetType="tpf:Clock" x:Key="TPF.ClockStyle">
+        <Setter Property="HeaderForeground" Value="{tpf:ResourceLink Key=SelectedTextBrush}"/>
+        <Setter Property="HeaderBackground" Value="{tpf:ResourceLink Key=HeaderBrush}"/>
+        <Setter Property="BorderBrush" Value="{tpf:ResourceLink Key=BorderBrush}"/>
+        <Setter Property="Background" Value="{tpf:ResourceLink Key=PrimaryBrush}"/>
+        <Setter Property="Foreground" Value="{tpf:ResourceLink Key=TextBrush}"/>
+        <Setter Property="HeaderPadding" Value="8 4"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="MajorClockButtonStyle" Value="{StaticResource TPF.ClockButtonStyle}"/>
+        <Setter Property="MinorClockButtonStyle" Value="{StaticResource TPF.SmallClockButtonStyle}"/>
+        <Style.Triggers>
+            <Trigger Property="DisplayMode" Value="List">
+                <Setter Property="Template" Value="{StaticResource TPF.ClockListTemplate}"/>
+            </Trigger>
+            <Trigger Property="DisplayMode" Value="Clock">
+                <Setter Property="Template" Value="{StaticResource TPF.ClockTemplate}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style TargetType="tpf:Clock" BasedOn="{StaticResource TPF.ClockStyle}"/>
 
     <!-- ========== Calculator ========== -->
     <Style TargetType="tpf:Calculator" x:Key="TPF.CalculatorStyle">

@@ -6,6 +6,25 @@
 	Zusätzlich wurden die neuen Properties SmallChange und LargeChange hinzugefügt.
 	SmallChange wird in den Fällen verwendet, wo die Buttons gedrückt werden oder der Wert über die Pfeiltasten verändert wird.
 	LargeChange wird für die neue Funktion verwendet, dass der Wert nun auch über die Bild Auf/Ab-Tasten in größeren Schritten verändert werden kann.
+--RadialPanel
+	Das RadialPanel wurde um die neue Property RadiusRatio erweitert, mit der ein Faktor zwischen 0 und 1 bestimmt werden kann, der die Position der Elemente im Panel bestimmt.
+	Das bisherige verhalten entspricht dem Wert 0.5, wodurch die Elemente in der Mitte von dem ihnen zur verfügung stehenden Platz angeordnet wurden.
+	Um so höher der Wert ist, desto weiter außen werden die Elemente Positioniert.
+
+-Neue Controls
+--Clock
+	Das Clock-Control ist ein Oberflächenelement zum Anzeigen und Bearbeiten der Zeitkomponente eines DateTime-Werts.
+	Das Control besitzt zwei Darstellungsweisen (Clock und List), die über die Property DisplayMode gesteuert werden.
+	Im Clock-Modus wird das Control als eine klassische Uhr dargestellt und über einfache Klicks auf die entsprechenden Stellen in dieser Uhr wird der Wert bearbeitet.
+	Hierbei wird über die ActiveInputMode-Property gesteuert, welcher Teil der Zeit gerade dargestellt und bearbeitet wird.
+	Diese Property kann einfach durch das klicken des entsprechenden Teils der Zeit im Header des Controls gesteuert werden, wodurch sich die Ansicht aktualisiert.
+	Im List-Modus werden die einzelnen Bestandteile der Uhrzeit über ListBoxen dargestellt und das bearbeiten erfolgt hier über das auswählen des entsprechenden Werts in der passenden ListBox.
+	Die SelectedTime-Property enthält den aktuellen Wert des Controls und im List-Modus wird ebenfalls die SelectedTimeString-Property im Header angezeigt.
+	Der Header kann über die Properties HeaderVisibility, HeaderForeground, HeaderBackground und HeaderPadding je nach Bedarf angepasst werden.
+	In beiden Modi kann über die ShowSeconds-Property das Anzeigen und Bearbeiten der Sekunden deaktiviert werden.
+	Über die Is24Hours-Property kann das Control zwischen der 24-Stunden Darstellung und der 12-Stunden Darstellung umschalten.
+	Wenn sich das Control im 12-Stunden-Modus befindet wird im Header der aktive Meridiem-Indikator angezeigt und es werden zwei Buttons eingeblendet, über die der Modus (AM/PM) umgeschaltet werden kann.
+	Die Darstellung der Buttons im Clock-Modus die die einzelnen Zeitpunkte darstellen werden über die MajorClockButtonStyle und MinorClockButtonStyle Properties gesteuert.
 
 -Veränderte sonstige Klassen
 --DropInfo

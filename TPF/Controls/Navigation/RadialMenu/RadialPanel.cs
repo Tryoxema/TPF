@@ -32,6 +32,29 @@ namespace TPF.Controls
         }
         #endregion
 
+        #region RadiusRatio DependencyProperty
+        public static readonly DependencyProperty RadiusRatioProperty = DependencyProperty.Register("RadiusRatio",
+            typeof(double),
+            typeof(RadialPanel),
+            new FrameworkPropertyMetadata(0.5, FrameworkPropertyMetadataOptions.AffectsArrange, null, ConstrainRadiusRatio));
+
+        private static object ConstrainRadiusRatio(DependencyObject d, object baseValue)
+        {
+            var doubleValue = (double)baseValue;
+
+            if (doubleValue < 0) doubleValue = 0;
+            else if (doubleValue > 1) doubleValue = 1;
+
+            return doubleValue;
+        }
+
+        public double RadiusRatio
+        {
+            get { return (double)GetValue(RadiusRatioProperty); }
+            set { SetValue(RadiusRatioProperty, value); }
+        }
+        #endregion
+
         protected override Size MeasureOverride(Size availableSize)
         {
             foreach (UIElement child in Children)
@@ -46,30 +69,29 @@ namespace TPF.Controls
         {
             if (Children.Count == 0) return finalSize;
 
-            var startAngle = StartAngle * (Math.PI / 180);
-            var anglePerChild = TotalAngle / Children.Count * (Math.PI / 180);
+            var start = StartAngle * (Math.PI / 180);
+            var anglePerItem = TotalAngle / Children.Count;
+            var radiansPerItem = anglePerItem * (Math.PI / 180);
             var radiusX = finalSize.Width * 0.5;
             var radiusY = finalSize.Height * 0.5;
-            var startPointX = radiusX + 1 * Math.Sin(startAngle) * radiusX / 2;
-            var startPointY = radiusY / 2 + (1 - Math.Cos(startAngle)) * radiusY / 2;
-            var currentPosition = new Point(startPointX, startPointY);
+            var hypotenuseRadius = radiusX * RadiusRatio;
 
             for (int i = 0; i < Children.Count; i++)
             {
                 var child = Children[i];
 
-                var angle = (i + 1) * anglePerChild + startAngle;
-                var offsetX = Math.Sin(angle) * radiusX / 2;
-                var offsetY = (1 - Math.Cos(angle)) * radiusY / 2;
+                var adjacent = Math.Cos((i * radiansPerItem) + start) * hypotenuseRadius;
+                var opposite = Math.Sin((i * radiansPerItem) + start) * hypotenuseRadius;
 
-                var childRect = new Rect(new Point(currentPosition.X - child.DesiredSize.Width / 2,
-                                                   currentPosition.Y - child.DesiredSize.Height / 2),
-                                         new Point(currentPosition.X + child.DesiredSize.Width / 2,
-                                                   currentPosition.Y + child.DesiredSize.Height / 2));
+                var buttonCentreX = radiusX + opposite;
+                var buttonCentreY = radiusY - adjacent;
 
-                child.Arrange(childRect);
-                currentPosition.X = 1 * offsetX + radiusX;
-                currentPosition.Y = offsetY + radiusY / 2;
+                var buttonX = buttonCentreX - child.DesiredSize.Width / 2;
+                var buttonY = buttonCentreY - child.DesiredSize.Height / 2;
+
+                var rect = new Rect(buttonX, buttonY, child.DesiredSize.Width, child.DesiredSize.Height);
+
+                child.Arrange(rect);
             }
 
             return finalSize;

@@ -112,7 +112,16 @@
                         </StackPanel>
 
                         <StackPanel Grid.Column="1">
-                            <tpf:NumericRangeBox Width="300" ShowButtons="True"/>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <tpf:Clock DisplayMode="List"/>
+
+                                <tpf:Clock DisplayMode="Clock" Grid.Column="1"/>
+                            </Grid>
                         </StackPanel>
                     </Grid>
                 </Grid>
