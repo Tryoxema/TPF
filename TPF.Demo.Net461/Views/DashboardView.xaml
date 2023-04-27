@@ -74,7 +74,7 @@
                     <tpf:StackedDataBar Height="20" ItemsSource="{Binding DataBarTests}" ValuePath="Value" BarBrushes="{StaticResource PurpleBrushCollection}">
                         <tpf:StackedDataBar.ToolTipTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding DataItem.Name}"/>
+                                <TextBlock Text="{Binding DataItem.Value}"/>
                             </DataTemplate>
                         </tpf:StackedDataBar.ToolTipTemplate>
                     </tpf:StackedDataBar>

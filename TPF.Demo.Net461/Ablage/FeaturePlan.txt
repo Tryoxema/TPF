@@ -69,7 +69,7 @@
 [ ] DateTimePicker
 [ ] TimePicker
 [X] Calendar
-[ ] Clock
+[X] Clock
 [X] TaskBoard
 [ ] Scheduler
 ---Daten-Management---
