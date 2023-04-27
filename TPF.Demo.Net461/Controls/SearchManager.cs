@@ -21,7 +21,11 @@ namespace TPF.Demo.Net461.Controls
 
             for (var i = 0; i < assemblies.Length; i++)
             {
-                var types = assemblies[i].GetExportedTypes();
+                var assembly = assemblies[i];
+
+                if (assembly.IsDynamic) continue;
+
+                var types = assembly.GetExportedTypes();
 
                 for (var j = 0; j < types.Length; j++)
                 {

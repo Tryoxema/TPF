@@ -430,7 +430,7 @@ namespace TPF.Controls
                 case NotifyCollectionChangedAction.Reset:
                 {
                     SparklineDataItems.Clear();
-                    AddSparklineDataItems(e.NewItems);
+                    AddSparklineDataItems(sender as IEnumerable);
                     break;
                 }
             }

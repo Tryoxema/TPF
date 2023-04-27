@@ -55,6 +55,12 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Views\ClockView.xaml.cs">
+      <DependentUpon>ClockView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DashboardView.xaml.cs">
+      <DependentUpon>DashboardView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\RadialProgressBarView.xaml.cs">
       <DependentUpon>RadialProgressBarView.xaml</DependentUpon>
     </Compile>
@@ -79,9 +85,6 @@
     <Compile Include="Views\PasswordBoxView.xaml.cs">
       <DependentUpon>PasswordBoxView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\FluentView.xaml.cs">
-      <DependentUpon>FluentView.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Views\DragDropView.xaml.cs">
       <DependentUpon>DragDropView.xaml</DependentUpon>
     </Compile>
@@ -96,6 +99,9 @@
     </Compile>
     <Compile Include="Windows\CalculatorWindow.xaml.cs">
       <DependentUpon>CalculatorWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\FluentWindow.xaml.cs">
+      <DependentUpon>FluentWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Windows\GradiantsWindow.xaml.cs">
       <DependentUpon>GradiantsWindow.xaml</DependentUpon>
@@ -138,6 +144,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\ClockView.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\DashboardView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\RadialProgressBarView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -170,10 +184,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\FluentView.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Views\DragDropView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -191,6 +201,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Windows\CalculatorWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\FluentWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

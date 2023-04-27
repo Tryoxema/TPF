@@ -2291,8 +2291,8 @@
         </Setter>
     </Style>
     <Style TargetType="tpf:Calendar" BasedOn="{StaticResource TPF.CalendarStyle}"/>
-    
-    <!--Clock-->
+
+    <!-- ========== Clock ========== -->
     <Style TargetType="RadioButton" x:Key="TPF.ClockMeridiemRadioButtonStyle">
         <Setter Property="Foreground" Value="{tpf:ResourceLink Key=TextBrush}"/>
         <Setter Property="Background" Value="Transparent"/>

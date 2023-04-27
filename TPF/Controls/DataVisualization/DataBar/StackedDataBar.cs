@@ -252,6 +252,7 @@ namespace TPF.Controls
 
             DataBarDataItems.Clear();
             AddDataBarDataItems(ItemsSource);
+            CalculateBars();
         }
 
         private void ItemsSource_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
@@ -277,7 +278,7 @@ namespace TPF.Controls
                 case NotifyCollectionChangedAction.Reset:
                 {
                     DataBarDataItems.Clear();
-                    AddDataBarDataItems(e.NewItems);
+                    AddDataBarDataItems(sender as IEnumerable);
                     break;
                 }
             }

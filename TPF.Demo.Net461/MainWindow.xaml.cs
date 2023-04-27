@@ -66,18 +66,6 @@ namespace TPF.Demo.Net461
         {
             get { return _skins ?? (_skins = new ObservableCollection<ColorSkin>()); }
         }
-
-        ObservableCollection<DataBarTest> _dataBarTests;
-        public ObservableCollection<DataBarTest> DataBarTests
-        {
-            get { return _dataBarTests ?? (_dataBarTests = new ObservableCollection<DataBarTest>()); }
-        }
-
-        ObservableCollection<SparklineTest> _sparklineTests;
-        public ObservableCollection<SparklineTest> SparklineTests
-        {
-            get { return _sparklineTests ?? (_sparklineTests = new ObservableCollection<SparklineTest>()); }
-        }
         #endregion
 
         private void Initialize()
@@ -91,24 +79,6 @@ namespace TPF.Demo.Net461
             Skins.Add(new ColorSkin(SmoothLightSkin.Instance, "Smooth Hell"));
             Skins.Add(new ColorSkin(SmoothDarkSkin.Instance, "Smooth Dunkel"));
             DesignComboBox.SelectedItem = Skins.FirstOrDefault();
-
-            DataBarTests.Add(new DataBarTest(5));
-            DataBarTests.Add(new DataBarTest(15));
-            DataBarTests.Add(new DataBarTest(5));
-            DataBarTests.Add(new DataBarTest(3));
-            DataBarTests.Add(new DataBarTest(18));
-            DataBarTests.Add(new DataBarTest(22));
-            DataBarTests.Add(new DataBarTest(10));
-            DataBarTests.Add(new DataBarTest(5));
-            DataBarTests.Add(new DataBarTest(9));
-            DataBarTests.Add(new DataBarTest(6));
-
-            var random = new Random();
-
-            for (int i = 0; i < 20; i++)
-            {
-                SparklineTests.Add(new SparklineTest(i, random.Next(-10, 10)));
-            }
         }
 
         private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
@@ -206,52 +176,6 @@ namespace TPF.Demo.Net461
         {
             Name = name;
             Skin = skin;
-        }
-    }
-
-    public class DataBarTest : NotifyObject
-    {
-        public DataBarTest(double value)
-        {
-            Value = value;
-            Name = "Test";
-        }
-
-        double _value;
-        public double Value
-        {
-            get { return _value; }
-            set { SetProperty(ref _value, value); }
-        }
-
-        string _name;
-        public string Name
-        {
-            get { return _name; }
-            set { SetProperty(ref _name, value); }
-        }
-    }
-
-    public class SparklineTest : NotifyObject
-    {
-        public SparklineTest(double x, double y)
-        {
-            X = x;
-            Y = y;
-        }
-
-        double _x;
-        public double X
-        {
-            get { return _x; }
-            set { SetProperty(ref _x, value); }
-        }
-
-        double _y;
-        public double Y
-        {
-            get { return _y; }
-            set { SetProperty(ref _y, value); }
         }
     }
 }

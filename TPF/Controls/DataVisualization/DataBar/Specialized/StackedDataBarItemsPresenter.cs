@@ -190,7 +190,7 @@ namespace TPF.Controls.Specialized.DataBar
                 case NotifyCollectionChangedAction.Reset:
                 {
                     Children.Clear();
-                    AddItems(e.NewItems);
+                    AddItems(sender as IList);
                     break;
                 }
             }

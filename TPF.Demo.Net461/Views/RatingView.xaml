@@ -26,6 +26,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
             </Grid.RowDefinitions>
 
             <Label Content="Ganze Werte" Foreground="{tpf:ResourceLink Key=TextBrush}" Grid.Column="0" Grid.Row="0"/>
@@ -43,8 +44,17 @@
             <Label Content="Mehr Sterne" Foreground="{tpf:ResourceLink Key=TextBrush}" Grid.Column="0" Grid.Row="4"/>
             <tpf:Rating Grid.Column="1" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center" ItemsToGenerateCount="8"/>
 
-            <Label Content="Andere Form" Foreground="{tpf:ResourceLink Key=TextBrush}" Grid.Column="0" Grid.Row="5"/>
-            <tpf:Rating Grid.Column="1" Grid.Row="5" HorizontalAlignment="Left" VerticalAlignment="Center" Geometry="{StaticResource ArrowRightGlyph}"/>
+            <Label Content="Farbe" Foreground="{tpf:ResourceLink Key=TextBrush}" Grid.Column="0" Grid.Row="5"/>
+            <tpf:Rating Grid.Column="1" Grid.Row="5" HorizontalAlignment="Left" VerticalAlignment="Center">
+                <tpf:RatingItem SelectedBackground="Red" SelectedBorderBrush="Transparent"/>
+                <tpf:RatingItem SelectedBackground="Yellow" SelectedBorderBrush="Transparent"/>
+                <tpf:RatingItem SelectedBackground="ForestGreen" SelectedBorderBrush="Transparent"/>
+                <tpf:RatingItem SelectedBackground="Yellow" SelectedBorderBrush="Transparent"/>
+                <tpf:RatingItem SelectedBackground="Red" SelectedBorderBrush="Transparent"/>
+            </tpf:Rating>
+            
+            <Label Content="Andere Form" Foreground="{tpf:ResourceLink Key=TextBrush}" Grid.Column="0" Grid.Row="6"/>
+            <tpf:Rating Grid.Column="1" Grid.Row="6" HorizontalAlignment="Left" VerticalAlignment="Center" Geometry="{StaticResource ArrowRightGlyph}"/>
         </Grid>
     </Grid>
 </UserControl>

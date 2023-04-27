@@ -52,11 +52,11 @@
 
                         <tpf:Divider Content="Path 1" HorizontalContentAlignment="Center" Grid.Column="0" Grid.Row="0"/>
                         <Path Stroke="{tpf:ResourceLink Key=GlyphBrush}" Fill="{tpf:ResourceLink Key=GlyphBrush}" Height="36" Width="36" Stretch="Uniform" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="1"
-                              Data="M0,0 L10,0 10,4 0,4 z M6,0.1 L9.9,0.1 9.9,3.9 6,3.9 z"/>
+                              Data="M500,300 425,300 425,620 720,620 720,550 500,550 Z M512.71,80.16 c-245.74 0 -445.18 197.58 -445.18 441.02 s199.44 441.02 445.18 441.02 c245.74 0 445.18 -197.58 445.18 -441.02 S758.45 80.16 512.71 80.16 z M512.71,874.01 c-195.88 0 -356.15 -158.77 -356.15 -352.82 s160.27 -352.82 356.15 -352.82 c195.88 0 356.14 158.77 356.14 352.82 S708.59 874.01 512.71 874.01 z"/>
 
                         <tpf:Divider Content="Path 2" HorizontalContentAlignment="Center" Grid.Column="1" Grid.Row="0"/>
                         <Path Stroke="{tpf:ResourceLink Key=GlyphBrush}" Fill="{tpf:ResourceLink Key=GlyphBrush}" Height="36" Width="36" Stretch="Uniform" HorizontalAlignment="Center" Grid.Column="1" Grid.Row="1"
-                              Data="M2,0 L10,0 10,12 12,12 12,12.2 6.5,12.2 6.5,18 5.5,18 5.5,12.2 0,12.2 0,12 2,12 z M2.2,0.2 L7,0.2 7,12 2.2,12 z"/>
+                              Data="M0,0 L10,0 10,10 0,10 z M1,1 L9,1 9,9 1,9 z"/>
 
                         <tpf:Divider Content="Path 3" HorizontalContentAlignment="Center" Grid.Column="2" Grid.Row="0"/>
                         <Path Stroke="{tpf:ResourceLink Key=GlyphBrush}" Fill="{tpf:ResourceLink Key=GlyphBrush}" Height="36" Width="36" Stretch="Uniform" HorizontalAlignment="Center" Grid.Column="2" Grid.Row="1"
@@ -71,58 +71,9 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        <StackPanel>
-                            <tpf:DataBar Height="20" OriginValue="20" Value="120" OriginAxisVisibility="Visible"/>
-                            <tpf:DataBar Height="20" OriginValue="20" Value="100" OriginAxisVisibility="Visible"/>
-                            <tpf:DataBar Height="20" OriginValue="20" Value="80" OriginAxisVisibility="Visible"/>
-                            <tpf:DataBar Height="20" OriginValue="20" Value="40" OriginAxisVisibility="Visible"/>
-                            <tpf:DataBar Height="20" OriginValue="20" Value="10" OriginAxisVisibility="Visible"/>
-                            <tpf:DataBar Height="20" OriginValue="20" Value="0" OriginAxisVisibility="Visible"/>
-                            <tpf:DataBar Height="20" OriginValue="20" Value="-10" OriginAxisVisibility="Visible"/>
-                            <tpf:StackedDataBar Height="20" ItemsSource="{Binding DataBarTests}" ValuePath="Value"/>
-                            <tpf:StackedDataBar Height="20" ItemsSource="{Binding DataBarTests}" ValuePath="Value">
-                                <tpf:StackedDataBar.BarBrushes>
-                                    <tpf:BrushCollection>
-                                        <SolidColorBrush Color="Crimson"/>
-                                        <SolidColorBrush Color="ForestGreen"/>
-                                    </tpf:BrushCollection>
-                                </tpf:StackedDataBar.BarBrushes>
-                                <tpf:StackedDataBar.ToolTipTemplate>
-                                    <DataTemplate>
-                                        <TextBlock Text="{Binding DataItem.Name}"/>
-                                    </DataTemplate>
-                                </tpf:StackedDataBar.ToolTipTemplate>
-                            </tpf:StackedDataBar>
-                            <tpf:DataAxis/>
-                            <tpf:StackedFullDataBar Height="20" ItemsSource="{Binding DataBarTests}" ValuePath="Value" BarBrushes="{StaticResource PurpleBrushCollection}" VerticalAlignment="Top"/>
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="Auto"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                
-                                <tpf:DataAxis Orientation="Vertical" Margin="0 10"/>
-                                <tpf:DataBar Value="80" Grid.Column="1" Margin="0 10" LabelVisibility="Hidden">
-                                    <tpf:DataBar.LayoutTransform>
-                                        <RotateTransform Angle="-90"/>
-                                    </tpf:DataBar.LayoutTransform>
-                                </tpf:DataBar>
-                            </Grid>
-                        </StackPanel>
+                        <tpf:Clock DisplayMode="List"/>
 
-                        <StackPanel Grid.Column="1">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="*"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-
-                                <tpf:Clock DisplayMode="List"/>
-
-                                <tpf:Clock DisplayMode="Clock" Grid.Column="1"/>
-                            </Grid>
-                        </StackPanel>
+                        <tpf:Clock DisplayMode="Clock" Grid.Column="1"/>
                     </Grid>
                 </Grid>
             </tpf:TabItem>
@@ -143,102 +94,7 @@
                                       Stroke="{Binding RelativeSource={RelativeSource AncestorType=ContentPresenter}, Path=(TextElement.Foreground)}"/>
                             </DataTemplate>
                         </tpf:HamburgerMenu.Resources>
-                        <tpf:HamburgerMenuItem Label="_Material" Icon="{StaticResource LetterMGlyph}" IconTemplate="{StaticResource IconTemplate}">
-                            <Grid>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto"/>
-                                    <RowDefinition Height="*"/>
-                                </Grid.RowDefinitions>
-
-                                <Label Content="Material" Foreground="{tpf:ResourceLink Key=TextBrush}" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-
-                                <StackPanel Grid.Row="1" Orientation="Horizontal">
-                                    <Grid Width="40" Height="20" Margin="2 0">
-                                        <tpf:Shadow ShadowDepth="Depth1" Background="{tpf:ResourceLink Key=InputBackgroundBrush}"/>
-                                        <TextBlock Text="Tiefe 1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                    </Grid>
-                                    <Grid Width="40" Height="20" Margin="2 0">
-                                        <tpf:Shadow ShadowDepth="Depth2" Background="{tpf:ResourceLink Key=InputBackgroundBrush}"/>
-                                        <TextBlock Text="Tiefe 2" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                    </Grid>
-                                    <Grid Width="40" Height="20" Margin="2 0">
-                                        <tpf:Shadow ShadowDepth="Depth3" Background="{tpf:ResourceLink Key=InputBackgroundBrush}"/>
-                                        <TextBlock Text="Tiefe 3" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                    </Grid>
-                                    <Grid Width="40" Height="20" Margin="2 0">
-                                        <tpf:Shadow ShadowDepth="Depth4" Background="{tpf:ResourceLink Key=InputBackgroundBrush}"/>
-                                        <TextBlock Text="Tiefe 4" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                    </Grid>
-                                    <Grid Width="40" Height="20" Margin="2 0">
-                                        <tpf:Shadow ShadowDepth="Depth5" Background="{tpf:ResourceLink Key=InputBackgroundBrush}"/>
-                                        <TextBlock Text="Tiefe 5" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                                    </Grid>
-                                    <Control Height="20" Margin="2 0" Width="80">
-                                        <Control.Style>
-                                            <Style TargetType="Control">
-                                                <Setter Property="Template">
-                                                    <Setter.Value>
-                                                        <ControlTemplate TargetType="Control">
-                                                            <Grid>
-                                                                <tpf:Shadow Background="{tpf:ResourceLink Key=InputBackgroundBrush}" ShadowDepth="Depth1" x:Name="Shadow"/>
-                                                                <tpf:MaterialControl HorizontalContentAlignment="Center" VerticalContentAlignment="Center" RippleBrush="Black">
-                                                                    <TextBlock Text="MouseOver"/>
-                                                                </tpf:MaterialControl>
-                                                            </Grid>
-                                                            <ControlTemplate.Triggers>
-                                                                <Trigger Property="IsMouseOver" Value="True">
-                                                                    <Setter TargetName="Shadow" Property="Darken" Value="True"/>
-                                                                </Trigger>
-                                                            </ControlTemplate.Triggers>
-                                                        </ControlTemplate>
-                                                    </Setter.Value>
-                                                </Setter>
-                                            </Style>
-                                        </Control.Style>
-                                    </Control>
-                                    <Grid Margin="5 0" Height="20">
-                                        <tpf:Shadow Background="White" ShadowDepth="Depth2"/>
-                                        <Rectangle Fill="DodgerBlue" Width="80"/>
-                                        <tpf:MaterialControl Width="80" HorizontalContentAlignment="Center">
-                                            <TextBlock Text="Test" Foreground="White"/>
-                                        </tpf:MaterialControl>
-                                    </Grid>
-                                    <Button Content="Button" Height="30" Width="100" BorderThickness="0" SnapsToDevicePixels="True" UseLayoutRounding="True">
-                                        <Button.Style>
-                                            <Style TargetType="Button">
-                                                <Setter Property="Background" Value="White"/>
-                                                <Setter Property="Template">
-                                                    <Setter.Value>
-                                                        <ControlTemplate TargetType="Button">
-                                                            <Grid>
-                                                                <tpf:Shadow x:Name="Shadow" Background="{TemplateBinding Background}" ShadowDepth="Depth1" CornerRadius="10"/>
-                                                                <Border BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}" CornerRadius="10"/>
-                                                                <tpf:MaterialControl x:Name="Material" RippleBrush="Black" CornerRadius="10" IsSmartClipped="True">
-                                                                    <ContentPresenter/>
-                                                                </tpf:MaterialControl>
-                                                            </Grid>
-                                                            <ControlTemplate.Triggers>
-                                                                <Trigger Property="IsMouseOver" Value="True">
-                                                                    <Setter TargetName="Material" Property="Background" Value="#F5F5F5"/>
-                                                                    <Setter TargetName="Shadow" Property="Darken" Value="True"/>
-                                                                </Trigger>
-                                                                <Trigger Property="IsPressed" Value="True">
-                                                                    <Setter TargetName="Material" Property="Background" Value="#E0E0E0"/>
-                                                                </Trigger>
-                                                            </ControlTemplate.Triggers>
-                                                        </ControlTemplate>
-                                                    </Setter.Value>
-                                                </Setter>
-                                            </Style>
-                                        </Button.Style>
-                                    </Button>
-                                </StackPanel>
-                            </Grid>
-                        </tpf:HamburgerMenuItem>
-                        <tpf:HamburgerMenuItem Label="_Fluent" Icon="{StaticResource LetterFGlyph}" IconTemplate="{StaticResource IconTemplate}">
-                            <views:FluentView/>
-                        </tpf:HamburgerMenuItem>
-                        <tpf:HamburgerMenuItem Label="_Buttons" Icon="{StaticResource ArrowRightGlyph}" IconTemplate="{StaticResource IconTemplate}">
+                        <tpf:HamburgerMenuItem Label="_Buttons" Icon="{StaticResource ButtonGlyph}" IconTemplate="{StaticResource IconTemplate}">
                             <views:ButtonsView/>
                         </tpf:HamburgerMenuItem>
                         <tpf:HamburgerMenuItem Label="_Rating" Icon="{StaticResource StarGlyph}" IconTemplate="{StaticResource IconTemplate}">
@@ -256,13 +112,16 @@
                         <tpf:HamburgerMenuItem Label="Calendar" Icon="{StaticResource CalendarGlyph}" IconTemplate="{StaticResource IconTemplate}">
                             <views:CalendarView/>
                         </tpf:HamburgerMenuItem>
+                        <tpf:HamburgerMenuItem Label="Clock" Icon="{StaticResource ClockGlyph}" IconTemplate="{StaticResource IconTemplate}">
+                            <views:ClockView/>
+                        </tpf:HamburgerMenuItem>
                         <tpf:HamburgerMenuItem Label="Step_ProgressBar" Icon="{StaticResource CheckGlyph}" IconTemplate="{StaticResource IconTemplate}">
                             <views:StepProgressBarView/>
                         </tpf:HamburgerMenuItem>
                         <tpf:HamburgerMenuItem Label="ProgressBar" Icon="{StaticResource ProgressBarGlyph}" IconTemplate="{StaticResource IconTemplate}">
                             <views:ProgressBarView/>
                         </tpf:HamburgerMenuItem>
-                        <tpf:HamburgerMenuItem Label="RadialProgressBar" IconTemplate="{StaticResource IconTemplate}">
+                        <tpf:HamburgerMenuItem Label="RadialProgressBar" Icon="{StaticResource ProgressBarGlyph}" IconTemplate="{StaticResource IconTemplate}">
                             <views:RadialProgressBarView/>
                         </tpf:HamburgerMenuItem>
                     </tpf:HamburgerMenu>
@@ -275,63 +134,7 @@
 
             <tpf:TabItem Header="Dashboard">
                 <tpf:SimplePanel>
-                    <tpf:Dashboard Grid.Column="1">
-                        <tpf:Widget>
-                            <StackPanel>
-                                <tpf:RadialProgressBar Progress="60" SecondaryProgress="100" Width="130" StartAngle="60" EndAngle="300"/>
-                                <TextBlock Text="Wichtiger Wert" HorizontalAlignment="Center"/>
-                            </StackPanel>
-                        </tpf:Widget>
-                        <tpf:Widget HorizontalSlots="2">
-                            <StackPanel>
-                                <TextBlock Text="Wert 1"/>
-                                <tpf:DataBar Grid.Row="1" Value="40"/>
-                                <TextBlock Text="Wert 2"/>
-                                <tpf:DataBar Grid.Row="1" Value="80"/>
-                                <TextBlock Text="Wert 3"/>
-                                <tpf:DataBar Value="60"/>
-                                <TextBlock Text="Wert 4"/>
-                                <tpf:DataBar Value="50"/>
-                            </StackPanel>
-                        </tpf:Widget>
-                        <tpf:Widget Top="1" Left="0">
-                            <StackPanel>
-                                <TextBlock Text="Zufriedenheit"/>
-                                <tpf:Rating Value="4.5" IsReadOnly="True"/>
-                                <TextBlock Text="Qualität"/>
-                                <tpf:Rating Value="4.7" IsReadOnly="True"/>
-                                <TextBlock Text="Termintreue"/>
-                                <tpf:Rating Value="4.3" IsReadOnly="True"/>
-                            </StackPanel>
-                        </tpf:Widget>
-                        <tpf:Widget Top="1" Left="1" VerticalContentAlignment="Stretch">
-                            <tpf:SimplePanel>
-                                <TextBlock Text="LinearSparkline" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                                <tpf:LinearSparkline ItemsSource="{Binding SparklineTests}" XValuePath="X" YValuePath="Y" Width="130" Height="65" ShowAxis="True" ShowNormalRange="True" NormalRangeTop="5" NormalRangeBottom="0" ShowIndicators="True"/>
-                            </tpf:SimplePanel>
-                        </tpf:Widget>
-                        <tpf:Widget Top="1" Left="2" VerticalContentAlignment="Stretch">
-                            <tpf:SimplePanel>
-                                <TextBlock Text="AreaSparkline" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                                <tpf:AreaSparkline ItemsSource="{Binding SparklineTests}" XValuePath="X" YValuePath="Y" Width="130" Height="65" ShowAxis="True" NegativeAreaBrush="Crimson"/>
-                            </tpf:SimplePanel>
-                        </tpf:Widget>
-                        <tpf:Widget Top="2" Left="0" VerticalContentAlignment="Stretch">
-                            <tpf:SimplePanel>
-                                <TextBlock Text="ColumnSparkline" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                                <tpf:ColumnSparkline ItemsSource="{Binding SparklineTests}" XValuePath="X" YValuePath="Y" Width="130" Height="65" ShowAxis="True" ColumnWidthFactor="0.8" ShowNegativePointIndicators="True"/>
-                            </tpf:SimplePanel>
-                        </tpf:Widget>
-                        <tpf:Widget Top="2" Left="1" VerticalContentAlignment="Stretch">
-                            <tpf:SimplePanel>
-                                <TextBlock Text="WinLossSparkline" HorizontalAlignment="Center" VerticalAlignment="Top"/>
-                                <tpf:WinLossSparkline ItemsSource="{Binding SparklineTests}" XValuePath="X" YValuePath="Y" Width="130" Height="65" ShowAxis="True" ColumnWidthFactor="0.8"/>
-                            </tpf:SimplePanel>
-                        </tpf:Widget>
-                        <tpf:Widget HorizontalSlots="2" VerticalSlots="2">
-                            <tpf:Calendar/>
-                        </tpf:Widget>
-                    </tpf:Dashboard>
+                    <views:DashboardView/>
                 </tpf:SimplePanel>
             </tpf:TabItem>
 
