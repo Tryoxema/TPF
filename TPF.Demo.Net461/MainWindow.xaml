@@ -138,43 +138,6 @@
                 </tpf:SimplePanel>
             </tpf:TabItem>
 
-            <tpf:TabItem Header="Notification">
-                <Grid Margin="5">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-
-                    <StackPanel Grid.Column="0">
-                        <Grid>
-                            <tpf:Shadow Background="White" ShadowDepth="Depth3"/>
-                            <StackPanel>
-                                <tpf:Notification Header="Info" Message="Eine Information" BadgeText="INFO">
-                                    <tpf:Notification.Buttons>
-                                        <Button Content="X"/>
-                                    </tpf:Notification.Buttons>
-                                </tpf:Notification>
-                                <tpf:Notification Header="Warnung" Message="Eine Warnung" BadgeText="WARN" AccentBrush="Orange">
-                                    <tpf:Notification.Buttons>
-                                        <Button Content="X"/>
-                                    </tpf:Notification.Buttons>
-                                </tpf:Notification>
-                                <tpf:Notification Header="Fehler" Message="Ein Fehler" BadgeText="ERR" AccentBrush="Crimson">
-                                    <tpf:Notification.Buttons>
-                                        <Button Content="X"/>
-                                    </tpf:Notification.Buttons>
-                                </tpf:Notification>
-                                <tpf:Notification Header="Verbindungsverlust" Message="Es wird versucht, die Verbindung wieder aufzubauen">
-                                    <tpf:Notification.AdditionalContentBottom>
-                                        <tpf:ProgressBar Style="{StaticResource BusyIndicatorProgressBarStyle}" IsIndeterminate="True" Height="5" Foreground="DodgerBlue" BorderBrush="Transparent"/>
-                                    </tpf:Notification.AdditionalContentBottom>
-                                </tpf:Notification>
-                            </StackPanel>
-                        </Grid>
-                    </StackPanel>
-                </Grid>
-            </tpf:TabItem>
-
             <tpf:TabItem Header="DragDrop">
                 <views:DragDropView/>
             </tpf:TabItem>

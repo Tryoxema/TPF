@@ -103,9 +103,6 @@
     <Compile Include="Windows\FluentWindow.xaml.cs">
       <DependentUpon>FluentWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Windows\GradiantsWindow.xaml.cs">
-      <DependentUpon>GradiantsWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Windows\SkinEditorWindow.xaml.cs">
       <DependentUpon>SkinEditorWindow.xaml</DependentUpon>
     </Compile>
@@ -117,7 +114,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Controls\LayoutGrid.cs" />
     <Compile Include="Controls\SearchManager.cs" />
     <Compile Include="Controls\SearchMetadataAttribute.cs" />
     <Compile Include="Controls\WindowFactory.cs" />
@@ -131,10 +127,6 @@
     <Page Include="Themes\Generic.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Images\Images.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Themes\SmoothStyles.xaml">
       <SubType>Designer</SubType>
@@ -208,10 +200,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Windows\GradiantsWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Windows\SkinEditorWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -248,9 +236,6 @@
       <Project>{a67e23b9-e95a-449c-be77-56498f4e37e3}</Project>
       <Name>TPF</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\noise.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Ablage\Changelog.txt" />

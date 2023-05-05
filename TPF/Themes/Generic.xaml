@@ -2130,7 +2130,7 @@
     <Style TargetType="calendar:CalendarView" BasedOn="{StaticResource TPF.CalendarViewStyle}"/>
     <!-- ========== Calendar ========== -->
     <Style TargetType="Button" x:Key="TPF.CalendarHeaderButtonStyle">
-        <Setter Property="Margin" Value="3"/>
+        <Setter Property="Margin" Value="4 4 4 3"/>
         <Setter Property="Cursor" Value="Hand"/>
         <Setter Property="MinHeight" Value="22"/>
         <Setter Property="IsTabStop" Value="False"/>
@@ -2416,7 +2416,7 @@
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
 
-                <Border Grid.Row="0" Grid.ColumnSpan="3" Margin="-1" Padding="{TemplateBinding HeaderPadding}" Background="{TemplateBinding HeaderBackground}" Visibility="{TemplateBinding HeaderVisibility}">
+                <Border Grid.Row="0" Grid.ColumnSpan="3" Margin="-1 -1 -1 -0" Padding="{TemplateBinding HeaderPadding}" Background="{TemplateBinding HeaderBackground}" Visibility="{TemplateBinding HeaderVisibility}">
                     <TextBlock Text="{TemplateBinding SelectedTimeString}" Foreground="{TemplateBinding HeaderForeground}" FontSize="16" HorizontalAlignment="Center"/>
                 </Border>
                 
@@ -2448,7 +2448,7 @@
                     <RowDefinition Height="Auto"/>
                 </Grid.RowDefinitions>
 
-                <Border Grid.Row="0" Margin="-1" Padding="{TemplateBinding HeaderPadding}" Background="{TemplateBinding HeaderBackground}" Visibility="{TemplateBinding HeaderVisibility}">
+                <Border Grid.Row="0" Margin="-1 -1 -1 -0" Padding="{TemplateBinding HeaderPadding}" Background="{TemplateBinding HeaderBackground}" Visibility="{TemplateBinding HeaderVisibility}">
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
                         <RadioButton x:Name="PART_HoursButton" Content="--" Foreground="{TemplateBinding HeaderForeground}" Style="{StaticResource TPF.ClockInputModeButtonStyle}"/>
                         <TextBlock Text=":" Foreground="{TemplateBinding HeaderForeground}" FontSize="16"/>
