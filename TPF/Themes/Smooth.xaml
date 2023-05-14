@@ -1387,6 +1387,8 @@
     <!-- ========== CalendarView ========== -->
     <!-- ========== Calendar ========== -->
 
+    <!-- ========== Clock ========== -->
+    
     <!-- ========== Calculator ========== -->
 
     <!-- ========== Notification ========== -->
@@ -1809,6 +1811,111 @@
         </Setter>
     </Style>
     <Style TargetType="tpf:NumericRangeBox" BasedOn="{StaticResource TPF.NumericRangeBoxStyle}"/>
+
+    <!-- ========== DateTimePicker ========== -->
+    <Style TargetType="tpf:DateTimePicker" x:Key="TPF.DateTimePickerStyle">
+        <Setter Property="Background" Value="{tpf:ResourceLink Key=InputBackgroundBrush}"/>
+        <Setter Property="Foreground" Value="{tpf:ResourceLink Key=TextBrush}"/>
+        <Setter Property="BorderBrush" Value="{tpf:ResourceLink Key=BorderBrush}"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="MinHeight" Value="20"/>
+        <Setter Property="Padding" Value="4 2"/>
+        <Setter Property="ParsingToolTipTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <Border Background="{tpf:ResourceLink Key=PrimaryBrush}" BorderBrush="{tpf:ResourceLink Key=BorderBrush}" BorderThickness="1" Padding="3" CornerRadius="4">
+                        <ContentControl Foreground="{tpf:ResourceLink Key=TextBrush}" Content="{Binding }"/>
+                    </Border>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="tpf:DateTimePicker">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Border x:Name="Background" Grid.ColumnSpan="2" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="{Binding RelativeSource={RelativeSource AncestorType=tpf:DateTimePicker}, Path=(tpf:BorderElement.CornerRadius)}"/>
+
+                        <tpf:WatermarkTextBox x:Name="PART_TextBox" Grid.Column="0" Foreground="{TemplateBinding Foreground}" Background="{x:Null}" BorderThickness="0" CaretBrush="{TemplateBinding Foreground}"
+                                              VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              Margin="{TemplateBinding BorderThickness}" Padding="{TemplateBinding Padding}" SelectionOnFocus="{TemplateBinding SelectionOnFocus}"
+                                              Watermark="{TemplateBinding Watermark}" WatermarkTemplate="{TemplateBinding WatermarkTemplate}" IsReadOnly="{TemplateBinding IsReadOnly}"
+                                              Text="{Binding DateTimeText, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
+                                              tpf:BorderElement.CornerRadius="{Binding RelativeSource={RelativeSource AncestorType=tpf:DateTimePicker}, Path=(tpf:BorderElement.CornerRadius), Converter={StaticResource CornerRadiusToSpecificCornerRadiusConverter}, ConverterParameter=#\,0\,0\,#}"/>
+
+                        <ToggleButton x:Name="DropDownButton" Grid.Column="1" BorderThickness="0" Margin="1" Background="Transparent" Visibility="{TemplateBinding DropDownButtonVisibility}"
+                                      IsChecked="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
+                                      tpf:BorderElement.CornerRadius="{Binding RelativeSource={RelativeSource AncestorType=tpf:DateTimePicker}, Path=(tpf:BorderElement.CornerRadius), Converter={StaticResource CornerRadiusToSpecificCornerRadiusConverter}, ConverterParameter=0\,#\,#\,0}">
+                            <Path x:Name="DropDownIcon" Data="{StaticResource CalendarGeometry}" Fill="{TemplateBinding Foreground}" Stretch="Uniform" Width="16" Height="16"/>
+                        </ToggleButton>
+
+                        <Popup IsOpen="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" StaysOpen="False" AllowsTransparency="True" PopupAnimation="Slide">
+                            <Border Background="{TemplateBinding Background}">
+                                <Grid>
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*"/>
+                                        <ColumnDefinition Width="*"/>
+                                    </Grid.ColumnDefinitions>
+
+                                    <tpf:Calendar x:Name="Calendar" Grid.Column="0" BorderThickness="1 1 0 1" Style="{TemplateBinding CalendarStyle}" DisplayMode="{TemplateBinding CalendarDisplayMode}"
+                                                  Culture="{TemplateBinding Culture}" SelectedDate="{Binding Date, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" SelectionMode="Single"
+                                                  DisplayDate="{Binding DisplayDate, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" DateSelectionMode="{TemplateBinding DateSelectionMode}"
+                                                  DisplayDateStart="{TemplateBinding DisplayDateStart}" DisplayDateEnd="{TemplateBinding DisplayDateEnd}"
+                                                  SelectableDateStart="{TemplateBinding SelectableDateStart}" SelectableDateEnd="{TemplateBinding SelectableDateEnd}"/>
+
+                                    <tpf:Clock x:Name="Clock" Grid.Column="1" Style="{TemplateBinding ClockStyle}" DisplayMode="{TemplateBinding ClockDisplayMode}" Is24Hours="{TemplateBinding IsClock24Hours}"
+                                               SelectedTime="{Binding Time, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"/>
+                                </Grid>
+                            </Border>
+                        </Popup>
+
+                        <Popup IsOpen="{Binding IsParsingToolTipOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" StaysOpen="False" AllowsTransparency="True" 
+                               Placement="Top" PlacementTarget="{Binding ElementName=Background}">
+                            <ContentPresenter Content="{TemplateBinding ParsingToolTip}" ContentTemplate="{TemplateBinding ParsingToolTipTemplate}"/>
+                        </Popup>
+                    </Grid>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="PART_TextBox" Property="Opacity" Value="{tpf:ResourceLink Key=DisabledOpacity}"/>
+                        </Trigger>
+                        <Trigger Property="IsReadOnly" Value="True">
+                            <Setter TargetName="DropDownButton" Property="IsEnabled" Value="False"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Background" Property="BorderBrush" Value="{tpf:ResourceLink Key=MouseOverAccentBrush}"/>
+                        </Trigger>
+                        <Trigger Property="IsKeyboardFocusWithin" Value="True">
+                            <Setter TargetName="Background" Property="BorderBrush" Value="{tpf:ResourceLink Key=MouseOverAccentBrush}"/>
+                        </Trigger>
+                        <Trigger Property="InputMode" Value="Date">
+                            <Setter TargetName="Calendar" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="Clock" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="DropDownIcon" Property="Data" Value="{StaticResource CalendarGeometry}"/>
+                        </Trigger>
+                        <Trigger Property="InputMode" Value="Time">
+                            <Setter TargetName="Calendar" Property="Visibility" Value="Collapsed"/>
+                            <Setter TargetName="Clock" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="DropDownIcon" Property="Data" Value="{StaticResource ClockGeometry}"/>
+                        </Trigger>
+                        <Trigger Property="InputMode" Value="DateTime">
+                            <Setter TargetName="Calendar" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="Clock" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="DropDownIcon" Property="Data" Value="{StaticResource CalendarGeometry}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="tpf:DateTimePicker" BasedOn="{StaticResource TPF.DateTimePickerStyle}"/>
 
     <!-- ========== ComboBox ========== -->
     <Style TargetType="ToggleButton" x:Key="TPF.ComboBoxToggleButtonStyle">

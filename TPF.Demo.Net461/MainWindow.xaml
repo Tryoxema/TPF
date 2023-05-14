@@ -71,7 +71,13 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        <tpf:Clock DisplayMode="List"/>
+                        <tpf:DateTimePicker VerticalAlignment="Center" Width="200" InputMode="DateTime" DateSelectionMode="Month" tpf:BorderElement.CornerRadius="4">
+                            <tpf:DateTimePicker.SpecialDays>
+                                <tpf:SpecialDay Name="Heute" DayDifferenceFromToday="0"/>
+                                <tpf:SpecialDay Name="Gestern" DayDifferenceFromToday="-1"/>
+                                <tpf:SpecialDay Name="Morgen" DayDifferenceFromToday="1"/>
+                            </tpf:DateTimePicker.SpecialDays>
+                        </tpf:DateTimePicker>
 
                         <tpf:Clock DisplayMode="Clock" Grid.Column="1"/>
                     </Grid>

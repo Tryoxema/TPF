@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace TPF.Controls
+namespace TPF.Controls.Specialized.DateTimePicker
 {
     public static class DateTimeParser
     {
@@ -55,12 +55,12 @@ namespace TPF.Controls
             return dateParsed && timeParsed;
         }
 
-        public static bool TryParseSpecialDay(string value, DateTime referenceDate, SpecialDayCollection specialDays, out DateTime result)
+        public static bool TryParseSpecialDay(string value, DateTime referenceDate, SpecialDaysCollection specialDays, out DateTime result)
         {
             return TryParseSpecialDay(value, referenceDate, specialDays, DateTimeFormatInfo.CurrentInfo, out result);
         }
 
-        public static bool TryParseSpecialDay(string value, DateTime referenceDate, SpecialDayCollection specialDays, DateTimeFormatInfo dateTimeFormat, out DateTime result)
+        public static bool TryParseSpecialDay(string value, DateTime referenceDate, SpecialDaysCollection specialDays, DateTimeFormatInfo dateTimeFormat, out DateTime result)
         {
             result = referenceDate;
 

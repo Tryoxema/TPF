@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 
-namespace TPF.Controls
+namespace TPF.Controls.Specialized.DateTimePicker
 {
     public class DateParser
     {
@@ -91,60 +91,63 @@ namespace TPF.Controls
             {
                 var parts = GetDateParts(value, dateTimeFormat, datePartOrderInfo);
 
-                int? year = null, month = null, day = null;
-
-                for (int i = 0; i < parts.Count; i++)
+                if (parts.Count > 0)
                 {
-                    var part = parts[i];
+                    int? year = null, month = null, day = null;
 
-                    var currentDatePart = DatePart.Year;
-
-                    switch (i)
+                    for (int i = 0; i < parts.Count; i++)
                     {
-                        case 0:
+                        var part = parts[i];
+
+                        var currentDatePart = DatePart.Year;
+
+                        switch (i)
                         {
-                            currentDatePart = datePartOrderInfo.FirstPart.GetValueOrDefault();
-                            break;
+                            case 0:
+                            {
+                                currentDatePart = datePartOrderInfo.FirstPart.GetValueOrDefault();
+                                break;
+                            }
+                            case 1:
+                            {
+                                currentDatePart = datePartOrderInfo.SecondPart.GetValueOrDefault();
+                                break;
+                            }
+                            case 2:
+                            {
+                                currentDatePart = datePartOrderInfo.LastPart.GetValueOrDefault();
+                                break;
+                            }
                         }
-                        case 1:
+
+                        switch (currentDatePart)
                         {
-                            currentDatePart = datePartOrderInfo.SecondPart.GetValueOrDefault();
-                            break;
-                        }
-                        case 2:
-                        {
-                            currentDatePart = datePartOrderInfo.LastPart.GetValueOrDefault();
-                            break;
+                            case DatePart.Year:
+                            {
+                                if (int.TryParse(part, out var number)) year = number;
+                                break;
+                            }
+                            case DatePart.Month:
+                            {
+                                if (int.TryParse(part, out var number)) month = number;
+                                break;
+                            }
+                            case DatePart.Day:
+                            {
+                                if (int.TryParse(part, out var number)) day = number;
+                                break;
+                            }
                         }
                     }
 
-                    switch (currentDatePart)
-                    {
-                        case DatePart.Year:
-                        {
-                            if (int.TryParse(part, out var number)) year = number;
-                            break;
-                        }
-                        case DatePart.Month:
-                        {
-                            if (int.TryParse(part, out var number)) month = number;
-                            break;
-                        }
-                        case DatePart.Day:
-                        {
-                            if (int.TryParse(part, out var number)) day = number;
-                            break;
-                        }
-                    }
+                    if (year == null) year = dateTimeFormat.Calendar.GetYear(referenceDate);
+                    if (month == null) month = dateTimeFormat.Calendar.GetMonth(referenceDate);
+                    if (day == null) day = dateTimeFormat.Calendar.GetDayOfMonth(referenceDate);
+
+                    successful = TryCreateDateTime(year.Value, month.Value, day.Value, dateTimeFormat, out result);
+
+                    if (!successful) result = referenceDate; 
                 }
-
-                if (year == null) year = dateTimeFormat.Calendar.GetYear(referenceDate);
-                if (month == null) month = dateTimeFormat.Calendar.GetMonth(referenceDate);
-                if (day == null) day = dateTimeFormat.Calendar.GetDayOfMonth(referenceDate);
-
-                successful = TryCreateDateTime(year.Value, month.Value, day.Value, dateTimeFormat, out result);
-
-                if (!successful) result = referenceDate;
             }
 
             result = MergeDateAndTime(result, referenceDate, dateTimeFormat);
@@ -213,12 +216,12 @@ namespace TPF.Controls
             return false;
         }
 
-        public static bool TryParseSpecialDay(string value, DateTime referenceDate, SpecialDayCollection specialDays, out DateTime result)
+        public static bool TryParseSpecialDay(string value, DateTime referenceDate, SpecialDaysCollection specialDays, out DateTime result)
         {
             return TryParseSpecialDay(value, referenceDate, specialDays, DateTimeFormatInfo.CurrentInfo, out result);
         }
 
-        public static bool TryParseSpecialDay(string value, DateTime referenceDate, SpecialDayCollection specialDays, DateTimeFormatInfo dateTimeFormat, out DateTime result)
+        public static bool TryParseSpecialDay(string value, DateTime referenceDate, SpecialDaysCollection specialDays, DateTimeFormatInfo dateTimeFormat, out DateTime result)
         {
             result = referenceDate;
 

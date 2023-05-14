@@ -65,9 +65,7 @@
 [ ] HubTile
 [X] DragDrop
 ---Datum/Kalender/Planung---
-[ ] DatePicker
-[ ] DateTimePicker
-[ ] TimePicker
+[X] DateTimePicker
 [X] Calendar
 [X] Clock
 [X] TaskBoard

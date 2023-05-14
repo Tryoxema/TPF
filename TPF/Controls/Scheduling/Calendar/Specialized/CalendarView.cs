@@ -150,7 +150,7 @@ namespace TPF.Controls.Specialized.Calendar
         {
             base.OnMouseLeftButtonUp(e);
 
-            Mouse.Capture(null);
+            if (Mouse.Captured is CalendarView) Mouse.Capture(null);
 
             if (ParentCalendar != null) ParentCalendar.FinishSelection();
         }

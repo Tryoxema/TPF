@@ -25,6 +25,26 @@
 	Über die Is24Hours-Property kann das Control zwischen der 24-Stunden Darstellung und der 12-Stunden Darstellung umschalten.
 	Wenn sich das Control im 12-Stunden-Modus befindet wird im Header der aktive Meridiem-Indikator angezeigt und es werden zwei Buttons eingeblendet, über die der Modus (AM/PM) umgeschaltet werden kann.
 	Die Darstellung der Buttons im Clock-Modus die die einzelnen Zeitpunkte darstellen werden über die MajorClockButtonStyle und MinorClockButtonStyle Properties gesteuert.
+--DateTimePicker
+	Das DateTimePicker-Control ist ein Eingabeelement für die Eingabe und das Bearbeiten eines DateTime-Werts.
+	Das Control besitzt mehrere Eingabemodi die über die InputMode-Property gesteuert werden.
+	Zur Verfügung stehen Date, wo man nur ein Datum eingibt, Time, wo man nur eine Uhrzeit eingibt und DateTime, wo man Datum und Uhrzeit eingeben kann.
+	Das Ändern der InputMode-Property ändert auch das Icon des DropDownButtons und welche Controls im DropDown-Bereich angezeigt werden.
+	Der volle Wert wird in der Value-Property gespeichert und zusätzlich gibt es noch die Date-Property und die Time-Property, in denen die einzelnen Teile stehen.
+	In der DateTimeText-Property steht der aktuelle Wert aus der Value-Property als string formatiert, entweder nach Standardformat oder nach dem Format was in der DateTimeFormatInfo der Culture-Property steht.
+	Wenn sich die Value-Property ändert wird das ValueChanged-Event ausgelöst und sollte sich der Text ändern, wird das ParseValue-Event ausgelöst.
+	Durch Eingabe eines Texts in der TextBox wird der Parsing-Prozess ausgelöst, der zuerst versucht den Text mit den eingebauten Parsern einzulesen und danach noch über das ParseValue-Event.
+	Wenn die ShowParsingToolTip-Property auf true ist, wird wärend des Parsing-Prozesses ein ToolTip über der TextBox angezeigt, der das Ergebnis des Parsings anzeigt.
+	Falls der Parsing-Prozess nicht erfolgreich war, wird der Wert aus der ParsingErrorToolTip-Property angezeigt, an sonsten wird der geparste Wert angezeigt.
+	Die Darstellung des ToolTips kann man komplett über die ParsingToolTipTemplate-Property kontrollieren.
+	Neben den üblichen Formaten unterstützen der DateParser und der DateTimeParser auch noch das Parsen von Wochentagen oder selbst definierten Sonderwerten.
+	Für das Parsen von Wochentagen kann über die DayOfWeekBehavior-Property kontrolliert werden, ob der Wochentag in der aktuellen Woche liegt oder das nächste vorkommen dieses Tages ist.
+	Die selbst definierten Sonderwerte werden über die SpecialDays-Property verwaltet und bestehen aus einem Namen und einer Anzahl an Tagen die der Wert sich vom aktuellen Tag unterscheidet.
+	Über die Properties DisplayDateStart, DisplayDateEnd, SelectableDateStart und SelectableDateEnd können die angezeigten und auswählbaren Tage im Kalender angepasst werden.
+	Zusätzlich kann über die DateSelectionMode-Property angepasst werden, ob im Kalender ein Tag, ein Monat oder ein Jahr ausgewählt wird.
+	Das Clock-Control kann mit den Properties ClockDisplayMode und IsClock24Hours in seiner Darstellung auch konfiguriert werden.
+	Für beide Controls im DropDown-Bereich gibt es eine Style-Property, um alle weiteren Aspekte konfigurieren zu können, die nicht im Standard zur verfügung stehen.
+	Des weiteren gibt es die Möglichkeit über die Watermark-Property ein Wasserzeichen in der TextBox darzustellen und über die DropDownButtonVisibility-Property den Button auszublenden.
 
 -Veränderte sonstige Klassen
 --DropInfo

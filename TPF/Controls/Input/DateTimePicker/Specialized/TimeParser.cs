@@ -3,7 +3,7 @@ using System.Text;
 using System.Globalization;
 using System.Collections.Generic;
 
-namespace TPF.Controls
+namespace TPF.Controls.Specialized.DateTimePicker
 {
     public static class TimeParser
     {

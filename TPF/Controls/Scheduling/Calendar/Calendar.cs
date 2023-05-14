@@ -1538,7 +1538,7 @@ namespace TPF.Controls
             ChangeActiveViews();
         }
 
-        private void ChangeActiveViews(DateTime? displayDate = null)
+        internal void ChangeActiveViews(DateTime? displayDate = null)
         {
             switch (DisplayMode)
             {
