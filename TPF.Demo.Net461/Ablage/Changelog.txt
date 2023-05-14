@@ -1,4 +1,4 @@
-﻿--- 0.6.5 ---
+﻿--- 0.6.6 ---
 -Veränderte Controls
 --NumericRangeBox
 	Das Template des Controls wurde überarbeitet, da die neue Property ShowButtons hinzugefügt wurde.

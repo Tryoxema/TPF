@@ -8,41 +8,93 @@
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid>
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
 
-        <Label Content="ProgressBar" Foreground="{tpf:ResourceLink Key=TextBrush}" HorizontalAlignment="Center"/>
-
-        <Grid Grid.Row="1">
+        <Grid Grid.Column="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <Label Content="Determinate" Foreground="{tpf:ResourceLink Key=TextBrush}" Grid.Row="0" Margin="0 0 0 5"/>
-            <tpf:ProgressBar Progress="{Binding Progress}" Grid.Row="1" Width="400" HorizontalAlignment="Left" Margin="5 0 0 5"/>
+            <Label Content="ProgressBar" Foreground="{tpf:ResourceLink Key=TextBrush}" HorizontalAlignment="Center"/>
 
-            <Label Content="Indeterminate" Foreground="{tpf:ResourceLink Key=TextBrush}" Grid.Row="2" Margin="0 0 0 5"/>
-            <tpf:ProgressBar Grid.Row="3" Width="400" HorizontalAlignment="Left" Margin="5 0 0 5" IsIndeterminate="True"/>
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
 
-            <Label Content="Secondary Progress" Foreground="{tpf:ResourceLink Key=TextBrush}" Grid.Row="4" Margin="0 0 0 5"/>
-            <tpf:ProgressBar Progress="{Binding Progress}" SecondaryProgress="{Binding SecondaryProgress}" Grid.Row="5" Width="400" HorizontalAlignment="Left" Margin="5 0 0 5"/>
+                <Label Content="Determinate" Foreground="{tpf:ResourceLink Key=TextBrush}" Grid.Row="0" Margin="0 0 0 5"/>
+                <tpf:ProgressBar Progress="{Binding Progress}" Grid.Row="1" Width="400" HorizontalAlignment="Left" Margin="5 0 0 5"/>
 
-            <Label Content="Segments" Foreground="{tpf:ResourceLink Key=TextBrush}" Grid.Row="6" Margin="0 0 0 5"/>
-            <tpf:ProgressBar Progress="{Binding Progress}" SecondaryProgress="{Binding SecondaryProgress}" Grid.Row="7" SegmentCount="4" Width="400" HorizontalAlignment="Left" Margin="5 0 0 5"/>
+                <Label Content="Indeterminate" Foreground="{tpf:ResourceLink Key=TextBrush}" Grid.Row="2" Margin="0 0 0 5"/>
+                <tpf:ProgressBar Grid.Row="3" Width="400" HorizontalAlignment="Left" Margin="5 0 0 5" IsIndeterminate="True"/>
 
-            <Label Content="CornerRadius" Foreground="{tpf:ResourceLink Key=TextBrush}" Grid.Row="8" Margin="0 0 0 5"/>
-            <tpf:ProgressBar Progress="{Binding Progress}" SecondaryProgress="{Binding SecondaryProgress}" Grid.Row="9" SegmentCount="4" CornerRadius="4" Width="400" HorizontalAlignment="Left" Margin="5 0 0 5"/>
+                <Label Content="Secondary Progress" Foreground="{tpf:ResourceLink Key=TextBrush}" Grid.Row="4" Margin="0 0 0 5"/>
+                <tpf:ProgressBar Progress="{Binding Progress}" SecondaryProgress="{Binding SecondaryProgress}" Grid.Row="5" Width="400" HorizontalAlignment="Left" Margin="5 0 0 5"/>
+
+                <Label Content="Segments" Foreground="{tpf:ResourceLink Key=TextBrush}" Grid.Row="6" Margin="0 0 0 5"/>
+                <tpf:ProgressBar Progress="{Binding Progress}" SecondaryProgress="{Binding SecondaryProgress}" Grid.Row="7" SegmentCount="4" Width="400" HorizontalAlignment="Left" Margin="5 0 0 5"/>
+
+                <Label Content="CornerRadius" Foreground="{tpf:ResourceLink Key=TextBrush}" Grid.Row="8" Margin="0 0 0 5"/>
+                <tpf:ProgressBar Progress="{Binding Progress}" SecondaryProgress="{Binding SecondaryProgress}" Grid.Row="9" SegmentCount="4" CornerRadius="4" Width="400" HorizontalAlignment="Left" Margin="5 0 0 5"/>
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <Label Content="RadialProgressBar" Foreground="{tpf:ResourceLink Key=TextBrush}" HorizontalAlignment="Center"/>
+
+            <Grid Grid.Row="1">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <Label Content="Determinate" Foreground="{tpf:ResourceLink Key=TextBrush}" Grid.Row="0" Margin="0 0 0 5"/>
+                <StackPanel Orientation="Horizontal" Grid.Row="1" HorizontalAlignment="Left" Margin="5 0 0 5">
+                    <tpf:RadialProgressBar Progress="{Binding Progress}" Height="80" Width="80"/>
+                    <tpf:RadialProgressBar Progress="{Binding Progress}" SecondaryProgress="{Binding SecondaryProgress}" Height="80" Width="80" Margin="20 0 0 0"/>
+                </StackPanel>
+
+                <Label Content="Indeterminate" Foreground="{tpf:ResourceLink Key=TextBrush}" Grid.Row="2" Margin="0 0 0 5"/>
+                <tpf:RadialProgressBar Grid.Row="3" Height="80" Width="80" HorizontalAlignment="Left" Margin="5 0 0 5" IsIndeterminate="True"/>
+
+                <Label Content="Custom Angle" Foreground="{tpf:ResourceLink Key=TextBrush}" Grid.Row="4" Margin="0 0 0 5"/>
+                <StackPanel Orientation="Horizontal" Grid.Row="5" HorizontalAlignment="Left" Margin="5 0 0 5">
+                    <tpf:RadialProgressBar Progress="{Binding Progress}" StartAngle="45" EndAngle="315" Height="80" Width="80"/>
+                    <tpf:RadialProgressBar Progress="{Binding Progress}" StartAngle="90" EndAngle="270" Height="80" Width="80" Margin="20 0 0 0"/>
+                    <tpf:RadialProgressBar Progress="{Binding Progress}" StartAngle="180" EndAngle="360" Height="80" Width="80" Margin="20 0 0 0"/>
+                </StackPanel>
+
+                <Label Content="Custom Radius" Foreground="{tpf:ResourceLink Key=TextBrush}" Grid.Row="6" Margin="0 0 0 5"/>
+                <StackPanel Orientation="Horizontal" Grid.Row="7" HorizontalAlignment="Left" Margin="5 0 0 5">
+                    <tpf:RadialProgressBar Progress="{Binding Progress}" TrackOuterRadius="0.9" TrackInnerRadius="0" Height="80" Width="80"/>
+                    <tpf:RadialProgressBar Progress="{Binding Progress}" IndicatorInnerRadius="0" Height="80" Width="80" Margin="20 0 0 0"/>
+                    <tpf:RadialProgressBar Progress="{Binding Progress}" IndicatorInnerRadius="0.6" TrackOuterRadius="0.9" TrackInnerRadius="0.7" Height="80" Width="80" Margin="20 0 0 0"/>
+                </StackPanel>
+            </Grid>
         </Grid>
     </Grid>
 </UserControl>

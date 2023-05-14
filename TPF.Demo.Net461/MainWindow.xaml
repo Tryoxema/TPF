@@ -71,7 +71,7 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        <tpf:DateTimePicker VerticalAlignment="Center" Width="200" InputMode="DateTime" DateSelectionMode="Month" tpf:BorderElement.CornerRadius="4">
+                        <tpf:DateTimePicker VerticalAlignment="Center" Width="200">
                             <tpf:DateTimePicker.SpecialDays>
                                 <tpf:SpecialDay Name="Heute" DayDifferenceFromToday="0"/>
                                 <tpf:SpecialDay Name="Gestern" DayDifferenceFromToday="-1"/>
@@ -126,9 +126,6 @@
                         </tpf:HamburgerMenuItem>
                         <tpf:HamburgerMenuItem Label="ProgressBar" Icon="{StaticResource ProgressBarGlyph}" IconTemplate="{StaticResource IconTemplate}">
                             <views:ProgressBarView/>
-                        </tpf:HamburgerMenuItem>
-                        <tpf:HamburgerMenuItem Label="RadialProgressBar" Icon="{StaticResource ProgressBarGlyph}" IconTemplate="{StaticResource IconTemplate}">
-                            <views:RadialProgressBarView/>
                         </tpf:HamburgerMenuItem>
                     </tpf:HamburgerMenu>
                 </Grid>
