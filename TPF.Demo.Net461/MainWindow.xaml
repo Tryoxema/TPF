@@ -179,7 +179,7 @@
             <StatusBarItem>
                 <StackPanel Orientation="Horizontal">
                     <tpf:Shield Label="Dev" Content="0.6.6" Margin="0 0 5 0" tpf:Poptip.Content="Aktuelle Entwicklungs-Version"/>
-                    <tpf:Shield Label="Release" Content="0.6.5" Margin="0 0 5 0" tpf:Poptip.Content="Aktuelle Release-Version"/>
+                    <tpf:Shield Label="Release" Content="0.6.6" Margin="0 0 5 0" tpf:Poptip.Content="Aktuelle Release-Version"/>
                     <tpf:Shield Label="Skins" Content="4" Background="Orange">
                         <tpf:Poptip.Instance>
                             <tpf:Poptip Placement="BottomLeft" Offset="0">

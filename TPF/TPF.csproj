@@ -11,6 +11,7 @@
     <FileVersion>0.6.6.0</FileVersion>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Copyright>Copyright 2023 Tim Czerwonka</Copyright>
+    <RepositoryUrl>https://github.com/Tryoxema/TPF</RepositoryUrl>
   </PropertyGroup>
 
   <ItemGroup>
