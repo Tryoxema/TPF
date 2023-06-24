@@ -1,4 +1,16 @@
 ﻿--- 0.6.7 ---
+-Neue Controls
+--Banner
+	Das Banner-Control ist ein ContentControl das dafür gedacht ist, um seinen Content animiert über den Bildschirm zu bewegen.
+	Für die Bewegung stehen 4 Optionen zur Auswahl: LeftToRight, RightToLeft, TopToBottom, BottomToTop.
+	Die Richtung wird über die Direction-Property vom Banner-Control gesteuert.
+	Ob die Animation gerade ausgeführt werden soll oder nicht, steuert man über die IsRunning-Property.
+	Des weiteren kann man über die AutoReverse-Property einstellen, ob die Animation nach durchlaufen auch noch einmal Rückwärts abgespielt werden soll oder nicht.
+	Über die Properties Speed oder Duration steuert man die Geschwindigkeit der Animation.
+	Duration ist eine Feste Zeit vom Typ TimeSpan und Speed steht für die Anzahl an Pixel pro Sekunde, die sich der Content bewegt.
+	Zwischen den einzelnen Durchläufen kann man zusätzlich über die RepeatDelay-Property konfigurieren, ob und wie lange zwischen den einzelnen Durchläufen Pause gemacht werden soll.
+	Nach jedem kompletten Durchlauf der Animation wird das RunCompleted-Event ausgelöst und die Animation danach neu gestartet.
+
 -Veränderte Controls
 --Shadow
 	Dem Shadow-Element wurde ein weiterer Effekt hinzugefügt, der jetzt im Falle von ShadowDepth = Depth0 genutzt wird.

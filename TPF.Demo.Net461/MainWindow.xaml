@@ -71,15 +71,9 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        <tpf:DateTimePicker VerticalAlignment="Center" Width="200">
-                            <tpf:DateTimePicker.SpecialDays>
-                                <tpf:SpecialDay Name="Heute" DayDifferenceFromToday="0"/>
-                                <tpf:SpecialDay Name="Gestern" DayDifferenceFromToday="-1"/>
-                                <tpf:SpecialDay Name="Morgen" DayDifferenceFromToday="1"/>
-                            </tpf:DateTimePicker.SpecialDays>
-                        </tpf:DateTimePicker>
-
-                        <tpf:Clock DisplayMode="Clock" Grid.Column="1"/>
+                        <tpf:Banner Grid.Column="0" Height="30" Margin="10 0" BorderThickness="1" CornerRadius="4" IsRunning="True" Direction="RightToLeft" Speed="100">
+                            <TextBlock Text="Das Banner ist ein Control zum animieren von Content der in eine bestimmte Richtung läuft" VerticalAlignment="Center"/>
+                        </tpf:Banner>
                     </Grid>
                 </Grid>
             </tpf:TabItem>

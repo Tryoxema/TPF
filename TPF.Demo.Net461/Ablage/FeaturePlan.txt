@@ -102,5 +102,5 @@
 [X] Shield
 [ ] SplashScreen
 [ ] Screenshot
-[ ] Banner
+[X] Banner
 [ ] Comparer
