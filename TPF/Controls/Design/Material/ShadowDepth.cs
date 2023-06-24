@@ -2,11 +2,12 @@
 {
     public enum ShadowDepth
     {
-        Depth0,
-        Depth1,
-        Depth2,
-        Depth3,
-        Depth4,
-        Depth5
+        Depth0 = 0,
+        Depth1 = 1,
+        Depth2 = 2,
+        Depth3 = 3,
+        Depth4 = 4,
+        Depth5 = 5,
+        None = -1
     }
 }

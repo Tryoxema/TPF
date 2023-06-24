@@ -9,7 +9,7 @@ namespace TPF.Controls
         public static readonly DependencyProperty ShadowDepthProperty = DependencyProperty.RegisterAttached("ShadowDepth",
             typeof(ShadowDepth),
             typeof(ShadowElement),
-            new PropertyMetadata(ShadowDepth.Depth0));
+            new PropertyMetadata(ShadowDepth.None));
 
         public static ShadowDepth GetShadowDepth(DependencyObject element)
         {

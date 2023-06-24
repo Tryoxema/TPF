@@ -101,3 +101,6 @@
 ---Misc---
 [X] Shield
 [ ] SplashScreen
+[ ] Screenshot
+[ ] Banner
+[ ] Comparer

@@ -1,4 +1,13 @@
-﻿--- 0.6.6 ---
+﻿--- 0.6.7 ---
+-Veränderte Controls
+--Shadow
+	Dem Shadow-Element wurde ein weiterer Effekt hinzugefügt, der jetzt im Falle von ShadowDepth = Depth0 genutzt wird.
+	Dem enum für ShadowDepth wurde der Wert None hinzugefügt, der jetzt auch den neuen Standardwert der ShadowDepth-Property darstellt.
+--Card
+	Dem Card-Control wurden die Properties ShadowDepth und Darken vom Shadow-Control hinzugefügt, damit das Aussehen des Card-Controls einfacher Konfiguriert werden kann.
+	Zusätzlich wurde die DarkenOnMouseOver-Property hinzugefügt, über die man nun steuern kann, ob der Schatten des Controls dunkler werden soll oder nicht beim MouseOver.
+
+--- 0.6.6 ---
 -Veränderte Controls
 --NumericRangeBox
 	Das Template des Controls wurde überarbeitet, da die neue Property ShowButtons hinzugefügt wurde.

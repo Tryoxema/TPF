@@ -1127,7 +1127,7 @@
     <!--TPF Controls-->
     <!-- ========== Shadow ========== -->
     <Style TargetType="tpf:Shadow" x:Key="TPF.ShadowStyle">
-        <Setter Property="ShadowDepth" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(tpf:ShadowElement.ShadowDepth), Mode=OneWay, FallbackValue=Depth0}"/>
+        <Setter Property="ShadowDepth" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(tpf:ShadowElement.ShadowDepth), Mode=OneWay, FallbackValue=None}"/>
         <Setter Property="Focusable" Value="False"/>
         <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
@@ -1466,22 +1466,25 @@
         <Setter Property="BorderBrush" Value="{tpf:ResourceLink Key=BorderBrush}"/>
         <Setter Property="Foreground" Value="{tpf:ResourceLink Key=TextBrush}"/>
         <Setter Property="BorderThickness" Value="0"/>
-        <Setter Property="tpf:ShadowElement.ShadowDepth" Value="Depth2"/>
+        <Setter Property="ShadowDepth" Value="Depth0"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="tpf:Card">
                     <tpf:SimplePanel>
-                        <tpf:Shadow ShadowDepth="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(tpf:ShadowElement.ShadowDepth)}"
-                                    Darken="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(tpf:ShadowElement.Darken)}"
+                        <tpf:Shadow ShadowDepth="{TemplateBinding ShadowDepth}" Darken="{TemplateBinding Darken}"
                                     Background="{TemplateBinding Background}" CornerRadius="{TemplateBinding CornerRadius}"/>
                         <tpf:ClipBorder BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" CornerRadius="{TemplateBinding CornerRadius}">
                             <ContentPresenter/>
                         </tpf:ClipBorder>
                     </tpf:SimplePanel>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="tpf:ShadowElement.Darken" Value="True"/>
-                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsMouseOver" Value="True"/>
+                                <Condition Property="DarkenOnMouseOver" Value="True"/>
+                            </MultiTrigger.Conditions>
+                            <Setter Property="Darken" Value="True"/>
+                        </MultiTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>

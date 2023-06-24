@@ -20,7 +20,7 @@ namespace TPF.Controls
         public static readonly DependencyProperty ShadowDepthProperty = DependencyProperty.Register("ShadowDepth",
             typeof(ShadowDepth),
             typeof(Shadow),
-            new FrameworkPropertyMetadata(ShadowDepth.Depth0, FrameworkPropertyMetadataOptions.AffectsRender, OnShadowDepthChanged));
+            new FrameworkPropertyMetadata(ShadowDepth.None, FrameworkPropertyMetadataOptions.AffectsRender, OnShadowDepthChanged));
 
         private static void OnShadowDepthChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
@@ -28,6 +28,7 @@ namespace TPF.Controls
 
             switch (instance.ShadowDepth)
             {
+                case ShadowDepth.Depth0:
                 case ShadowDepth.Depth1:
                 case ShadowDepth.Depth2:
                 case ShadowDepth.Depth3:
@@ -40,7 +41,7 @@ namespace TPF.Controls
                     instance.Effect = effect.Clone();
                 }
                 break;
-                case ShadowDepth.Depth0:
+                case ShadowDepth.None:
                 default: instance.Effect = null; break;
             }
         }
@@ -111,6 +112,16 @@ namespace TPF.Controls
         {
             var color = (Color)ColorConverter.ConvertFromString("#AA000000");
 
+            var depth0Effect = new DropShadowEffect()
+            {
+                BlurRadius = 2,
+                ShadowDepth = 0,
+                Direction = 270,
+                Opacity = _defaultOpacity,
+                RenderingBias = RenderingBias.Performance,
+                Color = color
+            };
+
             var depth1Effect = new DropShadowEffect()
             {
                 BlurRadius = 5,
@@ -162,12 +173,14 @@ namespace TPF.Controls
             };
 
             // Die Vorlagen können alle eingefroren werden, da sie nie bearbeitet werden sollten
+            depth0Effect.Freeze();
             depth1Effect.Freeze();
             depth2Effect.Freeze();
             depth3Effect.Freeze();
             depth4Effect.Freeze();
             depth5Effect.Freeze();
 
+            Shadows.Add(ShadowDepth.Depth0, depth0Effect);
             Shadows.Add(ShadowDepth.Depth1, depth1Effect);
             Shadows.Add(ShadowDepth.Depth2, depth2Effect);
             Shadows.Add(ShadowDepth.Depth3, depth3Effect);
