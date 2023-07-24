@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls.Primitives;
 
 namespace TPF.Controls
@@ -62,6 +63,8 @@ namespace TPF.Controls
             }
 
             newValue = ParentSlider.SnapToTick(newValue);
+
+            newValue = Math.Max(ParentSlider.Minimum, Math.Min(ParentSlider.Maximum, newValue));
 
             Value = newValue;
         }
