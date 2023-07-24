@@ -1,4 +1,4 @@
-﻿--- 0.6.7 ---
+﻿===== 0.6.7 =====
 -Neue Controls
 --Banner
 	Das Banner-Control ist ein ContentControl das dafür gedacht ist, um seinen Content animiert über den Bildschirm zu bewegen.
@@ -18,8 +18,38 @@
 --Card
 	Dem Card-Control wurden die Properties ShadowDepth und Darken vom Shadow-Control hinzugefügt, damit das Aussehen des Card-Controls einfacher Konfiguriert werden kann.
 	Zusätzlich wurde die DarkenOnMouseOver-Property hinzugefügt, über die man nun steuern kann, ob der Schatten des Controls dunkler werden soll oder nicht beim MouseOver.
+--Slider
+	Das Slider-Control hat ein umfangreiches Rework bekommen, um den Feature-Umfang und die Konfigurierbarkeit deutlich zu erhöhen und es vielseitiger einsetzbar zu machen.
+	Um die Darstellung des Sliders einfacher anpassen zu können wurden die neuen Properties TrackBrush und TrackCornerRadius eingefügt.
+	Über diese Properties können die Farbe des Tracks gesetzt werden und seine Ecken abgerundet werden.
+	Wenn die ActiveTrackBrush-Property gesetzt wird erscheint im Single-Modus des Sliders der Bereich zwischen Minimum und Value in dem entsprechenden Brush.
+	Die Ticks-Funktion des Sliders wurde komplett überarbeitet, um auch hier mehr Features zu haben und mehr Kontrolle über die Darstellung der Ticks.
+	Die UseNumbersAsTicks-Property wurde im Zuge des Reworks der Slider-Ticks entfernt, da diese Funktionalität jetzt anders abgebildet wird.
+	Den Ticks des Sliders wurden MinorTicks hinzugefügt, die nur die Hälfte der Größe der normalen Ticks haben.
+	Diese neuen Ticks werden über die MinorTickFrequency-Property gesteuert über die man angibt, wie viele MinorTicks zwischen den normalen Ticks generiert werden sollen.
+	Zusätzlich besitzen Ticks nun 2 Zustände: Aktiv und Inaktiv.
+	Ein Tick ist Aktiv, wenn er je nach Modus des Sliders unter den Wert oder in den geltenden Wertebereich fällt.
+	Um die Aktiven von den Inaktiven Ticks unterscheiden zu können wurden 4 neue Brush-Properties hinzugefügt: TickBrush, MinorTickBrush, ActiveTickBrush und ActiveMinorTickBrush.
+	Der TickBrush ist der Standardbrush für alle Ticks und Fallback-Wert, sollten entsprechende spezielle Brushes nicht angegeben sein.
+	MinorTickBrush ist entsprechend der normale Brush für alle MinorTicks und ebenfalls Fallback-Wert für aktive MinorTicks, sofern der ActiveMinorTickBrush nicht angegeben wurde.
+	ActiveTickBrush und ActiveMinorTickBrush sind entsprechend die Brushes die für aktive Ticks verwendet werden, wobei ActiveTickBrush ebenfalls der Fallback-Wert ist, falls ActiveMinorTickBrush fehlt.
+	Zusätzlich zu den neuen Tick-Zuständen wurden die Properties LabelPlacement und LabelTextSelector hinzugefügt, um die alte UseNumbersAsTicks-Funktion abzulösen.
+	LabelPlacement funktioniert exakt so wie TickPlacement, nur eben für die neuen Wertelabel, die an jedem großen Tick generiert werden.
+	Der LabelTextSelector bestimmt hierbei, welcher Text an den einzelnen Punkten angezeigt werden soll.
+	Wird kein eigener LabelTextSelector zur verfügung gestellt, gilt das Standardverhalten und als LabelText wird der entsprechende Wert angezeigt.
+	Die größte Erweiterung an Features betrifft die Hauptfunktion des Sliders, das Festlegen des Wertes.
+	Hier gibt es nun die neue Property ThumbMode mit den Optionen Single, Range und Custom.
+	Der Modus Single ist das bisherige verhalten des Sliders, mit nur einem Thumb (der jetzt vom Typen SliderThumb ist statt ein normaler Thumb) und dem entsprechenden Wert in der Value-Property.
+	Zusätzlich kann im Modus Single über die Property HandlesMouseWheel gesteuert werden, ob der Wert des Sliders auch über das Mausrad verändert werden kann.
+	Im Modus Range wird anstatt des einzelnen Thumbs nun ein RangeSliderThumb angezeigt, der aus drei einzelnen Teilen besteht.
+	In dem Modus werden die Werte in den Properties RangeStart und RangeEnd gespeichert, wobei die entsprechenden Thumbs des RangeSliderThumbs an die passenden Werte gebunden sind.
+	Mit dem mittleren Teil des RangeSliderThumbs lässt sich der Wertebereich als ganzes verschieben, statt nur einen der beiden Werte zu verändern.
+	Über die Properties MinimumRangeSpan und MaximumRangeSpan kann eine Mindestspanne und eine Maximalspanne für den Wertebereich festgelegt werden.
+	Im dritten Modus Custom werden die normalen Funktionen des Sliders deaktiviert und stattdessen werden alle Thumbs angezeigt, die sich in der neuen Collection der Thumbs-Property befinden.
+	In diese Collection können beliebig viele SliderThumbs und RangeSliderThumbs hinzugefügt werden wie man braucht.
+	Die Thumbs haben ihre Werte alle in sich selbst gespeichert und die Properties Value, RangeStart, RangeEnd, MinimumRangeSpan und MaximumRangeSpan des Sliders werden nicht genutzt.
 
---- 0.6.6 ---
+===== 0.6.6 =====
 -Veränderte Controls
 --NumericRangeBox
 	Das Template des Controls wurde überarbeitet, da die neue Property ShowButtons hinzugefügt wurde.
@@ -76,7 +106,7 @@
 	Die zweite Methode ist DoScrolling, in der der tatsächliche Scroll-Vorgang durchgeführt wird.
 	Beide Methoden sind als virtual markiert und können überschrieben werden, um ihre Verhaltensweise selber steuern zu können.
 
---- 0.6.5 ---
+===== 0.6.5 =====
 -Veränderte Controls
 --SparklineBase
 	Die Basisklasse der Sparkline-Controls wurde um diverse Properties erweitert, um Indikatoren an den einzelnen Datenpunkten darzustellen.
@@ -122,7 +152,7 @@
 	Das Theme lässt sich über die Datei Smooth.xaml einbinden, anstatt wie normal Generic.xaml.
 	ACHTUNG: Aktuell sind noch nicht alle Controls im neuen Theme unterstützt.
 
---- 0.6.4 ---
+===== 0.6.4 =====
 -Neue Controls
 --DataAxis
 	Das DataAxis-Control ist ein Element, welches als Unterstützung für das StackedDataBar-Control entwickelt wurde.
@@ -168,7 +198,7 @@
 --SkinBase
 	SkinBase stellt nun die Methode BrushFromString zur verfügung, die einen SolidColorBrush aus einem string der eine Farbe darstellt generiert wird
 
---- 0.6.3 ---
+===== 0.6.3 =====
 -Neue Controls
 --Dashboard
 	Das Dashboard ist ein ItemsControl welches als ItemContainer die neue Widget-Klasse verwendet.
@@ -252,7 +282,7 @@
 	Es wurden neue Styles für Standard WPF Controls eingefügt.
 	Bei diesen Controls handelt es sich um Label und Expander
 
---- 0.6.2 ---
+===== 0.6.2 =====
 -Veränderte Controls
 --TaskBoard
 	Das TaskBoard hat eine umfangreiche Überarbeitung erhalten um das gesamte Control zu verbessern und mehr Features zu ermöglichen.
@@ -308,7 +338,7 @@
 	Falls ein Parameter doppelt angegeben wird, ignoriert der MathParser alle doppelten Werte. 
 	Alle Parameter die in der Formel angegeben sind und nicht an die Funktion übergeben werden, lösen Fehler aus.
 
---- 0.6.1 ---
+===== 0.6.1 =====
 -Neue Controls
 --HighlightingTextBlock
 	Der HighlightingTextBlock ist ein Control was eine Version des normalen TextBlocks darstellt, die um eine Highlighting-Funktion erweitert wurde.
@@ -364,7 +394,7 @@
 	Es wurden neue Styles für Standard WPF Controls eingefügt.
 	Bei diesen Controls handelt es sich um ScrollBar, ScrollViewer, GroupBox, PasswordBox, GridSplitter und RepeatButton
 
---- 0.6.0 ---
+===== 0.6.0 =====
 -Neue Controls
 --DialogHost
 	Der DialogHost ist ein ContentControl mit dem Zweck, über dem enthaltenen Content ein Dialog-Fenster anzeigen zu können.
@@ -420,7 +450,7 @@
 	Über diese neue Klasse ist es möglich Content, ContentTemplate, Foreground und Background für einen bestimmten Button getrennt von den für alle Buttons geltenden Properties festzulegen.
 	Hierbei werden nur die Werte überschrieben die auch in dem Configuration-Objekt gesetzt wurden.
 
---- 0.5.5 ---
+===== 0.5.5 =====
 -Neue Controls
 --ProgressButton
 	Der ProgressButton ist eine erweiterte Implementierung des Buttons, wodurch die Funktionen eines Buttons und die einer ProgressBar in einem Element vereint wurden.
@@ -441,7 +471,7 @@
 	Separator ist ein Element, welches als einfacher Trennstrich in der Struktur zum organisieren dient.
 	Item ist das klassische HamburgerMenuItem, welches Content besitzen kann, der im Content-Bereich des HamburgerMenu-Controls angezeigt wird und nun ebenfalls Sub-Items.
 
---- 0.5.4 ---
+===== 0.5.4 =====
 -Neue Controls
 --ToggleSwitchButton
 	Der ToggleSwitchButton ist eine erweiterte Implemetierung des ToggleButtons, um ein Schalter-ähnliches Verhalten für einen ToggleButton zu liefern, 
@@ -474,7 +504,7 @@
 --.Net5-Support
 	Ab Version 0.5.4 ist TPF nun für .Net Framework 4.6.1 sowie für .Net 5 verfügbar
 
---- 0.5.3 ---
+===== 0.5.3 =====
 -Neue Controls
 --Calculator
 	Der Calculator ist ein simples Taschenrechner-Control, was alle Grundfunktionen eines klassischen Taschenrechners besitzt.
@@ -503,7 +533,7 @@
 --DragDropHelper
 	Es wurde die neue Funktion ShouldShowDropVisual hinzugefügt, um bessere Kontrolle über den DropVisualProvider zu erlangen.
 
---- 0.5.2 ---
+===== 0.5.2 =====
 -Neue Controls
 --Divider
 	Der Divider ist ein Simples Control um einfach horizontale Trenner mit Content oder einen simplen vertikalen Trenner einzubauen.
@@ -529,7 +559,7 @@
 	Hierfür gibt es mehrere HorizontalAlignment und VerticalAlignment Properties, sowie die Möglichkeit über 4 Position Properties die Position volkommen frei zu kontrollieren.
 	Durch dieses Rework wird das Badge-Control auch nicht mehr abgeschnitten, wenn sich neben dem Control direkt ein anderes befindet.
 
---- 0.5.1 ---
+===== 0.5.1 =====
 -Neue Controls:
 --UniformGrid
 	Eine alternative Implementierung des UniformGrids, das es in WPF schon gibt mit ein paar zusätzlichen Features für eine höhere Konfigurierbarkeit.
@@ -561,7 +591,7 @@
 	2. FindChildByName<T> ist eine Methode, die den VisualTree nach unten hin durchsucht und ein ChildElement des gewünschten Typs mit dem geforderten Namen zurückgibt.
 	Beide Methoden akzeptieren einen Ziel-Typen der mindestens ein FrameworkElement sein muss, da die Name-Property vorhanden sein muss.
 
---- 0.5.0 ---
+===== 0.5.0 =====
 -Neue Controls:
 --Card
 	Ein ContentControl was vom MaterialDesign inspiriert wurde und einen CornerRadius mit Clipping zur Verfügung stellt
@@ -617,7 +647,7 @@
 	Orientation sagt dem DragDropManager, in welcher Richtung die Items in einem ItemsControl ausgerichtet sind.
 	MinimumHorizontalDragDistance und MinimumVerticalDragDistance sind die Pixel, die ein Element bewegt werden muss, bevor der DragDrop-Vorgang gestartet wird.
 
---- 0.4.3 ---
+===== 0.4.3 =====
 -Neue Controls:
 --SplitButton
 	Ein mehrteiliger Button, der einen Klickbaren Button und einen DropDown-Bereich für weiteren Content darstellt.

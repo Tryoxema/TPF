@@ -1,8 +1,7 @@
 ﻿using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Controls.Primitives;
-using System.Windows.Data;
+using System.Collections.Generic;
 using TPF.Internal;
 
 namespace TPF.Controls
@@ -14,10 +13,21 @@ namespace TPF.Controls
             SnapsToDevicePixelsProperty.OverrideMetadata(typeof(TickBar), new FrameworkPropertyMetadata(true));
         }
 
-        #region TickBrush DependencyProperty
-        public static readonly DependencyProperty TickBrushProperty = DependencyProperty.Register("TickBrush",
-            typeof(Brush),
+        #region Ticks DependencyProperty
+        public static readonly DependencyProperty TicksProperty = DependencyProperty.Register("Ticks",
+            typeof(List<SliderTick>),
             typeof(TickBar),
+            new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsRender | FrameworkPropertyMetadataOptions.AffectsMeasure));
+
+        public List<SliderTick> Ticks
+        {
+            get { return (List<SliderTick>)GetValue(TicksProperty); }
+            set { SetValue(TicksProperty, value); }
+        }
+        #endregion
+
+        #region TickBrush DependencyProperty
+        public static readonly DependencyProperty TickBrushProperty = Slider.TickBrushProperty.AddOwner(typeof(TickBar),
             new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsRender));
 
         public Brush TickBrush
@@ -27,36 +37,36 @@ namespace TPF.Controls
         }
         #endregion
 
-        #region Minimum DependencyProperty
-        public static readonly DependencyProperty MinimumProperty = RangeBase.MinimumProperty.AddOwner(typeof(TickBar),
-            new FrameworkPropertyMetadata(0.0, FrameworkPropertyMetadataOptions.AffectsRender));
+        #region MinorTickBrush DependencyProperty
+        public static readonly DependencyProperty MinorTickBrushProperty = Slider.MinorTickBrushProperty.AddOwner(typeof(TickBar),
+            new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsRender));
 
-        public double Minimum
+        public Brush MinorTickBrush
         {
-            get { return (double)GetValue(MinimumProperty); }
-            set { SetValue(MinimumProperty, value); }
+            get { return (Brush)GetValue(MinorTickBrushProperty); }
+            set { SetValue(MinorTickBrushProperty, value); }
         }
         #endregion
 
-        #region Maximum DependencyProperty
-        public static readonly DependencyProperty MaximumProperty = RangeBase.MaximumProperty.AddOwner(typeof(TickBar),
-            new FrameworkPropertyMetadata(100.0, FrameworkPropertyMetadataOptions.AffectsRender));
+        #region ActiveTickBrush DependencyProperty
+        public static readonly DependencyProperty ActiveTickBrushProperty = Slider.ActiveTickBrushProperty.AddOwner(typeof(TickBar),
+            new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsRender));
 
-        public double Maximum
+        public Brush ActiveTickBrush
         {
-            get { return (double)GetValue(MaximumProperty); }
-            set { SetValue(MaximumProperty, value); }
+            get { return (Brush)GetValue(ActiveTickBrushProperty); }
+            set { SetValue(ActiveTickBrushProperty, value); }
         }
         #endregion
 
-        #region TickFrequency DependencyProperty
-        public static readonly DependencyProperty TickFrequencyProperty = Slider.TickFrequencyProperty.AddOwner(typeof(TickBar),
-            new FrameworkPropertyMetadata(1.0, FrameworkPropertyMetadataOptions.AffectsRender));
+        #region ActiveMinorTickBrush DependencyProperty
+        public static readonly DependencyProperty ActiveMinorTickBrushProperty = Slider.ActiveMinorTickBrushProperty.AddOwner(typeof(TickBar),
+            new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsRender));
 
-        public double TickFrequency
+        public Brush ActiveMinorTickBrush
         {
-            get { return (double)GetValue(TickFrequencyProperty); }
-            set { SetValue(TickFrequencyProperty, value); }
+            get { return (Brush)GetValue(ActiveMinorTickBrushProperty); }
+            set { SetValue(ActiveMinorTickBrushProperty, value); }
         }
         #endregion
 
@@ -71,21 +81,10 @@ namespace TPF.Controls
         }
         #endregion
 
-        #region UseNumbersAsTicksProperty DependencyProperty
-        public static readonly DependencyProperty UseNumbersAsTicksProperty = Slider.UseNumbersAsTicksProperty.AddOwner(typeof(TickBar),
-            new FrameworkPropertyMetadata(BooleanBoxes.FalseBox, FrameworkPropertyMetadataOptions.AffectsRender));
-
-        public bool UseNumbersAsTicks
-        {
-            get { return (bool)GetValue(UseNumbersAsTicksProperty); }
-            set { SetValue(UseNumbersAsTicksProperty, BooleanBoxes.Box(value)); }
-        }
-        #endregion
-
         #region Placement DependencyProperty
         public static readonly DependencyProperty PlacementProperty = DependencyProperty.Register("Placement",
             typeof(TickBarPlacement),
-            typeof(Slider),
+            typeof(TickBar),
             new FrameworkPropertyMetadata(TickBarPlacement.Top, FrameworkPropertyMetadataOptions.AffectsRender));
 
         public TickBarPlacement Placement
@@ -95,132 +94,67 @@ namespace TPF.Controls
         }
         #endregion
 
-        #region ReservedSpace DependencyProperty
-        public static readonly DependencyProperty ReservedSpaceProperty = DependencyProperty.Register("ReservedSpace",
-            typeof(double),
-            typeof(Slider),
-            new FrameworkPropertyMetadata(0.0, FrameworkPropertyMetadataOptions.AffectsRender));
-
-        public double ReservedSpace
-        {
-            get { return (double)GetValue(ReservedSpaceProperty); }
-            set { SetValue(ReservedSpaceProperty, value); }
-        }
-        #endregion
-
-        private void BindDoubleToTemplatedParent(DependencyProperty target, DependencyProperty source)
-        {
-            if ((double)GetValue(target) == (double)target.GetMetadata(this).DefaultValue)
-            {
-                var binding = new Binding
-                {
-                    RelativeSource = RelativeSource.TemplatedParent,
-                    Path = new PropertyPath(source)
-                };
-                SetBinding(target, binding);
-            }
-        }
-
-        private void BindBoolToTemplatedParent(DependencyProperty target, DependencyProperty source)
-        {
-            if ((bool)GetValue(target) == (bool)target.GetMetadata(this).DefaultValue)
-            {
-                var binding = new Binding
-                {
-                    RelativeSource = RelativeSource.TemplatedParent,
-                    Path = new PropertyPath(source)
-                };
-                SetBinding(target, binding);
-            }
-        }
+        private readonly Dictionary<Brush, Pen> _penCache = new Dictionary<Brush, Pen>();
 
         protected override void OnRender(DrawingContext drawingContext)
         {
-            // Wenn die TickBar in einem Slider verbaut wurde (wofür sie gemacht wurde), dann Properties übernehmen, wenn die nicht schon eigene Werte haben
-            if (TemplatedParent is Slider parent)
-            {
-                BindDoubleToTemplatedParent(TickFrequencyProperty, Slider.TickFrequencyProperty);
-                BindDoubleToTemplatedParent(MinimumProperty, RangeBase.MinimumProperty);
-                BindDoubleToTemplatedParent(MaximumProperty, RangeBase.MaximumProperty);
-                BindBoolToTemplatedParent(IsDirectionReversedProperty, Slider.IsDirectionReversedProperty);
-                BindBoolToTemplatedParent(UseNumbersAsTicksProperty, Slider.UseNumbersAsTicksProperty);
-                if (parent.Track != null && ReservedSpace == (double)ReservedSpaceProperty.GetMetadata(this).DefaultValue)
-                {
-                    var binding = new Binding()
-                    {
-                        Source = parent.Track.Thumb,
-                        Path = parent.Orientation == Orientation.Horizontal ? new PropertyPath(WidthProperty) : new PropertyPath(HeightProperty)
-                    };
-                    SetBinding(ReservedSpaceProperty, binding);
-                }
-            }
-
-            if (UseNumbersAsTicks) DrawTickNumbers(drawingContext);
-            else DrawTickLines(drawingContext);
+            DrawTicks(drawingContext);
         }
 
-        private void DrawTickLines(DrawingContext drawingContext)
+        private void DrawTicks(DrawingContext drawingContext)
         {
+            var ticks = Ticks;
+
+            if (ticks == null || ticks.Count == 0) return;
+
             var size = new Size(ActualWidth, ActualHeight);
-            var range = Maximum - Minimum;
             var tickLength = 0.0;
-            double tickLength2;
-            var logicalToPhysical = 1.0;
+            double minorTickLength;
             var startPoint = new Point(0.0, 0.0);
             var endPoint = new Point(0.0, 0.0);
-
-            var halfReservedSpace = ReservedSpace * 0.5;
 
             switch (Placement)
             {
                 case TickBarPlacement.Left:
-                    if (ReservedSpace >= size.Height) return;
-                    size.Height -= ReservedSpace;
+                {
                     tickLength = -size.Width;
-                    startPoint = new Point(size.Width, size.Height + halfReservedSpace);
-                    endPoint = new Point(size.Width, halfReservedSpace);
-                    logicalToPhysical = size.Height / range * -1;
+                    startPoint = new Point(size.Width, size.Height);
+                    endPoint = new Point(size.Width, 0);
                     break;
+                }
                 case TickBarPlacement.Top:
-                    if (ReservedSpace >= size.Width) return;
-                    size.Width -= ReservedSpace;
+                {
                     tickLength = -size.Height;
-                    startPoint = new Point(halfReservedSpace, size.Height);
-                    endPoint = new Point(halfReservedSpace + size.Width, size.Height);
-                    logicalToPhysical = size.Width / range;
+                    startPoint = new Point(0, size.Height);
+                    endPoint = new Point(0 + size.Width, size.Height);
                     break;
+                }
                 case TickBarPlacement.Right:
-                    if (ReservedSpace >= size.Height) return;
-                    size.Height -= ReservedSpace;
+                {
                     tickLength = size.Width;
-                    startPoint = new Point(0d, size.Height + halfReservedSpace);
-                    endPoint = new Point(0d, halfReservedSpace);
-                    logicalToPhysical = size.Height / range * -1;
+                    startPoint = new Point(0d, size.Height + 0);
+                    endPoint = new Point(0d, 0);
                     break;
+                }
                 case TickBarPlacement.Bottom:
-                    if (ReservedSpace >= size.Width) return;
-                    size.Width -= ReservedSpace;
+                {
                     tickLength = size.Height;
-                    startPoint = new Point(halfReservedSpace, 0d);
-                    endPoint = new Point(halfReservedSpace + size.Width, 0d);
-                    logicalToPhysical = size.Width / range;
+                    startPoint = new Point(0, 0d);
+                    endPoint = new Point(0 + size.Width, 0d);
                     break;
+                }
             }
 
-            tickLength2 = tickLength * 0.75;
+            minorTickLength = tickLength * 0.5;
 
             // Richtung Invertieren
             if (IsDirectionReversed)
             {
-                logicalToPhysical *= -1;
-
                 // startPoint & endPoint tauschen
                 var point = startPoint;
                 startPoint = endPoint;
                 endPoint = point;
             }
-
-            var pen = new Pen(TickBrush, 1.0d);
 
             var snapsToDevicePixels = SnapsToDevicePixels;
             var xLines = snapsToDevicePixels ? new DoubleCollection() : null;
@@ -228,69 +162,60 @@ namespace TPF.Controls
 
             if ((Placement == TickBarPlacement.Left) || (Placement == TickBarPlacement.Right))
             {
-                // Interval verringern, wenn der verfügbare Platz überschritten wird
-                var interval = TickFrequency;
-                if (interval > 0.0)
-                {
-                    var minInterval = (Maximum - Minimum) / size.Height;
-                    if (interval < minInterval)
-                    {
-                        interval = minInterval;
-                    }
-                }
-
-                // Start & Ende zeichnen
-                drawingContext.DrawLine(pen, startPoint, new Point(startPoint.X + tickLength, startPoint.Y));
-                drawingContext.DrawLine(pen, new Point(startPoint.X, endPoint.Y), new Point(startPoint.X + tickLength, endPoint.Y));
-
                 if (snapsToDevicePixels)
                 {
                     xLines.Add(startPoint.X);
-                    yLines.Add(startPoint.Y - 0.5);
                     xLines.Add(startPoint.X + tickLength);
-                    yLines.Add(endPoint.Y - 0.5);
-                    xLines.Add(startPoint.X + tickLength2);
+                    //yLines.Add(startPoint.Y - 0.5);
+                    //yLines.Add(endPoint.Y - 0.5);
+                    xLines.Add(startPoint.X + minorTickLength);
                 }
 
-                for (var i = interval; i < range; i += interval)
+                for (int i = 0; i < ticks.Count; i++)
                 {
-                    var y = (i * logicalToPhysical) + startPoint.Y;
+                    var tick = ticks[i];
 
-                    drawingContext.DrawLine(pen, new Point(startPoint.X, y), new Point(startPoint.X + tickLength2, y));
+                    var pen = GetPenForTick(tick);
+
+                    if (pen == null) continue;
+
+                    var y = size.Height - ((IsDirectionReversed ? 1 - tick.NormalizedValue : tick.NormalizedValue) * size.Height);
+
+                    // Aus irgendwelchen unbekannten Gründen muss der erste Tick für das Zeichnen um 0.5 verschoben werden, da er sonst nicht korrekt dargestellt wird
+                    if (IsDirectionReversed && tick.NormalizedValue == 1 || tick.NormalizedValue == 0) y += 0.5;
+
+                    var tickSize = tick.IsMajorTick ? tickLength : minorTickLength;
+
+                    drawingContext.DrawLine(pen, new Point(startPoint.X, y), new Point(startPoint.X + tickSize, y));
 
                     if (snapsToDevicePixels) yLines.Add(y - 0.5);
                 }
             }
             else
             {
-                // Interval verringern, wenn der verfügbare Platz überschritten wird
-                var interval = TickFrequency;
-                if (interval > 0.0)
-                {
-                    var minInterval = (Maximum - Minimum) / size.Width;
-                    if (interval < minInterval)
-                    {
-                        interval = minInterval;
-                    }
-                }
-
-                // Start & Ende zeichnen
-                drawingContext.DrawLine(pen, startPoint, new Point(startPoint.X, startPoint.Y + tickLength));
-                drawingContext.DrawLine(pen, new Point(endPoint.X, startPoint.Y), new Point(endPoint.X, startPoint.Y + tickLength));
-
                 if (snapsToDevicePixels)
                 {
-                    xLines.Add(startPoint.X - 0.5);
                     yLines.Add(startPoint.Y);
-                    xLines.Add(startPoint.X - 0.5);
                     yLines.Add(endPoint.Y + tickLength);
-                    yLines.Add(endPoint.Y + tickLength2);
+                    yLines.Add(endPoint.Y + minorTickLength);
                 }
 
-                for (var i = interval; i < range; i += interval)
+                for (int i = 0; i < ticks.Count; i++)
                 {
-                    var x = (i * logicalToPhysical) + startPoint.X;
-                    drawingContext.DrawLine(pen, new Point(x, startPoint.Y), new Point(x, startPoint.Y + tickLength2));
+                    var tick = ticks[i];
+
+                    var pen = GetPenForTick(tick);
+
+                    if (pen == null) continue;
+
+                    var x = (IsDirectionReversed ? 1 - tick.NormalizedValue : tick.NormalizedValue) * size.Width;
+
+                    // Aus irgendwelchen unbekannten Gründen muss der letzte Tick für das Zeichnen um 0.5 verschoben werden, da er sonst nicht korrekt dargestellt wird
+                    if (IsDirectionReversed && tick.NormalizedValue == 0 || tick.NormalizedValue == 1) x -= 0.5;
+
+                    var tickSize = tick.IsMajorTick ? tickLength : minorTickLength;
+
+                    drawingContext.DrawLine(pen, new Point(x, startPoint.Y), new Point(x, startPoint.Y + tickSize));
 
                     if (snapsToDevicePixels) xLines.Add(x - 0.5);
                 }
@@ -305,119 +230,28 @@ namespace TPF.Controls
             }
         }
 
-        private void DrawTickNumbers(DrawingContext drawingContext)
+        private Pen GetPenForTick(SliderTick tick)
         {
-            var size = new Size(ActualWidth, ActualHeight);
-            var range = Maximum - Minimum;
-            var logicalToPhysical = 1.0;
-            var startPoint = new Point(0.0, 0.0);
-            var endPoint = new Point(0.0, 0.0);
-            var halfReservedSpace = ReservedSpace * 0.5;
+            var tickBrush = TickBrush;
 
-            switch (Placement)
+            if (!tick.IsMajorTick)
             {
-                case TickBarPlacement.Left:
-                    if (ReservedSpace >= size.Height) return;
-                    size.Height -= ReservedSpace;
-                    //tickLength = -size.Width;
-                    startPoint = new Point(size.Width, size.Height + halfReservedSpace);
-                    endPoint = new Point(size.Width, halfReservedSpace);
-                    logicalToPhysical = size.Height / range * -1;
-                    break;
-                case TickBarPlacement.Top:
-                    if (ReservedSpace >= size.Width) return;
-                    size.Width -= ReservedSpace;
-                    //tickLength = -size.Height;
-                    startPoint = new Point(halfReservedSpace, size.Height);
-                    endPoint = new Point(halfReservedSpace + size.Width, size.Height);
-                    logicalToPhysical = size.Width / range;
-                    break;
-                case TickBarPlacement.Right:
-                    if (ReservedSpace >= size.Height) return;
-                    size.Height -= ReservedSpace;
-                    //tickLength = size.Width;
-                    startPoint = new Point(0d, size.Height + halfReservedSpace);
-                    endPoint = new Point(0d, halfReservedSpace);
-                    logicalToPhysical = size.Height / range * -1;
-                    break;
-                case TickBarPlacement.Bottom:
-                    if (ReservedSpace >= size.Width) return;
-                    size.Width -= ReservedSpace;
-                    //tickLength = size.Height;
-                    startPoint = new Point(halfReservedSpace, 0d);
-                    endPoint = new Point(halfReservedSpace + size.Width, 0d);
-                    logicalToPhysical = size.Width / range;
-                    break;
+                if (tick.IsActive) tickBrush = ActiveMinorTickBrush ?? ActiveTickBrush ?? MinorTickBrush;
+                else tickBrush = MinorTickBrush;
+            }
+            else if (tick.IsActive) tickBrush = ActiveTickBrush;
+
+            if (tickBrush == null) tickBrush = TickBrush;
+
+            if (tickBrush == null) return null;
+
+            if (!_penCache.TryGetValue(tickBrush, out var pen))
+            {
+                pen = new Pen(tickBrush, 1);
+                _penCache.Add(tickBrush, pen);
             }
 
-            // Richtung Invertieren
-            if (IsDirectionReversed)
-            {
-                logicalToPhysical *= -1;
-
-                // startPoint & endPoint tauschen
-                var point = startPoint;
-                startPoint = endPoint;
-                endPoint = point;
-            }
-
-            FormattedText text = null;
-            var typeFace = new Typeface("Verdana");
-
-#pragma warning disable CS0618
-            if ((Placement == TickBarPlacement.Left) || (Placement == TickBarPlacement.Right))
-            {
-                // Interval verringern, wenn der verfügbare Platz überschritten wird
-                var interval = TickFrequency;
-                if (interval > 0.0)
-                {
-                    var minInterval = (Maximum - Minimum) / size.Height;
-                    if (interval < minInterval)
-                    {
-                        interval = minInterval;
-                    }
-                }
-
-                // Start & Ende zeichnen
-                text = new FormattedText(Minimum.ToString(), System.Globalization.CultureInfo.CurrentCulture, FlowDirection.LeftToRight, typeFace, 8, TickBrush);
-                drawingContext.DrawText(text, new Point(startPoint.X - text.Width * 0.5, startPoint.Y - text.Height * 0.5));
-                text = new FormattedText(Maximum.ToString(), System.Globalization.CultureInfo.CurrentCulture, FlowDirection.LeftToRight, typeFace, 8, TickBrush);
-                drawingContext.DrawText(text, new Point(startPoint.X - text.Width * 0.5, endPoint.Y - text.Height * 0.5));
-
-                for (var i = interval; i < range; i += interval)
-                {
-                    var y = i * logicalToPhysical + startPoint.Y;
-                    text = new FormattedText(i.ToString(), System.Globalization.CultureInfo.CurrentCulture, FlowDirection.LeftToRight, typeFace, 8, TickBrush);
-                    drawingContext.DrawText(text, new Point(startPoint.X - text.Width * 0.5, y - text.Height * 0.5));
-                }
-            }
-            else
-            {
-                // Interval verringern, wenn der verfügbare Platz überschritten wird
-                var interval = TickFrequency;
-                if (interval > 0.0)
-                {
-                    var minInterval = (Maximum - Minimum) / size.Width;
-                    if (interval < minInterval)
-                    {
-                        interval = minInterval;
-                    }
-                }
-
-                // Start & Ende zeichnen
-                text = new FormattedText(Minimum.ToString(), System.Globalization.CultureInfo.CurrentCulture, FlowDirection.LeftToRight, typeFace, 8, TickBrush);
-                drawingContext.DrawText(text, new Point(startPoint.X - text.Width * 0.5, -2));
-                text = new FormattedText(Maximum.ToString(), System.Globalization.CultureInfo.CurrentCulture, FlowDirection.LeftToRight, typeFace, 8, TickBrush);
-                drawingContext.DrawText(text, new Point(endPoint.X - text.Width * 0.5, -2));
-
-                for (var i = interval; i < range; i += interval)
-                {
-                    var x = (i * logicalToPhysical) + startPoint.X;
-                    text = new FormattedText(i.ToString(), System.Globalization.CultureInfo.CurrentCulture, FlowDirection.LeftToRight, typeFace, 8, TickBrush);
-                    drawingContext.DrawText(text, new Point(x - text.Width * 0.5, -2));
-                }
-            }
-#pragma warning restore CS0618
+            return pen;
         }
     }
 }

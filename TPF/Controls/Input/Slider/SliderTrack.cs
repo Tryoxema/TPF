@@ -23,6 +23,17 @@ namespace TPF.Controls
         }
         #endregion
 
+        #region ThumbMode DependencyProperty
+        public static readonly DependencyProperty ThumbModeProperty = Slider.ThumbModeProperty.AddOwner(typeof(SliderTrack),
+            new FrameworkPropertyMetadata(SliderThumbMode.Single, FrameworkPropertyMetadataOptions.AffectsMeasure | FrameworkPropertyMetadataOptions.AffectsArrange));
+
+        public SliderThumbMode ThumbMode
+        {
+            get { return (SliderThumbMode)GetValue(ThumbModeProperty); }
+            set { SetValue(ThumbModeProperty, value); }
+        }
+        #endregion
+
         #region Minimum DependencyProperty
         public static readonly DependencyProperty MinimumProperty = RangeBase.MinimumProperty.AddOwner(typeof(SliderTrack),
             new FrameworkPropertyMetadata(0.0, FrameworkPropertyMetadataOptions.AffectsArrange));
@@ -47,7 +58,7 @@ namespace TPF.Controls
 
         #region Value DependencyProperty
         public static readonly DependencyProperty ValueProperty = RangeBase.ValueProperty.AddOwner(typeof(SliderTrack),
-            new FrameworkPropertyMetadata(0.0, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault | FrameworkPropertyMetadataOptions.AffectsArrange));
+            new FrameworkPropertyMetadata(0.0, FrameworkPropertyMetadataOptions.AffectsArrange));
 
         public double Value
         {
@@ -56,9 +67,31 @@ namespace TPF.Controls
         }
         #endregion
 
+        #region RangeStart DependencyProperty
+        public static readonly DependencyProperty RangeStartProperty = Slider.RangeStartProperty.AddOwner(typeof(SliderTrack),
+            new FrameworkPropertyMetadata(0.0, FrameworkPropertyMetadataOptions.AffectsArrange));
+
+        public double RangeStart
+        {
+            get { return (double)GetValue(RangeStartProperty); }
+            set { SetValue(RangeStartProperty, value); }
+        }
+        #endregion
+
+        #region RangeEnd DependencyProperty
+        public static readonly DependencyProperty RangeEndProperty = Slider.RangeEndProperty.AddOwner(typeof(SliderTrack),
+            new FrameworkPropertyMetadata(0.0, FrameworkPropertyMetadataOptions.AffectsArrange));
+
+        public double RangeEnd
+        {
+            get { return (double)GetValue(RangeEndProperty); }
+            set { SetValue(RangeEndProperty, value); }
+        }
+        #endregion
+
         #region IsDirectionReversed DependencyProperty
         public static readonly DependencyProperty IsDirectionReversedProperty = Slider.IsDirectionReversedProperty.AddOwner(typeof(SliderTrack),
-            new PropertyMetadata(BooleanBoxes.FalseBox));
+            new FrameworkPropertyMetadata(BooleanBoxes.FalseBox, FrameworkPropertyMetadataOptions.AffectsArrange));
 
         public bool IsDirectionReversed
         {
@@ -79,14 +112,40 @@ namespace TPF.Controls
             }
         }
 
-        Thumb _thumb;
-        public Thumb Thumb
+        Border _valueIndicator;
+        public Border ValueIndicator
+        {
+            get { return _valueIndicator; }
+            set
+            {
+                UpdateComponent(_valueIndicator, value);
+                _valueIndicator = value;
+            }
+        }
+
+        SliderThumb _thumb;
+        public SliderThumb Thumb
         {
             get { return _thumb; }
             set
             {
+                if (_thumb != null) ClearThumbBindings();
                 UpdateComponent(_thumb, value);
                 _thumb = value;
+                BindThumbToSlider();
+            }
+        }
+
+        RangeSliderThumb _rangeThumb;
+        public RangeSliderThumb RangeThumb
+        {
+            get { return _rangeThumb; }
+            set
+            {
+                if (_rangeThumb != null) ClearRangeThumbBindings();
+                UpdateComponent(_rangeThumb, value);
+                _rangeThumb = value;
+                BindRangeThumbToSlider();
             }
         }
 
@@ -102,6 +161,19 @@ namespace TPF.Controls
             }
         }
 
+        SliderThumbsControl _thumbsControl;
+        public SliderThumbsControl ThumbsControl
+        {
+            get { return _thumbsControl; }
+            set
+            {
+                UpdateComponent(_thumbsControl, value);
+                _thumbsControl = value;
+            }
+        }
+
+        private Slider _slider;
+
         private double Density { get; set; }
 
         private double ThumbCenterOffset { get; set; }
@@ -109,15 +181,15 @@ namespace TPF.Controls
         #region VisualChildren Verwaltung
         private Visual[] _children;
 
-        private void UpdateComponent(Control oldValue, Control newValue)
+        private void UpdateComponent(Visual oldValue, Visual newValue)
         {
             if (oldValue != newValue)
             {
-                if (_children == null) _children = new Visual[3];
+                if (_children == null) _children = new Visual[6];
                 if (oldValue != null) RemoveVisualChild(oldValue);
 
                 int i = 0;
-                while (i < 3)
+                while (i < 6)
                 {
                     // Array ist nicht gefüllt, break
                     if (_children[i] == null) break;
@@ -126,7 +198,7 @@ namespace TPF.Controls
                     if (_children[i] == oldValue)
                     {
                         // Alle Werte um eins nach oben verschieben, damit das neue an letzter Stelle landet
-                        while (i < 2 && _children[i + 1] != null)
+                        while (i < 5 && _children[i + 1] != null)
                         {
                             _children[i] = _children[i + 1];
                             i++;
@@ -154,9 +226,14 @@ namespace TPF.Controls
         {
             get
             {
-                if (_children == null || _children[0] == null) return 0;
-                else if (_children[1] == null) return 1;
-                else return _children[2] == null ? 2 : 3;
+                if (_children == null) return 0;
+
+                for (var i = 0; i < _children.Length; i++)
+                {
+                    if (_children[i] == null) return i;
+                }
+
+                return _children.Length;
             }
         }
         #endregion
@@ -173,6 +250,7 @@ namespace TPF.Controls
             {
                 value = Value + ValueFromDistance(point.X - (RenderSize.Width * 0.5), point.Y - ThumbCenterOffset);
             }
+
             return Math.Max(Minimum, Math.Min(Maximum, value));
         }
 
@@ -190,44 +268,59 @@ namespace TPF.Controls
             }
         }
 
-        private void BindToTemplatedParent(DependencyProperty target, DependencyProperty source)
-        {
-            var binding = new Binding
-            {
-                RelativeSource = RelativeSource.TemplatedParent,
-                Path = new PropertyPath(source)
-            };
-            SetBinding(target, binding);
-        }
-
-        private void BindChildToTemplatedParent(FrameworkElement element, DependencyProperty target, DependencyProperty source)
-        {
-            var binding = new Binding
-            {
-                Source = TemplatedParent,
-                Path = new PropertyPath(source)
-            };
-            element.SetBinding(target, binding);
-        }
-
         protected override void OnInitialized(EventArgs e)
         {
             base.OnInitialized(e);
 
-            // Properties vom übergeordneten Slider übernehmen
-            if (TemplatedParent is Slider parent)
-            {
-                BindToTemplatedParent(MinimumProperty, RangeBase.MinimumProperty);
-                BindToTemplatedParent(MaximumProperty, RangeBase.MaximumProperty);
-                BindToTemplatedParent(ValueProperty, RangeBase.ValueProperty);
-                BindToTemplatedParent(OrientationProperty, Slider.OrientationProperty);
-                BindToTemplatedParent(IsDirectionReversedProperty, Slider.IsDirectionReversedProperty);
+            _slider = this.ParentOfType<Slider>();
 
-                BindChildToTemplatedParent(DecreaseRepeatButton, RepeatButton.DelayProperty, Slider.DelayProperty);
-                BindChildToTemplatedParent(DecreaseRepeatButton, RepeatButton.IntervalProperty, Slider.IntervalProperty);
-                BindChildToTemplatedParent(IncreaseRepeatButton, RepeatButton.DelayProperty, Slider.DelayProperty);
-                BindChildToTemplatedParent(IncreaseRepeatButton, RepeatButton.IntervalProperty, Slider.IntervalProperty);
-            }
+            BindTrackToSlider();
+            BindThumbToSlider();
+            BindRangeThumbToSlider();
+        }
+
+        private void BindTrackToSlider()
+        {
+            if (_slider == null) return;
+
+            SetBinding(MinimumProperty, new Binding("Minimum") { Source = _slider });
+            SetBinding(MaximumProperty, new Binding("Maximum") { Source = _slider });
+            SetBinding(ValueProperty, new Binding("Value") { Source = _slider });
+            SetBinding(RangeStartProperty, new Binding("RangeStart") { Source = _slider });
+            SetBinding(RangeEndProperty, new Binding("RangeEnd") { Source = _slider });
+            SetBinding(OrientationProperty, new Binding("Orientation") { Source = _slider });
+            SetBinding(ThumbModeProperty, new Binding("ThumbMode") { Source = _slider });
+            SetBinding(IsDirectionReversedProperty, new Binding("IsDirectionReversed") { Source = _slider });
+        }
+
+        private void BindThumbToSlider()
+        {
+            if (Thumb == null || _slider == null) return;
+
+            Thumb.SetBinding(SliderThumb.ValueProperty, new Binding("Value") { Source = _slider, Mode = BindingMode.TwoWay });
+        }
+
+        private void ClearThumbBindings()
+        {
+            BindingOperations.ClearBinding(Thumb, SliderThumb.ValueProperty);
+        }
+
+        private void BindRangeThumbToSlider()
+        {
+            if (RangeThumb == null || _slider == null) return;
+
+            RangeThumb.SetBinding(RangeSliderThumb.RangeStartProperty, new Binding("RangeStart") { Source = _slider, Mode = BindingMode.TwoWay });
+            RangeThumb.SetBinding(RangeSliderThumb.RangeEndProperty, new Binding("RangeEnd") { Source = _slider, Mode = BindingMode.TwoWay });
+            RangeThumb.SetBinding(RangeSliderThumb.MinimumRangeSpanProperty, new Binding("MinimumRangeSpan") { Source = _slider });
+            RangeThumb.SetBinding(RangeSliderThumb.MaximumRangeSpanProperty, new Binding("MaximumRangeSpan") { Source = _slider });
+        }
+
+        private void ClearRangeThumbBindings()
+        {
+            BindingOperations.ClearBinding(RangeThumb, RangeSliderThumb.RangeStartProperty);
+            BindingOperations.ClearBinding(RangeThumb, RangeSliderThumb.RangeEndProperty);
+            BindingOperations.ClearBinding(RangeThumb, RangeSliderThumb.MinimumRangeSpanProperty);
+            BindingOperations.ClearBinding(RangeThumb, RangeSliderThumb.MaximumRangeSpanProperty);
         }
 
         // Sicherstellen, dass die Länge nicht < 0 oder > trackLength ist
@@ -237,14 +330,42 @@ namespace TPF.Controls
             else if (componentLength > trackLength || double.IsNaN(componentLength)) componentLength = trackLength;
         }
 
+        private SliderThumbBase GetCurrentlyRelevantThumb()
+        {
+            switch (ThumbMode)
+            {
+                case SliderThumbMode.Single:
+                {
+                    return Thumb;
+                }
+                case SliderThumbMode.Range:
+                {
+                    return RangeThumb;
+                }
+                case SliderThumbMode.Custom:
+                {
+                    return ThumbsControl?.GetThumbForMeasure();
+                }
+            }
+
+            return null;
+        }
+
         protected override Size MeasureOverride(Size availableSize)
         {
             var desiredSize = new Size(0.0, 0.0);
 
-            if (Thumb != null)
+            var thumb = GetCurrentlyRelevantThumb();
+
+            if (ThumbMode == SliderThumbMode.Custom && ThumbsControl != null)
             {
-                Thumb.Measure(availableSize);
-                desiredSize = Thumb.DesiredSize;
+                ThumbsControl.Measure(availableSize);
+                desiredSize = ThumbsControl.DesiredSize;
+            }
+            else if (thumb != null)
+            {
+                thumb.Measure(availableSize);
+                desiredSize = thumb.DesiredSize;
             }
 
             return desiredSize;
@@ -252,25 +373,54 @@ namespace TPF.Controls
 
         protected override Size ArrangeOverride(Size finalSize)
         {
-            double decreaseButtonLength, thumbLength, increaseButtonLength;
+            ResetArrangements();
+
+            if (ThumbMode == SliderThumbMode.Custom) CustomArrange(finalSize);
+            else NormalArrange(finalSize);
+
+            return finalSize;
+        }
+
+        private void ResetArrangements()
+        {
+            if (Thumb != null) Thumb.Arrange(new Rect());
+            if (RangeThumb != null) RangeThumb.Arrange(new Rect());
+            if (ValueIndicator != null) ValueIndicator.Arrange(new Rect());
+            if (DecreaseRepeatButton != null) DecreaseRepeatButton.Arrange(new Rect());
+            if (IncreaseRepeatButton != null) IncreaseRepeatButton.Arrange(new Rect());
+            if (ThumbsControl != null) ThumbsControl.Arrange(new Rect());
+        }
+
+        private void NormalArrange(Size finalSize)
+        {
+            double decreaseButtonLength, thumbLength, increaseButtonLength, additionalThumbLength;
 
             var isVertical = Orientation == Orientation.Vertical;
 
             var range = Math.Max(0.0, Maximum - Minimum);
             var offset = Math.Min(range, Value - Minimum);
+            var offsetStart = Math.Min(range, RangeStart - Minimum);
+            var offsetEnd = Math.Min(range, RangeEnd - Minimum);
 
             double trackLength;
+
+            var thumb = GetCurrentlyRelevantThumb();
 
             // Größe des Thumb festlegen
             if (isVertical)
             {
                 trackLength = finalSize.Height;
-                thumbLength = Thumb == null ? 0 : Thumb.DesiredSize.Height;
+                thumbLength = thumb == null ? 0 : thumb.DesiredSize.Height;
             }
             else
             {
                 trackLength = finalSize.Width;
-                thumbLength = Thumb == null ? 0 : Thumb.DesiredSize.Width;
+                thumbLength = thumb == null ? 0 : thumb.DesiredSize.Width;
+            }
+
+            if (ThumbMode == SliderThumbMode.Range)
+            {
+                offset = offsetStart;
             }
 
             CoerceLength(ref thumbLength, trackLength);
@@ -280,7 +430,16 @@ namespace TPF.Controls
             decreaseButtonLength = remainingTrackLength * offset / range;
             CoerceLength(ref decreaseButtonLength, remainingTrackLength);
 
-            increaseButtonLength = remainingTrackLength - decreaseButtonLength;
+            if (ThumbMode == SliderThumbMode.Range)
+            {
+                additionalThumbLength = remainingTrackLength * offsetEnd / range - decreaseButtonLength;
+                CoerceLength(ref additionalThumbLength, trackLength);
+            }
+            else additionalThumbLength = 0;
+
+            var fullThumbLength = thumbLength + additionalThumbLength;
+
+            increaseButtonLength = remainingTrackLength - decreaseButtonLength - additionalThumbLength;
             CoerceLength(ref increaseButtonLength, remainingTrackLength);
 
             Density = range / remainingTrackLength;
@@ -290,54 +449,106 @@ namespace TPF.Controls
             // Damit nicht jedes mal die DependencyProperty ausgelesen werden muss wird der Wert zwischengespeichert
             var isDirectionReversed = IsDirectionReversed;
 
+            double topLeftMargin, bottomRightMargin;
+
             if (isVertical)
             {
                 CoerceLength(ref decreaseButtonLength, finalSize.Height);
                 CoerceLength(ref increaseButtonLength, finalSize.Height);
-                CoerceLength(ref thumbLength, finalSize.Height);
+                CoerceLength(ref fullThumbLength, finalSize.Height);
 
-                offsetPoint.Y = isDirectionReversed ? decreaseButtonLength + thumbLength : 0.0;
+                offsetPoint.Y = isDirectionReversed ? decreaseButtonLength + fullThumbLength : 0.0;
                 pieceSize.Height = increaseButtonLength;
 
                 if (IncreaseRepeatButton != null) IncreaseRepeatButton.Arrange(new Rect(offsetPoint, pieceSize));
 
-                offsetPoint.Y = isDirectionReversed ? 0.0 : increaseButtonLength + thumbLength;
+                offsetPoint.Y = isDirectionReversed ? 0.0 : increaseButtonLength + fullThumbLength;
                 pieceSize.Height = decreaseButtonLength;
 
                 if (DecreaseRepeatButton != null) DecreaseRepeatButton.Arrange(new Rect(offsetPoint, pieceSize));
+                if (ValueIndicator != null && ThumbMode == SliderThumbMode.Single) ValueIndicator.Arrange(new Rect(offsetPoint, pieceSize));
 
                 offsetPoint.Y = isDirectionReversed ? decreaseButtonLength : increaseButtonLength;
-                pieceSize.Height = thumbLength;
+                pieceSize.Height = fullThumbLength;
 
-                if (Thumb != null) Thumb.Arrange(new Rect(offsetPoint, pieceSize));
+                if (thumb != null) thumb.Arrange(new Rect(offsetPoint, pieceSize));
 
                 ThumbCenterOffset = offsetPoint.Y + (thumbLength * 0.5);
+
+                topLeftMargin = thumbLength / 2;
+                bottomRightMargin = thumbLength / 2;
             }
             else
             {
                 CoerceLength(ref decreaseButtonLength, finalSize.Width);
                 CoerceLength(ref increaseButtonLength, finalSize.Width);
-                CoerceLength(ref thumbLength, finalSize.Width);
+                CoerceLength(ref fullThumbLength, finalSize.Width);
 
-                offsetPoint.X = isDirectionReversed ? increaseButtonLength + thumbLength : 0.0;
+                offsetPoint.X = isDirectionReversed ? increaseButtonLength + fullThumbLength : 0.0;
                 pieceSize.Width = decreaseButtonLength;
 
                 if (DecreaseRepeatButton != null) DecreaseRepeatButton.Arrange(new Rect(offsetPoint, pieceSize));
+                if (ValueIndicator != null && ThumbMode == SliderThumbMode.Single) ValueIndicator.Arrange(new Rect(offsetPoint, pieceSize));
 
-                offsetPoint.X = isDirectionReversed ? 0.0 : decreaseButtonLength + thumbLength;
+                offsetPoint.X = isDirectionReversed ? 0.0 : decreaseButtonLength + fullThumbLength;
                 pieceSize.Width = increaseButtonLength;
 
                 if (IncreaseRepeatButton != null) IncreaseRepeatButton.Arrange(new Rect(offsetPoint, pieceSize));
 
                 offsetPoint.X = isDirectionReversed ? increaseButtonLength : decreaseButtonLength;
-                pieceSize.Width = thumbLength;
+                pieceSize.Width = fullThumbLength;
 
-                if (Thumb != null) Thumb.Arrange(new Rect(offsetPoint, pieceSize));
+                if (thumb != null) thumb.Arrange(new Rect(offsetPoint, pieceSize));
 
                 ThumbCenterOffset = offsetPoint.X + (thumbLength * 0.5);
+
+                topLeftMargin = thumbLength / 2;
+                bottomRightMargin = thumbLength / 2;
             }
 
-            return finalSize;
+            if (_slider != null)
+            {
+                _slider.UpdateMargins(topLeftMargin, bottomRightMargin);
+            }
+        }
+
+        private void CustomArrange(Size finalSize)
+        {
+            ThumbCenterOffset = 0;
+
+            if (ThumbsControl != null)
+            {
+                ThumbsControl.Arrange(new Rect(finalSize));
+
+                var isVertical = Orientation == Orientation.Vertical;
+                var thumb = GetCurrentlyRelevantThumb();
+
+                // Größe des Thumb festlegen
+                double thumbLength, trackLength;
+
+                if (isVertical)
+                {
+                    trackLength = finalSize.Height;
+                    thumbLength = thumb == null ? 0 : thumb.DesiredSize.Height;
+                }
+                else
+                {
+                    trackLength = finalSize.Width;
+                    thumbLength = thumb == null ? 0 : thumb.DesiredSize.Width;
+                }
+
+                var remainingTrackLength = trackLength - thumbLength;
+                var range = Math.Max(0.0, Maximum - Minimum);
+
+                Density = range / remainingTrackLength;
+
+                // Wenn wir ein ThumbsPanel haben, kriegt das die Anweisung neu anzuordnen, da sonst im Fall von IsDirectionReversed hier nicht neu angeordnet wird
+                if (thumb?.ParentThumbsPanel != null) thumb.ParentThumbsPanel.InvalidateArrange();
+            }
+            else
+            {
+                Density = 0;
+            }
         }
     }
 }

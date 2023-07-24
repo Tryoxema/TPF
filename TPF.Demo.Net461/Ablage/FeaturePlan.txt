@@ -9,7 +9,6 @@
 [ ] MaskedInputBox
 [X] Calculator
 [X] Slider
-[ ] RangeSlider
 [ ] ColorPicker
 [X] ColorEditor
 [ ] ColorBox

@@ -61,6 +61,13 @@ namespace TPF.Demo.Net461
             set { SetProperty(ref _badgeVisibility, value); }
         }
 
+        double _sliderValue;
+        public double SliderValue
+        {
+            get { return _sliderValue; }
+            set { SetProperty(ref _sliderValue, value); }
+        }
+
         ObservableCollection<ColorSkin> _skins;
         public ObservableCollection<ColorSkin> Skins
         {

@@ -3970,15 +3970,16 @@
     <Style TargetType="tpf:ComboBoxItem" BasedOn="{StaticResource TPF.ComboBoxItemStyle}"/>
 
     <!-- ========== Slider ========== -->
-    <Style TargetType="RepeatButton" x:Key="TPF.TransparentRepeatButtonStyle">
+    <Style TargetType="RepeatButton" x:Key="TPF.SliderRepeatButtonStyle">
         <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="OverridesDefaultStyle" Value="True"/>
         <Setter Property="IsTabStop" Value="False"/>
         <Setter Property="Focusable" Value="False"/>
+        <Setter Property="Background" Value="Transparent"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="RepeatButton">
-                    <Border Background="Transparent"/>
+                    <Border Background="{TemplateBinding Background}"/>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -3987,7 +3988,7 @@
         <Setter Property="IsTabStop" Value="True"/>
         <Setter Property="Focusable" Value="True"/>
         <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="Width" Value="8"/>
+        <Setter Property="Width" Value="9"/>
         <Setter Property="Height" Value="22"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="Background" Value="{tpf:ResourceLink Key=PrimaryBrush}"/>
@@ -4010,59 +4011,23 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <ControlTemplate TargetType="tpf:Slider" x:Key="TPF.HorizontalSliderTemplate">
-        <Border BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto"/>
-                    <RowDefinition Height="*" MinHeight="{TemplateBinding MinHeight}"/>
-                    <RowDefinition Height="Auto"/>
-                </Grid.RowDefinitions>
-
-                <tpf:TickBar x:Name="TopTick" Grid.Row="0" Grid.ColumnSpan="3" TickBrush="{tpf:ResourceLink Key=TextBrush}" Placement="Top" Height="4" Margin="0 0 0 2" Visibility="Collapsed"/>
-                <tpf:TickBar x:Name="BottomTick" Grid.Row="2" Grid.ColumnSpan="3" TickBrush="{tpf:ResourceLink Key=TextBrush}" Placement="Bottom" Height="4" Margin="0 2 0 0" Visibility="Collapsed"/>
-                <Border x:Name="TrackBackground" Grid.Row="1" Grid.ColumnSpan="3" Height="6" Background="#DBDDE6"/>
-                <tpf:SliderTrack x:Name="PART_Track" Grid.Row="1">
-                    <tpf:SliderTrack.DecreaseRepeatButton>
-                        <RepeatButton Command="{x:Static tpf:Slider.DecreaseLarge}" Style="{StaticResource TPF.TransparentRepeatButtonStyle}"/>
-                    </tpf:SliderTrack.DecreaseRepeatButton>
-                    <tpf:SliderTrack.IncreaseRepeatButton>
-                        <RepeatButton Command="{x:Static tpf:Slider.IncreaseLarge}" Style="{StaticResource TPF.TransparentRepeatButtonStyle}"/>
-                    </tpf:SliderTrack.IncreaseRepeatButton>
-                    <tpf:SliderTrack.Thumb>
-                        <Thumb Style="{TemplateBinding ThumbStyle}"/>
-                    </tpf:SliderTrack.Thumb>
-                </tpf:SliderTrack>
-            </Grid>
-        </Border>
-        <ControlTemplate.Triggers>
-            <Trigger Property="TickPlacement" Value="TopLeft">
-                <Setter TargetName="TopTick" Property="Visibility" Value="Visible"/>
-            </Trigger>
-            <Trigger Property="TickPlacement" Value="BottomRight">
-                <Setter TargetName="BottomTick" Property="Visibility" Value="Visible"/>
-            </Trigger>
-            <Trigger Property="TickPlacement" Value="Both">
-                <Setter TargetName="TopTick" Property="Visibility" Value="Visible"/>
-                <Setter TargetName="BottomTick" Property="Visibility" Value="Visible"/>
-            </Trigger>
-        </ControlTemplate.Triggers>
-    </ControlTemplate>
-    <Style TargetType="Thumb" x:Key="TPF.VerticalThumbStyle">
+    <Style TargetType="Thumb" BasedOn="{StaticResource TPF.ThumbStyle}" x:Key="TPF.VerticalThumbStyle">
+        <Setter Property="Width" Value="22"/>
+        <Setter Property="Height" Value="9"/>
+    </Style>
+    <Style TargetType="Thumb" x:Key="TPF.RangeMiddleThumbStyle">
+        <Setter Property="Height" Value="6"/>
         <Setter Property="IsTabStop" Value="True"/>
         <Setter Property="Focusable" Value="True"/>
-        <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="Width" Value="22"/>
-        <Setter Property="Height" Value="8"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
-        <Setter Property="Background" Value="{tpf:ResourceLink Key=PrimaryBrush}"/>
-        <Setter Property="BorderBrush" Value="{tpf:ResourceLink Key=BorderBrush}"/>
+        <Setter Property="Background" Value="{tpf:ResourceLink Key=SelectedBrush}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="Thumb">
                     <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"/>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Cursor" Value="Hand"/>
                             <Setter Property="Background" Value="{tpf:ResourceLink Key=MouseOverBrush}"/>
                             <Setter Property="BorderBrush" Value="{tpf:ResourceLink Key=MouseOverAccentBrush}"/>
                         </Trigger>
@@ -4075,51 +4040,258 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <ControlTemplate TargetType="tpf:Slider" x:Key="TPF.VerticalSliderTemplate">
+    <Style TargetType="Thumb" BasedOn="{StaticResource TPF.RangeMiddleThumbStyle}" x:Key="TPF.VerticalRangeMiddleThumbStyle">
+        <Setter Property="Width" Value="6"/>
+        <Setter Property="Height" Value="NaN"/>
+    </Style>
+    <Style TargetType="tpf:RangeSliderThumb" x:Key="TPF.RangeSliderThumbStyle">
+        <Setter Property="Height" Value="22"/>
+        <Setter Property="IsTabStop" Value="False"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="StartThumbStyle" Value="{StaticResource TPF.ThumbStyle}"/>
+        <Setter Property="MiddleThumbStyle" Value="{StaticResource TPF.RangeMiddleThumbStyle}"/>
+        <Setter Property="EndThumbStyle" Value="{StaticResource TPF.ThumbStyle}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="tpf:RangeSliderThumb">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+
+                        <tpf:SliderThumb x:Name="PART_StartThumb" Grid.Column="0" Style="{TemplateBinding StartThumbStyle}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                         Value="{Binding RangeStart, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" Panel.ZIndex="1"/>
+                        <Thumb x:Name="PART_MiddleThumb" Grid.Column="1" Style="{TemplateBinding MiddleThumbStyle}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" Panel.ZIndex="0"/>
+                        <tpf:SliderThumb x:Name="PART_EndThumb" Grid.Column="2" Style="{TemplateBinding EndThumbStyle}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                         Value="{Binding RangeEnd, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}" Panel.ZIndex="2"/>
+                    </Grid>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsDirectionReversed" Value="True">
+                            <Setter TargetName="PART_StartThumb" Property="Grid.Column" Value="2"/>
+                            <Setter TargetName="PART_EndThumb" Property="Grid.Column" Value="0"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="tpf:RangeSliderThumb" x:Key="TPF.VerticalRangeSliderThumbStyle">
+        <Setter Property="Width" Value="22"/>
+        <Setter Property="IsTabStop" Value="False"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="StartThumbStyle" Value="{StaticResource TPF.VerticalThumbStyle}"/>
+        <Setter Property="MiddleThumbStyle" Value="{StaticResource TPF.VerticalRangeMiddleThumbStyle}"/>
+        <Setter Property="EndThumbStyle" Value="{StaticResource TPF.VerticalThumbStyle}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="tpf:RangeSliderThumb">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                            <RowDefinition Height="Auto"/>
+                        </Grid.RowDefinitions>
+
+                        <tpf:SliderThumb x:Name="PART_EndThumb" Grid.Row="0" Style="{TemplateBinding EndThumbStyle}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                         Value="{Binding RangeEnd, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"/>
+                        <Thumb x:Name="PART_MiddleThumb" Grid.Row="1" Style="{TemplateBinding MiddleThumbStyle}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/>
+                        <tpf:SliderThumb x:Name="PART_StartThumb" Grid.Row="2" Style="{TemplateBinding StartThumbStyle}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                         Value="{Binding RangeStart, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"/>
+                    </Grid>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsDirectionReversed" Value="True">
+                            <Setter TargetName="PART_StartThumb" Property="Grid.Row" Value="0"/>
+                            <Setter TargetName="PART_EndThumb" Property="Grid.Row" Value="2"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="tpf:SliderLabelsControl" x:Key="TPF.SliderLabelsControlStyle">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="tpf:SliderLabelsControl">
+                    <Border x:Name="PART_Root" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="tpf:SliderLabelsControl" BasedOn="{StaticResource TPF.SliderLabelsControlStyle}"/>
+    <Style TargetType="tpf:SliderThumbsControl" x:Key="TPF.SliderThumbsControlStyle">
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <tpf:SliderThumbsPanel/>
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="tpf:SliderThumbsControl">
+                    <ItemsPresenter/>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="tpf:SliderThumbsControl" BasedOn="{StaticResource TPF.SliderThumbsControlStyle}"/>
+    <ControlTemplate TargetType="tpf:Slider" x:Key="TPF.HorizontalSliderTemplate">
         <Border BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}">
             <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="*" MinWidth="{TemplateBinding MinWidth}"/>
-                    <ColumnDefinition Width="Auto"/>
-                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*" MinHeight="{TemplateBinding MinHeight}"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
 
-                <tpf:TickBar x:Name="TopTick" Grid.Column="0" TickBrush="{tpf:ResourceLink Key=TextBrush}" Placement="Left" Width="4" Margin="0 0 2 0" Visibility="Collapsed"/>
-                <tpf:TickBar x:Name="BottomTick" Grid.Column="2" TickBrush="{tpf:ResourceLink Key=TextBrush}" Placement="Right" Width="4" Margin="2 0 0 0" Visibility="Collapsed"/>
-                <Border x:Name="TrackBackground" Width="6" Grid.Column="1" Background="#DBDDE6"/>
-                <tpf:SliderTrack x:Name="PART_Track" Grid.Column="1">
+                <tpf:SliderLabelsControl x:Name="PART_TopLeftLabelsControl" Grid.Row="0" Visibility="Collapsed"/>
+                <tpf:TickBar x:Name="PART_TopLeftTickBar" Grid.Row="1" Placement="Top" Height="6" Visibility="Collapsed" IsDirectionReversed="{TemplateBinding IsDirectionReversed}"
+                             Ticks="{TemplateBinding Ticks}" TickBrush="{TemplateBinding TickBrush}" MinorTickBrush="{TemplateBinding MinorTickBrush}"
+                             ActiveTickBrush="{TemplateBinding ActiveTickBrush}" ActiveMinorTickBrush="{TemplateBinding ActiveMinorTickBrush}"/>
+                <tpf:TickBar x:Name="PART_BottomRightTickBar" Grid.Row="3" Placement="Bottom" Height="6" Visibility="Collapsed" IsDirectionReversed="{TemplateBinding IsDirectionReversed}"
+                             Ticks="{TemplateBinding Ticks}" TickBrush="{TemplateBinding TickBrush}" MinorTickBrush="{TemplateBinding MinorTickBrush}"
+                             ActiveTickBrush="{TemplateBinding ActiveTickBrush}" ActiveMinorTickBrush="{TemplateBinding ActiveMinorTickBrush}"/>
+                <tpf:SliderLabelsControl x:Name="PART_BottomRightLabelsControl" Grid.Row="4" Visibility="Collapsed"/>
+
+                <Border x:Name="TrackBackground" Grid.Row="2" Height="6" Background="{TemplateBinding TrackBrush}" CornerRadius="{TemplateBinding TrackCornerRadius}"/>
+
+                <tpf:SliderTrack x:Name="PART_Track" Grid.Row="2" Margin="0 2">
                     <tpf:SliderTrack.DecreaseRepeatButton>
-                        <RepeatButton Command="{x:Static tpf:Slider.DecreaseLarge}" Style="{StaticResource TPF.TransparentRepeatButtonStyle}"/>
+                        <RepeatButton Command="{x:Static tpf:Slider.DecreaseLarge}" Style="{StaticResource TPF.SliderRepeatButtonStyle}" 
+                                      Interval="{TemplateBinding Interval}" Delay="{TemplateBinding Delay}"/>
                     </tpf:SliderTrack.DecreaseRepeatButton>
                     <tpf:SliderTrack.IncreaseRepeatButton>
-                        <RepeatButton Command="{x:Static tpf:Slider.IncreaseLarge}" Style="{StaticResource TPF.TransparentRepeatButtonStyle}"/>
+                        <RepeatButton Command="{x:Static tpf:Slider.IncreaseLarge}" Style="{StaticResource TPF.SliderRepeatButtonStyle}" 
+                                      Interval="{TemplateBinding Interval}" Delay="{TemplateBinding Delay}"/>
                     </tpf:SliderTrack.IncreaseRepeatButton>
                     <tpf:SliderTrack.Thumb>
-                        <Thumb Style="{TemplateBinding ThumbStyle}"/>
+                        <tpf:SliderThumb x:Name="MainThumb" Style="{TemplateBinding ThumbStyle}"/>
                     </tpf:SliderTrack.Thumb>
+                    <tpf:SliderTrack.ValueIndicator>
+                        <Border Height="6" Background="{TemplateBinding ActiveTrackBrush}" CornerRadius="{TemplateBinding TrackCornerRadius}"/>
+                    </tpf:SliderTrack.ValueIndicator>
+                    <tpf:SliderTrack.RangeThumb>
+                        <tpf:RangeSliderThumb Style="{TemplateBinding RangeThumbStyle}"/>
+                    </tpf:SliderTrack.RangeThumb>
+                    <tpf:SliderTrack.ThumbsControl>
+                        <tpf:SliderThumbsControl ItemsSource="{Binding Thumbs, RelativeSource={RelativeSource AncestorType=tpf:Slider}}" 
+                                                 Orientation="{TemplateBinding Orientation}" IsDirectionReversed="{TemplateBinding IsDirectionReversed}"/>
+                    </tpf:SliderTrack.ThumbsControl>
                 </tpf:SliderTrack>
             </Grid>
         </Border>
         <ControlTemplate.Triggers>
             <Trigger Property="TickPlacement" Value="TopLeft">
-                <Setter TargetName="TopTick" Property="Visibility" Value="Visible"/>
+                <Setter TargetName="PART_TopLeftTickBar" Property="Visibility" Value="Visible"/>
             </Trigger>
             <Trigger Property="TickPlacement" Value="BottomRight">
-                <Setter TargetName="BottomTick" Property="Visibility" Value="Visible"/>
+                <Setter TargetName="PART_BottomRightTickBar" Property="Visibility" Value="Visible"/>
             </Trigger>
             <Trigger Property="TickPlacement" Value="Both">
-                <Setter TargetName="TopTick" Property="Visibility" Value="Visible"/>
-                <Setter TargetName="BottomTick" Property="Visibility" Value="Visible"/>
+                <Setter TargetName="PART_TopLeftTickBar" Property="Visibility" Value="Visible"/>
+                <Setter TargetName="PART_BottomRightTickBar" Property="Visibility" Value="Visible"/>
+            </Trigger>
+            <Trigger Property="LabelPlacement" Value="TopLeft">
+                <Setter TargetName="PART_TopLeftLabelsControl" Property="Visibility" Value="Visible"/>
+            </Trigger>
+            <Trigger Property="LabelPlacement" Value="BottomRight">
+                <Setter TargetName="PART_BottomRightLabelsControl" Property="Visibility" Value="Visible"/>
+            </Trigger>
+            <Trigger Property="LabelPlacement" Value="Both">
+                <Setter TargetName="PART_TopLeftLabelsControl" Property="Visibility" Value="Visible"/>
+                <Setter TargetName="PART_BottomRightLabelsControl" Property="Visibility" Value="Visible"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+    <ControlTemplate TargetType="tpf:Slider" x:Key="TPF.VerticalSliderTemplate">
+        <Border BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*" MinWidth="{TemplateBinding MinWidth}"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+
+                <tpf:SliderLabelsControl x:Name="PART_TopLeftLabelsControl" Grid.Column="0" Visibility="Collapsed"/>
+                <tpf:TickBar x:Name="PART_TopLeftTickBar" Grid.Column="1" Placement="Left" Width="6" Visibility="Collapsed" IsDirectionReversed="{TemplateBinding IsDirectionReversed}"
+                             Ticks="{TemplateBinding Ticks}" TickBrush="{TemplateBinding TickBrush}" MinorTickBrush="{TemplateBinding MinorTickBrush}"
+                             ActiveTickBrush="{TemplateBinding ActiveTickBrush}" ActiveMinorTickBrush="{TemplateBinding ActiveMinorTickBrush}"/>
+                <tpf:TickBar x:Name="PART_BottomRightTickBar" Grid.Column="3" Placement="Right" Width="6" Visibility="Collapsed" IsDirectionReversed="{TemplateBinding IsDirectionReversed}"
+                             Ticks="{TemplateBinding Ticks}" TickBrush="{TemplateBinding TickBrush}" MinorTickBrush="{TemplateBinding MinorTickBrush}"
+                             ActiveTickBrush="{TemplateBinding ActiveTickBrush}" ActiveMinorTickBrush="{TemplateBinding ActiveMinorTickBrush}"/>
+                <tpf:SliderLabelsControl x:Name="PART_BottomRightLabelsControl" Grid.Column="4" Visibility="Collapsed"/>
+                
+                <Border x:Name="TrackBackground" Width="6" Grid.Column="2" Background="{TemplateBinding TrackBrush}" CornerRadius="{TemplateBinding TrackCornerRadius}"/>
+                
+                <tpf:SliderTrack x:Name="PART_Track" Grid.Column="2" Margin="2 0">
+                    <tpf:SliderTrack.DecreaseRepeatButton>
+                        <RepeatButton Command="{x:Static tpf:Slider.DecreaseLarge}" Style="{StaticResource TPF.SliderRepeatButtonStyle}" 
+                                      Interval="{TemplateBinding Interval}" Delay="{TemplateBinding Delay}"/>
+                    </tpf:SliderTrack.DecreaseRepeatButton>
+                    <tpf:SliderTrack.IncreaseRepeatButton>
+                        <RepeatButton Command="{x:Static tpf:Slider.IncreaseLarge}" Style="{StaticResource TPF.SliderRepeatButtonStyle}" 
+                                      Interval="{TemplateBinding Interval}" Delay="{TemplateBinding Delay}"/>
+                    </tpf:SliderTrack.IncreaseRepeatButton>
+                    <tpf:SliderTrack.Thumb>
+                        <tpf:SliderThumb x:Name="MainThumb" Style="{TemplateBinding ThumbStyle}"/>
+                    </tpf:SliderTrack.Thumb>
+                    <tpf:SliderTrack.ValueIndicator>
+                        <Border Width="6" Background="{TemplateBinding ActiveTrackBrush}" CornerRadius="{TemplateBinding TrackCornerRadius}"/>
+                    </tpf:SliderTrack.ValueIndicator>
+                    <tpf:SliderTrack.RangeThumb>
+                        <tpf:RangeSliderThumb Style="{TemplateBinding RangeThumbStyle}"/>
+                    </tpf:SliderTrack.RangeThumb>
+                    <tpf:SliderTrack.ThumbsControl>
+                        <tpf:SliderThumbsControl ItemsSource="{Binding Thumbs, RelativeSource={RelativeSource AncestorType=tpf:Slider}}" 
+                                                 Orientation="{TemplateBinding Orientation}" IsDirectionReversed="{TemplateBinding IsDirectionReversed}"/>
+                    </tpf:SliderTrack.ThumbsControl>
+                </tpf:SliderTrack>
+            </Grid>
+        </Border>
+        <ControlTemplate.Triggers>
+            <Trigger Property="TickPlacement" Value="TopLeft">
+                <Setter TargetName="PART_TopLeftTickBar" Property="Visibility" Value="Visible"/>
+            </Trigger>
+            <Trigger Property="TickPlacement" Value="BottomRight">
+                <Setter TargetName="PART_BottomRightTickBar" Property="Visibility" Value="Visible"/>
+            </Trigger>
+            <Trigger Property="TickPlacement" Value="Both">
+                <Setter TargetName="PART_TopLeftTickBar" Property="Visibility" Value="Visible"/>
+                <Setter TargetName="PART_BottomRightTickBar" Property="Visibility" Value="Visible"/>
+            </Trigger>
+            <Trigger Property="LabelPlacement" Value="TopLeft">
+                <Setter TargetName="PART_TopLeftLabelsControl" Property="Visibility" Value="Visible"/>
+            </Trigger>
+            <Trigger Property="LabelPlacement" Value="BottomRight">
+                <Setter TargetName="PART_BottomRightLabelsControl" Property="Visibility" Value="Visible"/>
+            </Trigger>
+            <Trigger Property="LabelPlacement" Value="Both">
+                <Setter TargetName="PART_TopLeftLabelsControl" Property="Visibility" Value="Visible"/>
+                <Setter TargetName="PART_BottomRightLabelsControl" Property="Visibility" Value="Visible"/>
             </Trigger>
         </ControlTemplate.Triggers>
     </ControlTemplate>
     <Style TargetType="tpf:Slider" x:Key="TPF.SliderStyle">
         <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="TrackBrush" Value="{tpf:ResourceLink Key=ScrollBarBrush}"/>
+        <Setter Property="TickBrush" Value="{tpf:ResourceLink Key=TextBrush}"/>
         <Setter Property="ThumbStyle" Value="{StaticResource TPF.ThumbStyle}"/>
+        <Setter Property="RangeThumbStyle" Value="{StaticResource TPF.RangeSliderThumbStyle}"/>
         <Setter Property="Template" Value="{StaticResource TPF.HorizontalSliderTemplate}"/>
         <Style.Triggers>
             <Trigger Property="Orientation" Value="Vertical">
                 <Setter Property="ThumbStyle" Value="{StaticResource TPF.VerticalThumbStyle}"/>
+                <Setter Property="RangeThumbStyle" Value="{StaticResource TPF.VerticalRangeSliderThumbStyle}"/>
                 <Setter Property="Template" Value="{StaticResource TPF.VerticalSliderTemplate}"/>
             </Trigger>
         </Style.Triggers>
