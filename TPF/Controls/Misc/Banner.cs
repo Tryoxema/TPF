@@ -190,28 +190,28 @@ namespace TPF.Controls
                 {
                     from = -contentWidth;
                     to = width;
-                    propertyPath = new PropertyPath("(UIElement.RenderTransform).(TransformGroup.Children)[0].(TranslateTransform.X)");
+                    propertyPath = new PropertyPath("(UIElement.RenderTransform).(TranslateTransform.X)");
                     break;
                 }
                 case BannerDirection.RightToLeft:
                 {
                     from = width;
                     to = -contentWidth;
-                    propertyPath = new PropertyPath("(UIElement.RenderTransform).(TransformGroup.Children)[0].(TranslateTransform.X)");
+                    propertyPath = new PropertyPath("(UIElement.RenderTransform).(TranslateTransform.X)");
                     break;
                 }
                 case BannerDirection.TopToBottom:
                 {
                     from = -contentHeight;
                     to = height;
-                    propertyPath = new PropertyPath("(UIElement.RenderTransform).(TransformGroup.Children)[0].(TranslateTransform.Y)");
+                    propertyPath = new PropertyPath("(UIElement.RenderTransform).(TranslateTransform.Y)");
                     break;
                 }
                 case BannerDirection.BottomToTop:
                 {
                     from = height;
                     to = -contentHeight;
-                    propertyPath = new PropertyPath("(UIElement.RenderTransform).(TransformGroup.Children)[0].(TranslateTransform.Y)");
+                    propertyPath = new PropertyPath("(UIElement.RenderTransform).(TranslateTransform.Y)");
                     break;
                 }
                 default: return;

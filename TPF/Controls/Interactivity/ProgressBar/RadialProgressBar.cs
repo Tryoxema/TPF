@@ -426,7 +426,7 @@ namespace TPF.Controls
 
         private static double GetCalculationAngle(double angle)
         {
-            // Für das Zeichnen wird oben mitte als 0 angesehen, für die Angle-Properties unten mitte
+            // Für das Zeichnen wird oben Mitte als 0 angesehen, für die Angle-Properties unten Mitte
             // Der Wert muss also um 180 Grad gedreht werden
             angle += 180.0;
 
