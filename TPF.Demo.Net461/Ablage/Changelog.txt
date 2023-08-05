@@ -52,6 +52,10 @@
 	Die Properties SegmentCount und GapWidth wurden aus der Klasse ProgressBar in die Basisklasse ProgressBarBase verschoben, wodurch sie jetzt auch dem RadialProgressBar-Control zur verfügung stehen.
 	Das Control kann jetzt eben so wie das normale ProgressBar-Control in beliebig viele Segmente unterteilt werden, die einen einstellbaren Abstand zueinander haben.
 
+-Sonstige Änderungen:
+--.Net6-Support
+	Ab Version 0.6.7 ist TPF nun auch für .Net 6 verfügbar
+
 ===== 0.6.6 =====
 -Veränderte Controls
 --NumericRangeBox
