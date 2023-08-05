@@ -48,6 +48,9 @@
 	Im dritten Modus Custom werden die normalen Funktionen des Sliders deaktiviert und stattdessen werden alle Thumbs angezeigt, die sich in der neuen Collection der Thumbs-Property befinden.
 	In diese Collection können beliebig viele SliderThumbs und RangeSliderThumbs hinzugefügt werden wie man braucht.
 	Die Thumbs haben ihre Werte alle in sich selbst gespeichert und die Properties Value, RangeStart, RangeEnd, MinimumRangeSpan und MaximumRangeSpan des Sliders werden nicht genutzt.
+--RadialProgressBar
+	Die Properties SegmentCount und GapWidth wurden aus der Klasse ProgressBar in die Basisklasse ProgressBarBase verschoben, wodurch sie jetzt auch dem RadialProgressBar-Control zur verfügung stehen.
+	Das Control kann jetzt eben so wie das normale ProgressBar-Control in beliebig viele Segmente unterteilt werden, die einen einstellbaren Abstand zueinander haben.
 
 ===== 0.6.6 =====
 -Veränderte Controls

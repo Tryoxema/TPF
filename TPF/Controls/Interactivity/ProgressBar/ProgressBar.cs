@@ -15,55 +15,6 @@ namespace TPF.Controls
             DefaultStyleKeyProperty.OverrideMetadata(typeof(ProgressBar), new FrameworkPropertyMetadata(typeof(ProgressBar)));
         }
 
-        #region SegmentCount DependencyProperty
-        public static readonly DependencyProperty SegmentCountProperty = DependencyProperty.Register("SegmentCount",
-            typeof(int),
-            typeof(ProgressBar),
-            new PropertyMetadata(1, OnSegmentCountPropertyChanged));
-
-        private static void OnSegmentCountPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
-        {
-            var instance = (ProgressBar)sender;
-
-            instance.ClearSegmentsCache();
-
-            instance.GenerateSegments();
-            instance.ResizeSegments();
-
-            if (instance.IsIndeterminate) instance.ResizeIndeterminateSegments();
-            else instance.ResizeValueSegments();
-        }
-
-        public int SegmentCount
-        {
-            get { return (int)GetValue(SegmentCountProperty); }
-            set { SetValue(SegmentCountProperty, value); }
-        }
-        #endregion
-
-        #region GapWidth DependencyProperty
-        public static readonly DependencyProperty GapWidthProperty = DependencyProperty.Register("GapWidth",
-            typeof(double),
-            typeof(ProgressBar),
-            new PropertyMetadata(5.0, OnGapWidthPropertyChanged));
-
-        private static void OnGapWidthPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
-        {
-            var instance = (ProgressBar)sender;
-
-            instance.ResizeSegments();
-
-            if (instance.IsIndeterminate) instance.ResizeIndeterminateSegments();
-            else instance.ResizeValueSegments();
-        }
-
-        public double GapWidth
-        {
-            get { return (double)GetValue(GapWidthProperty); }
-            set { SetValue(GapWidthProperty, value); }
-        }
-        #endregion
-
         #region CornerRadius DependencyProperty
         public static readonly DependencyProperty CornerRadiusProperty = DependencyProperty.Register("CornerRadius",
             typeof(CornerRadius),
@@ -184,6 +135,29 @@ namespace TPF.Controls
             if (newValue) StartAnimation();
         }
 
+        protected override void OnSegmentCountChanged(int oldValue, int newValue)
+        {
+            base.OnSegmentCountChanged(oldValue, newValue);
+
+            ClearSegmentsCache();
+
+            GenerateSegments();
+            ResizeSegments();
+
+            if (IsIndeterminate) ResizeIndeterminateSegments();
+            else ResizeValueSegments();
+        }
+
+        protected override void OnGapWidthChanged(double oldValue, double newValue)
+        {
+            base.OnGapWidthChanged(oldValue, newValue);
+
+            ResizeSegments();
+
+            if (IsIndeterminate) ResizeIndeterminateSegments();
+            else ResizeValueSegments();
+        }
+
         private void StartAnimation()
         {
             // Falls aus irgend einem Grund eine Animation läuft, diese entfernen
@@ -244,7 +218,7 @@ namespace TPF.Controls
             var width = _segmentsPanel.ActualWidth;
             var height = _segmentsPanel.ActualHeight;
             var gapCount = segmentCount - 1;
-            var gapWidth = GapWidth;
+            var gapWidth = Math.Max(0, GapWidth);
             var totalSegmentWidth = Math.Max(0, width - gapCount * gapWidth);
             var segmentWidth = totalSegmentWidth / segmentCount;
 

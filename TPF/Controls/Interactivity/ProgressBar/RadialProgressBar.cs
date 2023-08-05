@@ -7,12 +7,9 @@ using TPF.Internal;
 
 namespace TPF.Controls
 {
-    [TemplatePart(Name = "PART_BackgroundFigure", Type = typeof(PathFigure))]
-    [TemplatePart(Name = "PART_BackgroundArc", Type = typeof(ArcSegment))]
-    [TemplatePart(Name = "PART_GlowFigure", Type = typeof(PathFigure))]
-    [TemplatePart(Name = "PART_GlowArc", Type = typeof(ArcSegment))]
-    [TemplatePart(Name = "PART_ValueFigure", Type = typeof(PathFigure))]
-    [TemplatePart(Name = "PART_ValueArc", Type = typeof(ArcSegment))]
+    [TemplatePart(Name = "PART_Track", Type = typeof(Path))]
+    [TemplatePart(Name = "PART_SecondaryProgress", Type = typeof(Path))]
+    [TemplatePart(Name = "PART_Progress", Type = typeof(Path))]
     public class RadialProgressBar : ProgressBarBase
     {
         public RadialProgressBar()
@@ -279,6 +276,20 @@ namespace TPF.Controls
             if (newValue) StartAnimation();
         }
 
+        protected override void OnSegmentCountChanged(int oldValue, int newValue)
+        {
+            base.OnSegmentCountChanged(oldValue, newValue);
+
+            RenderAll();
+        }
+
+        protected override void OnGapWidthChanged(double oldValue, double newValue)
+        {
+            base.OnGapWidthChanged(oldValue, newValue);
+
+            RenderAll();
+        }
+
         private void StartAnimation()
         {
             // Falls aus irgend einem Grund eine Animation läuft, diese entfernen
@@ -306,23 +317,27 @@ namespace TPF.Controls
             if (ProgressPath == null) return;
 
             var availableAngle = EndAngle - StartAngle;
-            // Alles über 360 Grad ergibt keinen sinn, also kürzen
+            // Alles über 360 Grad ergibt keinen Sinn, also kürzen
             while (availableAngle > 360.0) availableAngle -= 360.0;
+
+            // Für die Berechnung wird bei weniger als 360 Grad ein zweiter Wert benötigt
+            // Wenn man alles mit einem Wert rechnet ist entweder der Anfang oder das Ende nicht korrekt
+            var calculationAngle = availableAngle;
 
             var startAngle = StartAngle;
 
             // Bei weniger als 360 Grad müssen wir 25% des verfügbaren Bereichs vor dem Anfang simulieren, damit der Balken nicht einfach komplett sichtbar startet
             if (availableAngle < 360.0)
             {
-                availableAngle *= 1.25;
+                calculationAngle *= 1.25;
                 startAngle -= availableAngle * 0.25;
             }
 
             // Start und Ende berechnen
-            var start = startAngle + availableAngle * AnimationProgressFactor;
+            var start = startAngle + calculationAngle * AnimationProgressFactor;
             var end = start + availableAngle * 0.25;
 
-            // Bei weniger als 360 Grad start und ende an den verfügbaren Bereich angleichen
+            // Bei weniger als 360 Grad Start und Ende an den verfügbaren Bereich angleichen
             if (availableAngle < 360.0)
             {
                 start = Math.Max(StartAngle, start);
@@ -437,6 +452,10 @@ namespace TPF.Controls
         {
             if (startAngle == endAngle) return;
 
+            // Immer mindestens ein Segment generieren
+            var segmentCount = Math.Max(1, SegmentCount);
+
+            var barStartAngle = GetCalculationAngle(StartAngle);
             var calculationStartAngle = GetCalculationAngle(startAngle);
             var calculationEndAngle = GetCalculationAngle(endAngle);
             var angleDelta = calculationEndAngle - calculationStartAngle;
@@ -452,8 +471,8 @@ namespace TPF.Controls
             var outerArcSize = new Size(calculationOuterRadius, calculationOuterRadius);
             var innerArcSize = new Size(calculationInnerRadius, calculationInnerRadius);
 
-            // Ist es ein vollständiger Kreis?
-            if (angleDelta >= 360)
+            // Ist es ein vollständiger Kreis in einem Segment?
+            if (angleDelta >= 360 && segmentCount == 1)
             {
                 // Da ArcTo bei 360 Grad gar nicht zeichnet, müssen 2 halbe Kreise gemalt werden
                 var outerArcTopPoint = Helper.ComputeCartesianCoordinate(arcCenter, calculationStartAngle, calculationOuterRadius);
@@ -461,28 +480,100 @@ namespace TPF.Controls
                 var innerArcTopPoint = Helper.ComputeCartesianCoordinate(arcCenter, calculationStartAngle, calculationInnerRadius);
                 var innerArcBottomPoint = Helper.ComputeCartesianCoordinate(arcCenter, calculationStartAngle + 180, calculationInnerRadius);
 
+                // Zeichnen
                 context.BeginFigure(innerArcTopPoint, true, true);
-                context.LineTo(outerArcTopPoint, true, true);
+                context.LineTo(outerArcTopPoint, false, true);
                 context.ArcTo(outerArcBottomPoint, outerArcSize, 0, false, SweepDirection.Clockwise, true, true);
                 context.ArcTo(outerArcTopPoint, outerArcSize, 0, false, SweepDirection.Clockwise, true, true);
-                context.LineTo(innerArcTopPoint, true, true);
+                context.LineTo(innerArcTopPoint, false, true);
                 context.ArcTo(innerArcBottomPoint, innerArcSize, 0, false, SweepDirection.Counterclockwise, true, true);
                 context.ArcTo(innerArcTopPoint, innerArcSize, 0, false, SweepDirection.Counterclockwise, true, true);
             }
             else
             {
-                var outerArcStartPoint = Helper.ComputeCartesianCoordinate(arcCenter, calculationStartAngle, calculationOuterRadius);
-                var outerArcEndPoint = Helper.ComputeCartesianCoordinate(arcCenter, calculationStartAngle + angleDelta, calculationOuterRadius);
-                var innerArcStartPoint = Helper.ComputeCartesianCoordinate(arcCenter, calculationStartAngle, calculationInnerRadius);
-                var innerArcEndPoint = Helper.ComputeCartesianCoordinate(arcCenter, calculationStartAngle + angleDelta, calculationInnerRadius);
+                var totalAngleDelta = EndAngle - StartAngle;
+                // Alles über 360 Grad verkompliziert nur die Berechnung, also wird es auf 360 Grad beschränkt
+                while (totalAngleDelta > 360.0) totalAngleDelta -= 360;
 
-                var largeArc = angleDelta > 180.0;
+                var angleDeltaPerSegment = totalAngleDelta / segmentCount;
+                var halfGapAngle = 0d;
 
-                context.BeginFigure(innerArcStartPoint, true, true);
-                context.LineTo(outerArcStartPoint, true, true);
-                context.ArcTo(outerArcEndPoint, outerArcSize, 0, largeArc, SweepDirection.Clockwise, true, true);
-                context.LineTo(innerArcEndPoint, true, true);
-                context.ArcTo(innerArcStartPoint, innerArcSize, 0, largeArc, SweepDirection.Counterclockwise, true, true);
+                // Bei mehr als einem Segment den Abstand ausrechnen
+                if (segmentCount > 1)
+                {
+                    var angleFactor = angleDelta / 360;
+                    var circumference = ActualWidth * angleFactor * Math.PI;
+                    var gapWidth = Math.Max(0, GapWidth);
+                    var gapFactor = gapWidth / circumference;
+                    var gapAngle = angleDelta * gapFactor;
+                    halfGapAngle = gapAngle / 2;
+                }
+
+                for (int i = 0; i < segmentCount; i++)
+                {
+                    var segmentStart = barStartAngle + angleDeltaPerSegment * i;
+                    var segmentEnd = segmentStart + angleDeltaPerSegment;
+
+                    double valueStart;
+                    var valueEnd = calculationEndAngle < segmentEnd ? calculationEndAngle : segmentEnd;
+
+                    if (IsIndeterminate)
+                    {
+                        // Wenn der zu zeichnende Bereich noch nicht erreicht wurde, können wir das Segment überspringen
+                        if (calculationEndAngle <= segmentStart) continue;
+
+                        valueStart = calculationStartAngle > segmentStart ? calculationStartAngle : segmentStart;
+
+                        if (calculationEndAngle > barStartAngle + 360 && totalAngleDelta == 360)
+                        {
+                            // -= 360 funktioniert bei nur einem Segment
+                            // bei mehreren Segmenten funktioniert muss anders gerechnet werden
+                            if (segmentCount == 1)
+                            {
+                                valueStart -= 360;
+                                valueEnd = calculationEndAngle - 360 < segmentEnd ? calculationEndAngle - 360 : segmentEnd;
+                            }
+                            else if (valueStart > segmentEnd)
+                            {
+                                valueStart = Math.Max(segmentStart, valueStart - 360);
+                                valueEnd = calculationEndAngle - 360 < segmentEnd ? calculationEndAngle - 360 : segmentEnd;
+                            }
+                        }
+                        // Wenn der Start nach unserer Umrechnung nach dem Ende des aktuellen Segments kommt, können wir das überspringen
+                        if (valueStart > segmentEnd) continue;
+                    }
+                    else
+                    {
+                        // Wenn der zu zeichnende Bereich noch nicht erreicht wurde oder überschritten wurde, können wir das Segment überspringen
+                        if (calculationStartAngle > segmentEnd || calculationEndAngle <= segmentStart) continue;
+
+                        valueStart = segmentStart;
+                    }
+
+                    var adjustedValueStart = valueStart + halfGapAngle;
+                    // Faktor der Distanz zwischen Start und Ende
+                    var factor = (valueEnd - valueStart) / angleDeltaPerSegment;
+                    // Anhand des tatsächlichen Starts und des Faktors des Segments den korrekten Endpunkt bestimmen
+                    var adjustedValueEnd = Math.Min(adjustedValueStart + (factor * (angleDeltaPerSegment - (2 * halfGapAngle))), segmentEnd - halfGapAngle);
+
+                    // Wenn durch die Rechnung ein Ende vor dem Start liegt, können wir das Segment überspringen
+                    if (adjustedValueEnd < adjustedValueStart) continue;
+
+                    var outerArcTopPoint = Helper.ComputeCartesianCoordinate(arcCenter, adjustedValueStart, calculationOuterRadius);
+                    var outerArcBottomPoint = Helper.ComputeCartesianCoordinate(arcCenter, adjustedValueEnd, calculationOuterRadius);
+                    var innerArcTopPoint = Helper.ComputeCartesianCoordinate(arcCenter, adjustedValueStart, calculationInnerRadius);
+                    var innerArcBottomPoint = Helper.ComputeCartesianCoordinate(arcCenter, adjustedValueEnd, calculationInnerRadius);
+
+                    // Wenn der Wert mehr als 180 Grad ist, muss ArcTo gesagt werden, dass es sich um einen großen Bogen handelt
+                    var isLargeArc = adjustedValueEnd - adjustedValueStart > 180.0;
+
+                    // Zeichnen
+                    context.BeginFigure(outerArcTopPoint, true, true);
+                    context.ArcTo(outerArcBottomPoint, outerArcSize, 0, isLargeArc, SweepDirection.Clockwise, true, true);
+                    context.LineTo(innerArcBottomPoint, true, true);
+                    context.ArcTo(innerArcTopPoint, innerArcSize, 0, isLargeArc, SweepDirection.Counterclockwise, true, true);
+                    context.LineTo(outerArcTopPoint, true, true);
+                }
             }
         }
     }

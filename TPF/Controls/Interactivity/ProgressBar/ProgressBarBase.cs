@@ -168,6 +168,46 @@ namespace TPF.Controls
         }
         #endregion
 
+        #region SegmentCount DependencyProperty
+        public static readonly DependencyProperty SegmentCountProperty = DependencyProperty.Register("SegmentCount",
+            typeof(int),
+            typeof(ProgressBarBase),
+            new PropertyMetadata(1, OnSegmentCountPropertyChanged));
+
+        private static void OnSegmentCountPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+        {
+            var instance = (ProgressBarBase)sender;
+
+            instance.OnSegmentCountChanged((int)e.OldValue, (int)e.NewValue);
+        }
+
+        public int SegmentCount
+        {
+            get { return (int)GetValue(SegmentCountProperty); }
+            set { SetValue(SegmentCountProperty, value); }
+        }
+        #endregion
+
+        #region GapWidth DependencyProperty
+        public static readonly DependencyProperty GapWidthProperty = DependencyProperty.Register("GapWidth",
+            typeof(double),
+            typeof(ProgressBarBase),
+            new PropertyMetadata(5.0, OnGapWidthPropertyChanged));
+
+        private static void OnGapWidthPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+        {
+            var instance = (ProgressBarBase)sender;
+
+            instance.OnGapWidthChanged((double)e.OldValue, (double)e.NewValue);
+        }
+
+        public double GapWidth
+        {
+            get { return (double)GetValue(GapWidthProperty); }
+            set { SetValue(GapWidthProperty, value); }
+        }
+        #endregion
+
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
@@ -192,6 +232,10 @@ namespace TPF.Controls
         protected virtual void OnSecondaryProgressChanged(double oldValue, double newValue) { }
 
         protected virtual void OnIsIndeterminateChanged(bool oldValue, bool newValue) { }
+
+        protected virtual void OnSegmentCountChanged(int oldValue, int newValue) { }
+
+        protected virtual void OnGapWidthChanged(double oldValue, double newValue) { }
 
         protected virtual void UpdateVisualState(bool useTransitions)
         {
