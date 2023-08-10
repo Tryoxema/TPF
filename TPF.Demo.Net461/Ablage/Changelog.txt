@@ -1,4 +1,17 @@
-﻿===== 0.6.7 =====
+﻿===== 0.6.8 =====
+-Neue Controls
+--ResizeableScrollBar
+	Die ResizeableScrollBar ist eine besondere Version der normalen ScrollBar, bei der es möglich ist den Bereich den die ScrollBar abdeckt, selber skalieren zu können.
+	Gedacht ist das Control für Fälle, wo es einen größeren Bereich an Daten gibt und Scrollen erwünscht ist, es aber gleichzeitig möglich sein soll, die angezeigte Menge an Daten zu ändern.
+	Um das zu bewerkstelligen stellt das Control die Properties Minimum und Maximum zur verfügung, um den verfügbaren Werteraum eintragen zu können.
+	Der aktuelle Werteraum wird über die Properties RangeStart und RangeEnd dargestellt und beim ändern der Werte wird das Scrolling-Event ausgelöst.
+	Zusätzlich lässt sich über die Properties MinimumRangeSpan und MaximumRangeSpan der minimale und maximale Abstand von Start und Ende einstellen.
+	Die Orientierung der ResizeableScrollBar lässt sich über die Orientation-Property ändern.
+	Mit der ButtonVisibility-Property lassen sich die Buttons an Start und Ende der ResizeableScrollBar ein- und ausblenden.
+	Die Schrittgröße in denen sich die ResizeableScrollBar beim klicken auf einen der Buttons bewegt lässt sich über die SmallChange-Property konfigurieren.
+	Für das klicken auf den scrollbaren Bereich in dem sich der Balken aktuell nicht befindet wird die Schrittgröße über die LargeChange-Property gesteuert.
+
+===== 0.6.7 =====
 -Neue Controls
 --Banner
 	Das Banner-Control ist ein ContentControl das dafür gedacht ist, um seinen Content animiert über den Bildschirm zu bewegen.

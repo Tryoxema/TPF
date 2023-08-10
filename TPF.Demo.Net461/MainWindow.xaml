@@ -75,26 +75,24 @@
                             <TextBlock Text="Das Banner ist ein Control zum animieren von Content der in eine bestimmte Richtung läuft" VerticalAlignment="Center"/>
                         </tpf:Banner>
 
-                        <tpf:Slider Value="{Binding SliderValue}" Grid.Column="1" Height="150" Margin="0 5 0 0" VerticalAlignment="Top" HorizontalAlignment="Center" IsDirectionReversed="True"
-                                    TickPlacement="Both" LabelPlacement="TopLeft" Orientation="Vertical" MinorTickFrequency="1" ActiveTickBrush="ForestGreen" ActiveTrackBrush="ForestGreen"
-                                    ThumbMode="Custom">
-                            <tpf:Slider.Thumbs>
-                                <tpf:SliderThumb Value="1"/>
-                                <tpf:SliderThumb Value="2"/>
-                                <tpf:SliderThumb Value="4"/>
-                                <tpf:RangeSliderThumb/>
-                            </tpf:Slider.Thumbs>
-                        </tpf:Slider>
-                        <tpf:Slider Value="{Binding SliderValue}" Grid.Column="1" Height="70" TrackCornerRadius="4" ActiveTrackBrush="{tpf:ResourceLink Key=SelectedBrush}" IsDirectionReversed="False"
-                                    TickPlacement="Both" LabelPlacement="Both" MinorTickFrequency="3" ActiveTickBrush="{tpf:ResourceLink Key=SelectedBrush}" IsSnapToTickEnabled="True"
-                                    ThumbMode="Single" MaximumRangeSpan="5" MinimumRangeSpan="1" HandlesMouseWheel="True">
-                            <tpf:Slider.Thumbs>
-                                <tpf:SliderThumb Value="1"/>
-                                <tpf:SliderThumb Value="2"/>
-                                <tpf:SliderThumb Value="4"/>
-                                <tpf:RangeSliderThumb RangeEnd="0.5"/>
-                            </tpf:Slider.Thumbs>
-                        </tpf:Slider>
+                        <Grid Grid.Column="1">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <StackPanel Grid.Row="0">
+                                <TextBlock Text="{Binding ElementName=VerticalTestBar, Path=RangeStart}"/>
+                                <TextBlock Text="{Binding ElementName=VerticalTestBar, Path=RangeEnd}"/>
+                            </StackPanel>
+                            <tpf:ResizeableScrollBar x:Name="VerticalTestBar" Grid.Row="0" RangeStart="0" RangeEnd="1" ButtonVisibility="Visible" Orientation="Vertical"/>
+
+                            <StackPanel Grid.Row="1">
+                                <TextBlock Text="{Binding ElementName=HorizontalTestBar, Path=RangeStart}"/>
+                                <TextBlock Text="{Binding ElementName=HorizontalTestBar, Path=RangeEnd}"/>
+                            </StackPanel>
+                            <tpf:ResizeableScrollBar x:Name="HorizontalTestBar" Grid.Row="1" RangeStart="0" RangeEnd="0.8" MinimumRangeSpan="0.1" MaximumRangeSpan="0.8" ButtonVisibility="Visible" Orientation="Horizontal"/>
+                        </Grid>
                     </Grid>
                 </Grid>
             </tpf:TabItem>
@@ -193,8 +191,8 @@
             </StatusBarItem>
             <StatusBarItem>
                 <StackPanel Orientation="Horizontal">
-                    <tpf:Shield Label="Dev" Content="0.6.7" Margin="0 0 5 0" tpf:Poptip.Content="Aktuelle Entwicklungs-Version"/>
-                    <tpf:Shield Label="Release" Content="0.6.6" Margin="0 0 5 0" tpf:Poptip.Content="Aktuelle Release-Version"/>
+                    <tpf:Shield Label="Dev" Content="0.6.8" Margin="0 0 5 0" tpf:Poptip.Content="Aktuelle Entwicklungs-Version"/>
+                    <tpf:Shield Label="Release" Content="0.6.7" Margin="0 0 5 0" tpf:Poptip.Content="Aktuelle Release-Version"/>
                     <tpf:Shield Label="Skins" Content="4" Background="Orange">
                         <tpf:Poptip.Instance>
                             <tpf:Poptip Placement="BottomLeft" Offset="0">

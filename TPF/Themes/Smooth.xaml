@@ -2145,6 +2145,152 @@
 
     <!-- ========== Slider ========== -->
 
+    <!-- ========== ResizeableScrollBar ========== -->
+    <ControlTemplate TargetType="Thumb" x:Key="TPF.ResizeableScrollBarResizeThumbTemplate">
+        <tpf:SimplePanel Background="Transparent">
+            <Border x:Name="Bar" Background="{tpf:ResourceLink Key=AccentBrush}" 
+                    CornerRadius="{Binding RelativeSource={RelativeSource AncestorType=Thumb}, Path=(tpf:BorderElement.CornerRadius)}" SnapsToDevicePixels="True"/>
+        </tpf:SimplePanel>
+
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter TargetName="Bar" Property="Background" Value="{tpf:ResourceLink Key=MouseOverAccentBrush}"/>
+            </Trigger>
+            <Trigger Property="IsDragging" Value="True">
+                <Setter TargetName="Bar" Property="Background" Value="{tpf:ResourceLink Key=PressedAccentBrush}"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter TargetName="Bar" Property="Opacity" Value="{tpf:ResourceLink Key=DisabledOpacity}"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+    <Style TargetType="Thumb" x:Key="TPF.ResizeableScrollBarHorizontalResizeThumbStyle">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="IsTabStop" Value="False"/>
+        <Setter Property="Margin" Value="0 3"/>
+        <Setter Property="Width" Value="4"/>
+        <Setter Property="Template" Value="{StaticResource TPF.ResizeableScrollBarResizeThumbTemplate}"/>
+    </Style>
+    <Style TargetType="Thumb" x:Key="TPF.ResizeableScrollBarVerticalResizeThumbStyle" BasedOn="{StaticResource TPF.ResizeableScrollBarHorizontalResizeThumbStyle}">
+        <Setter Property="Margin" Value="3 0"/>
+        <Setter Property="Height" Value="4"/>
+        <Setter Property="Width" Value="NaN"/>
+    </Style>
+    <Style TargetType="Thumb" x:Key="TPF.ResizeableScrollBarHorizontalMiddleThumbStyle">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="IsTabStop" Value="False"/>
+        <Setter Property="Margin" Value="0 3"/>
+        <Setter Property="Template" Value="{StaticResource TPF.ResizeableScrollBarMiddleThumbTemplate}"/>
+    </Style>
+    <Style TargetType="Thumb" x:Key="TPF.ResizeableScrollBarVerticalMiddleThumbStyle" BasedOn="{StaticResource TPF.ResizeableScrollBarHorizontalMiddleThumbStyle}">
+        <Setter Property="Margin" Value="3 0"/>
+    </Style>
+    <ControlTemplate TargetType="tpf:ResizeableScrollBar" x:Key="TPF.HorizontalResizeableScrollBarTemplate">
+        <Grid UseLayoutRounding="True">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Border Grid.ColumnSpan="3" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}"/>
+
+            <RepeatButton Grid.Column="0" Width="12" Style="{StaticResource TPF.ResizeableScrollBarRepeatButtonStyle}" 
+                          Command="{x:Static tpf:ResizeableScrollBar.LineLeft}" Visibility="{TemplateBinding ButtonVisibility}">
+                <Path Width="5" Height="6" Data="M0,3 L4,0 5,0 5,6 4,6 z" Fill="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType=RepeatButton}}"/>
+            </RepeatButton>
+
+            <tpf:ResizeableScrollBarTrack x:Name="PART_Track" Grid.Column="1" Orientation="Horizontal">
+                <tpf:ResizeableScrollBarTrack.DecreaseRepeatButton>
+                    <RepeatButton Style="{StaticResource TPF.ResizeableScrollBarRepeatButtonStyle}" Command="{x:Static tpf:ResizeableScrollBar.PageLeft}"/>
+                </tpf:ResizeableScrollBarTrack.DecreaseRepeatButton>
+                <tpf:ResizeableScrollBarTrack.StartThumb>
+                    <Thumb Style="{TemplateBinding StartThumbStyle}" Cursor="SizeWE" tpf:BorderElement.CornerRadius="3 0 0 3"/>
+                </tpf:ResizeableScrollBarTrack.StartThumb>
+                <tpf:ResizeableScrollBarTrack.MiddleThumb>
+                    <Thumb Style="{TemplateBinding MiddleThumbStyle}"/>
+                </tpf:ResizeableScrollBarTrack.MiddleThumb>
+                <tpf:ResizeableScrollBarTrack.EndThumb>
+                    <Thumb Style="{TemplateBinding EndThumbStyle}" Cursor="SizeWE" tpf:BorderElement.CornerRadius="0 3 3 0"/>
+                </tpf:ResizeableScrollBarTrack.EndThumb>
+                <tpf:ResizeableScrollBarTrack.IncreaseRepeatButton>
+                    <RepeatButton Style="{StaticResource TPF.ResizeableScrollBarRepeatButtonStyle}" Command="{x:Static tpf:ResizeableScrollBar.PageRight}"/>
+                </tpf:ResizeableScrollBarTrack.IncreaseRepeatButton>
+            </tpf:ResizeableScrollBarTrack>
+
+            <RepeatButton Grid.Column="2" Width="12" Style="{StaticResource TPF.ResizeableScrollBarRepeatButtonStyle}" 
+                          Command="{x:Static tpf:ResizeableScrollBar.LineRight}" Visibility="{TemplateBinding ButtonVisibility}">
+                <Path Width="5" Height="6" Data="M0,0 L0,6 1,6 5,3 1,0 z" Fill="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType=RepeatButton}}"/>
+            </RepeatButton>
+        </Grid>
+    </ControlTemplate>
+    <ControlTemplate TargetType="tpf:ResizeableScrollBar" x:Key="TPF.VerticalResizeableScrollBarTemplate">
+        <Grid UseLayoutRounding="True">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <Border Grid.RowSpan="3" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}"/>
+
+            <RepeatButton Grid.Row="0" Height="12" Style="{StaticResource TPF.ResizeableScrollBarRepeatButtonStyle}" 
+                          Command="{x:Static tpf:ResizeableScrollBar.LineUp}" Visibility="{TemplateBinding ButtonVisibility}">
+                <Path Margin="0 0 0 0" Width="6" Height="5" Data="M0,5 L0,4 3,0 6,4 6,5 z" Fill="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType=RepeatButton}}"/>
+            </RepeatButton>
+
+            <tpf:ResizeableScrollBarTrack x:Name="PART_Track" Grid.Row="1" Orientation="Vertical">
+                <tpf:ResizeableScrollBarTrack.DecreaseRepeatButton>
+                    <RepeatButton Style="{StaticResource TPF.ResizeableScrollBarRepeatButtonStyle}" Command="{x:Static tpf:ResizeableScrollBar.PageUp}"/>
+                </tpf:ResizeableScrollBarTrack.DecreaseRepeatButton>
+                <tpf:ResizeableScrollBarTrack.StartThumb>
+                    <Thumb Style="{TemplateBinding StartThumbStyle}" Cursor="SizeNS" tpf:BorderElement.CornerRadius="3 3 0 0"/>
+                </tpf:ResizeableScrollBarTrack.StartThumb>
+                <tpf:ResizeableScrollBarTrack.MiddleThumb>
+                    <Thumb Style="{TemplateBinding MiddleThumbStyle}"/>
+                </tpf:ResizeableScrollBarTrack.MiddleThumb>
+                <tpf:ResizeableScrollBarTrack.EndThumb>
+                    <Thumb Style="{TemplateBinding EndThumbStyle}" Cursor="SizeNS" tpf:BorderElement.CornerRadius="0 0 3 3"/>
+                </tpf:ResizeableScrollBarTrack.EndThumb>
+                <tpf:ResizeableScrollBarTrack.IncreaseRepeatButton>
+                    <RepeatButton Style="{StaticResource TPF.ResizeableScrollBarRepeatButtonStyle}" Command="{x:Static tpf:ResizeableScrollBar.PageDown}"/>
+                </tpf:ResizeableScrollBarTrack.IncreaseRepeatButton>
+            </tpf:ResizeableScrollBarTrack>
+
+            <RepeatButton Grid.Row="2" Height="12" Style="{StaticResource TPF.ResizeableScrollBarRepeatButtonStyle}" 
+                          Command="{x:Static tpf:ResizeableScrollBar.LineDown}" Visibility="{TemplateBinding ButtonVisibility}">
+                <Path Width="6" Height="5" Data="M0,0 L6,0 6,1 3,5 0,1 z" Fill="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType=RepeatButton}}"/>
+            </RepeatButton>
+        </Grid>
+    </ControlTemplate>
+    <Style TargetType="tpf:ResizeableScrollBar" x:Key="TPF.ResizeableScrollBarStyle">
+        <Setter Property="MinWidth" Value="12"/>
+        <Setter Property="MinHeight" Value="12"/>
+        <Setter Property="Height" Value="12"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="IsTabStop" Value="False"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="Background" Value="{tpf:ResourceLink Key=ScrollBarBackgroundBrush}"/>
+        <Setter Property="Template" Value="{StaticResource TPF.HorizontalResizeableScrollBarTemplate}"/>
+        <Setter Property="StartThumbStyle" Value="{StaticResource TPF.ResizeableScrollBarHorizontalResizeThumbStyle}"/>
+        <Setter Property="MiddleThumbStyle" Value="{StaticResource TPF.ResizeableScrollBarHorizontalMiddleThumbStyle}"/>
+        <Setter Property="EndThumbStyle" Value="{StaticResource TPF.ResizeableScrollBarHorizontalResizeThumbStyle}"/>
+        <Style.Triggers>
+            <Trigger Property="Orientation" Value="Vertical">
+                <Setter Property="Template" Value="{StaticResource TPF.VerticalResizeableScrollBarTemplate}"/>
+                <Setter Property="StartThumbStyle" Value="{StaticResource TPF.ResizeableScrollBarVerticalResizeThumbStyle}"/>
+                <Setter Property="MiddleThumbStyle" Value="{StaticResource TPF.ResizeableScrollBarVerticalMiddleThumbStyle}"/>
+                <Setter Property="EndThumbStyle" Value="{StaticResource TPF.ResizeableScrollBarVerticalResizeThumbStyle}"/>
+                <Setter Property="Width" Value="12"/>
+                <Setter Property="Height" Value="Auto"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style TargetType="tpf:ResizeableScrollBar" BasedOn="{StaticResource TPF.ResizeableScrollBarStyle}"/>
+
     <!-- ========== Color-Editor ========== -->
     <Style TargetType="tpf:ColorEditor" BasedOn="{StaticResource TPF.ColorEditorStyle}" x:Key="TPF.ColorEditorStyle">
         <Setter Property="tpf:BorderElement.CornerRadius" Value="4"/>
