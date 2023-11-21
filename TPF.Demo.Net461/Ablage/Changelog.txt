@@ -3,13 +3,41 @@
 --ResizeableScrollBar
 	Die ResizeableScrollBar ist eine besondere Version der normalen ScrollBar, bei der es möglich ist den Bereich den die ScrollBar abdeckt, selber skalieren zu können.
 	Gedacht ist das Control für Fälle, wo es einen größeren Bereich an Daten gibt und Scrollen erwünscht ist, es aber gleichzeitig möglich sein soll, die angezeigte Menge an Daten zu ändern.
-	Um das zu bewerkstelligen stellt das Control die Properties Minimum und Maximum zur verfügung, um den verfügbaren Werteraum eintragen zu können.
+	Um das zu bewerkstelligen stellt das Control die Properties Minimum und Maximum zur Verfügung, um den verfügbaren Werteraum eintragen zu können.
 	Der aktuelle Werteraum wird über die Properties RangeStart und RangeEnd dargestellt und beim ändern der Werte wird das Scrolling-Event ausgelöst.
 	Zusätzlich lässt sich über die Properties MinimumRangeSpan und MaximumRangeSpan der minimale und maximale Abstand von Start und Ende einstellen.
+	Über die Properties HiglightStart und HighlightEnd kann ein Bereich des Elements besonders hervorgehoben werden.
+	Für die Darstellung des Highlight-Bereichs steht die HighlightBrush-Property zur verfügung.
 	Die Orientierung der ResizeableScrollBar lässt sich über die Orientation-Property ändern.
 	Mit der ButtonVisibility-Property lassen sich die Buttons an Start und Ende der ResizeableScrollBar ein- und ausblenden.
 	Die Schrittgröße in denen sich die ResizeableScrollBar beim klicken auf einen der Buttons bewegt lässt sich über die SmallChange-Property konfigurieren.
 	Für das klicken auf den scrollbaren Bereich in dem sich der Balken aktuell nicht befindet wird die Schrittgröße über die LargeChange-Property gesteuert.
+--DateTimeRangeNavigator
+	Der DateTimeRangeNavigator ist ein Element zum darstellen und navigieren eines Zeitraums über eine einfache und intuitive Bedienung.
+	Der grundlegende Zeitraum wird über die Properties Start und End festgelegt, die den Rahmen für alles weitere bestimmen.
+	Innerhalb dieses Zeitraums wird über VisibleStart und VisibleEnd der aktuell sichtbare Bereich gesteuert.
+	Sollte sich der angezeigte Bereich verändern, löst das Element das VisibleRangeChanged-Event aus.
+	Dazu wird über die Properties SelectedStart und SelectedEnd der Teil des Zeitraums gesteuert, der als ausgewählt gilt.
+	Bei Änderung dieses Zeitraums wird das SelectedRangeChanged-Event ausgelöst.
+	Der sichtbare Bereich wird in der Oberfläche über ein ResizeableScrollBar-Element dargestellt, mit dem man die Werte beeinflussen kann.
+	Mit den Properties MinimumZoomRange und MaximumZoomRange lässt sich hierbei festlegen, wie groß der Bereich mindestens und maximal sein kann.
+	Für die Auswahl gibt es hier die MinimumSelectionRange und MaximumSelectionRange Properties, die dann den ausgewählten Bereich in seiner Größe einschränken.
+	Die wichtigste Property des Elements ist die Intervals-Property, die eine Collection aus IntervalBase-Elementen ist.
+	Diese Collection legt fest, welche visuelle Darstellung das Element für die einzelnen Zeiträume nutzt und in welchen Intervallen die Auswahl funktioniert.
+	Das Element nutzt für die Darstellung eine zweistufige Hierarchie die aus Gruppen und Items besteht.
+	Die aktuell ausgewählte Darstellung für die Gruppen findet man in der CurrentGroupInterval und für die Items ist es die CurrentItemInterval-Property.
+	Die Intervalle die hierfür genutzt werden bestimmt das Element selbst, anhand der Werte die von den einzelnen Intervallen zur verfügung gestellt werden.
+	In der Darstellung sind hierbei die Gruppen immer die größeren Intervalle und die Items die kleineren.
+	Als Beispiel hierfür wäre ein Zeitstrahl so um die 20 Tage anzeigt und hierbei als Gruppen die Wochen gewählt hat und als Items die einzelnen Tage.
+	Hierfür werden nur die Intervalle genutzt, die in der Intervals-Property definiert wurden.
+	Der kleinste vordefinierte Intervall ist hierbei der SecondInterval, der einzelne Sekunden darstellt und der größte ist der DecadeInterval, der Jahrzehnte darstellt.
+	Jeder Intervall hat eine bis mehrere Darstellungsmöglichkeiten für den Text, der den Interval repräsentiert, die in dem Interval definiert werden.
+	Das Element entscheidet hier über den verfügbaren Platz und die Anzahl der Intervalle die dargestellt werden müssen, welche Formatierung hierfür genommen wird.
+	Die Darstellung des Elements das einen einzelnen Interval repräsentiert kann hier über die Properties GroupIntervalLabelStyle und ItemIntervalLabelStyle gesteuert werden.
+	Bei den Gruppen handelt es sich hier um den Typen GroupIntervalLabel und bei den Items dann um ItemIntervalLabel.
+	Dazu kann über die Property ScrollBarVisibility die Sichtbarkeit des Scrollbalkens gesteuert werden und dieser hier auch ausgeblendet werden bei Bedarf.
+	Der Hintergrund der einzelnen Intervall-Elemente ist im Standard durchsichtig und die Farbe des Hintergrunds wird hier über die TimelineBackground-Property gesteuert.
+	Außerdem kann man mithilfe der ContentOverlayBrush-Property einen Brush festlegen, der über den Content des Controls gelegt werden soll, der sich nicht im ausgewählten Bereich befindet.
 
 ===== 0.6.7 =====
 -Neue Controls

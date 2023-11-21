@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Windows;
 using System.Windows.Media;
 using TPF.Controls;
 
@@ -29,6 +31,33 @@ namespace TPF.Internal
             }, new PointHitTestParameters(elementPosition));
 
             return resultElement;
+        }
+
+        internal static List<T> GetHitTestElementsInBoundsOfType<T>(object sender, Rect bounds) where T : UIElement
+        {
+            if (!(sender is Visual visual)) return new List<T>();
+
+            var resultElements = new HashSet<T>();
+
+            var items = new HashSet<DependencyObject>();
+
+            var hitTestParameters = new GeometryHitTestParameters(new RectangleGeometry(bounds));
+
+            VisualTreeHelper.HitTest(visual, HitTestFilterInvisible, result =>
+            {
+                items.Add(result.VisualHit);
+
+                return HitTestResultBehavior.Continue;
+            }, hitTestParameters);
+
+            foreach (var item in items)
+            {
+                var resultElement = item.ParentOfType<T>();
+
+                if (resultElement != null) resultElements.Add(resultElement);
+            }
+
+            return resultElements.ToList();
         }
 
         internal static HitTestFilterBehavior HitTestFilterInvisible(DependencyObject potentialHitTestTarget)

@@ -4,6 +4,7 @@ using System.Windows.Markup;
 // Namespaces als ein XAML-Namespace vereinen
 // Um weitere Namespaces hinzuzufügen muss jeweils eine XmlnsDefinition hinzugefügt werden
 [assembly: XmlnsDefinition("http://schemas.tpf.com/xaml/presentation", "TPF.Controls")]
+[assembly: XmlnsDefinition("http://schemas.tpf.com/xaml/presentation", "TPF.Controls.Specialized.DateTimeRangeNavigator")]
 [assembly: XmlnsDefinition("http://schemas.tpf.com/xaml/presentation", "TPF.MarkupExtensions")]
 [assembly: XmlnsDefinition("http://schemas.tpf.com/xaml/presentation", "TPF.Converter")]
 [assembly: XmlnsDefinition("http://schemas.tpf.com/xaml/presentation", "TPF.DragDrop")]

@@ -66,6 +66,28 @@ namespace TPF.Controls
         }
         #endregion
 
+        #region HighlightStart DependencyProperty
+        public static readonly DependencyProperty HighlightStartProperty = ResizeableScrollBar.HighlightStartProperty.AddOwner(typeof(ResizeableScrollBarTrack),
+            new FrameworkPropertyMetadata(0.0, FrameworkPropertyMetadataOptions.AffectsArrange));
+
+        public double HighlightStart
+        {
+            get { return (double)GetValue(HighlightStartProperty); }
+            set { SetValue(HighlightStartProperty, value); }
+        }
+        #endregion
+
+        #region HighlightEnd DependencyProperty
+        public static readonly DependencyProperty HighlightEndProperty = ResizeableScrollBar.HighlightEndProperty.AddOwner(typeof(ResizeableScrollBarTrack),
+            new FrameworkPropertyMetadata(0.0, FrameworkPropertyMetadataOptions.AffectsArrange));
+
+        public double HighlightEnd
+        {
+            get { return (double)GetValue(HighlightEndProperty); }
+            set { SetValue(HighlightEndProperty, value); }
+        }
+        #endregion
+
         private ResizeableScrollBar _scrollBar;
 
         RepeatButton _decreaseRepeatButton;
@@ -134,6 +156,17 @@ namespace TPF.Controls
             }
         }
 
+        Border _highlightIndicator;
+        public Border HighlightIndicator
+        {
+            get { return _highlightIndicator; }
+            set
+            {
+                UpdateComponent(_highlightIndicator, value);
+                _highlightIndicator = value;
+            }
+        }
+
         private double Density { get; set; }
 
         #region VisualChildren Verwaltung
@@ -143,11 +176,11 @@ namespace TPF.Controls
         {
             if (oldValue != newValue)
             {
-                if (_children == null) _children = new Visual[5];
+                if (_children == null) _children = new Visual[6];
                 if (oldValue != null) RemoveVisualChild(oldValue);
 
                 int i = 0;
-                while (i < 5)
+                while (i < 6)
                 {
                     // Array ist nicht gefüllt, break
                     if (_children[i] == null) break;
@@ -156,7 +189,7 @@ namespace TPF.Controls
                     if (_children[i] == oldValue)
                     {
                         // Alle Werte um eins nach oben verschieben, damit das neue an letzter Stelle landet
-                        while (i < 4 && _children[i + 1] != null)
+                        while (i < 5 && _children[i + 1] != null)
                         {
                             _children[i] = _children[i + 1];
                             i++;
@@ -213,6 +246,8 @@ namespace TPF.Controls
             SetBinding(MaximumProperty, new Binding("Maximum") { Source = _scrollBar });
             SetBinding(RangeStartProperty, new Binding("RangeStart") { Source = _scrollBar });
             SetBinding(RangeEndProperty, new Binding("RangeEnd") { Source = _scrollBar });
+            SetBinding(HighlightStartProperty, new Binding("HighlightStart") { Source = _scrollBar });
+            SetBinding(HighlightEndProperty, new Binding("HighlightEnd") { Source = _scrollBar });
             SetBinding(OrientationProperty, new Binding("Orientation") { Source = _scrollBar });
         }
 
@@ -275,13 +310,15 @@ namespace TPF.Controls
 
         protected override Size ArrangeOverride(Size finalSize)
         {
-            double trackLength, decreaseButtonLength, startThumbLength, middleThumbLength, endThumbLength, increaseButtonLength;
+            double trackLength, decreaseButtonLength, startThumbLength, middleThumbLength, endThumbLength, increaseButtonLength, highlightLength;
 
             var isVertical = Orientation == Orientation.Vertical;
 
             var range = Math.Max(0.0, Maximum - Minimum);
             var offsetStart = Math.Min(range, RangeStart - Minimum);
             var offsetEnd = Math.Min(range, RangeEnd - Minimum);
+            var highlightStart = Math.Min(range, HighlightStart - Minimum);
+            var highlightEnd = Math.Min(range, HighlightEnd - Minimum);
 
             if (isVertical)
             {
@@ -304,13 +341,18 @@ namespace TPF.Controls
             decreaseButtonLength = remainingTrackLength * offsetStart / range;
             CoerceLength(ref decreaseButtonLength, remainingTrackLength);
 
+            if (range == 0) decreaseButtonLength = 0;
+
             middleThumbLength = remainingTrackLength * offsetEnd / range - decreaseButtonLength;
-            CoerceLength(ref middleThumbLength, trackLength);
+            CoerceLength(ref middleThumbLength, remainingTrackLength);
 
             var fullThumbLength = startThumbLength + middleThumbLength + endThumbLength;
 
             increaseButtonLength = remainingTrackLength - decreaseButtonLength - middleThumbLength;
             CoerceLength(ref increaseButtonLength, remainingTrackLength);
+
+            var highlightStartLength = remainingTrackLength * highlightStart / range;
+            highlightLength = (remainingTrackLength * highlightEnd / range) - highlightStartLength;
 
             Density = range / remainingTrackLength;
 
@@ -325,6 +367,13 @@ namespace TPF.Controls
 
                 offsetPoint.Y = 0.0;
                 pieceSize.Height = decreaseButtonLength;
+
+                if (HighlightIndicator != null)
+                {
+                    var topLeft = new Point(0, highlightStartLength);
+                    var size = new Size(pieceSize.Width, highlightLength);
+                    HighlightIndicator.Arrange(new Rect(topLeft, size));
+                }
 
                 if (DecreaseRepeatButton != null) DecreaseRepeatButton.Arrange(new Rect(offsetPoint, pieceSize));
 
@@ -353,6 +402,13 @@ namespace TPF.Controls
 
                 offsetPoint.X = 0.0;
                 pieceSize.Width = decreaseButtonLength;
+
+                if (HighlightIndicator != null)
+                {
+                    var topLeft = new Point(highlightStartLength, 0);
+                    var size = new Size(highlightLength, pieceSize.Height);
+                    HighlightIndicator.Arrange(new Rect(topLeft, size));
+                }
 
                 if (DecreaseRepeatButton != null) DecreaseRepeatButton.Arrange(new Rect(offsetPoint, pieceSize));
 

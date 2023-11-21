@@ -53,6 +53,30 @@ namespace TPF.Internal
             }
         }
 
+        internal static Panel GetItemsPanel(this DependencyObject element)
+        {
+            var control = element as Control;
+            
+            control?.ApplyTemplate();
+
+            var childrenCount = VisualTreeHelper.GetChildrenCount(element);
+
+            for (int i = 0; i < childrenCount; i++)
+            {
+                if (VisualTreeHelper.GetChild(element, i) is UIElement child)
+                {
+                    // Wenn es sich um ein Panel handelt und das nächste höhere Element ein ItemsPresenter ist, dann haben wir das ItemsPanel gefunden
+                    if (child is Panel panel && VisualTreeHelper.GetParent(child) is ItemsPresenter) return panel;
+
+                    panel = GetItemsPanel(child);
+
+                    if (panel != null) return panel;
+                }
+            }
+
+            return null;
+        }
+
         internal static Type GetItemContainerType(this ItemsControl itemsControl)
         {
             // Wenn es keine Items gibt haben wir keine Möglichkeit den Typen zu bestimmen

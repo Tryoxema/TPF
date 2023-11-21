@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
 using TPF.Data;
 using TPF.Internal;
 
@@ -107,7 +108,7 @@ namespace TPF.Controls
             var instance = (ResizeableScrollBar)sender;
             var rangeStart = (double)value;
 
-            if (!instance._suppressSpanCoercion && instance.RangeEnd - rangeStart < instance.MinimumRangeSpan)
+            if (!instance.SuppressSpanCoercion && instance.RangeEnd - rangeStart < instance.MinimumRangeSpan)
             {
                 rangeStart = Math.Max(instance.RangeEnd - instance.MinimumRangeSpan, instance.Minimum);
             }
@@ -115,7 +116,7 @@ namespace TPF.Controls
             {
                 rangeStart = Math.Max(instance.Minimum, instance.Maximum - instance.MinimumRangeSpan);
             }
-            else if (!instance._suppressSpanCoercion && instance.RangeEnd - rangeStart > instance.MaximumRangeSpan)
+            else if (!instance.SuppressSpanCoercion && instance.RangeEnd - rangeStart > instance.MaximumRangeSpan)
             {
                 rangeStart = Math.Max(instance.RangeEnd - instance.MaximumRangeSpan, instance.Minimum);
             }
@@ -160,7 +161,7 @@ namespace TPF.Controls
             {
                 rangeEnd = instance.RangeStart + instance.MinimumRangeSpan;
             }
-            else if (!instance._suppressSpanCoercion && rangeEnd - instance.RangeStart > instance.MaximumRangeSpan)
+            else if (!instance.SuppressSpanCoercion && rangeEnd - instance.RangeStart > instance.MaximumRangeSpan)
             {
                 rangeEnd = Math.Min(instance.RangeStart + instance.MaximumRangeSpan, instance.Maximum);
             }
@@ -183,6 +184,91 @@ namespace TPF.Controls
         {
             get { return (double)GetValue(RangeEndProperty); }
             set { SetValue(RangeEndProperty, value); }
+        }
+        #endregion
+
+        #region HighlightStart DependencyProperty
+        public static readonly DependencyProperty HighlightStartProperty = DependencyProperty.Register("HighlightStart",
+            typeof(double),
+            typeof(ResizeableScrollBar),
+            new PropertyMetadata(0d, OnHighlightStartPropertyChanged, CoerceHighlightStart));
+
+        private static object CoerceHighlightStart(DependencyObject sender, object value)
+        {
+            var instance = (ResizeableScrollBar)sender;
+            var highlightStart = (double)value;
+
+            if (highlightStart <= instance.Minimum)
+            {
+                highlightStart = instance.Minimum;
+            }
+            else if (highlightStart >= instance.Maximum)
+            {
+                highlightStart = instance.Maximum;
+            }
+
+            return highlightStart;
+        }
+
+        private static void OnHighlightStartPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+        {
+            var instance = (ResizeableScrollBar)sender;
+
+            instance.CoerceValue(HighlightEndProperty);
+        }
+
+        public double HighlightStart
+        {
+            get { return (double)GetValue(HighlightStartProperty); }
+            set { SetValue(HighlightStartProperty, value); }
+        }
+        #endregion
+
+        #region HighlightEnd DependencyProperty
+        public static readonly DependencyProperty HighlightEndProperty = DependencyProperty.Register("HighlightEnd",
+            typeof(double),
+            typeof(ResizeableScrollBar),
+            new PropertyMetadata(0d, null, CoerceHighlightEnd));
+
+        private static object CoerceHighlightEnd(DependencyObject sender, object value)
+        {
+            var instance = (ResizeableScrollBar)sender;
+            var highlightEnd = (double)value;
+
+            if (highlightEnd < instance.HighlightStart)
+            {
+                highlightEnd = instance.HighlightStart;
+            }
+
+            if (highlightEnd <= instance.Minimum)
+            {
+                highlightEnd = instance.Minimum;
+            }
+            else if (highlightEnd >= instance.Maximum)
+            {
+                highlightEnd = instance.Maximum;
+            }
+
+            return highlightEnd;
+        }
+
+        public double HighlightEnd
+        {
+            get { return (double)GetValue(HighlightEndProperty); }
+            set { SetValue(HighlightEndProperty, value); }
+        }
+        #endregion
+
+        #region HighlightBrush DependencyProperty
+        public static readonly DependencyProperty HighlightBrushProperty = DependencyProperty.Register("HighlightBrush",
+            typeof(Brush),
+            typeof(ResizeableScrollBar),
+            new PropertyMetadata(null));
+
+        public Brush HighlightBrush
+        {
+            get { return (Brush)GetValue(HighlightBrushProperty); }
+            set { SetValue(HighlightBrushProperty, value); }
         }
         #endregion
 
@@ -495,26 +581,30 @@ namespace TPF.Controls
 
             var range = RangeEnd - RangeStart;
 
-            _suppressSpanCoercion = true;
+            SuppressSpanCoercion = true;
             RangeEnd = newValue;
             RangeStart = RangeEnd - range;
-            _suppressSpanCoercion = false;
+            SuppressSpanCoercion = false;
         }
         #endregion
 
-        private bool _suppressSpanCoercion;
+        internal bool SuppressSpanCoercion;
         private bool _suppressScrollingEvent;
 
         protected virtual void OnMinimumChanged(double oldMinimum, double newMinimum)
         {
             CoerceValue(RangeStartProperty);
             CoerceValue(RangeEndProperty);
+            CoerceValue(HighlightStartProperty);
+            CoerceValue(HighlightEndProperty);
         }
 
         protected virtual void OnMaximumChanged(double oldMaximum, double newMaximum)
         {
             CoerceValue(RangeStartProperty);
             CoerceValue(RangeEndProperty);
+            CoerceValue(HighlightStartProperty);
+            CoerceValue(HighlightEndProperty);
         }
 
         protected virtual void OnRangeStartChanged(double oldValue, double newValue)
@@ -568,12 +658,12 @@ namespace TPF.Controls
             rangeStart += valueDelta;
             rangeEnd += valueDelta;
 
-            _suppressSpanCoercion = true;
+            SuppressSpanCoercion = true;
             _suppressScrollingEvent = true;
             RangeStart = rangeStart;
             RangeEnd = rangeEnd;
             _suppressScrollingEvent = false;
-            _suppressSpanCoercion = false;
+            SuppressSpanCoercion = false;
 
             RaiseScrollingEvent();
         }

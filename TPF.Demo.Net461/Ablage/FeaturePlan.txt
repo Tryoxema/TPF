@@ -69,6 +69,7 @@
 [X] Clock
 [X] TaskBoard
 [ ] Scheduler
+[X] DateTimeRangeNavigator
 ---Daten-Management---
 [ ] DataGrid
 [ ] DataPager
