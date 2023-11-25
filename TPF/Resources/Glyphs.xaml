@@ -48,6 +48,7 @@
     <Geometry x:Key="MenuGlyph" po:Freeze="True">M0,0 L15,0 15,3 0,3 z M0,6 L15,6 15,9 0,9 z M0,12 L15,12 15,15 0,15 z</Geometry>
     <Geometry x:Key="VerticalMenuGlyph" po:Freeze="True">M0,0 L0,15 3,15 3,0 z M6,0 L6,15 9,15 9,0 z M12,0 L12,15 15,15 15,0 z</Geometry>
     <Geometry x:Key="GridGlyph" po:Freeze="True">M0,0 L1.5,0 1.5,1.5 0,1.5 z M2,0 L3.5,0 3.5,1.5 2,1.5 z M4,0 L5.5,0 5.5,1.5 4,1.5 z M0,2 L1.5,2 1.5,3.5 0,3.5 z M2,2 L3.5,2 3.5,3.5 2,3.5 z M4,2 L5.5,2 5.5,3.5 4,3.5 z M0,4 L1.5,4 1.5,5.5 0,5.5 z M2,4 L3.5,4 3.5,5.5 2,5.5 z M4,4 L5.5,4 5.5,5.5 4,5.5 z</Geometry>
+    <Geometry x:Key="GridTwoByTwoGlyph" po:Freeze="True">M0,0 H4 V4 H0 z M6,0 H10 V4 H6 z M0,6 H4 V10 H0 z M6,6 H10 V10 H6 z</Geometry>
     <Geometry x:Key="TableGlyph" po:Freeze="True">M-0.2,-0.2 L5.1,-0.2 5.1,5.1 -0.2,5.1 z M0,0 L1.5,0 1.5,1.5 0,1.5 z M1.7,0 L3.2,0 3.2,1.5 1.7,1.5 z M3.4,0 L4.9,0 4.9,1.5 3.4,1.5 z M0,1.7 L1.5,1.7 1.5,3.2 0,3.2 z M1.7,1.7 L3.2,1.7 3.2,3.2 1.7,3.2 z M3.4,1.7 L4.9,1.7 4.9,3.2 3.4,3.2 z M0,3.4 L1.5,3.4 1.5,4.9 0,4.9 z M1.7,3.4 L3.2,3.4 3.2,4.9 1.7,4.9 z M3.4,3.4 L4.9,3.4 4.9,4.9 3.4,4.9 z</Geometry>
     <!--ActionGlyphs-->
     <Geometry x:Key="CloseGlyph" po:Freeze="True">M0,0.5 L0.5,0 4.5,4 8.5,0 9,0.5 5,4.5 9,8.5 8.5,9 4.5,5 0.5,9 0,8.5 4,4.5 z</Geometry>
@@ -61,8 +62,10 @@
     <Geometry x:Key="UploadGlyph" po:Freeze="True">M0,6 L6,0 12,6 7.5,6 7.5,13 4.5,13 4.5,6 z M0,15 L12,15 12,17 0,17 z</Geometry>
     <Geometry x:Key="FullScreenGlyph" po:Freeze="True">M0,0 L2,0 2,1 1,1 1,2 0,2 z M4,0 L6,0 6,2 5,2 5,1 4,1 z M0,4 L0,6 2,6 2,5 1,5 1,4 z M4,6 L6,6 6,4 5,4 5,5 4,5 z</Geometry>
     <Geometry x:Key="FullScreenExitGlyph" po:Freeze="True">M0,2 L2,2 2,0 1,0 1,1 0,1 z M4,0 L4,2 6,2 6,1 5,1 5,0 z M0,4 L2,4 2,6 1,6 1,5 0,5 z M4,4 L6,4 6,5 5,5 5,6 4,6 z</Geometry>
+    <Geometry x:Key="HyperlinkOpenGlyph" po:Freeze="True">M14,3 V5 H17.59 L7.76,14.83 L9.17,16.24 L19,6.41 V10 H21 V3 M19,19 H5 V5 H12 V3 H3 V21 H21 V12 H19 V19 z</Geometry>
     <Geometry x:Key="SearchGlyph" po:Freeze="True">M14.1,0 C21,0 26.6,5.6 26.6,12.5 C26.6,14.9 26,17.1 24.8,19 L33.9,28 C35,29.2 35,31.1 33.9,32.3 C32.7,33.4 30.8,33.4 29.6,32.3 L20.6,23.2 C18.7,24.3 16.5,25 14.1,25 C7.2,25 1.6,19.4 1.6,12.5 C1.6,5.6 7.2,0 14.1,0 z M14.1,4 C18.8,4 22.6,7.8 22.6,12.5 C22.6,17.2 18.8,21 14.1,21 C9.4,21 5.6,17.2 5.6,12.5 C5.6,7.8 9.4,4 14.1,4 z</Geometry>
     <!--SymbolGlyphs-->
+    <Geometry x:Key="HomeGlyph" po:Freeze="True">M5,20 H10 V14 H14 V20 H19 V12 H22 L12,3 2,12 H5 V20 z</Geometry>
     <Geometry x:Key="StarGlyph" po:Freeze="True">M0,5 L4.5,5 6.5,0 8.5,5 13,5 9,8 11,13 6.5,10 2,13 4,8 z</Geometry>
     <Geometry x:Key="ButtonGlyph" po:Freeze="True">M0,0 L10,0 10,10 0,10 z M1,1 L9,1 9,9 1,9 z</Geometry>
     <Geometry x:Key="MagnifyingGlassGlyph" po:Freeze="True">M22.5,0 C29.4,0 35,5.6 35,12.5 C35,19.4 29.4,25 22.5,25 C20.1,25 17.9,24.3 16,23.2 L7,32.3 C5.8,33.4 3.9,33.4 2.7,32.3 C1.6,31.1 1.6,29.2 2.7,28 L11.8,19 C10.6,17.1 10,14.9 10,12.5 C10,5.6 15.6,0 22.5,0 z M22.5,4 C17.8,4 14,7.8 14,12.5 C14,17.2 17.8,21 22.5,21 C27.2,21 31,17.2 31,12.5 C31,7.8 27.2,4 22.5,4 z</Geometry>

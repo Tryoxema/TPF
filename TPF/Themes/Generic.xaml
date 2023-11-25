@@ -5177,7 +5177,7 @@
         </Grid>
     </ControlTemplate>
     <ControlTemplate TargetType="tpf:HamburgerMenuItem" x:Key="TPF.SeparatorHamburgerMenuItemTemplate">
-        <Separator Height="30" Background="{TemplateBinding Background}" HorizontalAlignment="Stretch" Focusable="False"/>
+        <Separator Background="{TemplateBinding Background}" HorizontalAlignment="Stretch" Focusable="False"/>
     </ControlTemplate>
     <Style TargetType="tpf:HamburgerMenuItem" x:Key="TPF.HamburgerMenuItemStyle">
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>

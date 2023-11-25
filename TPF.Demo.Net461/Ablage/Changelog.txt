@@ -47,6 +47,11 @@
 	Zusätzlich kann man über die Orientation-Property festlegen, ob man den Slider zum ändern des Wertes Horizontal oder Vertikal bewegen möchte.
 	Die Darstellung des Reglers zum verschieben kann hierbei über die ThumbStyle-Property bei Bedarf verändert werden.
 
+-Veränderte Controls
+--HamburgerMenuItem
+	Bei der Rolle Separator wurde die feste Höhe von 30 entfernt und die größe des Elements lässt sich jetzt voll über die Height-Property konfigurieren.
+	Diese Änderung wurde durchgeführt um eine bessere anpassbarkeit zu gewährleisten, ohne direkt den gesamten Style überschreiben zu müssen.
+
 ===== 0.6.7 =====
 -Neue Controls
 --Banner

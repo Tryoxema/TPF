@@ -52,15 +52,15 @@
 
                         <tpf:Divider Content="Path 1" HorizontalContentAlignment="Center" Grid.Column="0" Grid.Row="0"/>
                         <Path Stroke="{tpf:ResourceLink Key=GlyphBrush}" Fill="{tpf:ResourceLink Key=GlyphBrush}" Height="36" Width="36" Stretch="Uniform" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="1"
-                              Data="M500,300 425,300 425,620 720,620 720,550 500,550 Z M512.71,80.16 c-245.74 0 -445.18 197.58 -445.18 441.02 s199.44 441.02 445.18 441.02 c245.74 0 445.18 -197.58 445.18 -441.02 S758.45 80.16 512.71 80.16 z M512.71,874.01 c-195.88 0 -356.15 -158.77 -356.15 -352.82 s160.27 -352.82 356.15 -352.82 c195.88 0 356.14 158.77 356.14 352.82 S708.59 874.01 512.71 874.01 z"/>
+                              Data="M14,3 V5 H17.59 L7.76,14.83 L9.17,16.24 L19,6.41 V10 H21 V3 M19,19 H5 V5 H12 V3 H3 V21 H21 V12 H19 V19 z"/>
 
                         <tpf:Divider Content="Path 2" HorizontalContentAlignment="Center" Grid.Column="1" Grid.Row="0"/>
                         <Path Stroke="{tpf:ResourceLink Key=GlyphBrush}" Fill="{tpf:ResourceLink Key=GlyphBrush}" Height="36" Width="36" Stretch="Uniform" HorizontalAlignment="Center" Grid.Column="1" Grid.Row="1"
-                              Data="M0,0 L10,0 10,10 0,10 z M1,1 L9,1 9,9 1,9 z"/>
+                              Data="M0,0 H4 V4 H0 z M6,0 H10 V4 H6 z M0,6 H4 V10 H0 z M6,6 H10 V10 H6 z"/>
 
                         <tpf:Divider Content="Path 3" HorizontalContentAlignment="Center" Grid.Column="2" Grid.Row="0"/>
                         <Path Stroke="{tpf:ResourceLink Key=GlyphBrush}" Fill="{tpf:ResourceLink Key=GlyphBrush}" Height="36" Width="36" Stretch="Uniform" HorizontalAlignment="Center" Grid.Column="2" Grid.Row="1"
-                              Data="M5.8,0 L6,0 6,2 18,2 18,10 6,10 6,12 5.8,12 5.8,6.5 0,6.5 0,5.5 5.8,5.5 z M6,2.2 17.8,2.2 17.8,7 6,7 z"/>
+                              Data="M5,20 H10 V14 H14 V20 H19 V12 H22 L12,3 2,12 H5 V20 z"/>
                     </Grid>
 
                     <tpf:Divider Content="Neuestes Control" HorizontalContentAlignment="Center" Grid.Row="1"/>
