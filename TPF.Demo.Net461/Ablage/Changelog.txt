@@ -38,6 +38,14 @@
 	Dazu kann über die Property ScrollBarVisibility die Sichtbarkeit des Scrollbalkens gesteuert werden und dieser hier auch ausgeblendet werden bei Bedarf.
 	Der Hintergrund der einzelnen Intervall-Elemente ist im Standard durchsichtig und die Farbe des Hintergrunds wird hier über die TimelineBackground-Property gesteuert.
 	Außerdem kann man mithilfe der ContentOverlayBrush-Property einen Brush festlegen, der über den Content des Controls gelegt werden soll, der sich nicht im ausgewählten Bereich befindet.
+--Comparer
+	Der Comparer ist ein Element zum Vergleichen von zwei Dingen am gleichen Platz.
+	Mit dem Element kann z.B. das gleiche Element in zwei unterschiedlichen Farben oder aus zwei unterschiedlichen perspektiven einfach miteinander verglichen werden.
+	Die beiden miteinander vergleichbaren Inhalte werden über die FirstContent und SecondContent-Properties und deren optionale Templates und TemplateSelectoren angegeben.
+	Bei der Darstellung entscheidet hier der Wert der Value-Property wie viel von welchem Inhalt angezeigt wird.
+	Der Wert der Value-Property ist hierbei begrenzt auf den Zahlenraum von 0 bis 1, wobei eine 0 bedeutet, dass nichts vom ersten Content angezeigt wird und anders herum.
+	Zusätzlich kann man über die Orientation-Property festlegen, ob man den Slider zum ändern des Wertes Horizontal oder Vertikal bewegen möchte.
+	Die Darstellung des Reglers zum verschieben kann hierbei über die ThumbStyle-Property bei Bedarf verändert werden.
 
 ===== 0.6.7 =====
 -Neue Controls

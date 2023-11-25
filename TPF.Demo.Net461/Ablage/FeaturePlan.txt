@@ -60,6 +60,7 @@
 [ ] Callout
 [X] DialogHost
 [ ] Snackbar
+[X] Comparer
 [X] Badge
 [ ] HubTile
 [X] DragDrop
@@ -103,4 +104,3 @@
 [ ] SplashScreen
 [ ] Screenshot
 [X] Banner
-[ ] Comparer

@@ -180,6 +180,32 @@
             <tpf:TabItem Header="DragDrop">
                 <views:DragDropView/>
             </tpf:TabItem>
+            <tpf:TabItem Header="Comparer">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <tpf:Comparer Grid.Column="0">
+                        <tpf:Comparer.FirstContent>
+                            <Border Background="ForestGreen" Height="40" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </tpf:Comparer.FirstContent>
+                        <tpf:Comparer.SecondContent>
+                            <Border Background="Crimson" Height="40" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </tpf:Comparer.SecondContent>
+                    </tpf:Comparer>
+
+                    <tpf:Comparer Grid.Column="1" Orientation="Vertical">
+                        <tpf:Comparer.FirstContent>
+                            <Border Background="ForestGreen" Height="40" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </tpf:Comparer.FirstContent>
+                        <tpf:Comparer.SecondContent>
+                            <Border Background="Crimson" Height="40" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </tpf:Comparer.SecondContent>
+                    </tpf:Comparer>
+                </Grid>
+            </tpf:TabItem>
         </tpf:TabControl>
 
         <tpf:NotificationContainer x:Name="Notifications" Grid.Row="0" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="400"/>

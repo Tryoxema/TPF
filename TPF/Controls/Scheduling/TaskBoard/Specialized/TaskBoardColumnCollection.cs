@@ -15,7 +15,7 @@ namespace TPF.Controls.Specialized.TaskBoard
 
         public TaskBoardColumn GetColumnFromValue(object value)
         {
-            return this.FirstOrDefault(x => Comparer.IsEqualTo(x.Value, value));
+            return this.FirstOrDefault(x => ValueComparer.IsEqualTo(x.Value, value));
         }
 
         public void ClearColumns()

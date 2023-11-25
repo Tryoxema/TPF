@@ -16,7 +16,7 @@ namespace TPF.Controls
 
         public Brush GetBrushFromKey(object key)
         {
-            return this.FirstOrDefault(x => Comparer.IsEqualTo(x.Key, key))?.Brush;
+            return this.FirstOrDefault(x => ValueComparer.IsEqualTo(x.Key, key))?.Brush;
         }
     }
 }

@@ -121,7 +121,7 @@ namespace TPF.Controls
             if (drawBorder && drawBackground)
             {
                 // Sind BorderBrush und Background gleich? 
-                if (Comparer.IsEqualTo(borderBrush, background))
+                if (ValueComparer.IsEqualTo(borderBrush, background))
                 {
                     // Nur ein Objekt malen
                     dc.DrawGeometry(borderBrush, null, borderGeometry);

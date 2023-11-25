@@ -4297,6 +4297,92 @@
     </Style>
     <Style TargetType="tpf:Slider" BasedOn="{StaticResource TPF.SliderStyle}"/>
 
+    <!-- ========== Comparer ========== -->
+    <Style TargetType="Thumb" x:Key="TPF.ComparerHorizontalThumbStyle">
+        <Setter Property="Background" Value="{tpf:ResourceLink Key=PrimaryBrush}"/>
+        <Setter Property="BorderBrush" Value="{tpf:ResourceLink Key=BorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Thumb">
+                    <tpf:SimplePanel>
+                        <Border Width="1" Background="{TemplateBinding BorderBrush}" HorizontalAlignment="Center"/>
+                        <Border Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" 
+                                Width="22" Height="22" CornerRadius="11" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+
+                                <Path Grid.Column="0" Width="5" Height="9" Data="M0,4.5 L5,0 5,9 z" Fill="{tpf:ResourceLink Key=GlyphBrush}"/>
+                                <Path Grid.Column="1" Width="5" Height="9" Data="M0,0 L0,9 5,4.5 z" Fill="{tpf:ResourceLink Key=GlyphBrush}"/>
+                            </Grid>
+                        </Border>
+                    </tpf:SimplePanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="Thumb" x:Key="TPF.ComparerVerticalThumbStyle">
+        <Setter Property="Background" Value="{tpf:ResourceLink Key=PrimaryBrush}"/>
+        <Setter Property="BorderBrush" Value="{tpf:ResourceLink Key=BorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Thumb">
+                    <tpf:SimplePanel>
+                        <Border Height="1" Background="{TemplateBinding BorderBrush}" VerticalAlignment="Center"/>
+                        <Border Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" 
+                                Width="22" Height="22" CornerRadius="11" HorizontalAlignment="Center" VerticalAlignment="Center">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+
+                                <Path Grid.Row="0" Width="9" Height="5" Data="M0,5 L4.5,0 9,5 z" Fill="{tpf:ResourceLink Key=GlyphBrush}"/>
+                                <Path Grid.Row="1" Width="9" Height="5" Data="M0,0 L9,0 4.5,5 z" Fill="{tpf:ResourceLink Key=GlyphBrush}"/>
+                            </Grid>
+                        </Border>
+                    </tpf:SimplePanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="tpf:Comparer" x:Key="TPF.ComparerStyle">
+        <Setter Property="ThumbStyle" Value="{StaticResource TPF.ComparerHorizontalThumbStyle}"/>
+        <Setter Property="BorderBrush" Value="{tpf:ResourceLink Key=BorderBrush}"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="tpf:Comparer">
+                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                        <tpf:ComparerTrack>
+                            <tpf:ComparerTrack.FirstContentPresenter>
+                                <ContentPresenter ContentSource="FirstContent"/>
+                            </tpf:ComparerTrack.FirstContentPresenter>
+                            <tpf:ComparerTrack.SecondContentPresenter>
+                                <ContentPresenter ContentSource="SecondContent"/>
+                            </tpf:ComparerTrack.SecondContentPresenter>
+                            <tpf:ComparerTrack.Thumb>
+                                <Thumb Style="{TemplateBinding ThumbStyle}"/>
+                            </tpf:ComparerTrack.Thumb>
+                        </tpf:ComparerTrack>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="Orientation" Value="Vertical">
+                <Setter Property="ThumbStyle" Value="{StaticResource TPF.ComparerVerticalThumbStyle}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style TargetType="tpf:Comparer" BasedOn="{StaticResource TPF.ComparerStyle}"/>
+
     <!-- ========== ResizeableScrollBar ========== -->
     <Style TargetType="RepeatButton" x:Key="TPF.ResizeableScrollBarRepeatButtonStyle">
         <Setter Property="Foreground" Value="{tpf:ResourceLink Key=ScrollBarBrush}"/>

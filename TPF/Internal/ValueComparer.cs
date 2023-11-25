@@ -2,7 +2,7 @@
 
 namespace TPF.Internal
 {
-    internal static class Comparer
+    internal static class ValueComparer
     {
         internal static bool IsEqualTo(object first, object second)
         {
