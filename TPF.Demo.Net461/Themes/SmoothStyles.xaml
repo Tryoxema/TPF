@@ -5,6 +5,7 @@
     </ResourceDictionary.MergedDictionaries>
 
     <Style TargetType="ToolTip" BasedOn="{StaticResource WPF.ToolTipStyle}"/>
+    <Style TargetType="Label" BasedOn="{StaticResource WPF.LabelStyle}"/>
     <Style TargetType="Button" BasedOn="{StaticResource WPF.ButtonStyle}"/>
     <Style TargetType="ToggleButton" BasedOn="{StaticResource WPF.ToggleButtonStyle}"/>
     <Style TargetType="CheckBox" BasedOn="{StaticResource WPF.CheckBoxStyle}"/>

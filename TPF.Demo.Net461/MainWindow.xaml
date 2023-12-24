@@ -71,51 +71,13 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
+                        <StackPanel Orientation="Horizontal" Height="30" HorizontalAlignment="Center">
+                            <tpf:Button Content="Show SplashScreen" Click="ShowSplashScreenButton_Click"/>
+                            <tpf:Button Content="Close SplashScreen" Margin="3 0 0 0" Click="CloseSplashScreenButton_Click"/>
+                        </StackPanel>
                         <!--<tpf:Banner Grid.Column="0" Height="30" Margin="10 0" BorderThickness="1" CornerRadius="4" IsRunning="True" Direction="RightToLeft" Speed="100">
                             <TextBlock Text="Das Banner ist ein Control zum animieren von Content der in eine bestimmte Richtung läuft" VerticalAlignment="Center"/>
                         </tpf:Banner>-->
-
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="90"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-                            
-                            <StackPanel>
-                                <TextBlock Text="Start:"/>
-                                <TextBlock Text="End:"/>
-                                <TextBlock Text="VisibleStart:"/>
-                                <TextBlock Text="VisibleEnd:"/>
-                                <TextBlock Text="SelectedStart:"/>
-                                <TextBlock Text="SelectedEnd:"/>
-                            </StackPanel>
-
-                            <StackPanel Grid.Column="1">
-                                <TextBlock Text="{Binding ElementName=DateTimeRangeNavigator, Path=Start}"/>
-                                <TextBlock Text="{Binding ElementName=DateTimeRangeNavigator, Path=End}"/>
-                                <TextBlock Text="{Binding ElementName=DateTimeRangeNavigator, Path=VisibleStart}"/>
-                                <TextBlock Text="{Binding ElementName=DateTimeRangeNavigator, Path=VisibleEnd}"/>
-                                <TextBlock Text="{Binding ElementName=DateTimeRangeNavigator, Path=SelectedStart}"/>
-                                <TextBlock Text="{Binding ElementName=DateTimeRangeNavigator, Path=SelectedEnd}"/>
-                            </StackPanel>
-                        </Grid>
-                        <StackPanel>
-                            
-                        </StackPanel>
-                        <tpf:DateTimeRangeNavigator x:Name="DateTimeRangeNavigator" Grid.ColumnSpan="2" Height="100" ContentOverlayBrush="#33000000"
-                                                    Start="01.01.2023" End="12.31.2023"
-                                                    MinimumZoomRange="10.00:00:00" MaximumZoomRange="100.00:00:00"
-                                                    MinimumSelectionRange="1.00:00:00">
-                            <tpf:DateTimeRangeNavigator.Intervals>
-                                <tpf:YearInterval/>
-                                <tpf:QuarterInterval QuarterString="Quartal"/>
-                                <tpf:MonthInterval/>
-                                <tpf:WeekInterval WeekString="Woche"/>
-                                <tpf:DayInterval/>
-                                <tpf:HourInterval/>
-                            </tpf:DateTimeRangeNavigator.Intervals>
-                            <TextBlock Text="Hier könnte ihre Werbung stehen" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </tpf:DateTimeRangeNavigator>
                     </Grid>
                 </Grid>
             </tpf:TabItem>
@@ -162,6 +124,9 @@
                         </tpf:HamburgerMenuItem>
                         <tpf:HamburgerMenuItem Label="ProgressBar" Icon="{StaticResource ProgressBarGlyph}" IconTemplate="{StaticResource IconTemplate}">
                             <views:ProgressBarView/>
+                        </tpf:HamburgerMenuItem>
+                        <tpf:HamburgerMenuItem Label="RangeNavigator" IconTemplate="{StaticResource IconTemplate}">
+                            <views:DateTimeRangeNavigatorView/>
                         </tpf:HamburgerMenuItem>
                     </tpf:HamburgerMenu>
                 </Grid>

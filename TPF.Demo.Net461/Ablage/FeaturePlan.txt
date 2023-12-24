@@ -62,7 +62,7 @@
 [ ] Snackbar
 [X] Comparer
 [X] Badge
-[ ] HubTile
+[ ] RotatorTile
 [X] DragDrop
 ---Datum/Kalender/Planung---
 [X] DateTimePicker

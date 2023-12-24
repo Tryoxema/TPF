@@ -1,4 +1,19 @@
-﻿===== 0.6.8 =====
+﻿===== 0.6.9 =====
+-Neue Controls
+--SplashScreen
+	Der SplashScreen ist ein Element, das zur überbrückung von Ladezeiten eingesetzt werden kann.
+	Bei dem Element selbst handelt es sich nur um das Darstellungs-Element, die tatsächliche Interaktion wird über die SplashScreenManager-Klasse abgebildet.
+	Über die Methode Show kann ein Standard-SplashScreen angezeigt werden und durch die Methoden ShowCustom<T>() und ShowCustom(Type) können andere Elemente als SplashScreen angezeigt werden.
+	Die Properties AllowTransparancy und DataContext des SplashScreenManagers werden an das erstellte Host-Fenster weitergereicht und können so die Anzeige beeinflussen.
+	Mit der Methode CreateDataContext wird ein Standard-DataContext für den SplashScreen erstellt, den man dann nach Bedarf konfigurieren kann und über den SplashScreenManager weiterreichen kann.
+	Der SplashScreen selbst wird in einem neuen Thread gestartet, um unabhängig von der normalen Anwendung zu laufen.
+	Durch die Trennung in einem anderen Thread ist zu beachten, dass nicht direkt auf den SplashScreen zugegriffen werden kann und auch der SplashScreen nicht direkt auf den Rest zugreifen kann.
+	Sobald die zu überbrückende Ladezeit abgeschlossen ist, kann der SplashScreen wieder über die Close-Methode des SplashScreenManagers geschlossen werden.
+	Der normale SplashScreen unterstützt einen Titel, Untertitel, Statustext, eine Fußzeile, ein Logo und einen Ladebalken.
+	Diese Werte und Elemente können alle über den DataContext gesteuert werden, den der SplashScreenManager mit der Methode CreateDataContext generiert.
+	Es ist außerdem möglich, die Einstellungen des SplashScreenManagers auf Standard zurückzusetzen, indem man die Methode ResetAll aufruft.
+
+===== 0.6.8 =====
 -Neue Controls
 --ResizeableScrollBar
 	Die ResizeableScrollBar ist eine besondere Version der normalen ScrollBar, bei der es möglich ist den Bereich den die ScrollBar abdeckt, selber skalieren zu können.

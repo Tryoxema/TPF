@@ -6792,4 +6792,76 @@
         </Setter>
     </Style>
     <Style TargetType="tpf:DateTimeRangeNavigator" BasedOn="{StaticResource TPF.DateTimeRangeNavigatorStyle}"/>
+
+    <!-- ========== SplashScreen ========== -->
+    <Style TargetType="tpf:SplashScreen" x:Key="TPF.SplashScreenStyle">
+        <Setter Property="Foreground" Value="{tpf:ResourceLink Key=TextBrush}"/>
+        <Setter Property="Background" Value="{tpf:ResourceLink Key=PrimaryBrush}"/>
+        <Setter Property="BorderBrush" Value="{tpf:ResourceLink Key=BorderBrush}"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="Padding" Value="25 25 25 15"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="MinWidth" Value="300"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="tpf:SplashScreen">
+                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <Border Grid.Row="0" Background="{tpf:ResourceLink Key=HeaderBrush}" Margin="-1" Visibility="{TemplateBinding HasTitle, Converter={StaticResource BooleanToVisibilityConverter}}">
+                                <StackPanel Margin="30">
+                                    <TextBlock Text="{TemplateBinding Title}" Foreground="{tpf:ResourceLink Key=SelectedTextBrush}" FontWeight="SemiBold" FontSize="18" HorizontalAlignment="Center"/>
+                                    <TextBlock Text="{TemplateBinding SubTitle}" Foreground="{tpf:ResourceLink Key=SelectedTextBrush}" FontSize="15" HorizontalAlignment="Center"/>
+                                </StackPanel>
+                            </Border>
+                            
+                            <Border Grid.Row="1" Padding="{TemplateBinding Padding}">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="Auto"/>
+                                    </Grid.RowDefinitions>
+
+                                    <TextBlock Grid.Row="0" Text="{TemplateBinding StatusText}" HorizontalAlignment="{TemplateBinding HorizontalStatusAlignment}"/>
+                                    <tpf:ProgressBar Grid.Row="1" Progress="{TemplateBinding Progress}" SecondaryProgress="{TemplateBinding SecondaryProgress}"
+                                                     Minimum="{TemplateBinding ProgressMinimum}" Maximum="{TemplateBinding ProgressMaximum}" Margin="0 10 0 20"
+                                                     IsIndeterminate="{TemplateBinding IsIndeterminate}" Visibility="{TemplateBinding ProgressBarVisibility}"/>
+                                    <ContentControl Grid.Row="2" Content="{TemplateBinding Footer}" HorizontalAlignment="{TemplateBinding HorizontalFooterAlignment}" VerticalAlignment="Bottom" Margin="0 20 0 0"/>
+                                </Grid>
+                            </Border>
+
+                            <Image x:Name="Logo" Source="{Binding Path=Logo, RelativeSource={RelativeSource TemplatedParent}, TargetNullValue={x:Null}}" 
+                                   Width="{TemplateBinding LogoWidth}" Height="{TemplateBinding LogoHeight}" Margin="10" Grid.RowSpan="2"
+                                   Stretch="{TemplateBinding LogoStretch}"/>
+                        </Grid>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="LogoPosition" Value="TopLeft">
+                            <Setter TargetName="Logo" Property="HorizontalAlignment" Value="Left"/>
+                            <Setter TargetName="Logo" Property="VerticalAlignment" Value="Top"/>
+                        </Trigger>
+                        <Trigger Property="LogoPosition" Value="TopRight">
+                            <Setter TargetName="Logo" Property="HorizontalAlignment" Value="Right"/>
+                            <Setter TargetName="Logo" Property="VerticalAlignment" Value="Top"/>
+                        </Trigger>
+                        <Trigger Property="LogoPosition" Value="BottomLeft">
+                            <Setter TargetName="Logo" Property="HorizontalAlignment" Value="Left"/>
+                            <Setter TargetName="Logo" Property="VerticalAlignment" Value="Bottom"/>
+                        </Trigger>
+                        <Trigger Property="LogoPosition" Value="BottomRight">
+                            <Setter TargetName="Logo" Property="HorizontalAlignment" Value="Right"/>
+                            <Setter TargetName="Logo" Property="VerticalAlignment" Value="Bottom"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="tpf:SplashScreen" BasedOn="{StaticResource TPF.SplashScreenStyle}"/>
 </ResourceDictionary>

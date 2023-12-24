@@ -1,15 +1,24 @@
 ﻿using System;
-using System.Windows;
 using System.Windows.Media;
 using TPF.Skins;
 
 namespace TPF.Controls
 {
-    public sealed class ResourceManager : DependencyObject
+    public sealed class ResourceManager : System.ComponentModel.INotifyPropertyChanged
     {
         private ResourceManager()
         {
             ChangeSkinInternal(VS2013LightSkin.Instance);
+        }
+
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+
+        bool SetProperty<T>(ref T field, T value, [System.Runtime.CompilerServices.CallerMemberName] string propertyName = null)
+        {
+            if (System.Collections.Generic.EqualityComparer<T>.Default.Equals(field, value)) return false;
+            field = value;
+            PropertyChanged?.Invoke(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            return true;
         }
 
         #region Properties
@@ -19,453 +28,408 @@ namespace TPF.Controls
             get { return _resources ?? (_resources = new ResourceManager()); }
         }
 
-        #region SkinName DependencyProperty
-        public static readonly DependencyProperty SkinNameProperty = DependencyProperty.Register(nameof(SkinName), typeof(string), typeof(ResourceManager));
-
+        #region SkinName
+        string _skinName;
         public string SkinName
         {
-            get { return (string)GetValue(SkinNameProperty); }
-            set { SetValue(SkinNameProperty, value); }
+            get { return _skinName; }
+            set { SetProperty(ref _skinName, value); }
         }
         #endregion
 
-        #region FontSize DependencyProperty
-        public static readonly DependencyProperty FontSizeProperty = DependencyProperty.Register(nameof(FontSize), typeof(double), typeof(ResourceManager));
-
+        #region FontSize
+        double _fontSize;
         public double FontSize
         {
-            get { return (double)GetValue(FontSizeProperty); }
-            set { SetValue(FontSizeProperty, value); }
+            get { return _fontSize; }
+            set { SetProperty(ref _fontSize, value); }
         }
         #endregion
 
-        #region DisabledOpacity DependencyProperty
-        public static readonly DependencyProperty DisabledOpacityProperty = DependencyProperty.Register(nameof(DisabledOpacity), typeof(double), typeof(ResourceManager));
-
+        #region DisabledOpacity
+        double _disabledOpacity;
         public double DisabledOpacity
         {
-            get { return (double)GetValue(DisabledOpacityProperty); }
-            set { SetValue(DisabledOpacityProperty, value); }
+            get { return _disabledOpacity; }
+            set { SetProperty(ref _disabledOpacity, value); }
         }
         #endregion
 
-        #region RippleOpacity DependencyProperty
-        public static readonly DependencyProperty RippleOpacityProperty = DependencyProperty.Register(nameof(RippleOpacity), typeof(double), typeof(ResourceManager));
-
+        #region RippleOpacity 
+        double _rippleOpacity;
         public double RippleOpacity
         {
-            get { return (double)GetValue(RippleOpacityProperty); }
-            set { SetValue(RippleOpacityProperty, value); }
+            get { return _rippleOpacity; }
+            set { SetProperty(ref _rippleOpacity, value); }
         }
         #endregion
 
-        #region ApplicationBackground DependencyProperty
-        public static readonly DependencyProperty ApplicationBackgroundProperty = DependencyProperty.Register(nameof(ApplicationBackground), typeof(Brush), typeof(ResourceManager));
-
+        #region ApplicationBackground 
+        Brush _applicationBackground;
         public Brush ApplicationBackground
         {
-            get { return (Brush)GetValue(ApplicationBackgroundProperty); }
-            set { SetValue(ApplicationBackgroundProperty, value); }
+            get { return _applicationBackground; }
+            set { SetProperty(ref _applicationBackground, value); }
         }
         #endregion
 
-        #region TextBrush DependencyProperty
-        public static readonly DependencyProperty TextBrushProperty = DependencyProperty.Register(nameof(TextBrush), typeof(Brush), typeof(ResourceManager));
-
+        #region TextBrush
+        Brush _textBrush;
         public Brush TextBrush
         {
-            get { return (Brush)GetValue(TextBrushProperty); }
-            set { SetValue(TextBrushProperty, value); }
+            get { return _textBrush; }
+            set { SetProperty(ref _textBrush, value); }
         }
         #endregion
 
-        #region MouseOverTextBrush DependencyProperty
-        public static readonly DependencyProperty MouseOverTextBrushProperty = DependencyProperty.Register(nameof(MouseOverTextBrush), typeof(Brush), typeof(ResourceManager));
-
+        #region MouseOverTextBrush
+        Brush _mouseOverTextBrush;
         public Brush MouseOverTextBrush
         {
-            get { return (Brush)GetValue(MouseOverTextBrushProperty); }
-            set { SetValue(MouseOverTextBrushProperty, value); }
+            get { return _mouseOverTextBrush; }
+            set { SetProperty(ref _mouseOverTextBrush, value); }
         }
         #endregion
 
-        #region PressedTextBrush DependencyProperty
-        public static readonly DependencyProperty PressedTextBrushProperty = DependencyProperty.Register(nameof(PressedTextBrush), typeof(Brush), typeof(ResourceManager));
-
+        #region PressedTextBrush
+        Brush _pressedTextBrush;
         public Brush PressedTextBrush
         {
-            get { return (Brush)GetValue(PressedTextBrushProperty); }
-            set { SetValue(PressedTextBrushProperty, value); }
+            get { return _pressedTextBrush; }
+            set { SetProperty(ref _pressedTextBrush, value); }
         }
         #endregion
 
-        #region SelectedTextBrush DependencyProperty
-        public static readonly DependencyProperty SelectedTextBrushProperty = DependencyProperty.Register(nameof(SelectedTextBrush), typeof(Brush), typeof(ResourceManager));
-
+        #region SelectedTextBrush
+        Brush _selectedTextBrush;
         public Brush SelectedTextBrush
         {
-            get { return (Brush)GetValue(SelectedTextBrushProperty); }
-            set { SetValue(SelectedTextBrushProperty, value); }
+            get { return _selectedTextBrush; }
+            set { SetProperty(ref _selectedTextBrush, value); }
         }
         #endregion
 
-        #region ReadOnlyTextBrush DependencyProperty
-        public static readonly DependencyProperty ReadOnlyTextBrushProperty = DependencyProperty.Register(nameof(ReadOnlyTextBrush), typeof(Brush), typeof(ResourceManager));
-
+        #region ReadOnlyTextBrush
+        Brush _readOnlyTextBrush;
         public Brush ReadOnlyTextBrush
         {
-            get { return (Brush)GetValue(ReadOnlyTextBrushProperty); }
-            set { SetValue(ReadOnlyTextBrushProperty, value); }
+            get { return _readOnlyTextBrush; }
+            set { SetProperty(ref _readOnlyTextBrush, value); }
         }
         #endregion
 
-        #region GlyphBrush DependencyProperty
-        public static readonly DependencyProperty GlyphBrushProperty = DependencyProperty.Register(nameof(GlyphBrush), typeof(Brush), typeof(ResourceManager));
-
+        #region GlyphBrush
+        Brush _glyphBrush;
         public Brush GlyphBrush
         {
-            get { return (Brush)GetValue(GlyphBrushProperty); }
-            set { SetValue(GlyphBrushProperty, value); }
+            get { return _glyphBrush; }
+            set { SetProperty(ref _glyphBrush, value); }
         }
         #endregion
 
-        #region InputBackgroundBrush DependencyProperty
-        public static readonly DependencyProperty InputBackgroundBrushProperty = DependencyProperty.Register(nameof(InputBackgroundBrush), typeof(Brush), typeof(ResourceManager));
-
+        #region InputBackgroundBrush
+        Brush _inputBackgroundBrush;
         public Brush InputBackgroundBrush
         {
-            get { return (Brush)GetValue(InputBackgroundBrushProperty); }
-            set { SetValue(InputBackgroundBrushProperty, value); }
+            get { return _inputBackgroundBrush; }
+            set { SetProperty(ref _inputBackgroundBrush, value); }
         }
         #endregion
 
-        #region PrimaryBrush DependencyProperty
-        public static readonly DependencyProperty PrimaryBrushProperty = DependencyProperty.Register(nameof(PrimaryBrush), typeof(Brush), typeof(ResourceManager));
-
+        #region PrimaryBrush
+        Brush _primaryBrush;
         public Brush PrimaryBrush
         {
-            get { return (Brush)GetValue(PrimaryBrushProperty); }
-            set { SetValue(PrimaryBrushProperty, value); }
+            get { return _primaryBrush; }
+            set { SetProperty(ref _primaryBrush, value); }
         }
         #endregion
 
-        #region SelectedBrush DependencyProperty
-        public static readonly DependencyProperty SelectedBrushProperty = DependencyProperty.Register(nameof(SelectedBrush), typeof(Brush), typeof(ResourceManager));
-
+        #region SelectedBrush
+        Brush _selectedBrush;
         public Brush SelectedBrush
         {
-            get { return (Brush)GetValue(SelectedBrushProperty); }
-            set { SetValue(SelectedBrushProperty, value); }
+            get { return _selectedBrush; }
+            set { SetProperty(ref _selectedBrush, value); }
         }
         #endregion
 
-        #region PressedBrush DependencyProperty
-        public static readonly DependencyProperty PressedBrushProperty = DependencyProperty.Register(nameof(PressedBrush), typeof(Brush), typeof(ResourceManager));
-
+        #region PressedBrush
+        Brush _pressedBrush;
         public Brush PressedBrush
         {
-            get { return (Brush)GetValue(PressedBrushProperty); }
-            set { SetValue(PressedBrushProperty, value); }
+            get { return _pressedBrush; }
+            set { SetProperty(ref _pressedBrush, value); }
         }
         #endregion
 
-        #region DisabledBrush DependencyProperty
-        public static readonly DependencyProperty DisabledBrushProperty = DependencyProperty.Register(nameof(DisabledBrush), typeof(Brush), typeof(ResourceManager));
-
+        #region DisabledBrush
+        Brush _disabledBrush;
         public Brush DisabledBrush
         {
-            get { return (Brush)GetValue(DisabledBrushProperty); }
-            set { SetValue(DisabledBrushProperty, value); }
+            get { return _disabledBrush; }
+            set { SetProperty(ref _disabledBrush, value); }
         }
         #endregion
 
-        #region BorderBrush DependencyProperty
-        public static readonly DependencyProperty BorderBrushProperty = DependencyProperty.Register(nameof(BorderBrush), typeof(Brush), typeof(ResourceManager));
-
+        #region BorderBrush
+        Brush _borderBrush;
         public Brush BorderBrush
         {
-            get { return (Brush)GetValue(BorderBrushProperty); }
-            set { SetValue(BorderBrushProperty, value); }
+            get { return _borderBrush; }
+            set { SetProperty(ref _borderBrush, value); }
         }
         #endregion
 
-        #region MouseOverBrush DependencyProperty
-        public static readonly DependencyProperty MouseOverBrushProperty = DependencyProperty.Register(nameof(MouseOverBrush), typeof(Brush), typeof(ResourceManager));
-
+        #region MouseOverBrush
+        Brush _mouseOverBrush;
         public Brush MouseOverBrush
         {
-            get { return (Brush)GetValue(MouseOverBrushProperty); }
-            set { SetValue(MouseOverBrushProperty, value); }
+            get { return _mouseOverBrush; }
+            set { SetProperty(ref _mouseOverBrush, value); }
         }
         #endregion
 
-        #region AccentBrush DependencyProperty
-        public static readonly DependencyProperty AccentBrushProperty = DependencyProperty.Register(nameof(AccentBrush), typeof(Brush), typeof(ResourceManager));
-
+        #region AccentBrush
+        Brush _accentBrush;
         public Brush AccentBrush
         {
-            get { return (Brush)GetValue(AccentBrushProperty); }
-            set { SetValue(AccentBrushProperty, value); }
+            get { return _accentBrush; }
+            set { SetProperty(ref _accentBrush, value); }
         }
         #endregion
 
-        #region MouseOverAccentBrush DependencyProperty
-        public static readonly DependencyProperty MouseOverAccentBrushProperty = DependencyProperty.Register(nameof(MouseOverAccentBrush), typeof(Brush), typeof(ResourceManager));
-
+        #region MouseOverAccentBrush
+        Brush _mouseOverAccentBrush;
         public Brush MouseOverAccentBrush
         {
-            get { return (Brush)GetValue(MouseOverAccentBrushProperty); }
-            set { SetValue(MouseOverAccentBrushProperty, value); }
+            get { return _mouseOverAccentBrush; }
+            set { SetProperty(ref _mouseOverAccentBrush, value); }
         }
         #endregion
 
-        #region FocusedAccentBrush DependencyProperty
-        public static readonly DependencyProperty FocusedAccentBrushProperty = DependencyProperty.Register(nameof(FocusedAccentBrush), typeof(Brush), typeof(ResourceManager));
-
+        #region FocusedAccentBrush
+        Brush _focusedAccentBrush;
         public Brush FocusedAccentBrush
         {
-            get { return (Brush)GetValue(FocusedAccentBrushProperty); }
-            set { SetValue(FocusedAccentBrushProperty, value); }
+            get { return _focusedAccentBrush; }
+            set { SetProperty(ref _focusedAccentBrush, value); }
         }
         #endregion
 
-        #region PressedAccentBrush DependencyProperty
-        public static readonly DependencyProperty PressedAccentBrushProperty = DependencyProperty.Register(nameof(PressedAccentBrush), typeof(Brush), typeof(ResourceManager));
-
+        #region PressedAccentBrush
+        Brush _pressedAccentBrush;
         public Brush PressedAccentBrush
         {
-            get { return (Brush)GetValue(PressedAccentBrushProperty); }
-            set { SetValue(PressedAccentBrushProperty, value); }
+            get { return _pressedAccentBrush; }
+            set { SetProperty(ref _pressedAccentBrush, value); }
         }
         #endregion
 
-        #region HeaderBrush DependencyProperty
-        public static readonly DependencyProperty HeaderBrushProperty = DependencyProperty.Register(nameof(HeaderBrush), typeof(Brush), typeof(ResourceManager));
-
+        #region HeaderBrush
+        Brush _headerBrush;
         public Brush HeaderBrush
         {
-            get { return (Brush)GetValue(HeaderBrushProperty); }
-            set { SetValue(HeaderBrushProperty, value); }
+            get { return _headerBrush; }
+            set { SetProperty(ref _headerBrush, value); }
         }
         #endregion
 
-        #region ErrorBrush DependencyProperty
-        public static readonly DependencyProperty ErrorBrushProperty = DependencyProperty.Register(nameof(ErrorBrush), typeof(Brush), typeof(ResourceManager));
-
+        #region ErrorBrush
+        Brush _errorBrush;
         public Brush ErrorBrush
         {
-            get { return (Brush)GetValue(ErrorBrushProperty); }
-            set { SetValue(ErrorBrushProperty, value); }
+            get { return _errorBrush; }
+            set { SetProperty(ref _errorBrush, value); }
         }
         #endregion
 
-        #region ProgressBarBrush DependencyProperty
-        public static readonly DependencyProperty ProgressBarBrushProperty = DependencyProperty.Register(nameof(ProgressBarBrush), typeof(Brush), typeof(ResourceManager));
-
+        #region ProgressBarBrush
+        Brush _progressBarBrush;
         public Brush ProgressBarBrush
         {
-            get { return (Brush)GetValue(ProgressBarBrushProperty); }
-            set { SetValue(ProgressBarBrushProperty, value); }
+            get { return _progressBarBrush; }
+            set { SetProperty(ref _progressBarBrush, value); }
         }
         #endregion
 
-        #region RippleBrush DependencyProperty
-        public static readonly DependencyProperty RippleBrushProperty = DependencyProperty.Register(nameof(RippleBrush), typeof(Brush), typeof(ResourceManager));
-
+        #region RippleBrush
+        Brush _rippleBrush;
         public Brush RippleBrush
         {
-            get { return (Brush)GetValue(RippleBrushProperty); }
-            set { SetValue(RippleBrushProperty, value); }
+            get { return _rippleBrush; }
+            set { SetProperty(ref _rippleBrush, value); }
         }
         #endregion
 
-        #region HyperlinkBrush DependencyProperty
-        public static readonly DependencyProperty HyperlinkBrushProperty = DependencyProperty.Register(nameof(HyperlinkBrush), typeof(Brush), typeof(ResourceManager));
-
+        #region HyperlinkBrush
+        Brush _hyperlinkBrush;
         public Brush HyperlinkBrush
         {
-            get { return (Brush)GetValue(HyperlinkBrushProperty); }
-            set { SetValue(HyperlinkBrushProperty, value); }
+            get { return _hyperlinkBrush; }
+            set { SetProperty(ref _hyperlinkBrush, value); }
         }
         #endregion
 
-        #region HyperlinkVisitedBrush DependencyProperty
-        public static readonly DependencyProperty HyperlinkVisitedBrushProperty = DependencyProperty.Register(nameof(HyperlinkVisitedBrush), typeof(Brush), typeof(ResourceManager));
-
+        #region HyperlinkVisitedBrush
+        Brush _hyperlinkVisitedBrush;
         public Brush HyperlinkVisitedBrush
         {
-            get { return (Brush)GetValue(HyperlinkVisitedBrushProperty); }
-            set { SetValue(HyperlinkVisitedBrushProperty, value); }
+            get { return _hyperlinkVisitedBrush; }
+            set { SetProperty(ref _hyperlinkVisitedBrush, value); }
         }
         #endregion
 
-        #region ScrollBarBackgroundBrush DependencyProperty
-        public static readonly DependencyProperty ScrollBarBackgroundBrushProperty = DependencyProperty.Register(nameof(ScrollBarBackgroundBrush), typeof(Brush), typeof(ResourceManager));
-
+        #region ScrollBarBackgroundBrush
+        Brush _scrollBarBackgroundBrush;
         public Brush ScrollBarBackgroundBrush
         {
-            get { return (Brush)GetValue(ScrollBarBackgroundBrushProperty); }
-            set { SetValue(ScrollBarBackgroundBrushProperty, value); }
+            get { return _scrollBarBackgroundBrush; }
+            set { SetProperty(ref _scrollBarBackgroundBrush, value); }
         }
         #endregion
 
-        #region ScrollBarBrush DependencyProperty
-        public static readonly DependencyProperty ScrollBarBrushProperty = DependencyProperty.Register(nameof(ScrollBarBrush), typeof(Brush), typeof(ResourceManager));
-
+        #region ScrollBarBrush
+        Brush _scrollBarBrush;
         public Brush ScrollBarBrush
         {
-            get { return (Brush)GetValue(ScrollBarBrushProperty); }
-            set { SetValue(ScrollBarBrushProperty, value); }
+            get { return _scrollBarBrush; }
+            set { SetProperty(ref _scrollBarBrush, value); }
         }
         #endregion
 
-        #region ScrollBarMouseOverBrush DependencyProperty
-        public static readonly DependencyProperty ScrollBarMouseOverBrushProperty = DependencyProperty.Register(nameof(ScrollBarMouseOverBrush), typeof(Brush), typeof(ResourceManager));
-
+        #region ScrollBarMouseOverBrush
+        Brush _scrollBarMouseOverBrush;
         public Brush ScrollBarMouseOverBrush
         {
-            get { return (Brush)GetValue(ScrollBarMouseOverBrushProperty); }
-            set { SetValue(ScrollBarMouseOverBrushProperty, value); }
+            get { return _scrollBarMouseOverBrush; }
+            set { SetProperty(ref _scrollBarMouseOverBrush, value); }
         }
         #endregion
 
-        #region ScrollBarPressedBrush DependencyProperty
-        public static readonly DependencyProperty ScrollBarPressedBrushProperty = DependencyProperty.Register(nameof(ScrollBarPressedBrush), typeof(Brush), typeof(ResourceManager));
-
+        #region ScrollBarPressedBrush
+        Brush _scrollBarPressedBrush;
         public Brush ScrollBarPressedBrush
         {
-            get { return (Brush)GetValue(ScrollBarPressedBrushProperty); }
-            set { SetValue(ScrollBarPressedBrushProperty, value); }
+            get { return _scrollBarPressedBrush; }
+            set { SetProperty(ref _scrollBarPressedBrush, value); }
         }
         #endregion
 
-        #region SecondaryBrush DependencyProperty
-        public static readonly DependencyProperty SecondaryBrushProperty = DependencyProperty.Register(nameof(SecondaryBrush), typeof(Brush), typeof(ResourceManager));
-
+        #region SecondaryBrush
+        Brush _secondaryBrush;
         public Brush SecondaryBrush
         {
-            get { return (Brush)GetValue(SecondaryBrushProperty); }
-            set { SetValue(SecondaryBrushProperty, value); }
+            get { return _secondaryBrush; }
+            set { SetProperty(ref _secondaryBrush, value); }
         }
         #endregion
 
-        #region SecondaryBorderBrush DependencyProperty
-        public static readonly DependencyProperty SecondaryBorderBrushProperty = DependencyProperty.Register(nameof(SecondaryBorderBrush), typeof(Brush), typeof(ResourceManager));
-
+        #region SecondaryBorderBrush
+        Brush _secondaryBorderBrush;
         public Brush SecondaryBorderBrush
         {
-            get { return (Brush)GetValue(SecondaryBorderBrushProperty); }
-            set { SetValue(SecondaryBorderBrushProperty, value); }
+            get { return _secondaryBorderBrush; }
+            set { SetProperty(ref _secondaryBorderBrush, value); }
         }
         #endregion
 
-        #region SecondaryMouseOverBrush DependencyProperty
-        public static readonly DependencyProperty SecondaryMouseOverBrushProperty = DependencyProperty.Register(nameof(SecondaryMouseOverBrush), typeof(Brush), typeof(ResourceManager));
-
+        #region SecondaryMouseOverBrush
+        Brush _secondaryMouseOverBrush;
         public Brush SecondaryMouseOverBrush
         {
-            get { return (Brush)GetValue(SecondaryMouseOverBrushProperty); }
-            set { SetValue(SecondaryMouseOverBrushProperty, value); }
+            get { return _secondaryMouseOverBrush; }
+            set { SetProperty(ref _secondaryMouseOverBrush, value); }
         }
         #endregion
 
-        #region SecondarySelectedBrush DependencyProperty
-        public static readonly DependencyProperty SecondarySelectedBrushProperty = DependencyProperty.Register(nameof(SecondarySelectedBrush), typeof(Brush), typeof(ResourceManager));
-
+        #region SecondarySelectedBrush
+        Brush _secondarySelectedBrush;
         public Brush SecondarySelectedBrush
         {
-            get { return (Brush)GetValue(SecondarySelectedBrushProperty); }
-            set { SetValue(SecondarySelectedBrushProperty, value); }
+            get { return _secondarySelectedBrush; }
+            set { SetProperty(ref _secondarySelectedBrush, value); }
         }
         #endregion
 
-        #region SecondaryPressedBrush DependencyProperty
-        public static readonly DependencyProperty SecondaryPressedBrushProperty = DependencyProperty.Register(nameof(SecondaryPressedBrush), typeof(Brush), typeof(ResourceManager));
-
+        #region SecondaryPressedBrush
+        Brush _secondaryPressedBrush;
         public Brush SecondaryPressedBrush
         {
-            get { return (Brush)GetValue(SecondaryPressedBrushProperty); }
-            set { SetValue(SecondaryPressedBrushProperty, value); }
+            get { return _secondaryPressedBrush; }
+            set { SetProperty(ref _secondaryPressedBrush, value); }
         }
         #endregion
 
-        #region SecondaryMouseOverTextBrush DependencyProperty
-        public static readonly DependencyProperty SecondaryMouseOverTextBrushProperty = DependencyProperty.Register(nameof(SecondaryMouseOverTextBrush), typeof(Brush), typeof(ResourceManager));
-
+        #region SecondaryMouseOverTextBrush
+        Brush _secondaryMouseOverTextBrush;
         public Brush SecondaryMouseOverTextBrush
         {
-            get { return (Brush)GetValue(SecondaryMouseOverTextBrushProperty); }
-            set { SetValue(SecondaryMouseOverTextBrushProperty, value); }
+            get { return _secondaryMouseOverTextBrush; }
+            set { SetProperty(ref _secondaryMouseOverTextBrush, value); }
         }
         #endregion
 
-        #region SecondaryPressedTextBrush DependencyProperty
-        public static readonly DependencyProperty SecondaryPressedTextBrushProperty = DependencyProperty.Register(nameof(SecondaryPressedTextBrush), typeof(Brush), typeof(ResourceManager));
-
+        #region SecondaryPressedTextBrush
+        Brush _secondaryPressedTextBrush;
         public Brush SecondaryPressedTextBrush
         {
-            get { return (Brush)GetValue(SecondaryPressedTextBrushProperty); }
-            set { SetValue(SecondaryPressedTextBrushProperty, value); }
+            get { return _secondaryPressedTextBrush; }
+            set { SetProperty(ref _secondaryPressedTextBrush, value); }
         }
         #endregion
 
-        #region SecondaryAccentBrush DependencyProperty
-        public static readonly DependencyProperty SecondaryAccentBrushProperty = DependencyProperty.Register(nameof(SecondaryAccentBrush), typeof(Brush), typeof(ResourceManager));
-
+        #region SecondaryAccentBrush
+        Brush _secondaryAccentBrush;
         public Brush SecondaryAccentBrush
         {
-            get { return (Brush)GetValue(SecondaryAccentBrushProperty); }
-            set { SetValue(SecondaryAccentBrushProperty, value); }
+            get { return _secondaryAccentBrush; }
+            set { SetProperty(ref _secondaryAccentBrush, value); }
         }
         #endregion
 
-        #region SecondaryMouseOverAccentBrush DependencyProperty
-        public static readonly DependencyProperty SecondaryMouseOverAccentBrushProperty = DependencyProperty.Register(nameof(SecondaryMouseOverAccentBrush), typeof(Brush), typeof(ResourceManager));
-
+        #region SecondaryMouseOverAccentBrush
+        Brush _secondaryMouseOverAccentBrush;
         public Brush SecondaryMouseOverAccentBrush
         {
-            get { return (Brush)GetValue(SecondaryMouseOverAccentBrushProperty); }
-            set { SetValue(SecondaryMouseOverAccentBrushProperty, value); }
+            get { return _secondaryMouseOverAccentBrush; }
+            set { SetProperty(ref _secondaryMouseOverAccentBrush, value); }
         }
         #endregion
 
-        #region SecondaryFocusedAccentBrush DependencyProperty
-        public static readonly DependencyProperty SecondaryFocusedAccentBrushProperty = DependencyProperty.Register(nameof(SecondaryFocusedAccentBrush), typeof(Brush), typeof(ResourceManager));
-
+        #region SecondaryFocusedAccentBrush
+        Brush _secondaryFocusedAccentBrush;
         public Brush SecondaryFocusedAccentBrush
         {
-            get { return (Brush)GetValue(SecondaryFocusedAccentBrushProperty); }
-            set { SetValue(SecondaryFocusedAccentBrushProperty, value); }
+            get { return _secondaryFocusedAccentBrush; }
+            set { SetProperty(ref _secondaryFocusedAccentBrush, value); }
         }
         #endregion
 
-        #region SecondaryPressedAccentBrush DependencyProperty
-        public static readonly DependencyProperty SecondaryPressedAccentBrushProperty = DependencyProperty.Register(nameof(SecondaryPressedAccentBrush), typeof(Brush), typeof(ResourceManager));
-
+        #region SecondaryPressedAccentBrush
+        Brush _secondaryPressedAccentBrush;
         public Brush SecondaryPressedAccentBrush
         {
-            get { return (Brush)GetValue(SecondaryPressedAccentBrushProperty); }
-            set { SetValue(SecondaryPressedAccentBrushProperty, value); }
+            get { return _secondaryPressedAccentBrush; }
+            set { SetProperty(ref _secondaryPressedAccentBrush, value); }
         }
         #endregion
 
-        #region SecondaryHeaderBrush DependencyProperty
-        public static readonly DependencyProperty SecondaryHeaderBrushProperty = DependencyProperty.Register(nameof(SecondaryHeaderBrush), typeof(Brush), typeof(ResourceManager));
-
+        #region SecondaryHeaderBrush
+        Brush _secondaryHeaderBrush;
         public Brush SecondaryHeaderBrush
         {
-            get { return (Brush)GetValue(SecondaryHeaderBrushProperty); }
-            set { SetValue(SecondaryHeaderBrushProperty, value); }
+            get { return _secondaryHeaderBrush; }
+            set { SetProperty(ref _secondaryHeaderBrush, value); }
         }
         #endregion
 
-        #region SecondaryProgressBarBrush DependencyProperty
-        public static readonly DependencyProperty SecondaryProgressBarBrushProperty = DependencyProperty.Register(nameof(SecondaryProgressBarBrush), typeof(Brush), typeof(ResourceManager));
-
+        #region SecondaryProgressBarBrush
+        Brush _secondaryProgressBarBrush;
         public Brush SecondaryProgressBarBrush
         {
-            get { return (Brush)GetValue(SecondaryProgressBarBrushProperty); }
-            set { SetValue(SecondaryProgressBarBrushProperty, value); }
+            get { return _secondaryProgressBarBrush; }
+            set { SetProperty(ref _secondaryProgressBarBrush, value); }
         }
         #endregion
         #endregion
@@ -533,6 +497,50 @@ namespace TPF.Controls
             SecondaryPressedAccentBrush = skin.SecondaryPressedAccentBrush;
             SecondaryHeaderBrush = skin.SecondaryHeaderBrush;
             SecondaryProgressBarBrush = skin.SecondaryProgressBarBrush;
+
+            // Alle Brushes müssen eingefroren werden, da an sonsten Fehler bei mehereren Threads auftreten können
+            // Aus dem gleichen Grund kann auch kein DependencyObject als Basisklasse hierfür benutzt werden
+            ApplicationBackground.Freeze();
+            TextBrush.Freeze();
+            MouseOverTextBrush.Freeze();
+            PressedTextBrush.Freeze();
+            SelectedTextBrush.Freeze();
+            ReadOnlyTextBrush.Freeze();
+            GlyphBrush.Freeze();
+            InputBackgroundBrush.Freeze();
+            PrimaryBrush.Freeze();
+            SelectedBrush.Freeze();
+            PressedBrush.Freeze();
+            DisabledBrush.Freeze();
+            BorderBrush.Freeze();
+            MouseOverBrush.Freeze();
+            AccentBrush.Freeze();
+            MouseOverAccentBrush.Freeze();
+            FocusedAccentBrush.Freeze();
+            PressedAccentBrush.Freeze();
+            HeaderBrush.Freeze();
+            ErrorBrush.Freeze();
+            ProgressBarBrush.Freeze();
+            RippleBrush.Freeze();
+            HyperlinkBrush.Freeze();
+            HyperlinkVisitedBrush.Freeze();
+            ScrollBarBackgroundBrush.Freeze();
+            ScrollBarBrush.Freeze();
+            ScrollBarMouseOverBrush.Freeze();
+            ScrollBarPressedBrush.Freeze();
+            SecondaryBrush.Freeze();
+            SecondaryBorderBrush.Freeze();
+            SecondaryMouseOverBrush.Freeze();
+            SecondarySelectedBrush.Freeze();
+            SecondaryPressedBrush.Freeze();
+            SecondaryMouseOverTextBrush.Freeze();
+            SecondaryPressedTextBrush.Freeze();
+            SecondaryAccentBrush.Freeze();
+            SecondaryMouseOverAccentBrush.Freeze();
+            SecondaryFocusedAccentBrush.Freeze();
+            SecondaryPressedAccentBrush.Freeze();
+            SecondaryHeaderBrush.Freeze();
+            SecondaryProgressBarBrush.Freeze();
 
             var changedEventArgs = new SkinChangedEventArgs(skin);
             // Bescheid sagen, dass der Skin geändert wurde
