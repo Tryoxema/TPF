@@ -4383,6 +4383,149 @@
     </Style>
     <Style TargetType="tpf:Comparer" BasedOn="{StaticResource TPF.ComparerStyle}"/>
 
+    <!-- ========== SplitView ========== -->
+    <Style TargetType="Button" x:Key="TPF.SplitViewButtonStyle">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="BorderThickness" Value="0"/>
+        <Setter Property="Margin" Value="0"/>
+        <Setter Property="Padding" Value="2"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <tpf:SimplePanel>
+                        <Rectangle x:Name="Background" Fill="{TemplateBinding Background}"/>
+                        <ContentPresenter x:Name="Content" Margin="{TemplateBinding Padding}"/>
+                    </tpf:SimplePanel>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter TargetName="Content" Property="Opacity" Value="{tpf:ResourceLink Key=DisabledOpacity}"/>
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Background" Property="Fill" Value="#33FFFFFF"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="Background" Property="Fill" Value="#66FFFFFF"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <PathGeometry x:Key="SwapVerticalGeometry" Figures="M9,3 L5,7 H8.5 V14 H9.5 V7 H13 M17.5,10 V3 H16.5 V10 H13 L17,14 L21,10 H18 z"/>
+    <PathGeometry x:Key="SwapHorizontalGeometry" Figures="M14,7 L10,3 V6.5 H3 V7.5 H10 V11 M7,11 L3,15 L7,19 V15.5 H14 V14.5 H7 V11 z"/>
+    <PathGeometry x:Key="VerticalSplitGeometry" Figures="M1,1 H19 V19 H1 V1 M2,2 V18 H18 V2 H2 z M11,4 V16 H9 V4 H11 z"/>
+    <PathGeometry x:Key="HorizontalSplitGeometry" Figures="M1,1 H19 V19 H1 V1 M2,2 V18 H18 V2 H2 z M4,11 H16 V9 H4 V11 z"/>
+    <ControlTemplate TargetType="tpf:SplitView" x:Key="TPF.HorizontalSplitViewTemplate">
+        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <ContentPresenter x:Name="FirstPresenter" Grid.Row="0" ContentSource="FirstContent"/>
+
+                <GridSplitter Grid.Row="1" Background="{TemplateBinding SplitBarBackgroundBrush}" HorizontalAlignment="Stretch" ResizeDirection="Rows"/>
+                <Grid Grid.Row="1" Height="18" Margin="3 0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Border Grid.Column="1" Width="40" BorderThickness="0 1" BorderBrush="{TemplateBinding SplitBarForegroundBrush}" Margin="0 6" IsHitTestVisible="False"/>
+
+                    <StackPanel Orientation="Horizontal" Grid.Column="0">
+                        <Button Style="{StaticResource TPF.SplitViewButtonStyle}" Command="{x:Static tpf:SplitView.SwapContent}" Width="16" Padding="1">
+                            <Path Data="{StaticResource SwapVerticalGeometry}" Fill="{TemplateBinding SplitBarForegroundBrush}" Stretch="Uniform"/>
+                        </Button>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Grid.Column="2">
+                        <Button Style="{StaticResource TPF.SplitViewButtonStyle}" Command="{x:Static tpf:SplitView.VerticalLayout}" Width="15">
+                            <Path Data="{StaticResource VerticalSplitGeometry}" Fill="{TemplateBinding SplitBarForegroundBrush}" Stretch="Uniform"/>
+                        </Button>
+                        <Button Style="{StaticResource TPF.SplitViewButtonStyle}" Command="{x:Static tpf:SplitView.HorizontalLayout}" Width="15">
+                            <Path Data="{StaticResource HorizontalSplitGeometry}" Fill="{TemplateBinding SplitBarForegroundBrush}" Stretch="Uniform"/>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+
+                <ContentPresenter x:Name="SecondPresenter" Grid.Row="2" ContentSource="SecondContent"/>
+            </Grid>
+        </Border>
+
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsContentSwaped" Value="True">
+                <Setter TargetName="FirstPresenter" Property="Grid.Row" Value="2"/>
+                <Setter TargetName="SecondPresenter" Property="Grid.Row" Value="0"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+    <ControlTemplate TargetType="tpf:SplitView" x:Key="TPF.VerticalSplitViewTemplate">
+        <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <ContentPresenter x:Name="FirstPresenter" Grid.Column="0" ContentSource="FirstContent"/>
+
+                <GridSplitter Grid.Column="1" Background="{TemplateBinding SplitBarBackgroundBrush}" HorizontalAlignment="Stretch" ResizeDirection="Columns"/>
+                <Grid Grid.Column="1" Width="18" Margin="0 3">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Border Grid.Row="1" Height="40" BorderThickness="1 0" BorderBrush="{TemplateBinding SplitBarForegroundBrush}" Margin="6 0" IsHitTestVisible="False"/>
+
+                    <StackPanel Grid.Row="0">
+                        <Button Style="{StaticResource TPF.SplitViewButtonStyle}" Command="{x:Static tpf:SplitView.SwapContent}" Height="16" Padding="1">
+                            <Path Data="{StaticResource SwapHorizontalGeometry}" Fill="{TemplateBinding SplitBarForegroundBrush}" Stretch="Uniform"/>
+                        </Button>
+                    </StackPanel>
+
+                    <StackPanel Grid.Row="2">
+                        <Button Style="{StaticResource TPF.SplitViewButtonStyle}" Command="{x:Static tpf:SplitView.VerticalLayout}" Height="15">
+                            <Path Data="{StaticResource VerticalSplitGeometry}" Fill="{TemplateBinding SplitBarForegroundBrush}" Stretch="Uniform"/>
+                        </Button>
+                        <Button Style="{StaticResource TPF.SplitViewButtonStyle}" Command="{x:Static tpf:SplitView.HorizontalLayout}" Height="15">
+                            <Path Data="{StaticResource HorizontalSplitGeometry}" Fill="{TemplateBinding SplitBarForegroundBrush}" Stretch="Uniform"/>
+                        </Button>
+                    </StackPanel>
+                </Grid>
+
+                <ContentPresenter x:Name="SecondPresenter" Grid.Column="2" ContentSource="SecondContent"/>
+            </Grid>
+        </Border>
+
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsContentSwaped" Value="True">
+                <Setter TargetName="FirstPresenter" Property="Grid.Column" Value="2"/>
+                <Setter TargetName="SecondPresenter" Property="Grid.Column" Value="0"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+    <Style TargetType="tpf:SplitView" x:Key="TPF.SplitViewStyle">
+        <Setter Property="Template" Value="{StaticResource TPF.HorizontalSplitViewTemplate}"/>
+        <Setter Property="SplitBarBackgroundBrush" Value="{tpf:ResourceLink Key=BorderBrush}"/>
+        <Setter Property="SplitBarForegroundBrush" Value="{tpf:ResourceLink Key=GlyphBrush}"/>
+        <Setter Property="BorderBrush" Value="{tpf:ResourceLink Key=BorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Style.Triggers>
+            <Trigger Property="Orientation" Value="Vertical">
+                <Setter Property="Template" Value="{StaticResource TPF.VerticalSplitViewTemplate}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style TargetType="tpf:SplitView" BasedOn="{StaticResource TPF.SplitViewStyle}"/>
+
     <!-- ========== ResizeableScrollBar ========== -->
     <Style TargetType="RepeatButton" x:Key="TPF.ResizeableScrollBarRepeatButtonStyle">
         <Setter Property="Foreground" Value="{tpf:ResourceLink Key=ScrollBarBrush}"/>

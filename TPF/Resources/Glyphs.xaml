@@ -49,6 +49,8 @@
     <Geometry x:Key="VerticalMenuGlyph" po:Freeze="True">M0,0 L0,15 3,15 3,0 z M6,0 L6,15 9,15 9,0 z M12,0 L12,15 15,15 15,0 z</Geometry>
     <Geometry x:Key="GridGlyph" po:Freeze="True">M0,0 L1.5,0 1.5,1.5 0,1.5 z M2,0 L3.5,0 3.5,1.5 2,1.5 z M4,0 L5.5,0 5.5,1.5 4,1.5 z M0,2 L1.5,2 1.5,3.5 0,3.5 z M2,2 L3.5,2 3.5,3.5 2,3.5 z M4,2 L5.5,2 5.5,3.5 4,3.5 z M0,4 L1.5,4 1.5,5.5 0,5.5 z M2,4 L3.5,4 3.5,5.5 2,5.5 z M4,4 L5.5,4 5.5,5.5 4,5.5 z</Geometry>
     <Geometry x:Key="GridTwoByTwoGlyph" po:Freeze="True">M0,0 H4 V4 H0 z M6,0 H10 V4 H6 z M0,6 H4 V10 H0 z M6,6 H10 V10 H6 z</Geometry>
+    <Geometry x:Key="HorizontalSplitGlyph" po:Freeze="True">M1,1 H19 V19 H1 V1 M2,2 V18 H18 V2 H2 z M4,11 H16 V9 H4 V11 z</Geometry>
+    <Geometry x:Key="VerticalSplitGlyph" po:Freeze="True">M1,1 H19 V19 H1 V1 M2,2 V18 H18 V2 H2 z M11,4 V16 H9 V4 H11 z</Geometry>
     <Geometry x:Key="TableGlyph" po:Freeze="True">M-0.2,-0.2 L5.1,-0.2 5.1,5.1 -0.2,5.1 z M0,0 L1.5,0 1.5,1.5 0,1.5 z M1.7,0 L3.2,0 3.2,1.5 1.7,1.5 z M3.4,0 L4.9,0 4.9,1.5 3.4,1.5 z M0,1.7 L1.5,1.7 1.5,3.2 0,3.2 z M1.7,1.7 L3.2,1.7 3.2,3.2 1.7,3.2 z M3.4,1.7 L4.9,1.7 4.9,3.2 3.4,3.2 z M0,3.4 L1.5,3.4 1.5,4.9 0,4.9 z M1.7,3.4 L3.2,3.4 3.2,4.9 1.7,4.9 z M3.4,3.4 L4.9,3.4 4.9,4.9 3.4,4.9 z</Geometry>
     <!--ActionGlyphs-->
     <Geometry x:Key="CloseGlyph" po:Freeze="True">M0,0.5 L0.5,0 4.5,4 8.5,0 9,0.5 5,4.5 9,8.5 8.5,9 4.5,5 0.5,9 0,8.5 4,4.5 z</Geometry>
@@ -58,6 +60,8 @@
     <Geometry x:Key="SortAscendingGlyph" po:Freeze="True">M0,0 L2,0 2,1 0,1 z M0,2 L3.5,2 3.5,3 0,3 z M0,4 L5,4 5,5 0,5 z</Geometry>
     <Geometry x:Key="SortDescendingGlyph" po:Freeze="True">M0,0 L5,0 5,1 0,1 z M0,2 L3.5,2 3.5,3 0,3 z M0,4 L2,4 2,5 0,5 z</Geometry>
     <Geometry x:Key="FilterGlyph" po:Freeze="True">M0,0 L9,0 5,4 5,8 4,9 4,4 z</Geometry>
+    <Geometry x:Key="SwapVerticalGlyph" po:Freeze="True">M9,3 L5,7 H8.5 V14 H9.5 V7 H13 M17.5,10 V3 H16.5 V10 H13 L17,14 L21,10 H18 z</Geometry>
+    <Geometry x:Key="SwapHorizontalGlyph" po:Freeze="True">M14,7 L10,3 V6.5 H3 V7.5 H10 V11 M7,11 L3,15 L7,19 V15.5 H14 V14.5 H7 V11 z</Geometry>
     <Geometry x:Key="DownloadGlyph" po:Freeze="True">M0,7 L4.5,7 4.5,0 7.5,0 7.5,7 12,7 6,13 z M0,15 L12,15 12,17 0,17 z</Geometry>
     <Geometry x:Key="UploadGlyph" po:Freeze="True">M0,6 L6,0 12,6 7.5,6 7.5,13 4.5,13 4.5,6 z M0,15 L12,15 12,17 0,17 z</Geometry>
     <Geometry x:Key="FullScreenGlyph" po:Freeze="True">M0,0 L2,0 2,1 1,1 1,2 0,2 z M4,0 L6,0 6,2 5,2 5,1 4,1 z M0,4 L0,6 2,6 2,5 1,5 1,4 z M4,6 L6,6 6,4 5,4 5,5 4,5 z</Geometry>

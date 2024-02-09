@@ -52,15 +52,15 @@
 
                         <tpf:Divider Content="Path 1" HorizontalContentAlignment="Center" Grid.Column="0" Grid.Row="0"/>
                         <Path Stroke="{tpf:ResourceLink Key=GlyphBrush}" Fill="{tpf:ResourceLink Key=GlyphBrush}" Height="36" Width="36" Stretch="Uniform" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="1"
-                              Data="M14,3 V5 H17.59 L7.76,14.83 L9.17,16.24 L19,6.41 V10 H21 V3 M19,19 H5 V5 H12 V3 H3 V21 H21 V12 H19 V19 z"/>
+                              Data="M9,3 L5,7 H8.5 V14 H9.5 V7 H13 M17.5,10 V3 H16.5 V10 H13 L17,14 L21,10 H18 z"/>
 
                         <tpf:Divider Content="Path 2" HorizontalContentAlignment="Center" Grid.Column="1" Grid.Row="0"/>
                         <Path Stroke="{tpf:ResourceLink Key=GlyphBrush}" Fill="{tpf:ResourceLink Key=GlyphBrush}" Height="36" Width="36" Stretch="Uniform" HorizontalAlignment="Center" Grid.Column="1" Grid.Row="1"
-                              Data="M0,0 H4 V4 H0 z M6,0 H10 V4 H6 z M0,6 H4 V10 H0 z M6,6 H10 V10 H6 z"/>
+                              Data="M1,1 H19 V19 H1 V1 M2,2 V18 H18 V2 H2 z M4,11 H16 V9 H4 V11 z"/>
 
                         <tpf:Divider Content="Path 3" HorizontalContentAlignment="Center" Grid.Column="2" Grid.Row="0"/>
                         <Path Stroke="{tpf:ResourceLink Key=GlyphBrush}" Fill="{tpf:ResourceLink Key=GlyphBrush}" Height="36" Width="36" Stretch="Uniform" HorizontalAlignment="Center" Grid.Column="2" Grid.Row="1"
-                              Data="M5,20 H10 V14 H14 V20 H19 V12 H22 L12,3 2,12 H5 V20 z"/>
+                              Data="M14,7 L10,3 V6.5 H3 V7.5 H10 V11 M7,11 L3,15 L7,19 V15.5 H14 V14.5 H7 V11 z"/>
                     </Grid>
 
                     <tpf:Divider Content="Neuestes Control" HorizontalContentAlignment="Center" Grid.Row="1"/>
@@ -78,6 +78,15 @@
                         <!--<tpf:Banner Grid.Column="0" Height="30" Margin="10 0" BorderThickness="1" CornerRadius="4" IsRunning="True" Direction="RightToLeft" Speed="100">
                             <TextBlock Text="Das Banner ist ein Control zum animieren von Content der in eine bestimmte Richtung läuft" VerticalAlignment="Center"/>
                         </tpf:Banner>-->
+
+                        <tpf:SplitView Grid.Column="1">
+                            <tpf:SplitView.FirstContent>
+                                <Border Background="ForestGreen"/>
+                            </tpf:SplitView.FirstContent>
+                            <tpf:SplitView.SecondContent>
+                                <Border Background="Crimson"/>
+                            </tpf:SplitView.SecondContent>
+                        </tpf:SplitView>
                     </Grid>
                 </Grid>
             </tpf:TabItem>
@@ -205,7 +214,7 @@
             </StatusBarItem>
             <StatusBarItem>
                 <StackPanel Orientation="Horizontal">
-                    <tpf:Shield Label="Dev" Content="0.6.8" Margin="0 0 5 0" tpf:Poptip.Content="Aktuelle Entwicklungs-Version"/>
+                    <tpf:Shield Label="Dev" Content="0.6.9" Margin="0 0 5 0" tpf:Poptip.Content="Aktuelle Entwicklungs-Version"/>
                     <tpf:Shield Label="Release" Content="0.6.8" Margin="0 0 5 0" tpf:Poptip.Content="Aktuelle Release-Version"/>
                     <tpf:Shield Label="Skins" Content="4" Background="Orange">
                         <tpf:Poptip.Instance>

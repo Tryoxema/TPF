@@ -33,7 +33,6 @@
 [ ] NavigationBar
 [ ] RibbonMenu
 [ ] ContextMenu
-[ ] SplitView
 [ ] Wizard
 [ ] Breadcrumb
 ---Layout---
@@ -46,6 +45,7 @@
 [ ] Carousel
 [X] Card
 [X] Divider
+[X] SplitView
 ---Interaktivität---
 [X] BusyIndicator
 [X] ProgressBar
@@ -101,6 +101,6 @@
 [ ] Themes
 ---Misc---
 [X] Shield
-[ ] SplashScreen
+[X] SplashScreen
 [ ] Screenshot
 [X] Banner

@@ -12,6 +12,13 @@
 	Der normale SplashScreen unterstützt einen Titel, Untertitel, Statustext, eine Fußzeile, ein Logo und einen Ladebalken.
 	Diese Werte und Elemente können alle über den DataContext gesteuert werden, den der SplashScreenManager mit der Methode CreateDataContext generiert.
 	Es ist außerdem möglich, die Einstellungen des SplashScreenManagers auf Standard zurückzusetzen, indem man die Methode ResetAll aufruft.
+--SplitView
+	Das SplitView-Element ist ein Control für die Anzeige von zwei Inhalten, die den Platz innerhalb des Elements zwischen sich aufteilen.
+	Die Inhalte selbst werden über die Properties FirstContent und SecondContent festgelegt, sowie die zugehörigen ContentTemplate und ContentTemplateSelector-Properties.
+	Für die Darstellung stehen eine Horizontale und Vertikale Aufteilung zur verfügung, die über die Orientation-Property gesteuert werden.
+	Innerhalb des Elements selbst befindet sich ein Trennbalken, der die Aufteilung der zwei Inhalte steuert und zusätzliche Buttons beinhaltet.
+	Diese Buttons stellen die Funktionen zur verfügung, die Positionen der beiden Inhalte miteinander zu tauschen und das Layout zwischen Horizontal und Vertikal umzuschalten.
+	Die Farben des Trennbalkens und der Buttons in ihm werden über die Properties SplitBarBackgroundBrush und SplitBarForegroundBrush gesteuert.
 
 ===== 0.6.8 =====
 -Neue Controls
