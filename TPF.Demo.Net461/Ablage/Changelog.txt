@@ -20,6 +20,12 @@
 	Diese Buttons stellen die Funktionen zur verfügung, die Positionen der beiden Inhalte miteinander zu tauschen und das Layout zwischen Horizontal und Vertikal umzuschalten.
 	Die Farben des Trennbalkens und der Buttons in ihm werden über die Properties SplitBarBackgroundBrush und SplitBarForegroundBrush gesteuert.
 
+-Veränderte Controls
+--DialogHost
+	Das DialogHost-Element wurde um zwei neue Properties erweitert, um das einfache Wegklicken eines Dialogs zu ermöglichen.
+	Mit der neuen Property CloseOnOverlayClick kann man nun festlegen, ob der Dialog beim Klicken auf das Overlay um den geöffneten Dialog herum geschlossen werden soll.
+	Wenn ein Dialog auf diese Art geschlossen wird, wird als Ergebniswert der Wert der CloseOnOverlayClickParameter Property übergeben.
+
 ===== 0.6.8 =====
 -Neue Controls
 --ResizeableScrollBar

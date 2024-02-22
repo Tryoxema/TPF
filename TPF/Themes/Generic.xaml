@@ -6117,6 +6117,13 @@
         <Setter Property="DialogBackground" Value="{tpf:ResourceLink Key=PrimaryBrush}"/>
         <Setter Property="DialogBorderBrush" Value="{tpf:ResourceLink Key=BorderBrush}"/>
         <Setter Property="DialogBorderThickness" Value="1"/>
+        <Setter Property="DialogContentTemplate">
+            <Setter.Value>
+                <DataTemplate>
+                    <ContentPresenter Content="{Binding}"/>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="tpf:DialogHost">
@@ -6133,7 +6140,7 @@
                                                     </DiscreteObjectKeyFrame.Value>
                                                 </DiscreteObjectKeyFrame>
                                             </ObjectAnimationUsingKeyFrames>
-                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="OverlayPanel" Storyboard.TargetProperty="Opacity">
+                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_OverlayPanel" Storyboard.TargetProperty="Opacity">
                                                 <EasingDoubleKeyFrame Value="0" KeyTime="0"/>
                                                 <EasingDoubleKeyFrame Value="0.4" KeyTime="0:0:0.3" EasingFunction="{animation:SineEase EasingMode=EaseInOut}"/>
                                             </DoubleAnimationUsingKeyFrames>
@@ -6157,7 +6164,7 @@
                                                     </DiscreteObjectKeyFrame.Value>
                                                 </DiscreteObjectKeyFrame>
                                             </ObjectAnimationUsingKeyFrames>
-                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="OverlayPanel" Storyboard.TargetProperty="Opacity">
+                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetName="PART_OverlayPanel" Storyboard.TargetProperty="Opacity">
                                                 <EasingDoubleKeyFrame Value="0.4" KeyTime="0"/>
                                                 <EasingDoubleKeyFrame Value="0" KeyTime="0:0:0.3" EasingFunction="{animation:SineEase EasingMode=EaseInOut}"/>
                                             </DoubleAnimationUsingKeyFrames>
@@ -6184,7 +6191,7 @@
                                         </ObjectAnimationUsingKeyFrames>
                                         <DoubleAnimation Storyboard.TargetName="DialogScaleTransform" Storyboard.TargetProperty="ScaleX" Duration="0" To="1"/>
                                         <DoubleAnimation Storyboard.TargetName="DialogScaleTransform" Storyboard.TargetProperty="ScaleY" Duration="0" To="1"/>
-                                        <DoubleAnimation Storyboard.TargetName="OverlayPanel" Storyboard.TargetProperty="Opacity" Duration="0" To="0.4"/>
+                                        <DoubleAnimation Storyboard.TargetName="PART_OverlayPanel" Storyboard.TargetProperty="Opacity" Duration="0" To="0.4"/>
                                     </Storyboard>
                                 </VisualState>
 
@@ -6197,14 +6204,14 @@
                                                 </DiscreteObjectKeyFrame.Value>
                                             </DiscreteObjectKeyFrame>
                                         </ObjectAnimationUsingKeyFrames>
-                                        <DoubleAnimation Storyboard.TargetName="OverlayPanel" Storyboard.TargetProperty="Opacity" Duration="0" To="0"/>
+                                        <DoubleAnimation Storyboard.TargetName="PART_OverlayPanel" Storyboard.TargetProperty="Opacity" Duration="0" To="0"/>
                                     </Storyboard>
                                 </VisualState>
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
                         <ContentPresenter/>
 
-                        <tpf:SimplePanel x:Name="OverlayPanel" Background="{TemplateBinding OverlayBackground}" Opacity="0" IsHitTestVisible="False" Focusable="False"/>
+                        <tpf:SimplePanel x:Name="PART_OverlayPanel" Background="{TemplateBinding OverlayBackground}" Opacity="0" IsHitTestVisible="False" Focusable="False"/>
 
                         <tpf:SimplePanel x:Name="DialogPanel" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                          Margin="{TemplateBinding DialogMargin}" Visibility="Collapsed" RenderTransformOrigin="0.5,0.5">
@@ -6220,7 +6227,7 @@
 
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsDialogOpen" Value="True">
-                            <Setter TargetName="OverlayPanel" Property="IsHitTestVisible" Value="True"/>
+                            <Setter TargetName="PART_OverlayPanel" Property="IsHitTestVisible" Value="True"/>
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

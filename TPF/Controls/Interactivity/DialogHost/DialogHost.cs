@@ -258,6 +258,32 @@ namespace TPF.Controls
         }
         #endregion
 
+        #region CloseOnOverlayClick DependencyProperty
+        public static readonly DependencyProperty CloseOnOverlayClickProperty = DependencyProperty.Register("CloseOnOverlayClick",
+            typeof(bool),
+            typeof(DialogHost),
+            new PropertyMetadata(BooleanBoxes.FalseBox));
+
+        public bool CloseOnOverlayClick
+        {
+            get { return (bool)GetValue(CloseOnOverlayClickProperty); }
+            set { SetValue(CloseOnOverlayClickProperty, BooleanBoxes.Box(value)); }
+        }
+        #endregion
+
+        #region CloseOnOverlayClickParameter DependencyProperty
+        public static readonly DependencyProperty CloseOnOverlayClickParameterProperty = DependencyProperty.Register("CloseOnOverlayClickParameter",
+            typeof(object),
+            typeof(DialogHost),
+            new PropertyMetadata(null));
+
+        public object CloseOnOverlayClickParameter
+        {
+            get { return GetValue(CloseOnOverlayClickParameterProperty); }
+            set { SetValue(CloseOnOverlayClickParameterProperty, value); }
+        }
+        #endregion
+
         #region OverlayBackground DependencyProperty
         public static readonly DependencyProperty OverlayBackgroundProperty = DependencyProperty.Register("OverlayBackground",
             typeof(Brush),
@@ -353,6 +379,7 @@ namespace TPF.Controls
         }
         #endregion
 
+        private UIElement _overlayElement;
         private FrameworkElement _dialogContentElement;
         private IInputElement _restoreFocusDialogClose;
 
@@ -509,7 +536,17 @@ namespace TPF.Controls
 
             UpdateVisualState(false);
 
+            if (_overlayElement != null) _overlayElement.MouseLeftButtonUp -= OverlayElement_MouseLeftButtonUp;
+
+            _overlayElement = GetTemplateChild("PART_OverlayPanel") as UIElement;
             _dialogContentElement = GetTemplateChild("PART_DialogContentElement") as FrameworkElement;
+
+            if (_overlayElement != null) _overlayElement.MouseLeftButtonUp += OverlayElement_MouseLeftButtonUp;
+        }
+
+        private void OverlayElement_MouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            if (CloseOnOverlayClick && CurrentHandle != null && !CurrentHandle.IsClosed) CloseDialogInternal(CloseOnOverlayClickParameter);
         }
 
         internal void FocusDialog()
