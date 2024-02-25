@@ -104,3 +104,4 @@
 [X] SplashScreen
 [ ] Screenshot
 [X] Banner
+[X] Skeleton

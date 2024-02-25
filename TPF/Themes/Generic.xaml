@@ -1464,6 +1464,7 @@
     <!-- ========== Banner ========== -->
     <Style TargetType="tpf:Banner" x:Key="TPF.BannerStyle">
         <Setter Property="BorderBrush" Value="{tpf:ResourceLink Key=BorderBrush}"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="Template">
             <Setter.Value>
@@ -1576,6 +1577,35 @@
         </Setter>
     </Style>
     <Style TargetType="tpf:Shield" BasedOn="{StaticResource TPF.ShieldStyle}"/>
+
+    <!-- ========== Skeleton ========== -->
+    <Style TargetType="tpf:Skeleton" x:Key="TPF.SkeletonStyle">
+        <Setter Property="Background" Value="{tpf:ResourceLink Key=ScrollBarBrush}"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="tpf:Skeleton">
+                    <tpf:SimplePanel>
+                        <tpf:SimplePanel x:Name="PART_PlaceholderContainer">
+                            <Border Background="{TemplateBinding Background}"/>
+                            <tpf:InfiniteSpaceProvider ClipToBounds="True">
+                                <Rectangle x:Name="PART_ShimmerRectangle"/>
+                            </tpf:InfiniteSpaceProvider>
+                        </tpf:SimplePanel>
+                        <ContentPresenter x:Name="Content" Visibility="Hidden"/>
+                    </tpf:SimplePanel>
+                    
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="ShowContent" Value="True">
+                            <Setter TargetName="Content" Property="Visibility" Value="Visible"/>
+                            <Setter TargetName="PART_PlaceholderContainer" Property="Visibility" Value="Collapsed"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="tpf:Skeleton" BasedOn="{StaticResource TPF.SkeletonStyle}"/>
 
     <!-- ========== Button ========== -->
     <Style TargetType="tpf:Button" x:Key="TPF.ButtonStyle">

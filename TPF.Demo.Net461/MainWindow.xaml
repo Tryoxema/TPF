@@ -8,7 +8,7 @@
                       DataContext="{Binding RelativeSource={RelativeSource Self}}"
                       Closing="Window_Closing"
                       mc:Ignorable="d"
-                      Title="MainWindow" 
+                      Title="MainWindow"
                       Height="640" Width="1020">
     <Grid x:Name="MainGrid">
         <Grid.RowDefinitions>
@@ -79,14 +79,31 @@
                             <TextBlock Text="Das Banner ist ein Control zum animieren von Content der in eine bestimmte Richtung läuft" VerticalAlignment="Center"/>
                         </tpf:Banner>-->
 
-                        <tpf:SplitView Grid.Column="1">
-                            <tpf:SplitView.FirstContent>
-                                <Border Background="ForestGreen"/>
-                            </tpf:SplitView.FirstContent>
-                            <tpf:SplitView.SecondContent>
-                                <Border Background="Crimson"/>
-                            </tpf:SplitView.SecondContent>
-                        </tpf:SplitView>
+                        <Grid Grid.Column="1">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <StackPanel Grid.Column="0">
+                                <tpf:Skeleton Grid.Column="1" Width="200" Height="80" Type="Rectangle"/>
+                                <tpf:Skeleton Grid.Column="1" Width="200" Height="80" Type="CirclePersona"/>
+                                <tpf:Skeleton Grid.Column="1" Width="200" Height="80" Type="CirclePersona"/>
+                                <tpf:Skeleton Grid.Column="1" Width="200" Height="80" Type="SquarePersona"/>
+                                <tpf:Skeleton Grid.Column="1" Width="200" Height="80" Type="SquarePersona"/>
+                            </StackPanel>
+                            
+                            <StackPanel Grid.Column="1">
+                                <tpf:Skeleton Grid.Column="1" Width="200" Height="80" Type="Text"/>
+                                <tpf:Skeleton Grid.Column="1" Width="200" Height="80" Type="Article"/>
+                                <tpf:Skeleton Grid.Column="1" Width="200" Height="80" Type="Article"/>
+                                <tpf:Skeleton Grid.Column="1" Width="200" Height="160" Type="Video"/>
+                            </StackPanel>
+                        </Grid>
+
+                        <StackPanel Grid.Column="1" Visibility="Collapsed">
+                            
+                        </StackPanel>
                     </Grid>
                 </Grid>
             </tpf:TabItem>
@@ -103,7 +120,7 @@
                         <tpf:HamburgerMenu.Resources>
                             <DataTemplate x:Key="IconTemplate">
                                 <Path Data="{Binding}" Stretch="Uniform" Width="16" Height="16"
-                                      Fill="{Binding RelativeSource={RelativeSource AncestorType=ContentPresenter}, Path=(TextElement.Foreground)}" 
+                                      Fill="{Binding RelativeSource={RelativeSource AncestorType=ContentPresenter}, Path=(TextElement.Foreground)}"
                                       Stroke="{Binding RelativeSource={RelativeSource AncestorType=ContentPresenter}, Path=(TextElement.Foreground)}"/>
                             </DataTemplate>
                         </tpf:HamburgerMenu.Resources>
@@ -154,30 +171,30 @@
             <tpf:TabItem Header="DragDrop">
                 <views:DragDropView/>
             </tpf:TabItem>
-            <tpf:TabItem Header="Comparer">
+            <tpf:TabItem Header="SplitView">
                 <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-
-                    <tpf:Comparer Grid.Column="0">
-                        <tpf:Comparer.FirstContent>
-                            <Border Background="ForestGreen" Height="40" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </tpf:Comparer.FirstContent>
-                        <tpf:Comparer.SecondContent>
-                            <Border Background="Crimson" Height="40" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </tpf:Comparer.SecondContent>
-                    </tpf:Comparer>
-
-                    <tpf:Comparer Grid.Column="1" Orientation="Vertical">
-                        <tpf:Comparer.FirstContent>
-                            <Border Background="ForestGreen" Height="40" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </tpf:Comparer.FirstContent>
-                        <tpf:Comparer.SecondContent>
-                            <Border Background="Crimson" Height="40" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </tpf:Comparer.SecondContent>
-                    </tpf:Comparer>
+                    <tpf:SplitView>
+                        <tpf:SplitView.FirstContent>
+                            <tpf:Comparer>
+                                <tpf:Comparer.FirstContent>
+                                    <Border Background="ForestGreen" Height="40" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </tpf:Comparer.FirstContent>
+                                <tpf:Comparer.SecondContent>
+                                    <Border Background="Crimson" Height="40" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </tpf:Comparer.SecondContent>
+                            </tpf:Comparer>
+                        </tpf:SplitView.FirstContent>
+                        <tpf:SplitView.SecondContent>
+                            <tpf:Comparer Orientation="Vertical">
+                                <tpf:Comparer.FirstContent>
+                                    <Border Background="ForestGreen" Height="40" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </tpf:Comparer.FirstContent>
+                                <tpf:Comparer.SecondContent>
+                                    <Border Background="Crimson" Height="40" Width="200" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                </tpf:Comparer.SecondContent>
+                            </tpf:Comparer>
+                        </tpf:SplitView.SecondContent>
+                    </tpf:SplitView>
                 </Grid>
             </tpf:TabItem>
         </tpf:TabControl>
@@ -236,7 +253,6 @@
                 <CheckBox Content="Smooth Design?" Checked="SmoothThemeCheckBox_Checked" Unchecked="SmoothThemeCheckBox_Unchecked" x:Name="SmoothThemeCheckBox"/>
             </StatusBarItem>
             <StatusBarItem>
-
             </StatusBarItem>
         </StatusBar>
     </Grid>

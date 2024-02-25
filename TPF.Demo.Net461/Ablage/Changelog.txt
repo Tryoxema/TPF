@@ -19,6 +19,21 @@
 	Innerhalb des Elements selbst befindet sich ein Trennbalken, der die Aufteilung der zwei Inhalte steuert und zusätzliche Buttons beinhaltet.
 	Diese Buttons stellen die Funktionen zur verfügung, die Positionen der beiden Inhalte miteinander zu tauschen und das Layout zwischen Horizontal und Vertikal umzuschalten.
 	Die Farben des Trennbalkens und der Buttons in ihm werden über die Properties SplitBarBackgroundBrush und SplitBarForegroundBrush gesteuert.
+--Skeleton
+	Das Skeleton-Element ist ein ContentControl, das als Platzhalter dient, während sein Content geladen wird.
+	Durch dieses Element kann ein entsprechender Platzhalter an der Position dargestellt werden und die Ladezeit überbrücken, wie man es aus einigen Webseiten kennt.
+	Der Platzhalter selbst besteht aus einer definierten Darstellung und einem Schimmer-Effekt der sich über das Element bewegt.
+	Es ist möglich die Farbe, Breite, Richtung und Geschwindigkeit des Effekts über die zugehörigen Properties zu steuern.
+	Die entsprechenden Properties in gleicher Reihenfolge sind: ShimmerColor, ShimmerWidth, ShimmerDirection und ShimmerDuration.
+	Bei der ShimmerDuration-Property handelt es sich hier um ein TimeSpan-Objekt, dass die Zeit für einen Durchlauf des Effekts bestimmt.
+	Welche Darstellung der Platzhalter hat, wird über die Type-Property gesteuert.
+	Für die Type-Property stehen vordefinierte Typen zur Auswahl, sowie der Typ Custom, bei dem man sein eigenes Layout definieren kann.
+	Die vordefinierten Typen sind: Rectangle, Square, Circle, CirclePersona, SquarePersona, Text, Article und Video.
+	Sollte man sein eigenes Layout festlegen wollen, wählt man als Type einfach Custom aus und legt dann über die CustomLayout-Property sein eigenes Layout fest.
+	Hierbei definiert man einfach ein UIElement, dass den gewünschten Grundriss darstellt, wie z.B. ein Grid mit dem man ein komplexeres Layout aufbaut.
+	Innerhalb des selbst definierten Layouts müssen alle Teile die den Umriss des Platzhalters bilden sollen sichtbar sein, also z.B. die Property Background gesetzt haben auf eine Farbe.
+	Es ist innerhalb des selbst definierten Layouts absolut egal, welche Farben man den Elementen gibt, da der tatsächliche Platzhalter nur die Background-Property des Skeleton-Elements selbst nutzt.
+	Sollte man dann den Platzhalter durch den eigentlichen Content austauschen wollen, setzt man einfach die ShowContent-Property auf true und die Anzeige wird ausgetauscht.
 
 -Veränderte Controls
 --DialogHost
