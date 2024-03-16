@@ -106,12 +106,12 @@ namespace TPF.Controls
         public static readonly DependencyProperty OriginAxisVisibilityProperty = DependencyProperty.Register("OriginAxisVisibility",
             typeof(Visibility),
             typeof(DataBarBase),
-            new PropertyMetadata(Visibility.Collapsed));
+            new PropertyMetadata(VisibilityBoxes.CollapsedBox));
 
         public Visibility OriginAxisVisibility
         {
             get { return (Visibility)GetValue(OriginAxisVisibilityProperty); }
-            set { SetValue(OriginAxisVisibilityProperty, value); }
+            set { SetValue(OriginAxisVisibilityProperty, VisibilityBoxes.Box(value)); }
         }
         #endregion
 

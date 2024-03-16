@@ -190,12 +190,12 @@ namespace TPF.Controls
         public static readonly DependencyProperty LabelVisibilityProperty = DependencyProperty.Register("LabelVisibility",
             typeof(Visibility),
             typeof(DataBar),
-            new PropertyMetadata(Visibility.Visible));
+            new PropertyMetadata(VisibilityBoxes.VisibleBox));
 
         public Visibility LabelVisibility
         {
             get { return (Visibility)GetValue(LabelVisibilityProperty); }
-            set { SetValue(LabelVisibilityProperty, value); }
+            set { SetValue(LabelVisibilityProperty, VisibilityBoxes.Box(value)); }
         }
         #endregion
 

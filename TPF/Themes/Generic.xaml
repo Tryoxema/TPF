@@ -60,6 +60,7 @@
     <converter:BooleanToVisibilityConverter x:Key="BooleanToVisibilityConverter"/>
     <converter:InvertedBooleanToVisibilityConverter x:Key="InvertedBooleanToVisibilityConverter"/>
     <converter:InvertedBooleanConverter x:Key="InvertedBooleanConverter"/>
+    <converter:InvertedNullToVisibilityConverter x:Key="InvertedNullToVisibilityConverter"/>
     <converter:ColorToBrushConverter x:Key="ColorToBrushConverter"/>
     <converter:HueToBrushConverter x:Key="HueToBrushConverter"/>
     <converter:DoubleToThicknessConverter x:Key="DoubleToThicknessConverter"/>

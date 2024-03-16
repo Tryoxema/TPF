@@ -255,12 +255,12 @@ namespace TPF.Controls
         public static readonly DependencyProperty HeaderVisibilityProperty = DependencyProperty.Register("HeaderVisibility",
             typeof(Visibility),
             typeof(TaskBoard),
-            new PropertyMetadata(Visibility.Collapsed));
+            new PropertyMetadata(VisibilityBoxes.CollapsedBox));
 
         public Visibility HeaderVisibility
         {
             get { return (Visibility)GetValue(HeaderVisibilityProperty); }
-            set { SetValue(HeaderVisibilityProperty, value); }
+            set { SetValue(HeaderVisibilityProperty, VisibilityBoxes.Box(value)); }
         }
         #endregion
 

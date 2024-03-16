@@ -7,6 +7,7 @@ using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Controls;
+using TPF.Internal;
 
 namespace TPF.Controls
 {
@@ -67,12 +68,12 @@ namespace TPF.Controls
         public static readonly DependencyProperty ShowPasswordButtonVisibilityProperty = DependencyProperty.Register("ShowPasswordButtonVisibility",
             typeof(Visibility),
             typeof(PasswordBox),
-            new PropertyMetadata(Visibility.Collapsed));
+            new PropertyMetadata(VisibilityBoxes.CollapsedBox));
 
         public Visibility ShowPasswordButtonVisibility
         {
             get { return (Visibility)GetValue(ShowPasswordButtonVisibilityProperty); }
-            set { SetValue(ShowPasswordButtonVisibilityProperty, value); }
+            set { SetValue(ShowPasswordButtonVisibilityProperty, VisibilityBoxes.Box(value)); }
         }
         #endregion
 

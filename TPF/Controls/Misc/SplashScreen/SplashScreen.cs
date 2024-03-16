@@ -124,12 +124,12 @@ namespace TPF.Controls
         public static readonly DependencyProperty ProgressBarVisibilityProperty = DependencyProperty.Register("ProgressBarVisibility",
             typeof(Visibility),
             typeof(SplashScreen),
-            new PropertyMetadata(Visibility.Visible));
+            new PropertyMetadata(VisibilityBoxes.VisibleBox));
 
         public Visibility ProgressBarVisibility
         {
             get { return (Visibility)GetValue(ProgressBarVisibilityProperty); }
-            set { SetValue(ProgressBarVisibilityProperty, value); }
+            set { SetValue(ProgressBarVisibilityProperty, VisibilityBoxes.Box(value)); }
         }
         #endregion
 

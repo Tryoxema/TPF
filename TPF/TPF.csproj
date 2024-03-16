@@ -3,12 +3,12 @@
   <PropertyGroup>
     <TargetFrameworks>net461;net5.0-windows;net6.0-windows</TargetFrameworks>
     <UseWPF>true</UseWPF>
-    <Version>0.6.8</Version>
+    <Version>0.6.9</Version>
     <Authors>Tim Czerwonka</Authors>
     <Company />
-    <GeneratePackageOnBuild>False</GeneratePackageOnBuild>
-    <AssemblyVersion>0.6.8.0</AssemblyVersion>
-    <FileVersion>0.6.8.0</FileVersion>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <AssemblyVersion>0.6.9.0</AssemblyVersion>
+    <FileVersion>0.6.9.0</FileVersion>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <Copyright>Copyright 2023 Tim Czerwonka</Copyright>
     <RepositoryUrl>https://github.com/Tryoxema/TPF</RepositoryUrl>

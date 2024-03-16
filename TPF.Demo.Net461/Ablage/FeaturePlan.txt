@@ -37,6 +37,7 @@
 [ ] Breadcrumb
 ---Layout---
 [X] ChromelessWindow
+[ ] TabbedWindow
 [ ] DockingControl
 [X] Dashboard
 [X] RadialPanel
@@ -98,7 +99,7 @@
 [X] Reveal-System
 [X] Skins
 [X] ResourceManager
-[ ] Themes
+[ ] ConditionalSelector
 ---Misc---
 [X] Shield
 [X] SplashScreen
