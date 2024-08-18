@@ -1159,7 +1159,7 @@ namespace TPF.Controls
         // Selected den angegebenen Container
         internal void Select(ComboBoxItem item)
         {
-            if (item == null) return;
+            if (item == null || IsReadOnly) return;
 
             if (AllowMultiSelection)
             {
@@ -1194,7 +1194,7 @@ namespace TPF.Controls
         // Selected das nächste Item
         private void SelectNext()
         {
-            if (Items.Count == 0) return;
+            if (Items.Count == 0 || IsReadOnly) return;
 
             if (SelectedIndex < Items.Count - 1) SelectedIndex++;
         }
@@ -1202,7 +1202,7 @@ namespace TPF.Controls
         // Selected das vorherige Item
         private void SelectPrevious()
         {
-            if (Items.Count == 0) return;
+            if (Items.Count == 0 || IsReadOnly) return;
 
             if (SelectedIndex > 0) SelectedIndex--;
         }

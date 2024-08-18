@@ -64,6 +64,9 @@
     <Compile Include="Views\DateTimeRangeNavigatorView.xaml.cs">
       <DependentUpon>DateTimeRangeNavigatorView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\MiscControlsView.xaml.cs">
+      <DependentUpon>MiscControlsView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\ProgressBarView.xaml.cs">
       <DependentUpon>ProgressBarView.xaml</DependentUpon>
     </Compile>
@@ -145,6 +148,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\DateTimeRangeNavigatorView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MiscControlsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

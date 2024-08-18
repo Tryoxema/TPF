@@ -28,14 +28,12 @@
             </tpf:TabItem>
 
             <tpf:TabItem Header="Dev-Bereich">
-                <Grid Margin="5" Background="Transparent" tpf:MouseTracker.IsEnabled="True">
+                <Grid Margin="5">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="120"/>
                         <RowDefinition Height="Auto"/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-
-                    <!--<Rectangle Grid.RowSpan="2" OpacityMask="{tpf:RevealBrush Color=White, Size=80, Opacity=1}" Fill="{StaticResource HexBrush}"/>-->
 
                     <!--Path-Spielplatz-->
                     <Grid Grid.Row="0">
@@ -52,7 +50,7 @@
 
                         <tpf:Divider Content="Path 1" HorizontalContentAlignment="Center" Grid.Column="0" Grid.Row="0"/>
                         <Path Stroke="{tpf:ResourceLink Key=GlyphBrush}" Fill="{tpf:ResourceLink Key=GlyphBrush}" Height="36" Width="36" Stretch="Uniform" HorizontalAlignment="Center" Grid.Column="0" Grid.Row="1"
-                              Data="M0,5 H19 V27 H0 V5 M2,7 H17 V25 H2 V7 M9,0 H24 V19 H22 V2 H9 z"/>
+                              Data="M5,0 H0 V15 H5 V14 H1 V1 H5 z M10,0 H15 V15 H10 V14 H14 V1 H10 z"/>
 
                         <tpf:Divider Content="Path 2" HorizontalContentAlignment="Center" Grid.Column="1" Grid.Row="0"/>
                         <Path Stroke="{tpf:ResourceLink Key=GlyphBrush}" Fill="{tpf:ResourceLink Key=GlyphBrush}" Height="36" Width="36" Stretch="Uniform" HorizontalAlignment="Center" Grid.Column="1" Grid.Row="1"
@@ -71,39 +69,32 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        <StackPanel Orientation="Horizontal" Height="30" HorizontalAlignment="Center">
-                            <tpf:Button Content="Show SplashScreen" Click="ShowSplashScreenButton_Click"/>
-                            <tpf:Button Content="Close SplashScreen" Margin="3 0 0 0" Click="CloseSplashScreenButton_Click"/>
-                        </StackPanel>
-                        <!--<tpf:Banner Grid.Column="0" Height="30" Margin="10 0" BorderThickness="1" CornerRadius="4" IsRunning="True" Direction="RightToLeft" Speed="100">
-                            <TextBlock Text="Das Banner ist ein Control zum animieren von Content der in eine bestimmte Richtung läuft" VerticalAlignment="Center"/>
-                        </tpf:Banner>-->
+                        <Border Background="#1A52A7" Grid.ColumnSpan="2">
+                            <Border>
+                                <Border.Background>
+                                    <DrawingBrush TileMode="Tile" Viewport="0,0,10,10" ViewportUnits="Absolute">
+                                        <DrawingBrush.Drawing>
+                                            <GeometryDrawing>
+                                                <GeometryDrawing.Geometry>
+                                                    <RectangleGeometry Rect="0,0,50,50"/>
+                                                </GeometryDrawing.Geometry>
+                                                <GeometryDrawing.Pen>
+                                                    <Pen Brush="#50A0F8" Thickness="1"/>
+                                                </GeometryDrawing.Pen>
+                                            </GeometryDrawing>
+                                        </DrawingBrush.Drawing>
+                                    </DrawingBrush>
+                                </Border.Background>
+                            </Border>
+                        </Border>
 
-                        <Grid Grid.Column="1">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="*"/>
-                            </Grid.ColumnDefinitions>
-
-                            <StackPanel Grid.Column="0">
-                                <tpf:Skeleton Grid.Column="1" Width="200" Height="80" Type="Rectangle"/>
-                                <tpf:Skeleton Grid.Column="1" Width="200" Height="80" Type="CirclePersona"/>
-                                <tpf:Skeleton Grid.Column="1" Width="200" Height="80" Type="CirclePersona"/>
-                                <tpf:Skeleton Grid.Column="1" Width="200" Height="80" Type="SquarePersona"/>
-                                <tpf:Skeleton Grid.Column="1" Width="200" Height="80" Type="SquarePersona"/>
-                            </StackPanel>
+                        <Grid Grid.Column="0">
                             
-                            <StackPanel Grid.Column="1">
-                                <tpf:Skeleton Grid.Column="1" Width="200" Height="80" Type="Text"/>
-                                <tpf:Skeleton Grid.Column="1" Width="200" Height="80" Type="Article"/>
-                                <tpf:Skeleton Grid.Column="1" Width="200" Height="80" Type="Article"/>
-                                <tpf:Skeleton Grid.Column="1" Width="200" Height="160" Type="Video"/>
-                            </StackPanel>
                         </Grid>
 
-                        <StackPanel Grid.Column="1" Visibility="Collapsed">
-                            
-                        </StackPanel>
+                        <Grid Grid.Column="1">
+
+                        </Grid>
                     </Grid>
                 </Grid>
             </tpf:TabItem>
@@ -151,7 +142,7 @@
                         <tpf:HamburgerMenuItem Label="ProgressBar" Icon="{StaticResource ProgressBarGlyph}" IconTemplate="{StaticResource IconTemplate}">
                             <views:ProgressBarView/>
                         </tpf:HamburgerMenuItem>
-                        <tpf:HamburgerMenuItem Label="RangeNavigator" IconTemplate="{StaticResource IconTemplate}">
+                        <tpf:HamburgerMenuItem Label="RangeNavigator" Icon="{StaticResource ArrayGlyph}" IconTemplate="{StaticResource IconTemplate}">
                             <views:DateTimeRangeNavigatorView/>
                         </tpf:HamburgerMenuItem>
                     </tpf:HamburgerMenu>
@@ -171,6 +162,7 @@
             <tpf:TabItem Header="DragDrop">
                 <views:DragDropView/>
             </tpf:TabItem>
+            
             <tpf:TabItem Header="SplitView">
                 <Grid>
                     <tpf:SplitView>
@@ -196,6 +188,10 @@
                         </tpf:SplitView.SecondContent>
                     </tpf:SplitView>
                 </Grid>
+            </tpf:TabItem>
+
+            <tpf:TabItem Header="Misc">
+                <views:MiscControlsView/>
             </tpf:TabItem>
         </tpf:TabControl>
 

@@ -169,24 +169,6 @@ namespace TPF.Demo.Net461
             Application.Current.Resources.MergedDictionaries.Clear();
             Application.Current.Resources.MergedDictionaries.Add(dictionary);
         }
-
-        private void ShowSplashScreenButton_Click(object sender, RoutedEventArgs e)
-        {
-            var data = SplashScreenManager.CreateDataContext();
-
-            data.Title = "SplashScreen";
-            data.SubTitle = "Jetzt neu";
-            data.StatusText = "Anfrage wird ignoriert...";
-            data.Footer = "Das liest doch eh keiner";
-
-            SplashScreenManager.DataContext = data;
-            SplashScreenManager.Show();
-        }
-
-        private void CloseSplashScreenButton_Click(object sender, RoutedEventArgs e)
-        {
-            SplashScreenManager.Close();
-        }
     }
 
     public class ColorSkin
