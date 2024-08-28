@@ -1608,6 +1608,22 @@
     </Style>
     <Style TargetType="tpf:Skeleton" BasedOn="{StaticResource TPF.SkeletonStyle}"/>
 
+    <!-- ========== Blueprint ========== -->
+    <Style TargetType="tpf:Blueprint" x:Key="TPF.BlueprintStyle">
+        <Setter Property="Background" Value="#1A52A7"/>
+        <Setter Property="LineBrush" Value="#50A0F8"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="tpf:Blueprint">
+                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                        <Rectangle x:Name="PART_CellsHost"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="tpf:Blueprint" BasedOn="{StaticResource TPF.BlueprintStyle}"/>
+
     <!-- ========== Button ========== -->
     <Style TargetType="tpf:Button" x:Key="TPF.ButtonStyle">
         <Setter Property="Padding" Value="3"/>

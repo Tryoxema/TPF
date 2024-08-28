@@ -69,27 +69,10 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        <Border Background="#1A52A7" Grid.ColumnSpan="2">
-                            <Border>
-                                <Border.Background>
-                                    <DrawingBrush TileMode="Tile" Viewport="0,0,10,10" ViewportUnits="Absolute">
-                                        <DrawingBrush.Drawing>
-                                            <GeometryDrawing>
-                                                <GeometryDrawing.Geometry>
-                                                    <RectangleGeometry Rect="0,0,50,50"/>
-                                                </GeometryDrawing.Geometry>
-                                                <GeometryDrawing.Pen>
-                                                    <Pen Brush="#50A0F8" Thickness="1"/>
-                                                </GeometryDrawing.Pen>
-                                            </GeometryDrawing>
-                                        </DrawingBrush.Drawing>
-                                    </DrawingBrush>
-                                </Border.Background>
-                            </Border>
-                        </Border>
+                        <tpf:Blueprint Grid.ColumnSpan="2"/>
 
                         <Grid Grid.Column="0">
-                            
+
                         </Grid>
 
                         <Grid Grid.Column="1">
