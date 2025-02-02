@@ -1,5 +1,4 @@
 ﻿using System.Windows;
-using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -18,15 +17,7 @@ namespace TPF.Controls
         public Poptip()
         {
             // Popup erstellen und uns als Child setzen
-            _popup = new Popup()
-            {
-                Placement = PlacementMode.Custom,
-                AllowsTransparency = true,
-                Child = this
-            };
-
-            // DataContext für das Popup setzen auf unseren DataContext
-            _popup.SetBinding(DataContextProperty, new Binding("DataContext") { Source = this });
+            _popup = CreatePopup();
         }
 
         #region CornerRadius Attached DependencyProperty
@@ -256,6 +247,25 @@ namespace TPF.Controls
                 newValue.LostFocus += TargetElement_LostFocus;
                 _popup.PlacementTarget = newValue;
             }
+        }
+
+        private Popup CreatePopup()
+        {
+            var popup = new Popup()
+            {
+                Placement = PlacementMode.Custom,
+                AllowsTransparency = true,
+                IsHitTestVisible = false,
+                Child = this,
+            };
+
+            // Diese Property wird von ToolTip benutzt, ist aber leider internal
+            // Da der Poptip quasi ein ToolTip ist mit anderen Triggern, sollte er sich auch so verhalten wie ein ToolTip
+            var hitTestableProperty = typeof(Popup).GetProperty("HitTestable", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+            
+            hitTestableProperty?.SetValue(popup, false);
+
+            return popup;
         }
 
         private void TargetElement_MouseEnter(object sender, MouseEventArgs e)

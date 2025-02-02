@@ -71,8 +71,12 @@
 
                         <tpf:Blueprint Grid.ColumnSpan="2"/>
 
-                        <Grid Grid.Column="0">
-
+                        <Grid Grid.Column="0" Background="{tpf:ResourceLink Key=ApplicationBackground}">
+                            <StackPanel>
+                                <RadioButton Content="Test 1"/>
+                                <RadioButton Content="Test 2"/>
+                                <RadioButton Content="Test 3"/>
+                            </StackPanel>
                         </Grid>
 
                         <Grid Grid.Column="1">
@@ -210,7 +214,7 @@
             </StatusBarItem>
             <StatusBarItem>
                 <StackPanel Orientation="Horizontal">
-                    <tpf:Shield Label="Dev" Content="0.6.9" Margin="0 0 5 0" tpf:Poptip.Content="Aktuelle Entwicklungs-Version"/>
+                    <tpf:Shield Label="Dev" Content="0.7.0" Margin="0 0 5 0" tpf:Poptip.Content="Aktuelle Entwicklungs-Version"/>
                     <tpf:Shield Label="Release" Content="0.6.9" Margin="0 0 5 0" tpf:Poptip.Content="Aktuelle Release-Version"/>
                     <tpf:Shield Label="Skins" Content="4" Background="Orange">
                         <tpf:Poptip.Instance>

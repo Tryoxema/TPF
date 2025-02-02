@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Markup;
+using System.Windows.Media;
 using TPF.Internal;
 
 namespace TPF.Controls
@@ -44,6 +45,19 @@ namespace TPF.Controls
         }
         #endregion
 
+        #region CornerRadius DependencyProperty
+        public static readonly DependencyProperty CornerRadiusProperty = DependencyProperty.Register("CornerRadius",
+            typeof(CornerRadius),
+            typeof(DropDownButton),
+            new PropertyMetadata(default(CornerRadius)));
+
+        public CornerRadius CornerRadius
+        {
+            get { return (CornerRadius)GetValue(CornerRadiusProperty); }
+            set { SetValue(CornerRadiusProperty, value); }
+        }
+        #endregion
+
         #region IsDropDownOpen DependencyProperty
         public static readonly DependencyProperty IsDropDownOpenProperty = DependencyProperty.Register("IsDropDownOpen",
             typeof(bool),
@@ -74,6 +88,19 @@ namespace TPF.Controls
         {
             get { return (bool)GetValue(IsDropDownOpenProperty); }
             set { SetValue(IsDropDownOpenProperty, BooleanBoxes.Box(value)); }
+        }
+        #endregion
+
+        #region DropDownArrowVisibility DependencyProperty
+        public static readonly DependencyProperty DropDownArrowVisibilityProperty = DependencyProperty.Register("DropDownArrowVisibility",
+            typeof(Visibility),
+            typeof(DropDownButton),
+            new PropertyMetadata(VisibilityBoxes.VisibleBox));
+
+        public Visibility DropDownArrowVisibility
+        {
+            get { return (Visibility)GetValue(DropDownArrowVisibilityProperty); }
+            set { SetValue(DropDownArrowVisibilityProperty, VisibilityBoxes.Box(value)); }
         }
         #endregion
 
@@ -152,6 +179,45 @@ namespace TPF.Controls
         {
             get { return (double)GetValue(DropDownMaxWidthProperty); }
             set { SetValue(DropDownMaxWidthProperty, value); }
+        }
+        #endregion
+
+        #region DropDownForeground DependencyProperty
+        public static readonly DependencyProperty DropDownForegroundProperty = DependencyProperty.Register("DropDownForeground",
+            typeof(Brush),
+            typeof(DropDownButton),
+            new PropertyMetadata(null));
+
+        public Brush DropDownForeground
+        {
+            get { return (Brush)GetValue(DropDownForegroundProperty); }
+            set { SetValue(DropDownForegroundProperty, value); }
+        }
+        #endregion
+
+        #region DropDownBackground DependencyProperty
+        public static readonly DependencyProperty DropDownBackgroundProperty = DependencyProperty.Register("DropDownBackground",
+            typeof(Brush),
+            typeof(DropDownButton),
+            new PropertyMetadata(null));
+
+        public Brush DropDownBackground
+        {
+            get { return (Brush)GetValue(DropDownBackgroundProperty); }
+            set { SetValue(DropDownBackgroundProperty, value); }
+        }
+        #endregion
+
+        #region DropDownBorderBrush DependencyProperty
+        public static readonly DependencyProperty DropDownBorderBrushProperty = DependencyProperty.Register("DropDownBorderBrush",
+            typeof(Brush),
+            typeof(DropDownButton),
+            new PropertyMetadata(null));
+
+        public Brush DropDownBorderBrush
+        {
+            get { return (Brush)GetValue(DropDownBorderBrushProperty); }
+            set { SetValue(DropDownBorderBrushProperty, value); }
         }
         #endregion
 

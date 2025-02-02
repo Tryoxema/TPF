@@ -77,7 +77,7 @@
     <converter:DateTimeToAngleConverter x:Key="ClockSecondToAngleConverter" TimePart="Second"/>
 
     <!--Default WPF Controls-->
-    <!-- ========== ToolTip ========== -->
+    <!-- ==================== ToolTip ==================== -->
     <Style TargetType="ToolTip" x:Key="WPF.ToolTipStyle">
         <Setter Property="UseLayoutRounding" Value="True"/>
         <Setter Property="SnapsToDevicePixels" Value="True"/>
@@ -98,7 +98,7 @@
         </Setter>
     </Style>
 
-    <!-- ========== Label ========== -->
+    <!-- ==================== Label ==================== -->
     <Style TargetType="Label" x:Key="WPF.LabelStyle">
         <Setter Property="Foreground" Value="{tpf:ResourceLink Key=TextBrush}"/>
         <Setter Property="Background" Value="Transparent"/>
@@ -121,7 +121,7 @@
         </Setter>
     </Style>
 
-    <!-- ========== Button ========== -->
+    <!-- ==================== Button ==================== -->
     <Style TargetType="Button" x:Key="WPF.ButtonStyle">
         <Setter Property="Background" Value="{tpf:ResourceLink Key=PrimaryBrush}"/>
         <Setter Property="BorderBrush" Value="{tpf:ResourceLink Key=BorderBrush}"/>
@@ -189,7 +189,7 @@
         </Setter>
     </Style>
 
-    <!-- ========== RepeatButton ========== -->
+    <!-- ==================== RepeatButton ==================== -->
     <Style TargetType="RepeatButton" x:Key="WPF.RepeatButtonStyle">
         <Setter Property="Background" Value="{tpf:ResourceLink Key=PrimaryBrush}"/>
         <Setter Property="BorderBrush" Value="{tpf:ResourceLink Key=BorderBrush}"/>
@@ -231,7 +231,7 @@
         </Setter>
     </Style>
 
-    <!-- ========== ToggleButton ========== -->
+    <!-- ==================== ToggleButton ==================== -->
     <Style TargetType="ToggleButton" x:Key="WPF.ToggleButtonStyle">
         <Setter Property="Background" Value="{tpf:ResourceLink Key=PrimaryBrush}"/>
         <Setter Property="BorderBrush" Value="{tpf:ResourceLink Key=BorderBrush}"/>
@@ -278,7 +278,7 @@
         </Setter>
     </Style>
 
-    <!-- ========== CheckBox ========== -->
+    <!-- ==================== CheckBox ==================== -->
     <Style TargetType="CheckBox" x:Key="WPF.CheckBoxStyle">
         <Setter Property="Background" Value="{tpf:ResourceLink Key=PrimaryBrush}"/>
         <Setter Property="BorderBrush" Value="{tpf:ResourceLink Key=BorderBrush}"/>
@@ -343,7 +343,62 @@
         </Setter>
     </Style>
 
-    <!-- ========== TextBox ========== -->
+    <!-- ==================== RadioButton ==================== -->
+    <Style TargetType="RadioButton" x:Key="WPF.RadioButtonStyle">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="Background" Value="{tpf:ResourceLink Key=PrimaryBrush}"/>
+        <Setter Property="BorderBrush" Value="{tpf:ResourceLink Key=BorderBrush}"/>
+        <Setter Property="Foreground" Value="{tpf:ResourceLink Key=TextBrush}"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Padding" Value="5 0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="RadioButton">
+                    <Grid Background="Transparent" SnapsToDevicePixels="True">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <Border x:Name="OptionBorder" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" 
+							    CornerRadius="100" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="1" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
+                            <Grid Margin="2">
+                                <Ellipse x:Name="OptionVisual" Fill="{tpf:ResourceLink Key=TextBrush}" MinWidth="6" MinHeight="6" Opacity="0"/>
+                            </Grid>
+                        </Border>
+
+                        <ContentPresenter Grid.Column="1" Focusable="False" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+									  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter Property="Background" TargetName="OptionBorder" Value="{tpf:ResourceLink Key=MouseOverBrush}"/>
+                            <Setter Property="BorderBrush" TargetName="OptionBorder" Value="{tpf:ResourceLink Key=MouseOverAccentBrush}"/>
+                            <Setter Property="Fill" TargetName="OptionVisual" Value="{tpf:ResourceLink Key=MouseOverTextBrush}"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="false">
+                            <Setter Property="Background" TargetName="OptionBorder" Value="{tpf:ResourceLink Key=DisabledBrush}"/>
+                            <Setter Property="Opacity" TargetName="OptionVisual" Value="{tpf:ResourceLink Key=DisabledOpacity}"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="true">
+                            <Setter Property="Background" TargetName="OptionBorder" Value="{tpf:ResourceLink Key=PressedBrush}"/>
+                            <Setter Property="BorderBrush" TargetName="OptionBorder" Value="{tpf:ResourceLink Key=PressedAccentBrush}"/>
+                            <Setter Property="Fill" TargetName="OptionVisual" Value="{tpf:ResourceLink Key=PressedTextBrush}"/>
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="true">
+                            <Setter Property="Opacity" TargetName="OptionVisual" Value="1"/>
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="{x:Null}">
+                            <Setter Property="Opacity" TargetName="OptionVisual" Value="0.5"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- ==================== TextBox ==================== -->
     <Style TargetType="TextBox" x:Key="WPF.TextBoxStyle">
         <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
@@ -379,7 +434,7 @@
         </Setter>
     </Style>
 
-    <!-- ========== PasswordBox ========== -->
+    <!-- ==================== PasswordBox ==================== -->
     <Style TargetType="PasswordBox" x:Key="WPF.PasswordBoxStyle">
         <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
@@ -422,7 +477,7 @@
         </Setter>
     </Style>
 
-    <!-- ========== ScrollBar ========== -->
+    <!-- ==================== ScrollBar ==================== -->
     <Style TargetType="RepeatButton" x:Key="WPF.ScrollBarRepeatButtonStyle">
         <Setter Property="tpf:PathElement.Fill" Value="{tpf:ResourceLink Key=GlyphBrush}"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
@@ -604,7 +659,7 @@
         </Setter>
     </Style>
 
-    <!-- ========== Expander ========== -->
+    <!-- ==================== Expander ==================== -->
     <ControlTemplate TargetType="ToggleButton" x:Key="WPF.ExpanderDownHeaderTemplate">
         <Border Padding="{TemplateBinding Padding}">
             <Grid Background="Transparent">
@@ -801,7 +856,7 @@
         </Setter>
     </Style>
 
-    <!-- ========== ListBoxItem ========== -->
+    <!-- ==================== ListBoxItem ==================== -->
     <Style TargetType="ListBoxItem" x:Key="WPF.ListBoxItemStyle">
         <Setter Property="MinHeight" Value="20"/>
         <Setter Property="SnapsToDevicePixels" Value="True"/>
@@ -836,7 +891,7 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <!-- ========== ListBox ========== -->
+    <!-- ==================== ListBox ==================== -->
     <Style TargetType="ListBox" x:Key="WPF.ListBoxStyle">
         <Setter Property="ItemContainerStyle" Value="{StaticResource WPF.ListBoxItemStyle}"/>
         <Setter Property="Foreground" Value="{tpf:ResourceLink Key=TextBrush}"/>
@@ -867,7 +922,7 @@
         </Setter>
     </Style>
 
-    <!-- ========== TabControl ========== -->
+    <!-- ==================== TabControl ==================== -->
     <Style TargetType="RepeatButton" x:Key="WPF.TabControlRepeatButtonStyle">
         <Setter Property="Foreground" Value="{tpf:ResourceLink Key=GlyphBrush}"/>
         <Setter Property="ContentTemplate">
@@ -1011,7 +1066,7 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <!-- ========== TabItem ========== -->
+    <!-- ==================== TabItem ==================== -->
     <Style TargetType="TabItem" x:Key="WPF.TabItemStyle">
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
         <Setter Property="VerticalContentAlignment" Value="Stretch"/>
@@ -1052,7 +1107,7 @@
         </Setter>
     </Style>
 
-    <!-- ========== GroupBox ========== -->
+    <!-- ==================== GroupBox ==================== -->
     <BorderGapMaskConverter x:Key="BorderGapMaskConverter"/>
     <Style TargetType="GroupBox" x:Key="WPF.GroupBoxStyle">
         <Setter Property="Foreground" Value="{tpf:ResourceLink Key=TextBrush}"/>
@@ -1095,7 +1150,7 @@
         </Setter>
     </Style>
 
-    <!-- ========== GridSplitter ========== -->
+    <!-- ==================== GridSplitter ==================== -->
     <Style TargetType="GridSplitter" x:Key="WPF.GridSplitterStyle">
         <Setter Property="MinWidth" Value="5"/>
         <Setter Property="MinHeight" Value="5"/>
@@ -1127,7 +1182,7 @@
     </Style>
 
     <!--TPF Controls-->
-    <!-- ========== Shadow ========== -->
+    <!-- ==================== Shadow ==================== -->
     <Style TargetType="tpf:Shadow" x:Key="TPF.ShadowStyle">
         <Setter Property="ShadowDepth" Value="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=(tpf:ShadowElement.ShadowDepth), Mode=OneWay, FallbackValue=None}"/>
         <Setter Property="Focusable" Value="False"/>
@@ -1136,7 +1191,7 @@
     </Style>
     <Style TargetType="tpf:Shadow" BasedOn="{StaticResource TPF.ShadowStyle}"/>
 
-    <!-- ========== MaterialControl ========== -->
+    <!-- ==================== MaterialControl ==================== -->
     <Style TargetType="tpf:MaterialControl" x:Key="TPF.MaterialControlStyle">
         <Setter Property="HorizontalAlignment" Value="Stretch"/>
         <Setter Property="VerticalAlignment" Value="Stretch"/>
@@ -1251,7 +1306,7 @@
     </Style>
     <Style TargetType="tpf:MaterialControl" BasedOn="{StaticResource TPF.MaterialControlStyle}"/>
 
-    <!-- ========== FluentControl ========== -->
+    <!-- ==================== FluentControl ==================== -->
     <Style TargetType="tpf:FluentControl" x:Key="TPF.FluentControlStyle">
         <Setter Property="HorizontalAlignment" Value="Stretch"/>
         <Setter Property="VerticalAlignment" Value="Stretch"/>
@@ -1371,7 +1426,7 @@
     </Style>
     <Style TargetType="tpf:FluentControl" BasedOn="{StaticResource TPF.FluentControlStyle}"/>
 
-    <!-- ========== HighlightingTextBlock ========== -->
+    <!-- ==================== HighlightingTextBlock ==================== -->
     <Style TargetType="tpf:HighlightingTextBlock" x:Key="TPF.HighlightingTextBlockStyle">
         <Setter Property="Foreground" Value="{tpf:ResourceLink Key=TextBrush}"/>
         <Setter Property="HighlightingForeground" Value="{tpf:ResourceLink Key=SelectedTextBrush}"/>
@@ -1379,7 +1434,7 @@
     </Style>
     <Style TargetType="tpf:HighlightingTextBlock" BasedOn="{StaticResource TPF.HighlightingTextBlockStyle}"/>
 
-    <!-- ========== Divider ========== -->
+    <!-- ==================== Divider ==================== -->
     <Style TargetType="tpf:Divider" x:Key="TPF.DividerStyle">
         <Setter Property="Focusable" Value="False"/>
         <Setter Property="Foreground" Value="{tpf:ResourceLink Key=TextBrush}"/>
@@ -1436,7 +1491,7 @@
     </Style>
     <Style TargetType="tpf:Divider" BasedOn="{StaticResource TPF.DividerStyle}"/>
 
-    <!-- ========== Badge ========== -->
+    <!-- ==================== Badge ==================== -->
     <Style TargetType="tpf:Badge" x:Key="TPF.BadgeStyle">
         <Setter Property="MinWidth" Value="9"/>
         <Setter Property="MinHeight" Value="9"/>
@@ -1462,7 +1517,7 @@
     </Style>
     <Style TargetType="tpf:Badge" BasedOn="{StaticResource TPF.BadgeStyle}"/>
 
-    <!-- ========== Banner ========== -->
+    <!-- ==================== Banner ==================== -->
     <Style TargetType="tpf:Banner" x:Key="TPF.BannerStyle">
         <Setter Property="BorderBrush" Value="{tpf:ResourceLink Key=BorderBrush}"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
@@ -1495,7 +1550,7 @@
     </Style>
     <Style TargetType="tpf:Banner" BasedOn="{StaticResource TPF.BannerStyle}"/>
 
-    <!-- ========== Card ========== -->
+    <!-- ==================== Card ==================== -->
     <Style TargetType="tpf:Card" x:Key="TPF.CardStyle">
         <Setter Property="Background" Value="{tpf:ResourceLink Key=PrimaryBrush}"/>
         <Setter Property="BorderBrush" Value="{tpf:ResourceLink Key=BorderBrush}"/>
@@ -1527,7 +1582,7 @@
     </Style>
     <Style TargetType="tpf:Card" BasedOn="{StaticResource TPF.CardStyle}"/>
 
-    <!-- ========== Shield ========== -->
+    <!-- ==================== Shield ==================== -->
     <Style TargetType="tpf:Shield" x:Key="TPF.ShieldStyle">
         <Setter Property="Height" Value="20"/>
         <Setter Property="ImageWidth" Value="20"/>
@@ -1579,7 +1634,7 @@
     </Style>
     <Style TargetType="tpf:Shield" BasedOn="{StaticResource TPF.ShieldStyle}"/>
 
-    <!-- ========== Skeleton ========== -->
+    <!-- ==================== Skeleton ==================== -->
     <Style TargetType="tpf:Skeleton" x:Key="TPF.SkeletonStyle">
         <Setter Property="Background" Value="{tpf:ResourceLink Key=ScrollBarBrush}"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
@@ -1608,7 +1663,7 @@
     </Style>
     <Style TargetType="tpf:Skeleton" BasedOn="{StaticResource TPF.SkeletonStyle}"/>
 
-    <!-- ========== Blueprint ========== -->
+    <!-- ==================== Blueprint ==================== -->
     <Style TargetType="tpf:Blueprint" x:Key="TPF.BlueprintStyle">
         <Setter Property="Background" Value="#1A52A7"/>
         <Setter Property="LineBrush" Value="#50A0F8"/>
@@ -1624,7 +1679,7 @@
     </Style>
     <Style TargetType="tpf:Blueprint" BasedOn="{StaticResource TPF.BlueprintStyle}"/>
 
-    <!-- ========== Button ========== -->
+    <!-- ==================== Button ==================== -->
     <Style TargetType="tpf:Button" x:Key="TPF.ButtonStyle">
         <Setter Property="Padding" Value="3"/>
         <Setter Property="BorderThickness" Value="1"/>
@@ -1666,7 +1721,7 @@
     </Style>
     <Style TargetType="tpf:Button" BasedOn="{StaticResource TPF.ButtonStyle}"/>
 
-    <!-- ========== ToggleSwitchButton ========== -->
+    <!-- ==================== ToggleSwitchButton ==================== -->
     <converter:ToggleSwitchPositionConverter x:Key="ToggleSwitchPositionConverter"/>
     <Style TargetType="tpf:ToggleSwitchButton" x:Key="TPF.ToggleSwitchButtonStyle">
         <Setter Property="Height" Value="20"/>
@@ -1808,7 +1863,7 @@
     </Style>
     <Style TargetType="tpf:ToggleSwitchButton" BasedOn="{StaticResource TPF.ToggleSwitchButtonStyle}"/>
 
-    <!-- ========== PathButton ========== -->
+    <!-- ==================== PathButton ==================== -->
     <Style TargetType="tpf:PathButton" x:Key="TPF.PathButtonStyle">
         <Setter Property="Background" Value="{tpf:ResourceLink Key=PrimaryBrush}"/>
         <Setter Property="BorderBrush" Value="{tpf:ResourceLink Key=BorderBrush}"/>
@@ -1868,7 +1923,7 @@
     </Style>
     <Style TargetType="tpf:PathButton" BasedOn="{StaticResource TPF.PathButtonStyle}"/>
 
-    <!-- ========== HyperlinkButton ========== -->
+    <!-- ==================== HyperlinkButton ==================== -->
     <Style TargetType="tpf:HyperlinkButton" x:Key="TPF.HyperlinkButtonStyle">
         <Setter Property="Foreground" Value="{tpf:ResourceLink Key=HyperlinkBrush}"/>
         <Setter Property="VisitedForeground" Value="{tpf:ResourceLink Key=HyperlinkVisitedBrush}"/>
@@ -1911,21 +1966,25 @@
     </Style>
     <Style TargetType="tpf:HyperlinkButton" BasedOn="{StaticResource TPF.HyperlinkButtonStyle}"/>
 
-    <!-- ========== DropDownButton ========== -->
+    <!-- ==================== DropDownButton ==================== -->
     <Style TargetType="tpf:DropDownButton" x:Key="TPF.DropDownButtonStyle">
         <Setter Property="Foreground" Value="{tpf:ResourceLink Key=TextBrush}"/>
         <Setter Property="Background" Value="{tpf:ResourceLink Key=PrimaryBrush}"/>
         <Setter Property="BorderBrush" Value="{tpf:ResourceLink Key=BorderBrush}"/>
-        <Setter Property="BorderThickness" Value="1"/>
-        <Setter Property="Padding" Value="4 3"/>
+        <Setter Property="DropDownForeground" Value="{tpf:ResourceLink Key=TextBrush}"/>
+        <Setter Property="DropDownBackground" Value="{tpf:ResourceLink Key=PrimaryBrush}"/>
+        <Setter Property="DropDownBorderBrush" Value="{tpf:ResourceLink Key=BorderBrush}"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Padding" Value="4 3"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="tpf:DropDownButton">
                     <tpf:SimplePanel>
-                        <Border x:Name="Border" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}">
+                        <Border x:Name="Border" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}"
+                                CornerRadius="{TemplateBinding CornerRadius}">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*"/>
@@ -1936,16 +1995,17 @@
                                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                                   Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
                                                   ContentStringFormat="{TemplateBinding ContentStringFormat}" RecognizesAccessKey="True"/>
-                                <Path x:Name="Symbol" Data="M0,0 L6,0 3,4 Z" Fill="{tpf:ResourceLink Key=GlyphBrush}" IsHitTestVisible="false" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5 3"/>
+                                <Path x:Name="Symbol" Data="M0,0 L6,0 3,4 Z" Fill="{tpf:ResourceLink Key=GlyphBrush}" Visibility="{TemplateBinding DropDownArrowVisibility}" 
+                                      IsHitTestVisible="false" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5 3"/>
                             </Grid>
                         </Border>
                         <Popup IsOpen="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" StaysOpen="False" AllowsTransparency="True" PopupAnimation="Slide" Placement="Bottom">
-                            <Border BorderThickness="1" BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}"
+                            <Border BorderThickness="1" BorderBrush="{TemplateBinding DropDownBorderBrush}" Background="{TemplateBinding DropDownBackground}" CornerRadius="{TemplateBinding CornerRadius}"
                                     MinWidth="{TemplateBinding DropDownMinWidth}" MinHeight="{TemplateBinding DropDownMinHeight}" 
                                     Width="{TemplateBinding DropDownWidth}" Height="{TemplateBinding DropDownHeight}"
                                     MaxWidth="{TemplateBinding DropDownMaxWidth}" MaxHeight="{TemplateBinding DropDownMaxHeight}">
                                 <ContentControl Content="{TemplateBinding DropDownContent}" ContentTemplate="{TemplateBinding DropDownContentTemplate}" ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
-                                                Foreground="{TemplateBinding Foreground}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+                                                Foreground="{TemplateBinding DropDownForeground}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
                                                 HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                             </Border>
                         </Popup>
@@ -1977,18 +2037,21 @@
     </Style>
     <Style TargetType="tpf:DropDownButton" BasedOn="{StaticResource TPF.DropDownButtonStyle}"/>
 
-    <!-- ========== SplitButton ========== -->
+    <!-- ==================== SplitButton ==================== -->
     <Style TargetType="tpf:SplitButton" x:Key="TPF.SplitButtonStyle">
         <Setter Property="Foreground" Value="{tpf:ResourceLink Key=TextBrush}"/>
         <Setter Property="Background" Value="{tpf:ResourceLink Key=PrimaryBrush}"/>
         <Setter Property="BorderBrush" Value="{tpf:ResourceLink Key=BorderBrush}"/>
-        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="DropDownForeground" Value="{tpf:ResourceLink Key=TextBrush}"/>
+        <Setter Property="DropDownBackground" Value="{tpf:ResourceLink Key=PrimaryBrush}"/>
+        <Setter Property="DropDownBorderBrush" Value="{tpf:ResourceLink Key=BorderBrush}"/>
         <Setter Property="ButtonStyle" Value="{StaticResource WPF.ButtonStyle}"/>
         <Setter Property="ToggleButtonStyle" Value="{StaticResource WPF.ToggleButtonStyle}"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
-        <Setter Property="Padding" Value="4 3"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Padding" Value="4 3"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="tpf:SplitButton">
@@ -2022,12 +2085,12 @@
                                 BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{tpf:ResourceLink Key=MouseOverAccentBrush}" CornerRadius="{TemplateBinding CornerRadius}"/>
                         
                         <Popup IsOpen="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" StaysOpen="False" AllowsTransparency="True" PopupAnimation="Slide" Placement="Bottom">
-                            <Border BorderThickness="1" BorderBrush="{TemplateBinding BorderBrush}" Background="{TemplateBinding Background}"
+                            <Border BorderThickness="1" BorderBrush="{TemplateBinding DropDownBorderBrush}" Background="{TemplateBinding DropDownBackground}"
                                     MinWidth="{TemplateBinding DropDownMinWidth}" MinHeight="{TemplateBinding DropDownMinHeight}" 
                                     Width="{TemplateBinding DropDownWidth}" Height="{TemplateBinding DropDownHeight}"
                                     MaxWidth="{TemplateBinding DropDownMaxWidth}" MaxHeight="{TemplateBinding DropDownMaxHeight}">
                                 <ContentControl Content="{TemplateBinding DropDownContent}" ContentTemplate="{TemplateBinding DropDownContentTemplate}" ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
-                                                Foreground="{TemplateBinding Foreground}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
+                                                Foreground="{TemplateBinding DropDownForeground}" HorizontalContentAlignment="Stretch" VerticalContentAlignment="Stretch"
                                                 HorizontalAlignment="Stretch" VerticalAlignment="Stretch"/>
                             </Border>
                         </Popup>
@@ -2052,7 +2115,7 @@
     </Style>
     <Style TargetType="tpf:SplitButton" BasedOn="{StaticResource TPF.SplitButtonStyle}"/>
 
-    <!-- ========== CalendarButton ========== -->
+    <!-- ==================== CalendarButton ==================== -->
     <Style TargetType="calendar:CalendarButton" x:Key="TPF.CalendarButtonStyle">
         <Setter Property="MinWidth" Value="22"/>
         <Setter Property="MinHeight" Value="22"/>
@@ -2144,7 +2207,7 @@
         </Setter>
     </Style>
     <Style TargetType="calendar:CalendarButton" BasedOn="{StaticResource TPF.CalendarButtonStyle}"/>
-    <!-- ========== CalendarView ========== -->
+    <!-- ==================== CalendarView ==================== -->
     <Style TargetType="calendar:CalendarView" x:Key="TPF.CalendarViewStyle">
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -2211,7 +2274,7 @@
         </Setter>
     </Style>
     <Style TargetType="calendar:CalendarView" BasedOn="{StaticResource TPF.CalendarViewStyle}"/>
-    <!-- ========== Calendar ========== -->
+    <!-- ==================== Calendar ==================== -->
     <Style TargetType="Button" x:Key="TPF.CalendarHeaderButtonStyle">
         <Setter Property="Margin" Value="4 4 4 3"/>
         <Setter Property="Cursor" Value="Hand"/>
@@ -2375,7 +2438,7 @@
     </Style>
     <Style TargetType="tpf:Calendar" BasedOn="{StaticResource TPF.CalendarStyle}"/>
 
-    <!-- ========== Clock ========== -->
+    <!-- ==================== Clock ==================== -->
     <Style TargetType="RadioButton" x:Key="TPF.ClockMeridiemRadioButtonStyle">
         <Setter Property="Foreground" Value="{tpf:ResourceLink Key=TextBrush}"/>
         <Setter Property="Background" Value="Transparent"/>
@@ -2635,7 +2698,7 @@
     </Style>
     <Style TargetType="tpf:Clock" BasedOn="{StaticResource TPF.ClockStyle}"/>
 
-    <!-- ========== Calculator ========== -->
+    <!-- ==================== Calculator ==================== -->
     <Style TargetType="tpf:Calculator" x:Key="TPF.CalculatorStyle">
         <Setter Property="MinWidth" Value="216"/>
         <Setter Property="MinHeight" Value="256"/>
@@ -2744,7 +2807,7 @@
     </Style>
     <Style TargetType="tpf:Calculator" BasedOn="{StaticResource TPF.CalculatorStyle}"/>
 
-    <!-- ========== Notification ========== -->
+    <!-- ==================== Notification ==================== -->
     <Style TargetType="Button" x:Key="TPF.NotificationButtonStyle">
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
@@ -2884,7 +2947,7 @@
     </Style>
     <Style TargetType="tpf:NotificationContainer" BasedOn="{StaticResource TPF.NotificationContainerStyle}"/>
 
-    <!-- ========== Tile ========== -->
+    <!-- ==================== Tile ==================== -->
     <Style TargetType="tpf:Tile" x:Key="TPF.TileStyle">
         <Setter Property="Background" Value="{tpf:ResourceLink Key=AccentBrush}"/>
         <Setter Property="Foreground" Value="{tpf:ResourceLink Key=SelectedTextBrush}"/>
@@ -2926,7 +2989,7 @@
     </Style>
     <Style TargetType="tpf:Tile" BasedOn="{StaticResource TPF.TileStyle}"/>
 
-    <!-- ========== ProgressBar ========== -->
+    <!-- ==================== ProgressBar ==================== -->
     <Style TargetType="tpf:ProgressBar" x:Key="TPF.ProgressBarStyle">
         <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -3112,7 +3175,7 @@
         </Setter>
     </Style>
 
-    <!-- ========== ProgressButton ========== -->
+    <!-- ==================== ProgressButton ==================== -->
     <Style TargetType="tpf:ProgressButton" x:Key="TPF.ProgressButtonStyle">
         <Setter Property="Padding" Value="1"/>
         <Setter Property="BorderThickness" Value="1"/>
@@ -3159,7 +3222,7 @@
     </Style>
     <Style TargetType="tpf:ProgressButton" BasedOn="{StaticResource TPF.ProgressButtonStyle}"/>
 
-    <!-- ========== StepProgressBar ========== -->
+    <!-- ==================== StepProgressBar ==================== -->
     <tpf:StepItemIndicatorTemplateSelector x:Key="StepItemIndicatorTemplateSelector">
         <tpf:StepItemIndicatorTemplateSelector.CompleteTemplate>
             <DataTemplate>
@@ -3202,7 +3265,7 @@
         </Setter>
     </Style>
     <Style TargetType="tpf:StepProgressBar" BasedOn="{StaticResource TPF.StepProgressBarStyle}"/>
-    <!-- ========== StepItem ========== -->
+    <!-- ==================== StepItem ==================== -->
     <ControlTemplate TargetType="tpf:StepItem" x:Key="TPF.HorizontalStepItemTemplate">
         <Grid x:Name="Root" Margin="{TemplateBinding ItemSpacing, Converter={StaticResource DoubleToThicknessConverter}, ConverterParameter=-#\,0\,0\,0}">
             <Grid.ColumnDefinitions>
@@ -3289,7 +3352,7 @@
     </Style>
     <Style TargetType="tpf:StepItem" BasedOn="{StaticResource TPF.StepItemStyle}"/>
 
-    <!-- ========== BusyIndicator ========== -->
+    <!-- ==================== BusyIndicator ==================== -->
     <Style TargetType="tpf:BusyIndicator" x:Key="TPF.BusyIndicatorStyle">
         <Setter Property="HorizontalAlignment" Value="Stretch"/>
         <Setter Property="VerticalAlignment" Value="Stretch"/>
@@ -3333,7 +3396,7 @@
     </Style>
     <Style TargetType="tpf:BusyIndicator" BasedOn="{StaticResource TPF.BusyIndicatorStyle}"/>
 
-    <!-- ========== RadialProgressBar ========== -->
+    <!-- ==================== RadialProgressBar ==================== -->
     <Style TargetType="tpf:RadialProgressBar" x:Key="TPF.RadialProgressBarStyle">
         <Setter Property="Maximum" Value="100"/>
         <Setter Property="SnapsToDevicePixels" Value="True"/>
@@ -3359,7 +3422,7 @@
     </Style>
     <Style TargetType="tpf:RadialProgressBar" BasedOn="{StaticResource TPF.RadialProgressBarStyle}"/>
 
-    <!-- ========== WatermarkTextBox ========== -->
+    <!-- ==================== WatermarkTextBox ==================== -->
     <Style TargetType="tpf:WatermarkTextBox" x:Key="TPF.WatermarkTextBoxStyle">
         <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="KeyboardNavigation.TabNavigation" Value="None"/>
@@ -3404,7 +3467,7 @@
     </Style>
     <Style TargetType="tpf:WatermarkTextBox" BasedOn="{StaticResource TPF.WatermarkTextBoxStyle}"/>
 
-    <!-- ========== PasswordBox ========== -->
+    <!-- ==================== PasswordBox ==================== -->
     <Style TargetType="Button" x:Key="TPF.PasswordBoxButtonStyle">
         <Setter Property="Foreground" Value="{tpf:ResourceLink Key=GlyphBrush}"/>
         <Setter Property="Background" Value="Transparent"/>
@@ -3483,7 +3546,7 @@
     </Style>
     <Style TargetType="tpf:PasswordBox" BasedOn="{StaticResource TPF.PasswordBoxStyle}"/>
 
-    <!-- ========== SearchTextBox ========== -->
+    <!-- ==================== SearchTextBox ==================== -->
     <PathGeometry x:Key="SearchGeometry" Figures="M14.1,0 C21,0 26.6,5.6 26.6,12.5 C26.6,14.9 26,17.1 24.8,19 L33.9,28 C35,29.2 35,31.1 33.9,32.3 C32.7,33.4 30.8,33.4 29.6,32.3 L20.6,23.2 C18.7,24.3 16.5,25 14.1,25 C7.2,25 1.6,19.4 1.6,12.5 C1.6,5.6 7.2,0 14.1,0 z M14.1,4 C18.8,4 22.6,7.8 22.6,12.5 C22.6,17.2 18.8,21 14.1,21 C9.4,21 5.6,17.2 5.6,12.5 C5.6,7.8 9.4,4 14.1,4 z"/>
     <Style TargetType="Button" x:Key="TPF.SearchTextBoxQueryButtonStyle">
         <Setter Property="Background" Value="Transparent"/>
@@ -3597,7 +3660,7 @@
     </Style>
     <Style TargetType="tpf:SearchTextBox" BasedOn="{StaticResource TPF.SearchTextBoxStyle}"/>
 
-    <!-- ========== NumericRangeBox ========== -->
+    <!-- ==================== NumericRangeBox ==================== -->
     <Style TargetType="tpf:NumericRangeBox" x:Key="TPF.NumericRangeBoxStyle">
         <Setter Property="BorderBrush" Value="{tpf:ResourceLink Key=BorderBrush}"/>
         <Setter Property="Background" Value="{tpf:ResourceLink Key=InputBackgroundBrush}"/>
@@ -3699,7 +3762,7 @@
     </Style>
     <Style TargetType="tpf:NumericRangeBox" BasedOn="{StaticResource TPF.NumericRangeBoxStyle}"/>
 
-    <!-- ========== DateTimePicker ========== -->
+    <!-- ==================== DateTimePicker ==================== -->
     <PathGeometry x:Key="CalendarGeometry" Figures="M377,116 l 265,0 0,47 -265,0 0,-47 M888,116 748,116 l 0,47 123,0 c18,0 33,14 33,33 l 0,93 L115,289 l 0,-93 c0,-18 14,-33 33,-33 l 123,0 0,-47 L131,116 c-35,0 -64,28 -64,64 l 0,714 c0,35 28,64 64,64 l 756,0 c35,0 64,-28 64,-64 l 0,-714 C952,145 923,116 888,116 z M904,337 l 0,540 c0,18 -14,33 -33,33 L148,910 c-18,0 -33,-14 -33,-33 L115,337 904,337 z M300,65 l 47,0 0,170 -47,0 0,-170 z M673,65 l 47,0 0,170 -47,0 0,-170 z M358,548 l 0,231 53,0 L411,459 l -34,0 -2,4 c-18,26 -41,48 -69,68 l -4,2 0,53 13,-8 C330,569 345,558 358,548 z M618,726 c-10,6 -24,8 -42,5 -16,-3 -28,-18 -35,-46 l -2,-8 -48,13 1,8 c6,30 18,52 36,65 17,12 35,19 54,21 3,0 6,0 10,0 15,0 28,-2 40,-7 14,-5 27,-13 37,-23 10,-9 18,-22 23,-37 5,-14 7,-28 8,-42 0,-13 0,-26 -4,-38 l 0,0 c-3,-11 -8,-23 -15,-35 -7,-12 -19,-22 -34,-30 -15,-7 -31,-10 -47,-11 -11,0 -23,1 -36,5 4,-14 7,-32 11,-51 l 114,0 0,-49 L535,464 l-1,7 c-24,115 -31,145 -33,150 l -3,10 46,5 3,-4 c8,-11 18,-18 31,-21 13,-3 24,-3 35,0 10,3 18,8 24,17 6,9 10,20 10,33 0,14 -1,26 -6,37 C636,711 629,720 618,726 z"/>
     <PathGeometry x:Key="ClockGeometry" Figures="M500,300 425,300 425,620 720,620 720,550 500,550 Z M512.71,80.16 c-245.74 0 -445.18 197.58 -445.18 441.02 s199.44 441.02 445.18 441.02 c245.74 0 445.18 -197.58 445.18 -441.02 S758.45 80.16 512.71 80.16 z M512.71,874.01 c-195.88 0 -356.15 -158.77 -356.15 -352.82 s160.27 -352.82 356.15 -352.82 c195.88 0 356.14 158.77 356.14 352.82 S708.59 874.01 512.71 874.01 z"/>
     <Style TargetType="tpf:DateTimePicker" x:Key="TPF.DateTimePickerStyle">
@@ -3803,7 +3866,7 @@
     </Style>
     <Style TargetType="tpf:DateTimePicker" BasedOn="{StaticResource TPF.DateTimePickerStyle}"/>
 
-    <!-- ========== ComboBox ========== -->
+    <!-- ==================== ComboBox ==================== -->
     <Style TargetType="ToggleButton" x:Key="TPF.ComboBoxToggleButtonStyle">
         <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -4015,7 +4078,7 @@
     </Style>
     <Style TargetType="tpf:ComboBoxItem" BasedOn="{StaticResource TPF.ComboBoxItemStyle}"/>
 
-    <!-- ========== Slider ========== -->
+    <!-- ==================== Slider ==================== -->
     <Style TargetType="RepeatButton" x:Key="TPF.SliderRepeatButtonStyle">
         <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="OverridesDefaultStyle" Value="True"/>
@@ -4344,7 +4407,7 @@
     </Style>
     <Style TargetType="tpf:Slider" BasedOn="{StaticResource TPF.SliderStyle}"/>
 
-    <!-- ========== Comparer ========== -->
+    <!-- ==================== Comparer ==================== -->
     <Style TargetType="Thumb" x:Key="TPF.ComparerHorizontalThumbStyle">
         <Setter Property="Background" Value="{tpf:ResourceLink Key=PrimaryBrush}"/>
         <Setter Property="BorderBrush" Value="{tpf:ResourceLink Key=BorderBrush}"/>
@@ -4430,7 +4493,7 @@
     </Style>
     <Style TargetType="tpf:Comparer" BasedOn="{StaticResource TPF.ComparerStyle}"/>
 
-    <!-- ========== SplitView ========== -->
+    <!-- ==================== SplitView ==================== -->
     <Style TargetType="Button" x:Key="TPF.SplitViewButtonStyle">
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderThickness" Value="0"/>
@@ -4573,7 +4636,7 @@
     </Style>
     <Style TargetType="tpf:SplitView" BasedOn="{StaticResource TPF.SplitViewStyle}"/>
 
-    <!-- ========== ResizeableScrollBar ========== -->
+    <!-- ==================== ResizeableScrollBar ==================== -->
     <Style TargetType="RepeatButton" x:Key="TPF.ResizeableScrollBarRepeatButtonStyle">
         <Setter Property="Foreground" Value="{tpf:ResourceLink Key=ScrollBarBrush}"/>
         <Setter Property="Background" Value="Transparent"/>
@@ -4770,7 +4833,7 @@
     </Style>
     <Style TargetType="tpf:ResizeableScrollBar" BasedOn="{StaticResource TPF.ResizeableScrollBarStyle}"/>
 
-    <!-- ========== Color-Editor ========== -->
+    <!-- ==================== Color-Editor ==================== -->
     <Style TargetType="tpf:Pad" x:Key="TPF.PadStyle">
         <Setter Property="Template">
             <Setter.Value>
@@ -4926,7 +4989,7 @@
     </Style>
     <Style TargetType="tpf:ColorEditor" BasedOn="{StaticResource TPF.ColorEditorStyle}"/>
 
-    <!-- ========== RadialMenuCentralButton ========== -->
+    <!-- ==================== RadialMenuCentralButton ==================== -->
     <Style TargetType="tpf:RadialMenuCentralButton" x:Key="TPF.RadialMenuCentralButtonStyle">
         <Setter Property="Background" Value="{tpf:ResourceLink Key=PrimaryBrush}"/>
         <Setter Property="Foreground" Value="{tpf:ResourceLink Key=TextBrush}"/>
@@ -5002,7 +5065,7 @@
         </Setter>
     </Style>
     <Style TargetType="tpf:RadialMenuCentralButton" BasedOn="{StaticResource TPF.RadialMenuCentralButtonStyle}"/>
-    <!-- ========== RadialMenuNavigationButton ========== -->
+    <!-- ==================== RadialMenuNavigationButton ==================== -->
     <Style TargetType="tpf:RadialMenuNavigationButton" x:Key="TPF.RadialMenuNavigationButtonStyle">
         <Setter Property="Background" Value="{tpf:ResourceLink Key=AccentBrush}"/>
         <Setter Property="BorderBrush" Value="{tpf:ResourceLink Key=BorderBrush}"/>
@@ -5038,16 +5101,16 @@
         </Setter>
     </Style>
     <Style TargetType="tpf:RadialMenuNavigationButton" BasedOn="{StaticResource TPF.RadialMenuNavigationButtonStyle}"/>
-    <!-- ========== NavigationMenuBackground ========== -->
+    <!-- ==================== NavigationMenuBackground ==================== -->
     <Style TargetType="tpf:Donut" x:Key="TPF.NavigationMenuBackgroundStyle">
         <Setter Property="Fill" Value="{tpf:ResourceLink Key=PrimaryBrush}"/>
         <Setter Property="Stroke" Value="{tpf:ResourceLink Key=BorderBrush}"/>
     </Style>
-    <!-- ========== ContentMenuBackground ========== -->
+    <!-- ==================== ContentMenuBackground ==================== -->
     <Style TargetType="Ellipse" x:Key="TPF.ContentMenuBackgroundStyle">
         <Setter Property="Fill" Value="{tpf:ResourceLink Key=InputBackgroundBrush}"/>
     </Style>
-    <!-- ========== RadialMenu ========== -->
+    <!-- ==================== RadialMenu ==================== -->
     <Style TargetType="tpf:RadialMenu" x:Key="RadialMenuStyle">
         <Setter Property="NavigationMenuBackgroundStyle" Value="{StaticResource TPF.NavigationMenuBackgroundStyle}"/>
         <Setter Property="ContentMenuBackgroundStyle" Value="{StaticResource TPF.ContentMenuBackgroundStyle}"/>
@@ -5105,7 +5168,7 @@
         </Setter>
     </Style>
     <Style TargetType="tpf:RadialMenu" BasedOn="{StaticResource RadialMenuStyle}"/>
-    <!-- ========== RadialMenuItem ========== -->
+    <!-- ==================== RadialMenuItem ==================== -->
     <Style TargetType="tpf:RadialMenuItem" x:Key="TPF.RadialMenuItemStyle">
         <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="UseLayoutRounding" Value="True"/>
@@ -5150,7 +5213,7 @@
     </Style>
     <Style TargetType="tpf:RadialMenuItem" BasedOn="{StaticResource TPF.RadialMenuItemStyle}"/>
 
-    <!-- ========== HamburgerMenu ========== -->
+    <!-- ==================== HamburgerMenu ==================== -->
     <Style TargetType="ToggleButton" x:Key="TPF.HamburgerMenuToggleButtonStyle" BasedOn="{StaticResource WPF.ToggleButtonStyle}">
         <Setter Property="Foreground" Value="{tpf:ResourceLink Key=TextBrush}"/>
         <Setter Property="Background" Value="Transparent"/>
@@ -5271,7 +5334,7 @@
         </Setter>
     </Style>
     <Style TargetType="tpf:HamburgerMenu" BasedOn="{StaticResource TPF.HamburgerMenuStyle}"/>
-    <!-- ========== HamburgerMenuItem ========== -->
+    <!-- ==================== HamburgerMenuItem ==================== -->
     <ControlTemplate TargetType="tpf:HamburgerMenuItem" x:Key="TPF.ItemHamburgerMenuItemTemplate">
         <Grid>
             <Grid.RowDefinitions>
@@ -5415,7 +5478,7 @@
     </Style>
     <Style TargetType="tpf:HamburgerMenuItem" BasedOn="{StaticResource TPF.HamburgerMenuItemStyle}"/>
 
-    <!-- ========== TaskBoardCard ========== -->
+    <!-- ==================== TaskBoardCard ==================== -->
     <taskboard:TaskBoardCardIconTemplateSelector x:Key="DefaultTaskBoardCardIconTemplateSelector">
         <taskboard:TaskBoardCardIconTemplateSelector.ImageTemplate>
             <DataTemplate>
@@ -5489,7 +5552,7 @@
     <DataTemplate x:Key="TPF.TaskBoardItemCardTemplate">
         <tpf:TaskBoardCard Assignee="{Binding Assignee}" Title="{Binding Title}" Description="{Binding Description}" Icon="{Binding Icon}" State="{Binding State}" Type="{Binding Type}" Tags="{Binding Tags}"/>
     </DataTemplate>
-    <!-- ========== TaskBoardItem ========== -->
+    <!-- ==================== TaskBoardItem ==================== -->
     <Style TargetType="tpf:TaskBoardItem" x:Key="TPF.TaskBoardItemStyle">
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="Foreground" Value="{tpf:ResourceLink Key=TextBrush}"/>
@@ -5505,7 +5568,7 @@
         </Setter>
     </Style>
     <Style TargetType="tpf:TaskBoardItem" BasedOn="{StaticResource TPF.TaskBoardItemStyle}"/>
-    <!-- ========== TaskBoardColumn ========== -->
+    <!-- ==================== TaskBoardColumn ==================== -->
     <Style TargetType="ToggleButton" x:Key="TPF.TaskBoardColumnToggleButtonStyle" BasedOn="{StaticResource WPF.ToggleButtonStyle}">
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="BorderBrush" Value="Transparent"/>
@@ -5654,7 +5717,7 @@
         </Setter>
     </Style>
     <Style TargetType="tpf:TaskBoardColumn" BasedOn="{StaticResource TPF.TaskBoardColumnStyle}"/>
-    <!-- ========== TaskBoard ========== -->
+    <!-- ==================== TaskBoard ==================== -->
     <Style TargetType="tpf:TaskBoard" x:Key="TPF.TaskBoardStyle">
         <Setter Property="BorderThickness" Value="1"/>
         <Setter Property="BorderBrush" Value="{tpf:ResourceLink Key=BorderBrush}"/>
@@ -5702,7 +5765,7 @@
     </Style>
     <Style TargetType="tpf:TaskBoard" BasedOn="{StaticResource TPF.TaskBoardStyle}"/>
 
-    <!-- ========== TabControl ========== -->
+    <!-- ==================== TabControl ==================== -->
     <Style TargetType="tabControl:TabControlDropdownItem" x:Key="TPF.TabControlDropdownItemStyle">
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="Foreground" Value="{tpf:ResourceLink Key=TextBrush}"/>
@@ -5897,7 +5960,7 @@
     </Style>
     <Style TargetType="tpf:TabControl" BasedOn="{StaticResource TPF.TabControlStyle}"/>
 
-    <!-- ========== TabItem ========== -->
+    <!-- ==================== TabItem ==================== -->
     <Style TargetType="Button" x:Key="TPF.TabItemHeaderButton">
         <Setter Property="Foreground" Value="{tpf:ResourceLink Key=GlyphBrush}"/>
         <Setter Property="Background" Value="Transparent"/>
@@ -6065,7 +6128,7 @@
     </Style>
     <Style TargetType="tpf:TabItem" BasedOn="{StaticResource TPF.TabItemStyle}"/>
 
-    <!-- ========== Rating ========== -->
+    <!-- ==================== Rating ==================== -->
     <PathGeometry x:Key="StarGeometry" Figures="M0,5 L4.5,5 6.5,0 8.5,5 13,5 9,8 11,13 6.5,10 2,13 4,8 z"/>
     <Style TargetType="tpf:Rating" x:Key="TPF.RatingStyle">
         <Setter Property="BorderThickness" Value="0"/>
@@ -6092,7 +6155,7 @@
         </Setter>
     </Style>
     <Style TargetType="tpf:Rating" BasedOn="{StaticResource TPF.RatingStyle}"/>
-    <!-- ========== RatingItem ========== -->
+    <!-- ==================== RatingItem ==================== -->
     <Style TargetType="tpf:RatingItem" x:Key="TPF.RatingItemStyle">
         <Setter Property="Background" Value="{tpf:ResourceLink Key=PrimaryBrush}"/>
         <Setter Property="BorderBrush" Value="{tpf:ResourceLink Key=BorderBrush}"/>
@@ -6131,7 +6194,7 @@
     </Style>
     <Style TargetType="tpf:RatingItem" BasedOn="{StaticResource TPF.RatingItemStyle}"/>
 
-    <!-- ========== Poptip ========== -->
+    <!-- ==================== Poptip ==================== -->
     <Style TargetType="tpf:Poptip" x:Key="TPF.PoptipStyle">
         <Setter Property="IsHitTestVisible" Value="False"/>
         <Setter Property="VerticalAlignment" Value="Top"/>
@@ -6155,7 +6218,7 @@
     </Style>
     <Style TargetType="tpf:Poptip" BasedOn="{StaticResource TPF.PoptipStyle}"/>
 
-    <!-- ========== DialogHost ========== -->
+    <!-- ==================== DialogHost ==================== -->
     <Style TargetType="tpf:DialogHost" x:Key="TPF.DialogHostStyle">
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="HorizontalContentAlignment" Value="Center"/>
@@ -6283,7 +6346,7 @@
     </Style>
     <Style TargetType="tpf:DialogHost" BasedOn="{StaticResource TPF.DialogHostStyle}"/>
 
-    <!-- ========== TitleBar ========== -->
+    <!-- ==================== TitleBar ==================== -->
     <Style TargetType="Button" x:Key="TPF.TitleBarButtonStyle">
         <Setter Property="Width" Value="30"/>
         <Setter Property="Foreground" Value="{tpf:ResourceLink Key=SelectedTextBrush}"/>
@@ -6424,7 +6487,7 @@
     </Style>
     <Style TargetType="tpf:WindowTitleBar" BasedOn="{StaticResource TPF.WindowTitleBarStyle}"/>
 
-    <!-- ========== Window ========== -->
+    <!-- ==================== Window ==================== -->
     <Style TargetType="tpf:ChromelessWindow" x:Key="TPF.ChromelessWindowStyle">
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="IconMargin" Value="8 0 0 0"/>
@@ -6478,7 +6541,7 @@
     </Style>
     <Style TargetType="tpf:ChromelessWindow" BasedOn="{StaticResource TPF.ChromelessWindowStyle}"/>
 
-    <!-- ========== Widget ========== -->
+    <!-- ==================== Widget ==================== -->
     <Style TargetType="tpf:Widget" x:Key="TPF.WidgetStyle">
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="VerticalContentAlignment" Value="Center"/>
@@ -6509,7 +6572,7 @@
     </Style>
     <Style TargetType="tpf:Widget" BasedOn="{StaticResource TPF.WidgetStyle}"/>
 
-    <!-- ========== Dashboard ========== -->
+    <!-- ==================== Dashboard ==================== -->
     <Style TargetType="tpf:Dashboard" x:Key="TPF.DashboardStyle">
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="Foreground" Value="{tpf:ResourceLink Key=TextBrush}"/>
@@ -6545,7 +6608,7 @@
     </Style>
     <Style TargetType="tpf:Dashboard" BasedOn="{StaticResource TPF.DashboardStyle}"/>
 
-    <!-- ========== DataBar ========== -->
+    <!-- ==================== DataBar ==================== -->
     <Style TargetType="Rectangle" x:Key="TPF.DataBarOriginAxisStyle">
         <Setter Property="Width" Value="1"/>
     </Style>
@@ -6574,7 +6637,7 @@
         </Setter>
     </Style>
     <Style TargetType="tpf:DataBar" BasedOn="{StaticResource TPF.DataBarStyle}"/>
-    <!-- ========== StackedDataBar ========== -->
+    <!-- ==================== StackedDataBar ==================== -->
     <Style TargetType="tpf:StackedDataBar" x:Key="TPF.StackedDataBarStyle">
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="OriginAxisBrush" Value="{tpf:ResourceLink Key=GlyphBrush}"/>
@@ -6627,7 +6690,7 @@
         </Setter>
     </Style>
     <Style TargetType="databar:StackedDataBarItemsPresenter" BasedOn="{StaticResource TPF.StackedDataBarItemsPresenterStyle}"/>
-    <!-- ========== StackedFullDataBar ========== -->
+    <!-- ==================== StackedFullDataBar ==================== -->
     <Style TargetType="tpf:StackedFullDataBar" x:Key="TPF.StackedFullDataBarStyle">
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="BarBrushes" Value="{StaticResource BlueBrushCollection}"/>
@@ -6645,7 +6708,7 @@
     </Style>
     <Style TargetType="tpf:StackedFullDataBar" BasedOn="{StaticResource TPF.StackedFullDataBarStyle}"/>
 
-    <!-- ========== DataAxis ========== -->
+    <!-- ==================== DataAxis ==================== -->
     <Style TargetType="tpf:DataAxis" x:Key="TPF.DataAxisStyle">
         <Setter Property="TickBrush" Value="{tpf:ResourceLink Key=GlyphBrush}"/>
         <Setter Property="Template">
@@ -6700,7 +6763,7 @@
     </Style>
     <Style TargetType="dataaxis:DataAxisLabelsControl" BasedOn="{StaticResource TPF.DataAxisLabelsControlStyle}"/>
 
-    <!-- ========== LinearSparkline ========== -->
+    <!-- ==================== LinearSparkline ==================== -->
     <Style TargetType="tpf:LinearSparkline" x:Key="TPF.LinearSparklineStyle">
         <Setter Property="AxisBrush" Value="{tpf:ResourceLink Key=GlyphBrush}"/>
         <Setter Property="LineBrush" Value="{tpf:ResourceLink Key=AccentBrush}"/>
@@ -6742,7 +6805,7 @@
     </Style>
     <Style TargetType="sparkline:IndicatorItem" BasedOn="{StaticResource TPF.SparklineIndicatorItemStyle}"/>
 
-    <!-- ========== AreaSparkline ========== -->
+    <!-- ==================== AreaSparkline ==================== -->
     <Style TargetType="tpf:AreaSparkline" x:Key="TPF.AreaSparklineStyle">
         <Setter Property="AxisBrush" Value="{tpf:ResourceLink Key=GlyphBrush}"/>
         <Setter Property="LineBrush" Value="{tpf:ResourceLink Key=AccentBrush}"/>
@@ -6772,7 +6835,7 @@
     </Style>
     <Style TargetType="tpf:AreaSparkline" BasedOn="{StaticResource TPF.AreaSparklineStyle}"/>
 
-    <!-- ========== ColumnSparkline ========== -->
+    <!-- ==================== ColumnSparkline ==================== -->
     <Style TargetType="tpf:ColumnSparkline" x:Key="TPF.ColumnSparklineStyle">
         <Setter Property="AxisBrush" Value="{tpf:ResourceLink Key=GlyphBrush}"/>
         <Setter Property="ColumnBrush" Value="{tpf:ResourceLink Key=SelectedBrush}"/>
@@ -6810,14 +6873,14 @@
     </Style>
     <Style TargetType="sparkline:ColumnItem" BasedOn="{StaticResource TPF.SparklineColumnItemStyle}"/>
 
-    <!-- ========== WinLossSparkline ========== -->
+    <!-- ==================== WinLossSparkline ==================== -->
     <Style TargetType="tpf:WinLossSparkline" BasedOn="{StaticResource TPF.ColumnSparklineStyle}" x:Key="TPF.WinLossSparklineStyle">
         <Setter Property="NeutralPointBrush" Value="{tpf:ResourceLink Key=GlyphBrush}"/>
         <Setter Property="ShowNegativePointIndicators" Value="True"/>
     </Style>
     <Style TargetType="tpf:WinLossSparkline" BasedOn="{StaticResource TPF.WinLossSparklineStyle}"/>
 
-    <!-- ========== DateTimeRangeNavigator ========== -->
+    <!-- ==================== DateTimeRangeNavigator ==================== -->
     <Style TargetType="datetimerange:IntervalLabelsControl" x:Key="TPF.IntervalLabelsControlStyle">
         <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="ItemsPanel">
@@ -6990,7 +7053,7 @@
     </Style>
     <Style TargetType="tpf:DateTimeRangeNavigator" BasedOn="{StaticResource TPF.DateTimeRangeNavigatorStyle}"/>
 
-    <!-- ========== SplashScreen ========== -->
+    <!-- ==================== SplashScreen ==================== -->
     <Style TargetType="tpf:SplashScreen" x:Key="TPF.SplashScreenStyle">
         <Setter Property="Foreground" Value="{tpf:ResourceLink Key=TextBrush}"/>
         <Setter Property="Background" Value="{tpf:ResourceLink Key=PrimaryBrush}"/>

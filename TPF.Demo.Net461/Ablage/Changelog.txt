@@ -1,4 +1,28 @@
-﻿===== 0.6.9 =====
+﻿===== 0.7.0 =====
+-Neue Controls
+--Blueprint
+	Der Blueprint ist ein simples Control, mit dem man ein einfaches Blueprint-Muster mit leichter Konfigurationsmöglichkeit zeichnen kann.
+	Mit der LineBrush-Property steuert man den Brush, der zum zeichnen der Kästchen verwendet wird.
+	Die Größe der Kästchen selbst wird über die CellSize-Property festgelegt. Dieser Wert ist uniform und wird für Höhe und Breite verwendet.
+
+-Veränderte Controls
+--Poptip
+	Das Verhalten des Poptips wurde angepasst, damit er sich nun mehr wie der normale ToolTip verhält.
+	Der Poptip ist jetzt vollkommen durchlässig für HitTests, wodurch visuelles Flackern verhindert wird, dass vorher durch überlappen des Poptips mit seinem Control entstehen konnte.
+--DropDownButton
+	Der DropDownButton wurde um fünf neue Properties erweitert, um die Konfigurationsmöglichkeiten zu verbessern.
+	Über die DropDownArrowVisibility-Property kann die Sichtbarkeit des Pfeil-Symbols konfiguriert werden, falls man den Button ohne den Pfeil haben möchte, ohne das Template zu überschreiben.
+	Die CornerRadius-Property wurde als normale Property in den DropDownButton übernommen, um diesen an die anderen Button-Controls anzugleichen.
+	Zusätzlich wurden die Properties DropDownForeground, DropDownBackground und DropDownBorderBrush hinzugefügt, um den DropDown-Bereich unabhängig von den Brushes des Buttons anpassen zu können.
+--SplitButton
+	Der SplitButton wurde um drei neue Properties erweitert, um die Konfigurationsmöglichkeiten zu verbessern.
+	Die Properties DropDownForeground, DropDownBackground und DropDownBorderBrush wurden hinzugefügt, um den DropDown-Bereich unabhängig von den Brushes des Buttons anpassen zu können.
+
+-Sonstige Änderungen
+--Neue Styles
+	Es wurde ein neuer Style für den Standard WPF RadioButton eingefügt.
+
+===== 0.6.9 =====
 -Neue Controls
 --SplashScreen
 	Der SplashScreen ist ein Element, das zur überbrückung von Ladezeiten eingesetzt werden kann.

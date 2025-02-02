@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Markup;
+using System.Windows.Media;
 using TPF.Internal;
 
 namespace TPF.Controls
@@ -255,6 +256,45 @@ namespace TPF.Controls
         }
         #endregion
 
+        #region DropDownForeground DependencyProperty
+        public static readonly DependencyProperty DropDownForegroundProperty = DependencyProperty.Register("DropDownForeground",
+            typeof(Brush),
+            typeof(SplitButton),
+            new PropertyMetadata(null));
+
+        public Brush DropDownForeground
+        {
+            get { return (Brush)GetValue(DropDownForegroundProperty); }
+            set { SetValue(DropDownForegroundProperty, value); }
+        }
+        #endregion
+
+        #region DropDownBackground DependencyProperty
+        public static readonly DependencyProperty DropDownBackgroundProperty = DependencyProperty.Register("DropDownBackground",
+            typeof(Brush),
+            typeof(SplitButton),
+            new PropertyMetadata(null));
+
+        public Brush DropDownBackground
+        {
+            get { return (Brush)GetValue(DropDownBackgroundProperty); }
+            set { SetValue(DropDownBackgroundProperty, value); }
+        }
+        #endregion
+
+        #region DropDownBorderBrush DependencyProperty
+        public static readonly DependencyProperty DropDownBorderBrushProperty = DependencyProperty.Register("DropDownBorderBrush",
+            typeof(Brush),
+            typeof(SplitButton),
+            new PropertyMetadata(null));
+
+        public Brush DropDownBorderBrush
+        {
+            get { return (Brush)GetValue(DropDownBorderBrushProperty); }
+            set { SetValue(DropDownBorderBrushProperty, value); }
+        }
+        #endregion
+
         #region DropDownContent DependencyProperty
         public static readonly DependencyProperty DropDownContentProperty = DependencyProperty.Register("DropDownContent",
             typeof(object),
@@ -456,12 +496,7 @@ namespace TPF.Controls
 
             if (Command is RoutedCommand routedCommand)
             {
-                var target = CommandTarget;
-
-                if (target == null)
-                {
-                    target = this;
-                }
+                var target = CommandTarget ?? this;
 
                 if (routedCommand.CanExecute(CommandParameter, target)) routedCommand.Execute(CommandParameter, target);
             }

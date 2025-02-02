@@ -9,6 +9,7 @@
     <Style TargetType="Button" BasedOn="{StaticResource WPF.ButtonStyle}"/>
     <Style TargetType="ToggleButton" BasedOn="{StaticResource WPF.ToggleButtonStyle}"/>
     <Style TargetType="CheckBox" BasedOn="{StaticResource WPF.CheckBoxStyle}"/>
+    <Style TargetType="RadioButton" BasedOn="{StaticResource WPF.RadioButtonStyle}"/>
     <Style TargetType="TextBox" BasedOn="{StaticResource WPF.TextBoxStyle}"/>
     <Style TargetType="ListBox" BasedOn="{StaticResource WPF.ListBoxStyle}"/>
     <Style TargetType="ListBoxItem" BasedOn="{StaticResource WPF.ListBoxItemStyle}"/>

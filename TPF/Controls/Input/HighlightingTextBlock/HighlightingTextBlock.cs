@@ -302,10 +302,7 @@ namespace TPF.Controls
 
         private static TextBlock CreateTextBlock(HighlightingTextBlock parent)
         {
-            var textBlock = new TextBlock()
-            {
-                Text = "Test"
-            };
+            var textBlock = new TextBlock();
 
             textBlock.SetBinding(TextBlock.ForegroundProperty, new Binding("Foreground") { Source = parent });
             textBlock.SetBinding(TextBlock.BackgroundProperty, new Binding("Background") { Source = parent });
