@@ -4,6 +4,30 @@
 	Der Blueprint ist ein simples Control, mit dem man ein einfaches Blueprint-Muster mit leichter Konfigurationsmöglichkeit zeichnen kann.
 	Mit der LineBrush-Property steuert man den Brush, der zum zeichnen der Kästchen verwendet wird.
 	Die Größe der Kästchen selbst wird über die CellSize-Property festgelegt. Dieser Wert ist uniform und wird für Höhe und Breite verwendet.
+--Wizard
+	Der Wizard ist ein Control für die Prozessflusssteuerung und praktische Darstellung eines mehrstufigen Vorgangs.
+	Das Control wird hauptsächlich über die Pages-Collection mit einer Liste an WizardPage-Instanzen befüllt und ein großteil der Interaktionen wird über die einzelnen WizardPages gesteuert.
+	Der Wizard selbst stellt mehrere Events für die Interaktion bereit und steuert die Auswahl der aktuell angezeigten Seite.
+	Die beiden Events Previous und Next stellen Navigations-Events dar, die die aktuelle Seite und die geplante nächste Seite als Parameter enthalten.
+	In diesen Events kann die nächste Seite überschrieben werden und somit auch komplexere Navigationsfälle abgebildet werden.
+	Wenn sich die aktive Seite ändert wird im nachhinein ebenfalls das SelectedPageChanged-Event ausgelöst.
+	Die beiden Events Finish und Cancel werden über die entsprechenden Commands/Buttons des Wizards ausgelöst und ermöglichen es, entsprechend auf einen Abbruch oder das Abschließen des Vorgangs zu reagieren.
+	Die SelectedPage-Property enthält immer die aktuell angezeigte Seite und die SelectedIndex-Property den entsprechenden Index dieser Seite.
+	Beide Properties können ebenfalls genutzt werden, um die normale Flusssteuerung zu überspringen und die angezeigte Seite manuell zu setzen.
+	Zusätzlich enthält der Wizard noch alle möglichen Properties, die den aktuellen Zustand des Footers darstellen.
+	Diese Properties erhalten ihren Wert immer von der aktuell ausgewählten WizardPage und alle Werte müssen entsprechend auf den einzelnen WizardPages gesetzt werden.
+	Über die Properties FooterBackground und FooterPadding kann zusätzlich noch die Darstellung des Footer-Bereichs weiter konfiguriert werden.
+	Die WizardPage selbst besteht aus 3 Segmenten für Inhalte und alle Properties zum steuern der Buttons des Footers.
+	Der Hauptbereich der WizardPage wird über die Content-Property und damit zusammenhängende Template-Properties gefüllt.
+	Der zweite Bereich wird über die Header-Property und damit zusammenhängende Template-Properties gefüllt.
+	Zusätzlich kann der Header-Bereich über die HeaderVisibility-Property komplett ausgeblendet werden oder über die HeaderHeight-Property die größe eingestellt werden.
+	Außerdem gibt es noch die HeaderPadding-Property für das Padding des Headers und die HeaderBorderHeight-Property zum steuern, wie dick der Rand des Headers ist.
+	Der dritte Bereich wird über die SideContent-Property und damit zusammenhängende Template-Properties gefüllt.
+	Dieser Bereich hat ebenfalls eine eigene Padding- und Visibility-Property wie der Header.
+	Die Breite wird über die SideContentWidth-Property gesteuert und die dicke des Randes über die SideContentBorderWidth-Property.
+	Jede WizardPage kann über die Can- Show- und Content-Properties der vier Buttons frei konfigurieren, ob ein Button klickbar ist, überhaupt angezeigt werden soll und was der Inhalt ist.
+	Die Vier Buttons sind GoToPrevious, GoToNext, Finish und Cancel.
+	Für alle Buttons gibt es in der WizardCommands-Klasse ein entsprechendes Command mit dem gleichen Namen, die auch für die steuerung genutzt werden können.
 
 -Veränderte Controls
 --Poptip

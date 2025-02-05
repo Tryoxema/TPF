@@ -7124,4 +7124,94 @@
         </Setter>
     </Style>
     <Style TargetType="tpf:SplashScreen" BasedOn="{StaticResource TPF.SplashScreenStyle}"/>
+
+    <!-- ==================== WizardPage ==================== -->
+    <Style TargetType="tpf:WizardPage" x:Key="TPF.WizardPageStyle">
+        <Setter Property="Foreground" Value="{tpf:ResourceLink Key=TextBrush}"/>
+        <Setter Property="BorderBrush" Value="{tpf:ResourceLink Key=BorderBrush}"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="tpf:WizardPage">
+                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <Border Grid.Column="0" Grid.RowSpan="2" BorderBrush="{TemplateBinding BorderBrush}" Padding="{TemplateBinding SideContentPadding}"
+                                    BorderThickness="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SideContentBorderWidth, Converter={StaticResource DoubleToThicknessConverter}, ConverterParameter=0\,0\,#\,0}" 
+                                    Width="{TemplateBinding SideContentWidth}" Visibility="{TemplateBinding SideContentVisibility}">
+                                <ContentPresenter ContentSource="SideContent"/>
+                            </Border>
+
+                            <Border Grid.Column="1" Grid.Row="0" BorderBrush="{TemplateBinding BorderBrush}" Padding="{TemplateBinding HeaderPadding}"
+                                    BorderThickness="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=HeaderBorderHeight, Converter={StaticResource DoubleToThicknessConverter}, ConverterParameter=0\,0\,0\,#}"
+                                    Height="{TemplateBinding HeaderHeight}" Visibility="{TemplateBinding HeaderVisibility}">
+                                <ContentPresenter ContentSource="Header"/>
+                            </Border>
+
+                            <ContentPresenter Grid.Column="1" Grid.Row="1" ContentSource="Content" Margin="{TemplateBinding Padding}"/>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="tpf:WizardPage" BasedOn="{StaticResource TPF.WizardPageStyle}"/>
+    <!-- ==================== Wizard ==================== -->
+    <Style TargetType="tpf:Wizard" x:Key="TPF.WizardStyle">
+        <Setter Property="Foreground" Value="{tpf:ResourceLink Key=TextBrush}"/>
+        <Setter Property="Background" Value="{tpf:ResourceLink Key=PrimaryBrush}"/>
+        <Setter Property="BorderBrush" Value="{tpf:ResourceLink Key=BorderBrush}"/>
+        <Setter Property="FooterBackground" Value="{tpf:ResourceLink Key=SecondaryBrush}"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="FooterPadding" Value="5 10"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="tpf:Wizard">
+                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <ContentPresenter Content="{TemplateBinding SelectedPage}"/>
+
+                            <Border Grid.Row="1" Background="{TemplateBinding FooterBackground}" BorderThickness="0 1 0 0" BorderBrush="{TemplateBinding BorderBrush}">
+                                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="{TemplateBinding FooterPadding}">
+                                    <tpf:Button Command="{x:Static tpf:WizardCommands.GoToPrevious}" 
+                                                Content="{TemplateBinding GoToPreviousButtonContent}" 
+                                                Visibility="{TemplateBinding GoToPreviousButtonVisibility}"
+                                                Margin="0 0 5 0" MinWidth="70" VerticalAlignment="Center"/>
+                                    <tpf:Button Command="{x:Static tpf:WizardCommands.GoToNext}" 
+                                                Content="{TemplateBinding GoToNextButtonContent}" 
+                                                Visibility="{TemplateBinding GoToNextButtonVisibility}"
+                                                Margin="0 0 5 0" MinWidth="70" VerticalAlignment="Center"/>
+                                    <tpf:Button Command="{x:Static tpf:WizardCommands.Finish}" 
+                                                Content="{TemplateBinding FinishButtonContent}" 
+                                                Visibility="{TemplateBinding FinishButtonVisibility}"
+                                                Margin="0 0 5 0" MinWidth="70" VerticalAlignment="Center"/>
+                                    <tpf:Button Command="{x:Static tpf:WizardCommands.Cancel}" 
+                                                Content="{TemplateBinding CancelButtonContent}" 
+                                                Visibility="{TemplateBinding CancelButtonVisibility}"
+                                                Margin="0 0 5 0" MinWidth="70" VerticalAlignment="Center"/>
+                                </StackPanel>
+                            </Border>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="tpf:Wizard" BasedOn="{StaticResource TPF.WizardStyle}"/>
 </ResourceDictionary>

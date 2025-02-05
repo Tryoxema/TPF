@@ -33,7 +33,7 @@
 [ ] NavigationBar
 [ ] RibbonMenu
 [ ] ContextMenu
-[ ] Wizard
+[X] Wizard
 [ ] Breadcrumb
 ---Layout---
 [X] ChromelessWindow

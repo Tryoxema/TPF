@@ -69,18 +69,12 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        <tpf:Blueprint Grid.ColumnSpan="2"/>
-
-                        <Grid Grid.Column="0" Background="{tpf:ResourceLink Key=ApplicationBackground}">
-                            <StackPanel>
-                                <RadioButton Content="Test 1"/>
-                                <RadioButton Content="Test 2"/>
-                                <RadioButton Content="Test 3"/>
-                            </StackPanel>
+                        <Grid Grid.Column="0">
+                            
                         </Grid>
 
                         <Grid Grid.Column="1">
-
+                            
                         </Grid>
                     </Grid>
                 </Grid>
@@ -177,6 +171,10 @@
                 </Grid>
             </tpf:TabItem>
 
+            <tpf:TabItem Header="Wizard">
+                <views:WizardView/>
+            </tpf:TabItem>
+            
             <tpf:TabItem Header="Misc">
                 <views:MiscControlsView/>
             </tpf:TabItem>

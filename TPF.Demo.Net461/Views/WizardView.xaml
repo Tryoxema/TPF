@@ -1,0 +1,80 @@
+﻿<UserControl x:Class="TPF.Demo.Net461.Views.WizardView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:tpf="http://schemas.tpf.com/xaml/presentation"
+             xmlns:views="clr-namespace:TPF.Demo.Net461.Views"
+             DataContext="{Binding RelativeSource={RelativeSource Self}}"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <DataTemplate x:Key="WizardPageHeaderTemplate" DataType="views:HeaderModel">
+            <Border Background="{tpf:ResourceLink Key=HeaderBrush}" Padding="10">
+                <StackPanel>
+                    <TextBlock Text="{Binding Title}" FontWeight="SemiBold" FontSize="16" Foreground="{tpf:ResourceLink Key=SelectedTextBrush}"/>
+                    <TextBlock Text="{Binding Description}" Foreground="{tpf:ResourceLink Key=SelectedTextBrush}"/>
+                </StackPanel>
+            </Border>
+        </DataTemplate>
+    </UserControl.Resources>
+    <Grid>
+        <tpf:Wizard Margin="10" Finish="Wizard_Finish" Cancel="Wizard_Cancel">
+            <tpf:WizardPage x:Name="StartPage" ShowGoToPreviousButton="False" HeaderTemplate="{StaticResource WizardPageHeaderTemplate}" Padding="10">
+                <tpf:WizardPage.SideContent>
+                    <tpf:StepProgressBar Orientation="Vertical" VerticalAlignment="Center" SelectedIndex="0" ItemSpacing="120">
+                        <tpf:StepItem Content="Start"/>
+                        <tpf:StepItem Content="Dateneingabe"/>
+                        <tpf:StepItem Content="Abschluss"/>
+                    </tpf:StepProgressBar>
+                </tpf:WizardPage.SideContent>
+
+                <TextBlock Text="Das hier ist ein Beispiel für das Wizard-Control und ein paar seiner Möglichkeiten" TextWrapping="Wrap"/>
+            </tpf:WizardPage>
+
+            <tpf:WizardPage x:Name="MiddlePage" CanGoToNext="{Binding CanContinue}" HeaderTemplate="{StaticResource WizardPageHeaderTemplate}" Padding="10">
+                <tpf:WizardPage.SideContent>
+                    <tpf:StepProgressBar Orientation="Vertical" VerticalAlignment="Center" SelectedIndex="1" ItemSpacing="120">
+                        <tpf:StepItem Content="Start"/>
+                        <tpf:StepItem Content="Dateneingabe"/>
+                        <tpf:StepItem Content="Abschluss"/>
+                    </tpf:StepProgressBar>
+                </tpf:WizardPage.SideContent>
+
+                <Grid>
+                    <StackPanel>
+                        <TextBlock Text="Name"/>
+                        <tpf:WatermarkTextBox Watermark="Vorname Nachname"/>
+                        <TextBlock Text="Straße" Margin="0 5 0 0"/>
+                        <tpf:WatermarkTextBox Watermark="Straße mit Hausnummer"/>
+                        <TextBlock Text="Bankverbindung" Margin="0 5 0 0"/>
+                        <tpf:WatermarkTextBox Watermark="IBAN hier"/>
+                        <TextBlock Text="Kreditkarte" Margin="0 5 0 0"/>
+                        <tpf:WatermarkTextBox Watermark="Definitiv notwendig"/>
+                        <TextBlock Text="Sozialversicherungsnummer" Margin="0 5 0 0"/>
+                        <tpf:WatermarkTextBox Watermark="Ohne geht nicht"/>
+                        <CheckBox IsChecked="{Binding CanContinue}" Content="Ich bin damit einverstanden, dass meine Daten gespeichert werden und habe definitiv alles angegeben" Margin="0 5"/>
+                    </StackPanel>
+                    <tpf:Banner VerticalAlignment="Bottom" Height="26" Content="Kaufen Sie jetzt nutzloses Produkt Pro für nur 34,99€ im Monat" IsRunning="True" Duration="0:0:20" Direction="RightToLeft"/>
+                </Grid>
+            </tpf:WizardPage>
+
+            <tpf:WizardPage x:Name="LastPage" ShowFinishButton="True" CanFinish="{Binding CanFinish}" ShowGoToNextButton="False" HeaderTemplate="{StaticResource WizardPageHeaderTemplate}" Padding="10">
+                <tpf:WizardPage.SideContent>
+                    <tpf:StepProgressBar Orientation="Vertical" VerticalAlignment="Center" SelectedIndex="2" ItemSpacing="120">
+                        <tpf:StepItem Content="Start"/>
+                        <tpf:StepItem Content="Dateneingabe"/>
+                        <tpf:StepItem Content="Abschluss"/>
+                    </tpf:StepProgressBar>
+                </tpf:WizardPage.SideContent>
+
+                <StackPanel>
+                    <TextBlock Text="Der Vorgang ist fast abgeschlossen und es muss nur noch ein letzter kleiner Haken gesetzt werden" TextWrapping="Wrap"/>
+                    <CheckBox IsChecked="{Binding CanFinish}" Content="Ich habe alles richtig gemacht" Margin="0 5"/>
+                </StackPanel>
+            </tpf:WizardPage>
+        </tpf:Wizard>
+        
+        <tpf:NotificationContainer x:Name="Notifications" VerticalAlignment="Top" HorizontalAlignment="Center" Width="400"/>
+    </Grid>
+</UserControl>
