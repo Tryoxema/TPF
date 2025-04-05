@@ -202,7 +202,7 @@ namespace TPF.Controls
                 // Fenster rausfinden in dem sich der DialogHost befindet
                 var window = Window.GetWindow(instance);
                 // Aktuelles Element mit Focus merken für später
-                instance._restoreFocusDialogClose = window != null ? FocusManager.GetFocusedElement(window) : null;
+                instance._restoreFocusTarget = window != null ? FocusManager.GetFocusedElement(window) : null;
 
                 var dialogOpenedEventArgs = new DialogOpenedEventArgs(DialogOpenedEvent, instance.CurrentHandle);
                 // Event auslösen
@@ -230,7 +230,7 @@ namespace TPF.Controls
                     // Wenn wir hier angelangt sind, ist es nicht mehr zulässig den Vorgang abzubrechen
                     if (!instance.CurrentHandle.IsClosed)
                     {
-                        throw new InvalidOperationException($"Cannot cancel dialog closing after {nameof(IsDialogOpen)} has been set");
+                        throw new InvalidOperationException($"Cannot cancel dialog closing after {nameof(IsDialogOpen)} has been set.");
                     }
                     resultValue = instance.CurrentHandle.Value;
                     instance.CurrentHandle = null;
@@ -247,7 +247,7 @@ namespace TPF.Controls
                 instance._dialogClosedEventHandler = null;
 
                 // Focus wiederherstellen
-                instance.Dispatcher.InvokeAsync(() => instance._restoreFocusDialogClose?.Focus(), DispatcherPriority.Input);
+                instance.Dispatcher.InvokeAsync(() => instance._restoreFocusTarget?.Focus(), DispatcherPriority.Input);
             }
         }
 
@@ -381,7 +381,7 @@ namespace TPF.Controls
 
         private UIElement _overlayElement;
         private FrameworkElement _dialogContentElement;
-        private IInputElement _restoreFocusDialogClose;
+        private IInputElement _restoreFocusTarget;
 
         private TaskCompletionSource<object> _dialogTaskCompletionSource;
         private DialogOpenedEventHandler _dialogOpenedEventHandler;
@@ -502,34 +502,6 @@ namespace TPF.Controls
             }
         }
 
-        private static DialogHost GetInstanceById(object dialogId)
-        {
-            if (_loadedInstances.Count == 0) return null;
-
-            DialogHost result = null;
-
-            var instances = _loadedInstances.ToList();
-
-            for (var i = 0; i < instances.Count; i++)
-            {
-                var instance = instances[i];
-
-                if (instance.TryGetTarget(out var dialogInstance))
-                {
-                    dialogInstance.Dispatcher.VerifyAccess();
-
-                    if (Equals(dialogId, dialogInstance.Id))
-                    {
-                        result = dialogInstance;
-                        break;
-                    }
-                }
-                else _loadedInstances.Remove(instance);
-            }
-
-            return result;
-        }
-
         public override void OnApplyTemplate()
         {
             base.OnApplyTemplate();
@@ -643,6 +615,36 @@ namespace TPF.Controls
             }
         }
 
+        #region Static Interactions
+        private static DialogHost GetInstanceById(object dialogId)
+        {
+            if (_loadedInstances.Count == 0) return null;
+
+            DialogHost result = null;
+
+            var instances = _loadedInstances.ToList();
+
+            for (var i = 0; i < instances.Count; i++)
+            {
+                var instance = instances[i];
+
+                if (instance.TryGetTarget(out var dialogInstance))
+                {
+                    // Da wir nicht wissen ob unser Thread Zugriff auf die Intanz hat in der wir unseren Dialog anzeigen wollen, benutzen wir sicherheitshalber den Dispatcher
+                    var instanceId = dialogInstance.Dispatcher.Invoke(() => dialogInstance.Id);
+
+                    if (Equals(dialogId, instanceId))
+                    {
+                        result = dialogInstance;
+                        break;
+                    }
+                }
+                else _loadedInstances.Remove(instance);
+            }
+
+            return result;
+        }
+
         public static async Task<object> Show(object content)
         {
             return await Show(content, null, null, null, null);
@@ -722,7 +724,9 @@ namespace TPF.Controls
         {
             if (content == null) throw new ArgumentNullException(nameof(content));
 
-            return await GetInstanceById(hostId)?.ShowInternal(content, openedEventHandler, closingEventHandler, closedEventHandler);
+            var instance = GetInstanceById(hostId);
+
+            return await instance?.Dispatcher.Invoke(() => instance.ShowInternal(content, openedEventHandler, closingEventHandler, closedEventHandler));
         }
 
         public static void Close(object hostId)
@@ -732,24 +736,28 @@ namespace TPF.Controls
 
         public static void Close(object hostId, object resultValue)
         {
-            var dialogHost = GetInstanceById(hostId);
+            var instance = GetInstanceById(hostId);
 
-            if (dialogHost.CurrentHandle != null && !dialogHost.CurrentHandle.IsClosed)
+            instance?.Dispatcher.Invoke(() =>
             {
-                dialogHost.CurrentHandle.Close(resultValue);
-            }
+                if (instance.CurrentHandle != null && !instance.CurrentHandle.IsClosed)
+                {
+                    instance.CurrentHandle.Close(resultValue);
+                }
+            });
         }
 
         public static DialogHandle GetDialogHandle(object hostId)
         {
-            var dialogHost = GetInstanceById(hostId);
+            var instance = GetInstanceById(hostId);
 
-            return dialogHost.CurrentHandle;
+            return instance?.Dispatcher.Invoke(() => instance.CurrentHandle);
         }
 
         public static bool HasOpenDialog(object hostId)
         {
             return GetDialogHandle(hostId)?.IsClosed == false;
         }
+        #endregion
     }
 }

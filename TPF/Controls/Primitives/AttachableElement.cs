@@ -75,6 +75,8 @@ namespace TPF.Controls.Primitives
         protected virtual void OnInstanceChanged(FrameworkElement targetElement)
         {
             Target = targetElement;
+
+            if (DataContext == null) DataContext = targetElement.DataContext;
         }
 
         #region IDisposable

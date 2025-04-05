@@ -54,7 +54,14 @@ namespace TPF.Controls
         public static readonly DependencyProperty WatermarkBehaviorProperty = DependencyProperty.Register("WatermarkBehavior",
             typeof(WatermarkBehavior),
             typeof(WatermarkTextBox),
-            new PropertyMetadata(WatermarkBehavior.HideOnTextEntered));
+            new PropertyMetadata(WatermarkBehavior.HideOnTextEntered, OnWatermarkBehaviorChanged));
+
+        private static void OnWatermarkBehaviorChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+        {
+            var instance = (WatermarkTextBox)sender;
+
+            instance.UpdateWatermarkVisibility();
+        }
 
         public WatermarkBehavior WatermarkBehavior
         {
@@ -91,6 +98,24 @@ namespace TPF.Controls
         }
         #endregion
 
+        private void UpdateWatermarkVisibility()
+        {
+            switch (WatermarkBehavior)
+            {
+                case WatermarkBehavior.HideOnFocus:
+                {
+                    IsWatermarkVisible = string.IsNullOrEmpty(Text) && !IsKeyboardFocusWithin;
+                    break;
+                }
+                case WatermarkBehavior.HideOnTextEntered:
+                default:
+                {
+                    IsWatermarkVisible = string.IsNullOrEmpty(Text);
+                    break;
+                }
+            }
+        }
+
         protected override void OnGotFocus(RoutedEventArgs e)
         {
             base.OnGotFocus(e);
@@ -109,24 +134,21 @@ namespace TPF.Controls
                     break;
             }
 
-            if (WatermarkBehavior == WatermarkBehavior.HideOnFocus) IsWatermarkVisible = false;
+            UpdateWatermarkVisibility();
         }
 
         protected override void OnLostFocus(RoutedEventArgs e)
         {
             base.OnLostFocus(e);
 
-            if (WatermarkBehavior == WatermarkBehavior.HideOnFocus) IsWatermarkVisible = true;
+            UpdateWatermarkVisibility();
         }
 
         protected override void OnTextChanged(TextChangedEventArgs e)
         {
             base.OnTextChanged(e);
 
-            if (WatermarkBehavior != WatermarkBehavior.HideOnTextEntered) return;
-
-            if (string.IsNullOrWhiteSpace(Text)) IsWatermarkVisible = true;
-            else IsWatermarkVisible = false;
+            UpdateWatermarkVisibility();
         }
     }
 }

@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{524A536F-48EE-48E4-8196-FDF726CAB53B}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>TPF.Demo</RootNamespace>
+    <AssemblyName>TPF.Demo</AssemblyName>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="Converter\VisiblilityToBooleanConverter.cs" />
+    <Compile Include="Views\Interaction\DragDropDemoView.xaml.cs">
+      <DependentUpon>DragDropDemoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Interaction\DialogHostDemoView.xaml.cs">
+      <DependentUpon>DialogHostDemoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Navigation\HamburgerMenuDemoView.xaml.cs">
+      <DependentUpon>HamburgerMenuDemoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Input\DateTimePickerDemoView.xaml.cs">
+      <DependentUpon>DateTimePickerDemoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Interaction\BadgeDemoView.xaml.cs">
+      <DependentUpon>BadgeDemoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Interaction\BusyIndicatorDemoView.xaml.cs">
+      <DependentUpon>BusyIndicatorDemoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DataBarTest.cs" />
+    <Compile Include="Views\DataVisualization\DataBarDemoView.xaml.cs">
+      <DependentUpon>DataBarDemoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Design\FluentControlDemoView.xaml.cs">
+      <DependentUpon>FluentControlDemoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Design\MaterialControlDemoView.xaml.cs">
+      <DependentUpon>MaterialControlDemoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Input\HighlightingTextBlockDemoView.xaml.cs">
+      <DependentUpon>HighlightingTextBlockDemoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Misc\BannerDemoView.xaml.cs">
+      <DependentUpon>BannerDemoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Interaction\ButtonsDemoView.xaml.cs">
+      <DependentUpon>ButtonsDemoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Input\CalculatorDemoView.xaml.cs">
+      <DependentUpon>CalculatorDemoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Input\NumericTextBoxDemoView.xaml.cs">
+      <DependentUpon>NumericTextBoxDemoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Interaction\PoptipDemoView.xaml.cs">
+      <DependentUpon>PoptipDemoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Interaction\NotificationDemoView.xaml.cs">
+      <DependentUpon>NotificationDemoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Scheduling\CalendarDemoView.xaml.cs">
+      <DependentUpon>CalendarDemoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Scheduling\ClockDemoView.xaml.cs">
+      <DependentUpon>ClockDemoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Input\ColorEditorDemoView.xaml.cs">
+      <DependentUpon>ColorEditorDemoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Interaction\ComparerDemoView.xaml.cs">
+      <DependentUpon>ComparerDemoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Layout\DashboardDemoView.xaml.cs">
+      <DependentUpon>DashboardDemoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Scheduling\DateTimeRangeNavigatorDemoView.xaml.cs">
+      <DependentUpon>DateTimeRangeNavigatorDemoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Layout\DividerDemoView.xaml.cs">
+      <DependentUpon>DividerDemoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Input\PasswordBoxDemoView.xaml.cs">
+      <DependentUpon>PasswordBoxDemoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Interaction\ProgressBarDemoView.xaml.cs">
+      <DependentUpon>ProgressBarDemoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Input\RatingDemoView.xaml.cs">
+      <DependentUpon>RatingDemoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Misc\RevealBrushDemoView.xaml.cs">
+      <DependentUpon>RevealBrushDemoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Input\SearchTextBoxDemoView.xaml.cs">
+      <DependentUpon>SearchTextBoxDemoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Misc\SkeletonDemoView.xaml.cs">
+      <DependentUpon>SkeletonDemoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Misc\SplashScreenDemoView.xaml.cs">
+      <DependentUpon>SplashScreenDemoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Layout\SplitViewDemoView.xaml.cs">
+      <DependentUpon>SplitViewDemoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Interaction\StepProgressBarDemoView.xaml.cs">
+      <DependentUpon>StepProgressBarDemoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Scheduling\TaskBoardDemoView.xaml.cs">
+      <DependentUpon>TaskBoardDemoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\DataVisualization\SparklineDemoView.xaml.cs">
+      <DependentUpon>SparklineDemoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Design\ShadowDemoView.xaml.cs">
+      <DependentUpon>ShadowDemoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Misc\ShieldDemoView.xaml.cs">
+      <DependentUpon>ShieldDemoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Input\SliderDemoView.xaml.cs">
+      <DependentUpon>SliderDemoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SparklineTest.cs" />
+    <Compile Include="Views\Navigation\TabControlDemoView.xaml.cs">
+      <DependentUpon>TabControlDemoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ViewBase.cs" />
+    <Compile Include="Views\Navigation\WizardDemoView.xaml.cs">
+      <DependentUpon>WizardDemoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Input\WatermarkTextBoxDemoView.xaml.cs">
+      <DependentUpon>WatermarkTextBoxDemoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\SkinEditorWindow.xaml.cs">
+      <DependentUpon>SkinEditorWindow.xaml</DependentUpon>
+    </Compile>
+    <Page Include="MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Page Include="Themes\Generic.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Themes\SmoothStyles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\VS2013Styles.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Interaction\DragDropDemoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Interaction\DialogHostDemoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Navigation\HamburgerMenuDemoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Input\DateTimePickerDemoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Interaction\BadgeDemoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Interaction\BusyIndicatorDemoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DataVisualization\DataBarDemoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Design\FluentControlDemoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Design\MaterialControlDemoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Input\HighlightingTextBlockDemoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Misc\BannerDemoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Interaction\ButtonsDemoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Input\CalculatorDemoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Input\NumericTextBoxDemoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Interaction\PoptipDemoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Interaction\NotificationDemoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Scheduling\CalendarDemoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Scheduling\ClockDemoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Input\ColorEditorDemoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Interaction\ComparerDemoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Layout\DashboardDemoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Scheduling\DateTimeRangeNavigatorDemoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Layout\DividerDemoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Input\PasswordBoxDemoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Interaction\ProgressBarDemoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Input\RatingDemoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Misc\RevealBrushDemoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Input\SearchTextBoxDemoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Misc\SkeletonDemoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Misc\SplashScreenDemoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Layout\SplitViewDemoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Interaction\StepProgressBarDemoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Scheduling\TaskBoardDemoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Navigation\WizardDemoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\DataVisualization\SparklineDemoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Design\ShadowDemoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Misc\ShieldDemoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Input\WatermarkTextBoxDemoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Input\SliderDemoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Navigation\TabControlDemoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\SkinEditorWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TPF\TPF.csproj">
+      <Project>{a67e23b9-e95a-449c-be77-56498f4e37e3}</Project>
+      <Name>TPF</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Ablage\Changelog.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Ablage\FeaturePlan.txt" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

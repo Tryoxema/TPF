@@ -2740,7 +2740,7 @@
                                 <TextBlock TextAlignment="Right" Grid.Column="1" HorizontalAlignment="Right" Foreground="{TemplateBinding Foreground}" VerticalAlignment="Center" Margin="4 3 5 0" Text="{TemplateBinding History}"/>
                             </Grid>
 
-                            <Grid Grid.Row="1" Margin="0 5 0 0">
+                            <Grid Grid.Row="1" Margin="0 5 0 2">
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*"/>
                                     <RowDefinition Height="*"/>
@@ -2921,7 +2921,7 @@
         </Setter>
     </Style>
     <Style TargetType="tpf:Notification" BasedOn="{StaticResource TPF.NotificationStyle}"/>
-    <Style TargetType="tpf:NotificationContainer" x:Key="TPF.NotificationContainerStyle">
+    <Style TargetType="tpf:NotificationsHost" x:Key="TPF.NotificationsHostStyle">
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="SnapsToDevicePixels" Value="True"/>
         <Setter Property="Focusable" Value="False"/>
@@ -2934,7 +2934,7 @@
         </Setter>
         <Setter Property="Template">
             <Setter.Value>
-                <ControlTemplate TargetType="tpf:NotificationContainer">
+                <ControlTemplate TargetType="tpf:NotificationsHost">
                     <Border Margin="12 0 12 12" Padding="{TemplateBinding Padding}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True" UseLayoutRounding="True">
                         <tpf:SimplePanel>
                             <tpf:Shadow ShadowDepth="Depth3" Background="{tpf:ResourceLink Key=PrimaryBrush}"/>
@@ -2945,7 +2945,7 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <Style TargetType="tpf:NotificationContainer" BasedOn="{StaticResource TPF.NotificationContainerStyle}"/>
+    <Style TargetType="tpf:NotificationsHost" BasedOn="{StaticResource TPF.NotificationsHostStyle}"/>
 
     <!-- ==================== Tile ==================== -->
     <Style TargetType="tpf:Tile" x:Key="TPF.TileStyle">
@@ -4291,7 +4291,7 @@
                         <tpf:RangeSliderThumb Style="{TemplateBinding RangeThumbStyle}"/>
                     </tpf:SliderTrack.RangeThumb>
                     <tpf:SliderTrack.ThumbsControl>
-                        <tpf:SliderThumbsControl ItemsSource="{Binding Thumbs, RelativeSource={RelativeSource AncestorType=tpf:Slider}}" 
+                        <tpf:SliderThumbsControl ItemsSource="{Binding Thumbs, RelativeSource={RelativeSource AncestorType=tpf:Slider}}"
                                                  Orientation="{TemplateBinding Orientation}" IsDirectionReversed="{TemplateBinding IsDirectionReversed}"/>
                     </tpf:SliderTrack.ThumbsControl>
                 </tpf:SliderTrack>
@@ -5872,7 +5872,7 @@
                 <ControlTemplate TargetType="tpf:TabControl">
                     <Grid x:Name="RootGrid" ClipToBounds="True" SnapsToDevicePixels="True" KeyboardNavigation.TabNavigation="Local">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition x:Name="ColumnDefinition0"/>
+                            <ColumnDefinition x:Name="ColumnDefinition0" Width="*"/>
                             <ColumnDefinition x:Name="ColumnDefinition1" Width="Auto"/>
                         </Grid.ColumnDefinitions>
 
@@ -5883,7 +5883,7 @@
 
                         <ScrollViewer x:Name="PART_ScrollViewer" Grid.Row="0" Grid.Column="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Margin="0"
                                       HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto" Style="{StaticResource WPF.TabControlScrollViewerStyle}">
-                            <TabPanel x:Name="PART_TabPanel" IsItemsHost="True" Background="{TemplateBinding HeaderBackground}" KeyboardNavigation.TabIndex="1" Panel.ZIndex="1"/>
+                            <TabPanel x:Name="PART_TabPanel" IsItemsHost="True" Background="{TemplateBinding HeaderBackground}" KeyboardNavigation.TabIndex="1"/>
                         </ScrollViewer>
 
                         <StackPanel x:Name="ButtonsPanel" Grid.Row="0" Grid.Column="1" Orientation="Horizontal">
@@ -5912,6 +5912,10 @@
                             <Setter Property="Grid.Row" TargetName="PART_ScrollViewer" Value="1"/>
                             <Setter Property="Grid.Row" TargetName="ButtonsPanel" Value="1"/>
                             <Setter Property="Grid.Row" TargetName="ContentPanel" Value="0"/>
+                            <Setter Property="Grid.RowSpan" TargetName="ContentPanel" Value="1"/>
+                            <Setter Property="Grid.Column" TargetName="PART_ScrollViewer" Value="0"/>
+                            <Setter Property="Grid.Column" TargetName="ButtonsPanel" Value="1"/>
+                            <Setter Property="Grid.Column" TargetName="ContentPanel" Value="0"/>
                             <Setter Property="Height" TargetName="RowDefinition0" Value="*"/>
                             <Setter Property="Height" TargetName="RowDefinition1" Value="Auto"/>
                             <Setter Property="Margin" TargetName="PART_ScrollViewer" Value="0 0 0 2"/>
@@ -5938,6 +5942,7 @@
                             <Setter Property="Grid.Column" TargetName="PART_ScrollViewer" Value="1"/>
                             <Setter Property="Grid.Column" TargetName="ButtonsPanel" Value="1"/>
                             <Setter Property="Grid.Column" TargetName="ContentPanel" Value="0"/>
+                            <Setter Property="Grid.ColumnSpan" TargetName="ContentPanel" Value="1"/>
                             <Setter Property="Width" TargetName="ColumnDefinition0" Value="*"/>
                             <Setter Property="Width" TargetName="ColumnDefinition1" Value="Auto"/>
                             <Setter Property="Height" TargetName="RowDefinition0" Value="Auto"/>
@@ -6780,8 +6785,8 @@
                     <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
                         <tpf:SimplePanel>
                             <Path x:Name="PART_NormalRange" Fill="{TemplateBinding NormalRangeBrush}"/>
-                            <Polyline Stroke="{TemplateBinding LineBrush}" Points="{TemplateBinding LinePoints}" Style="{TemplateBinding LineStyle}"/>
                             <Line x:Name="PART_Axis" Stroke="{TemplateBinding AxisBrush}" StrokeThickness="1"/>
+                            <Polyline Stroke="{TemplateBinding LineBrush}" Points="{TemplateBinding LinePoints}" Style="{TemplateBinding LineStyle}"/>
                             <sparkline:IndicatorPanel x:Name="PART_IndicatorPanel"/>
                         </tpf:SimplePanel>
                     </Border>

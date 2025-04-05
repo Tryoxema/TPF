@@ -1,0 +1,92 @@
+﻿<views:ViewBase x:Class="TPF.Demo.Views.DataBarDemoView"
+                xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+                xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+                xmlns:tpf="http://schemas.tpf.com/xaml/presentation"
+                xmlns:views="clr-namespace:TPF.Demo.Views"
+                DataContext="{Binding RelativeSource={RelativeSource Self}}"
+                mc:Ignorable="d" 
+                d:DesignHeight="450" d:DesignWidth="800">
+    <views:ViewBase.Settings>
+        <StackPanel>
+            <StackPanel Margin="0 2">
+                <TextBlock Text="Minimum"/>
+                <tpf:NumericRangeBox Value="{Binding Minimum, ElementName=ConfigurationDataBar}" NumberDecimalDigits="0"/>
+            </StackPanel>
+            <StackPanel Margin="0 2">
+                <TextBlock Text="Maximum"/>
+                <tpf:NumericRangeBox Value="{Binding Maximum, ElementName=ConfigurationDataBar}" NumberDecimalDigits="0"/>
+            </StackPanel>
+            <StackPanel Margin="0 2">
+                <TextBlock Text="Value"/>
+                <tpf:Slider Minimum="{Binding Minimum, ElementName=ConfigurationDataBar}" Maximum="{Binding Maximum, ElementName=ConfigurationDataBar}"
+                            Value="{Binding Value, ElementName=ConfigurationDataBar}" TickFrequency="1" IsSnapToTickEnabled="True"/>
+            </StackPanel>
+            <StackPanel Margin="0 2">
+                <TextBlock Text="LabelPosition"/>
+                <tpf:ComboBox SelectedValue="{Binding LabelPosition, ElementName=ConfigurationDataBar}" ItemsSource="{Binding LabelPositions}"/>
+            </StackPanel>
+            <StackPanel Margin="0 2">
+                <TextBlock Text="LabelOffset"/>
+                <tpf:NumericRangeBox Value="{Binding LabelOffset, ElementName=ConfigurationDataBar}" NumberDecimalDigits="0"/>
+            </StackPanel>
+            <StackPanel Margin="0 2">
+                <TextBlock Text="OriginValue"/>
+                <tpf:NumericRangeBox Value="{Binding OriginValue, ElementName=ConfigurationDataBar}" NumberDecimalDigits="0"
+                                     Minimum="{Binding Minimum, ElementName=ConfigurationDataBar}" Maximum="{Binding Maximum, ElementName=ConfigurationDataBar}"/>
+            </StackPanel>
+            <CheckBox IsChecked="{Binding OriginAxisVisibility, ElementName=ConfigurationDataBar, Converter={StaticResource VisibliltyToBooleanConverter}}" Content="OriginAxis Visible?" Margin="0 2"/>
+            <CheckBox IsChecked="{Binding LabelVisibility, ElementName=ConfigurationDataBar, Converter={StaticResource VisibliltyToBooleanConverter}}" Content="Label Visible?" Margin="0 2"/>
+        </StackPanel>
+    </views:ViewBase.Settings>
+    <Grid Margin="5">
+        <StackPanel>
+            <tpf:Divider Content="DataBar"/>
+            <tpf:DataBar Grid.Row="1" Value="40" Minimum="-100" OriginAxisVisibility="Visible"/>
+            <tpf:DataBar Grid.Row="1" Value="-40" Minimum="-100" OriginAxisVisibility="Visible"/>
+            <tpf:DataBar Grid.Row="1" Value="120" Minimum="-100" OriginAxisVisibility="Visible"/>
+            <tpf:DataBar Grid.Row="1" Value="-120" Minimum="-100" OriginAxisVisibility="Visible"/>
+            <tpf:DataBar Grid.Row="1" Value="120" Minimum="-100" OriginAxisVisibility="Visible" OutOfRangeMarkerType="Torn"/>
+            <tpf:DataBar Grid.Row="1" Value="-120" Minimum="-100" OriginAxisVisibility="Visible" OutOfRangeMarkerType="Torn"/>
+            <tpf:DataBar Grid.Row="1" Value="50" Minimum="-100" OriginAxisVisibility="Visible" PositiveValueBrush="ForestGreen"/>
+            <tpf:DataBar Grid.Row="1" Value="-50" Minimum="-100" OriginAxisVisibility="Visible" NegativeValueBrush="Yellow"/>
+            
+            <tpf:Divider Content="StackedDataBar"/>
+            <tpf:StackedDataBar Height="20" ItemsSource="{Binding DataBarTests}" ValuePath="Value">
+                <tpf:StackedDataBar.ToolTipTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding DataItem.Value}"/>
+                    </DataTemplate>
+                </tpf:StackedDataBar.ToolTipTemplate>
+            </tpf:StackedDataBar>
+            <tpf:StackedDataBar Height="20" ItemsSource="{Binding DataBarTests}" ValuePath="Value" BarBrushes="{StaticResource PurpleBrushCollection}">
+                <tpf:StackedDataBar.ToolTipTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding DataItem.Value}"/>
+                    </DataTemplate>
+                </tpf:StackedDataBar.ToolTipTemplate>
+            </tpf:StackedDataBar>
+            <tpf:DataAxis/>
+
+            <tpf:Divider Content="StackedFullDataBar"/>
+            <tpf:StackedFullDataBar Height="20" ItemsSource="{Binding DataBarTests}" ValuePath="Value">
+                <tpf:StackedFullDataBar.ToolTipTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding DataItem.Value}"/>
+                    </DataTemplate>
+                </tpf:StackedFullDataBar.ToolTipTemplate>
+            </tpf:StackedFullDataBar>
+            <tpf:StackedFullDataBar Height="20" ItemsSource="{Binding DataBarTests}" ValuePath="Value" BarBrushes="{StaticResource PurpleBrushCollection}">
+                <tpf:StackedFullDataBar.ToolTipTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding DataItem.Value}"/>
+                    </DataTemplate>
+                </tpf:StackedFullDataBar.ToolTipTemplate>
+            </tpf:StackedFullDataBar>
+
+            <tpf:Divider Content="Konfigurierbar"/>
+            <tpf:DataBar x:Name="ConfigurationDataBar" Height="30" BorderThickness="1" BorderBrush="{tpf:ResourceLink Key=BorderBrush}"/>
+        </StackPanel>
+    </Grid>
+</views:ViewBase>

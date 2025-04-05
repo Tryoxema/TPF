@@ -1279,6 +1279,9 @@ namespace TPF.Controls
             var displayDateStart = DisplayDateStart.GetValueOrDefault(DateTime.MinValue);
             var displayDateEnd = DisplayDateEnd.GetValueOrDefault(DateTime.MaxValue);
 
+            displayDateStart = new DateTime(displayDateStart.Year, displayDateStart.Month, 1);
+            displayDateEnd = new DateTime(displayDateEnd.Year, displayDateEnd.Month, DateTime.DaysInMonth(displayDateEnd.Year, displayDateEnd.Month));
+
             for (int i = 1; i <= 12; i++)
             {
                 var currentMonth = new DateTime(referenceDate.Year, i, 1);
@@ -1288,8 +1291,8 @@ namespace TPF.Controls
                 var hide = false;
                 var isEnabled = true;
 
-                if (displayDateStart.Month > currentMonth.Month) hide = true;
-                if (displayDateEnd.Month < currentMonth.Month) hide = true;
+                if (displayDateStart > currentMonth) hide = true;
+                if (displayDateEnd < currentMonth) hide = true;
 
                 if (SelectableDateStart != null && SelectableDateStart.Value.Month > currentMonth.Month) isEnabled = false;
                 if (SelectableDateEnd != null && SelectableDateEnd.Value.Month < currentMonth.Month) isEnabled = false;
@@ -1399,6 +1402,7 @@ namespace TPF.Controls
             for (int i = 0; i < 12; i++)
             {
                 var currentYear = firstDate.AddYears(i * 10);
+                var lastYear = currentYear.Year + 9;
 
                 var isPreviousCentury = i == 0;
                 var isFollowingCentury = i == 11;
@@ -1407,7 +1411,7 @@ namespace TPF.Controls
 
                 var isEnabled = true;
 
-                if (displayDateStart.Year > currentYear.Year) hide = true;
+                if (displayDateStart.Year > lastYear) hide = true;
                 if (displayDateEnd.Year < currentYear.Year) hide = true;
 
                 if (SelectableDateStart != null && SelectableDateStart.Value.Year > currentYear.Year) isEnabled = false;

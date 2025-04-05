@@ -1,0 +1,62 @@
+﻿<tpf:ChromelessWindow x:Class="TPF.Demo.MainWindow"
+                      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                      xmlns:tpf="http://schemas.tpf.com/xaml/presentation"
+                      xmlns:local="clr-namespace:TPF.Demo"
+                      DataContext="{Binding RelativeSource={RelativeSource Self}}"
+                      mc:Ignorable="d"
+                      Title="TPF Demo" 
+                      Width="1280" Height="720">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <tpf:TabControl x:Name="HostTabControl" Grid.Row="0" Closed="HostTabControl_Closed"
+                        ShowDropDownButton="True" ShowCloseButton="True" CloseTabOnMiddleMouseButtonDown="True">
+            <tpf:TabItem Header="Start" ShowCloseButton="False" CloseTabOnMiddleMouseButtonDown="False">
+                <Grid Margin="5">
+                    <ItemsControl ItemsSource="{Binding DemoItems}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <WrapPanel/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <tpf:Button Content="{Binding Name}" Width="200" Margin="5" Padding="0 20" FontWeight="SemiBold" Click="DemoItemButton_Click"/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </Grid>
+            </tpf:TabItem>
+        </tpf:TabControl>
+
+        <StatusBar Grid.Row="1" Background="{tpf:ResourceLink Key=ApplicationBackground}" BorderBrush="{tpf:ResourceLink Key=BorderBrush}" BorderThickness="0 1 0 0">
+            <StatusBarItem>
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="Skin: " VerticalAlignment="Center" Foreground="{tpf:ResourceLink Key=TextBrush}"/>
+                    <tpf:ComboBox x:Name="DesignComboBox" Width="150" ItemsSource="{Binding Skins}" SelectedValuePath="Skin" DisplayMemberPath="Name" SelectionChanged="DesignComboBox_SelectionChanged"/>
+                </StackPanel>
+            </StatusBarItem>
+
+            <StatusBarItem>
+                <tpf:Button Content="Skin Editor" Click="OpenSkinEditorWindowButton_Click"/>
+            </StatusBarItem>
+            
+            <StatusBarItem>
+                <CheckBox Content="Smooth Design?" Checked="SmoothThemeCheckBox_Checked" Unchecked="SmoothThemeCheckBox_Unchecked" x:Name="SmoothThemeCheckBox"/>
+            </StatusBarItem>
+
+            <StatusBarItem HorizontalAlignment="Right">
+                <StackPanel Orientation="Horizontal">
+                    <tpf:Shield Label="Dev" Content="0.7.0" Margin="0 0 5 0" tpf:Poptip.Content="Aktuelle Entwicklungs-Version"/>
+                    <tpf:Shield Label="Release" Content="0.6.9" Margin="0 0 5 0" tpf:Poptip.Content="Aktuelle Release-Version" Background="ForestGreen"/>
+                </StackPanel>
+            </StatusBarItem>
+        </StatusBar>
+    </Grid>
+</tpf:ChromelessWindow>

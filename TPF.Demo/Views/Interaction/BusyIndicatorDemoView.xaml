@@ -1,0 +1,44 @@
+﻿<views:ViewBase x:Class="TPF.Demo.Views.BusyIndicatorDemoView"
+                xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+                xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+                xmlns:tpf="http://schemas.tpf.com/xaml/presentation"
+                xmlns:views="clr-namespace:TPF.Demo.Views"
+                DataContext="{Binding RelativeSource={RelativeSource Self}}"
+                mc:Ignorable="d" 
+                d:DesignHeight="450" d:DesignWidth="800">
+    <views:ViewBase.Settings>
+        <StackPanel>
+            <StackPanel Margin="0 2">
+                <TextBlock Text="BusyContent"/>
+                <TextBox Text="{Binding BusyContent, UpdateSourceTrigger=PropertyChanged}"/>
+            </StackPanel>
+        </StackPanel>
+    </views:ViewBase.Settings>
+    <Grid Margin="5">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="10"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <tpf:BusyIndicator x:Name="IndeterminateBusyIndicator" Grid.Column="0" BusyContent="{Binding BusyContent}">
+            <Border BorderThickness="1" BorderBrush="{tpf:ResourceLink Key=BorderBrush}">
+                <StackPanel VerticalAlignment="Top">
+                    <TextBlock Text="Indeterminate" HorizontalAlignment="Center"/>
+                    <tpf:Button Click="ShowIndeterminateBusyIndicatorButton_Click" Content="ShowBusyIndicator" HorizontalAlignment="Center"/>
+                </StackPanel>
+            </Border>
+        </tpf:BusyIndicator>
+
+        <tpf:BusyIndicator x:Name="DeterminateBusyIndicator" IsIndeterminate="False" Grid.Column="2" BusyContent="{Binding BusyContent}">
+            <Border BorderThickness="1" BorderBrush="{tpf:ResourceLink Key=BorderBrush}">
+                <StackPanel VerticalAlignment="Top">
+                    <TextBlock Text="Determinate" HorizontalAlignment="Center"/>
+                    <tpf:Button Click="ShowDeterminateBusyIndicatorButton_Click" Content="ShowBusyIndicator" HorizontalAlignment="Center"/>
+                </StackPanel>
+            </Border>
+        </tpf:BusyIndicator>
+    </Grid>
+</views:ViewBase>

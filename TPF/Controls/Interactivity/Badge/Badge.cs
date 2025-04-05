@@ -20,7 +20,7 @@ namespace TPF.Controls
             typeof(Badge),
             new PropertyMetadata(new CornerRadius(), OnCornerRadiusChanged));
 
-        static void OnCornerRadiusChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+        private static void OnCornerRadiusChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
             var instance = (Badge)sender;
 
@@ -40,7 +40,7 @@ namespace TPF.Controls
             typeof(Badge),
             new PropertyMetadata(null, OnInstanceChanged));
 
-        static void OnInstanceChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+        private static void OnInstanceChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
             if (!(sender is FrameworkElement element)) return;
 
@@ -136,21 +136,21 @@ namespace TPF.Controls
         }
         #endregion
 
-        static void OnPositioningChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+        private static void OnPositioningChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
             var instance = (Badge)sender;
 
             instance.UpdatePosition();
         }
 
-        static void OnVisibilityChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+        private static void OnVisibilityChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
             var instance = (Badge)sender;
 
             instance.UpdateLayer();
         }
 
-        internal static object ConstrainPosition(DependencyObject sender, object value)
+        private static object ConstrainPosition(DependencyObject sender, object value)
         {
             var doubleValue = (double)value;
 
@@ -163,7 +163,7 @@ namespace TPF.Controls
             return doubleValue;
         }
 
-        internal static object ConstrainBadgePosition(DependencyObject sender, object value)
+        private static object ConstrainBadgePosition(DependencyObject sender, object value)
         {
             var doubleValue = (double)value;
 

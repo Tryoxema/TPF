@@ -28,6 +28,11 @@ namespace TPF.Controls
             MessageDismissed?.Invoke(this, e);
         }
 
+        public NotificationBuilder CreateNotification()
+        {
+            return new NotificationBuilder(this);
+        }
+
         public void Queue(Notification notification)
         {
             if (notification == null || _notifications.Contains(notification)) return;
@@ -69,6 +74,18 @@ namespace TPF.Controls
                 notification.BeginAnimation(property, animation);
             }
             else RaiseMessageDismissed(eventArgs);
+        }
+
+        public void Clear()
+        {
+            var notifications = _notifications.ToList();
+
+            for (int i = 0; i < notifications.Count; i++)
+            {
+                var notification = notifications[i];
+
+                Dismiss(notification);
+            }
         }
 
         public Notification GetNotificationByHeader(string value)

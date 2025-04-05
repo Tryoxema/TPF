@@ -1,0 +1,30 @@
+﻿<views:ViewBase x:Class="TPF.Demo.Views.MaterialControlDemoView"
+                xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+                xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+                xmlns:tpf="http://schemas.tpf.com/xaml/presentation"
+                xmlns:views="clr-namespace:TPF.Demo.Views"
+                DataContext="{Binding RelativeSource={RelativeSource Self}}"
+                mc:Ignorable="d" 
+                d:DesignHeight="450" d:DesignWidth="800">
+    <views:ViewBase.Settings>
+        <StackPanel>
+            <StackPanel Margin="0 2">
+                <TextBlock Text="RippleOpacity"/>
+                <tpf:NumericRangeBox Value="{Binding RippleOpacity, ElementName=DemoMaterialControl}" Minimum="0" Maximum="1"/>
+            </StackPanel>
+            <CheckBox IsChecked="{Binding IsRippleEnabled, ElementName=DemoMaterialControl}" Content="IsRippleEnabled" Margin="0 2"/>
+            <CheckBox IsChecked="{Binding IsRippleCentered, ElementName=DemoMaterialControl}" Content="IsRippleCentered" Margin="0 2"/>
+            <CheckBox IsChecked="{Binding IsRippleOnTop, ElementName=DemoMaterialControl}" Content="IsRippleOnTop" Margin="0 2"/>
+        </StackPanel>
+    </views:ViewBase.Settings>
+    <Grid Margin="5">
+        <tpf:SimplePanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Border BorderThickness="1" BorderBrush="{tpf:ResourceLink Key=BorderBrush}" Background="{tpf:ResourceLink Key=PrimaryBrush}"/>
+            <tpf:MaterialControl x:Name="DemoMaterialControl" RippleBrush="{tpf:ResourceLink Key=TextBrush}">
+                <TextBlock Text="Click Me" Margin="20 5"/>
+            </tpf:MaterialControl>
+        </tpf:SimplePanel>
+    </Grid>
+</views:ViewBase>

@@ -1,0 +1,63 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:tpf="http://schemas.tpf.com/xaml/presentation"
+                    xmlns:converter="clr-namespace:TPF.Demo.Converter"
+                    xmlns:views="clr-namespace:TPF.Demo.Views">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/TPF;component/Resources/Glyphs.xaml"/>
+        <ResourceDictionary Source="/TPF.Demo;component/Themes/VS2013Styles.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+    <converter:VisibliltyToBooleanConverter x:Key="VisibliltyToBooleanConverter"/>
+    
+    <!--Brushes-->
+    <DrawingBrush x:Key="HexBrush" Stretch="None" TileMode="Tile" Viewport="0 0 28.4 14.4" ViewportUnits="Absolute">
+        <DrawingBrush.Drawing>
+            <DrawingGroup>
+                <GeometryDrawing Geometry="M7,-1 L3,3 0,3 0,3.2 3,3.2 10,10.2 7,13.2 7.2,13.4 10.2,10.4 17.2,10.4 20.2,13.4 17.4,10.2 17.4,10.2 24.4,3.2 27.4,3.2 27.4,3 24.4,3 20.4,-1 20.2,-1.2 24.2,3.2 17.2,10.2 10.2,10.2 3.2,3.2 7.2,-1.2 z">
+                    <GeometryDrawing.Pen>
+                        <Pen Thickness="1" Brush="Black"/>
+                    </GeometryDrawing.Pen>
+                </GeometryDrawing>
+            </DrawingGroup>
+        </DrawingBrush.Drawing>
+    </DrawingBrush>
+
+    <Style TargetType="views:ViewBase">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="views:ViewBase">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
+                        
+                        <ContentPresenter Grid.Column="0"/>
+
+                        <tpf:SimplePanel Grid.Column="1" Margin="5" Width="300" Visibility="{TemplateBinding Settings, Converter={StaticResource NullToVisibilityConverter}}">
+                            <tpf:Shadow ShadowDepth="Depth2" Background="{tpf:ResourceLink Key=PrimaryBrush}"/>
+                            <Border BorderThickness="1" BorderBrush="{tpf:ResourceLink Key=BorderBrush}">
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto"/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    
+                                    <StackPanel Grid.Row="0">
+                                        <Label Content="Settings" HorizontalAlignment="Center" FontSize="20"/>
+                                        <Separator/>
+                                    </StackPanel>
+                                    
+                                    <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto" HorizontalScrollBarVisibility="Disabled" BorderThickness="0">
+                                        <ContentControl Content="{TemplateBinding Settings}" Margin="5 2"/>
+                                    </ScrollViewer>
+                                </Grid>
+                            </Border>
+                        </tpf:SimplePanel>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

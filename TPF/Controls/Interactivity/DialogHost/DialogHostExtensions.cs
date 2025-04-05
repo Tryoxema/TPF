@@ -8,6 +8,7 @@ namespace TPF.Controls
 {
     public static class DialogHostExtensions
     {
+        #region DialogHost
         public static async Task<object> Show(this DialogHost dialogHost, object content)
         {
             return await Show(dialogHost, content, null, null, null);
@@ -62,7 +63,9 @@ namespace TPF.Controls
                 dialogHost.CurrentHandle.Close(resultValue);
             }
         }
+        #endregion
 
+        #region DependencyObject ParentDialog
         public static async Task<object> ShowParentDialog(this DependencyObject dependencyObject, object content)
         {
             return await ShowParentDialog(dependencyObject, content, null, null, null);
@@ -134,6 +137,17 @@ namespace TPF.Controls
             return GetParentDialogHandle(dependencyObject)?.IsClosed == false;
         }
 
+        private static DialogHost GetParentDialogHost(DependencyObject dependencyObject)
+        {
+            var dialogHost = dependencyObject.ParentOfType<DialogHost>();
+
+            if (dialogHost == null) System.Diagnostics.Trace.WriteLine("ERROR: Could not find parent DialogHost");
+
+            return dialogHost;
+        }
+        #endregion
+
+        #region DependencyObject ChildDialog
         public static async Task<object> ShowChildDialog(this DependencyObject dependencyObject, object content)
         {
             return await ShowChildDialog(dependencyObject, content, null, null, null, null);
@@ -255,15 +269,6 @@ namespace TPF.Controls
             return GetChildDialogHandle(dependencyObject, hostId)?.IsClosed == false;
         }
 
-        private static DialogHost GetParentDialogHost(DependencyObject dependencyObject)
-        {
-            var dialogHost = dependencyObject.ParentOfType<DialogHost>();
-
-            if (dialogHost == null) System.Diagnostics.Trace.WriteLine("ERROR: Could not find parent DialogHost");
-
-            return dialogHost;
-        }
-
         private static DialogHost GetChildDialogHost(DependencyObject dependencyObject, object hostId)
         {
             var dialogHost = dependencyObject.ChildrenOfType<DialogHost>().FirstOrDefault(x => hostId == null || Equals(x.Id, hostId));
@@ -272,5 +277,6 @@ namespace TPF.Controls
 
             return dialogHost;
         }
+        #endregion
     }
 }

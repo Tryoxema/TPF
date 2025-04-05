@@ -93,15 +93,25 @@ namespace TPF.Controls
         public static readonly DependencyProperty NumberDecimalDigitsProperty = DependencyProperty.Register("NumberDecimalDigits",
             typeof(int),
             typeof(NumericRangeBox),
-            new PropertyMetadata(2, NumberDecimalDigitsPropertyChanged));
+            new PropertyMetadata(2, NumberDecimalDigitsPropertyChanged, ConstrainNumberDecimalDigits));
 
-        static void NumberDecimalDigitsPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+        private static void NumberDecimalDigitsPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
             var instance = (NumericRangeBox)sender;
 
             instance.NumberFormatInfo.NumberDecimalDigits = instance.NumberDecimalDigits;
             // Text neu formatieren
             instance.FormatText();
+        }
+
+        private static object ConstrainNumberDecimalDigits(DependencyObject sender, object value)
+        {
+            var decimalDigits = (int)value;
+
+            if (decimalDigits < 0) decimalDigits = 0;
+            else if (decimalDigits > 99) decimalDigits = 99;
+
+            return decimalDigits;
         }
 
         public int NumberDecimalDigits
@@ -117,7 +127,7 @@ namespace TPF.Controls
             typeof(NumericRangeBox),
             new PropertyMetadata(null, NumberDecimalSeparatorPropertyChanged));
 
-        static void NumberDecimalSeparatorPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+        private static void NumberDecimalSeparatorPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
             var instance = (NumericRangeBox)sender;
             // Wenn der Wert auf null gesetzt wird soll der Standardwert genutzt werden
@@ -139,7 +149,7 @@ namespace TPF.Controls
             typeof(NumericRangeBox),
             new PropertyMetadata(null, NumberGroupSeparatorPropertyChanged));
 
-        static void NumberGroupSeparatorPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+        private static void NumberGroupSeparatorPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
             var instance = (NumericRangeBox)sender;
             // Wenn der Wert auf null gesetzt wird soll der Standardwert genutzt werden
@@ -161,10 +171,10 @@ namespace TPF.Controls
             typeof(NumericRangeBox),
             new PropertyMetadata(null, CustomUnitPropertyChanged));
 
-        static void CustomUnitPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+        private static void CustomUnitPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
             var instance = (NumericRangeBox)sender;
-            // Text neu formatieren
+
             instance.FormatText();
         }
 
@@ -181,7 +191,7 @@ namespace TPF.Controls
             typeof(NumericRangeBox),
             new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.BindsTwoWayByDefault, ValuePropertyChanged, ConstrainValue));
 
-        static void ValuePropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+        private static void ValuePropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
             var instance = (NumericRangeBox)sender;
             // Text formatieren wenn gewünscht
@@ -190,7 +200,7 @@ namespace TPF.Controls
             instance.OnValueChanged((double?)e.OldValue, (double?)e.NewValue);
         }
 
-        internal static object ConstrainValue(DependencyObject sender, object value)
+        private static object ConstrainValue(DependencyObject sender, object value)
         {
             var instance = (NumericRangeBox)sender;
 
@@ -286,7 +296,14 @@ namespace TPF.Controls
         public static readonly DependencyProperty HideTrailingZerosProperty = DependencyProperty.Register("HideTrailingZeros",
             typeof(bool),
             typeof(NumericRangeBox),
-            new PropertyMetadata(BooleanBoxes.FalseBox));
+            new PropertyMetadata(BooleanBoxes.FalseBox, HideTrailingZerosPropertyChanged));
+
+        private static void HideTrailingZerosPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+        {
+            var instance = (NumericRangeBox)sender;
+
+            instance.FormatText();
+        }
 
         public bool HideTrailingZeros
         {

@@ -32,6 +32,8 @@ namespace TPF.Controls
         {
             var finalSize = new Size();
 
+            var isVertical = SliderThumbsControl?.Orientation == Orientation.Vertical;
+
             for (int i = 0, count = InternalChildren.Count; i < count; i++)
             {
                 var child = InternalChildren[i];
@@ -40,8 +42,9 @@ namespace TPF.Controls
                 {
                     thumb.ParentThumbsPanel = this;
                     thumb.Measure(availableSize);
-                    finalSize.Width = Math.Max(finalSize.Width, child.DesiredSize.Width);
+
                     finalSize.Height = Math.Max(finalSize.Height, child.DesiredSize.Height);
+                    finalSize.Width = Math.Max(finalSize.Width, child.DesiredSize.Width);
                 }
             }
 
@@ -61,6 +64,8 @@ namespace TPF.Controls
 
             var marginThumb = GetMarginThumb();
 
+            var centerPoint = new Point(finalSize.Width / 2, finalSize.Height / 2);
+
             for (int i = 0, count = InternalChildren.Count; i < count; i++)
             {
                 var child = InternalChildren[i];
@@ -74,17 +79,19 @@ namespace TPF.Controls
                     {
                         var factor = isDirectionReversed ? normalizedValue : 1 - normalizedValue;
 
+                        var x = Math.Max(0, centerPoint.X - sliderThumb.DesiredSize.Width / 2);
                         var y = Math.Max(0, factor * (finalSize.Height - sliderThumb.DesiredSize.Height));
 
-                        sliderThumb.Arrange(new Rect(0, y, sliderThumb.DesiredSize.Width, sliderThumb.DesiredSize.Height));
+                        sliderThumb.Arrange(new Rect(x, y, sliderThumb.DesiredSize.Width, sliderThumb.DesiredSize.Height));
                     }
                     else
                     {
                         var factor = isDirectionReversed ? 1 - normalizedValue : normalizedValue;
 
                         var x = Math.Max(0, factor * (finalSize.Width - sliderThumb.DesiredSize.Width));
+                        var y = Math.Max(0, centerPoint.Y - sliderThumb.DesiredSize.Height / 2);
 
-                        sliderThumb.Arrange(new Rect(x, 0, sliderThumb.DesiredSize.Width, sliderThumb.DesiredSize.Height));
+                        sliderThumb.Arrange(new Rect(x, y, sliderThumb.DesiredSize.Width, sliderThumb.DesiredSize.Height));
                     }
                 }
                 else if (child is RangeSliderThumb rangeThumb)
@@ -100,6 +107,7 @@ namespace TPF.Controls
                         var marginThumbHeight = (marginThumb ?? rangeThumb).DesiredSize.Height;
                         var remainingTrackLength = finalSize.Height - marginThumbHeight;
 
+                        var x = Math.Max(0, centerPoint.X - rangeThumb.DesiredSize.Width / 2);
                         var y = Math.Max(0, Math.Round((isDirectionReversed ? startFactor : endFactor) * remainingTrackLength));
 
                         if (rangeThumb.StartThumb != null && rangeThumb.MiddleThumb != null && rangeThumb.EndThumb != null)
@@ -110,7 +118,7 @@ namespace TPF.Controls
                             var y2 = Math.Max(0, Math.Round((isDirectionReversed ? endFactor : startFactor) * (finalSize.Height - endThumbHeight)));
 
                             var middleThumbHeight = y2 - y;
-                            var middleThumbX = (rangeThumb.DesiredSize.Width / 2) - (rangeThumb.MiddleThumb.DesiredSize.Width / 2);
+                            var middleThumbX = Math.Max(0, centerPoint.X - rangeThumb.MiddleThumb.DesiredSize.Width / 2);
 
                             // Wenn beide Werte auf Maximum sind liegt der EndThumb über dem StartThumb und keiner kann mehr bewegt werden
                             // Um das zu verhindern, setzen wir hier den ZIndex einmal anders herum, wenn dieser Fall eintritt
@@ -127,13 +135,13 @@ namespace TPF.Controls
 
                             if (isDirectionReversed)
                             {
-                                rangeThumb.StartThumb.Arrange(new Rect(0, y, rangeThumb.DesiredSize.Width, startThumbHeight));
-                                rangeThumb.EndThumb.Arrange(new Rect(0, y2, rangeThumb.DesiredSize.Width, endThumbHeight));
+                                rangeThumb.StartThumb.Arrange(new Rect(x, y, rangeThumb.DesiredSize.Width, startThumbHeight));
+                                rangeThumb.EndThumb.Arrange(new Rect(x, y2, rangeThumb.DesiredSize.Width, endThumbHeight));
                             }
                             else
                             {
-                                rangeThumb.StartThumb.Arrange(new Rect(0, y2, rangeThumb.DesiredSize.Width, startThumbHeight));
-                                rangeThumb.EndThumb.Arrange(new Rect(0, y, rangeThumb.DesiredSize.Width, endThumbHeight));
+                                rangeThumb.StartThumb.Arrange(new Rect(x, y2, rangeThumb.DesiredSize.Width, startThumbHeight));
+                                rangeThumb.EndThumb.Arrange(new Rect(x, y, rangeThumb.DesiredSize.Width, endThumbHeight));
                             }
 
                             rangeThumb.MiddleThumb.Arrange(new Rect(middleThumbX, y + startThumbHeight, rangeThumb.MiddleThumb.DesiredSize.Width, middleThumbHeight));
@@ -142,7 +150,7 @@ namespace TPF.Controls
                         {
                             var height = Math.Max(marginThumbHeight, Math.Round(((isDirectionReversed ? startFactor : endFactor) * remainingTrackLength) - y + marginThumbHeight));
 
-                            rangeThumb.Arrange(new Rect(0, y, rangeThumb.DesiredSize.Width, height));
+                            rangeThumb.Arrange(new Rect(x, y, rangeThumb.DesiredSize.Width, height));
                         }
                     }
                     else
@@ -154,6 +162,7 @@ namespace TPF.Controls
                         var remainingTrackLength = finalSize.Width - marginThumbWidth;
 
                         var x = Math.Max(0, Math.Round((isDirectionReversed ? endFactor : startFactor) * remainingTrackLength));
+                        var y = Math.Max(0, centerPoint.Y - rangeThumb.DesiredSize.Height / 2);
 
                         if (rangeThumb.StartThumb != null && rangeThumb.MiddleThumb != null && rangeThumb.EndThumb != null)
                         {
@@ -163,7 +172,7 @@ namespace TPF.Controls
                             var x2 = Math.Max(0, Math.Round((isDirectionReversed ? startFactor : endFactor) * (finalSize.Width - endThumbWidth)));
 
                             var middleThumbWidth = x2 - x;
-                            var middleThumbY = (rangeThumb.DesiredSize.Height / 2) - (rangeThumb.MiddleThumb.DesiredSize.Height / 2);
+                            var middleThumbY = Math.Max(0, centerPoint.Y - rangeThumb.MiddleThumb.DesiredSize.Height / 2);
 
                             // Wenn beide Werte auf Maximum sind liegt der EndThumb über dem StartThumb und keiner kann mehr bewegt werden
                             // Um das zu verhindern, setzen wir hier den ZIndex einmal anders herum, wenn dieser Fall eintritt
@@ -180,13 +189,13 @@ namespace TPF.Controls
 
                             if (isDirectionReversed)
                             {
-                                rangeThumb.StartThumb.Arrange(new Rect(x2, 0, startThumbWidth, rangeThumb.DesiredSize.Height));
-                                rangeThumb.EndThumb.Arrange(new Rect(x, 0, endThumbWidth, rangeThumb.DesiredSize.Height));
+                                rangeThumb.StartThumb.Arrange(new Rect(x2, y, startThumbWidth, rangeThumb.DesiredSize.Height));
+                                rangeThumb.EndThumb.Arrange(new Rect(x, y, endThumbWidth, rangeThumb.DesiredSize.Height));
                             }
                             else
                             {
-                                rangeThumb.StartThumb.Arrange(new Rect(x, 0, startThumbWidth, rangeThumb.DesiredSize.Height));
-                                rangeThumb.EndThumb.Arrange(new Rect(x2, 0, endThumbWidth, rangeThumb.DesiredSize.Height));
+                                rangeThumb.StartThumb.Arrange(new Rect(x, y, startThumbWidth, rangeThumb.DesiredSize.Height));
+                                rangeThumb.EndThumb.Arrange(new Rect(x2, y, endThumbWidth, rangeThumb.DesiredSize.Height));
                             }
 
                             rangeThumb.MiddleThumb.Arrange(new Rect(x + startThumbWidth, middleThumbY, middleThumbWidth, rangeThumb.MiddleThumb.DesiredSize.Height));
@@ -194,8 +203,8 @@ namespace TPF.Controls
                         else
                         {
                             var width = Math.Max(marginThumbWidth, Math.Round(((isDirectionReversed ? startFactor : endFactor) * remainingTrackLength) - x + marginThumbWidth));
-
-                            rangeThumb.Arrange(new Rect(x, 0, width, rangeThumb.DesiredSize.Height));
+                            
+                            rangeThumb.Arrange(new Rect(x, y, width, rangeThumb.DesiredSize.Height));
                         }
                     }
                 }

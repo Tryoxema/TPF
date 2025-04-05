@@ -1,0 +1,26 @@
+﻿<views:ViewBase x:Class="TPF.Demo.Views.ShieldDemoView"
+                xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+                xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+                xmlns:tpf="http://schemas.tpf.com/xaml/presentation"
+                xmlns:views="clr-namespace:TPF.Demo.Views"
+                DataContext="{Binding RelativeSource={RelativeSource Self}}"
+                mc:Ignorable="d" 
+                d:DesignHeight="450" d:DesignWidth="800">
+    <views:ViewBase.Settings>
+        <StackPanel>
+            <StackPanel Margin="0 2">
+                <TextBlock Text="Label"/>
+                <TextBox Text="{Binding Label, ElementName=DemoShield}"/>
+            </StackPanel>
+            <StackPanel Margin="0 2">
+                <TextBlock Text="Content"/>
+                <TextBox Text="{Binding Content, ElementName=DemoShield}"/>
+            </StackPanel>
+        </StackPanel>
+    </views:ViewBase.Settings>
+    <Grid Margin="5">
+        <tpf:Shield x:Name="DemoShield" Label="Version" Content="1.3.3.7" HorizontalAlignment="Center"/>
+    </Grid>
+</views:ViewBase>

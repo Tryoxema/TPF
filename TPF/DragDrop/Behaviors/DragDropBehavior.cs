@@ -34,7 +34,7 @@ namespace TPF.DragDrop.Behaviors
 
                 var targetType = TypeHelper.GetIListType(state.TargetItemsSource);
 
-                if (!targetType.IsAssignableFrom(draggedType)) return false;
+                if (targetType != null && !targetType.IsAssignableFrom(draggedType)) return false;
             }
 
             return true;

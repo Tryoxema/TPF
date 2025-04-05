@@ -1,0 +1,52 @@
+﻿<views:ViewBase x:Class="TPF.Demo.Views.SliderDemoView"
+                xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+                xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                xmlns:tpf="http://schemas.tpf.com/xaml/presentation"
+                xmlns:views="clr-namespace:TPF.Demo.Views"
+                DataContext="{Binding RelativeSource={RelativeSource Self}}"
+                mc:Ignorable="d" 
+                d:DesignHeight="450" d:DesignWidth="800">
+    <views:ViewBase.Settings>
+        <StackPanel>
+            <StackPanel Margin="0 2" Visibility="Collapsed">
+                <TextBlock Text="Orientation"/>
+                <tpf:ComboBox SelectedValue="{Binding Orientation, ElementName=DemoSlider}" ItemsSource="{Binding Orientations}"/>
+            </StackPanel>
+            <StackPanel Margin="0 2">
+                <TextBlock Text="ThumbMode"/>
+                <tpf:ComboBox SelectedValue="{Binding ThumbMode, ElementName=DemoSlider}" ItemsSource="{Binding ThumbModes}"/>
+            </StackPanel>
+            <StackPanel Margin="0 2">
+                <TextBlock Text="LabelPlacement"/>
+                <tpf:ComboBox SelectedValue="{Binding LabelPlacement, ElementName=DemoSlider}" ItemsSource="{Binding LabelPlacements}"/>
+            </StackPanel>
+            <StackPanel Margin="0 2">
+                <TextBlock Text="TickPlacement"/>
+                <tpf:ComboBox SelectedValue="{Binding TickPlacement, ElementName=DemoSlider}" ItemsSource="{Binding TickPlacements}"/>
+            </StackPanel>
+            <StackPanel Margin="0 2">
+                <TextBlock Text="TickFrequency"/>
+                <tpf:NumericRangeBox Value="{Binding TickFrequency, ElementName=DemoSlider}" Minimum="0" Maximum="100"/>
+            </StackPanel>
+            <StackPanel Margin="0 2">
+                <TextBlock Text="MinorTickFrequency"/>
+                <tpf:NumericRangeBox Value="{Binding MinorTickFrequency, ElementName=DemoSlider}" Minimum="0" Maximum="100"/>
+            </StackPanel>
+            <CheckBox IsChecked="{Binding IsSnapToTickEnabled, ElementName=DemoSlider}" Content="IsSnapToTickEnabled" Margin="0 2"/>
+            <CheckBox IsChecked="{Binding IsDirectionReversed, ElementName=DemoSlider}" Content="IsDirectionReversed" Margin="0 2"/>
+            <CheckBox IsChecked="{Binding IsMoveToPointEnabled, ElementName=DemoSlider}" Content="IsMoveToPointEnabled" Margin="0 2"/>
+            <CheckBox IsChecked="{Binding HandlesMouseWheel, ElementName=DemoSlider}" Content="HandlesMouseWheel" Margin="0 2"/>
+        </StackPanel>
+    </views:ViewBase.Settings>
+    <Grid Margin="5">
+        <tpf:Slider x:Name="DemoSlider" Width="300" ThumbMode="Custom" ActiveTickBrush="{tpf:ResourceLink Key=SelectedBrush}"
+                    Minimum="0" Maximum="100" TickFrequency="10" MinorTickFrequency="5" SmallChange="1" LargeChange="10" VerticalAlignment="Center">
+            <tpf:Slider.Thumbs>
+                <tpf:SliderThumb Value="5"/>
+                <tpf:RangeSliderThumb RangeStart="10" RangeEnd="20" MinimumRangeSpan="5" MaximumRangeSpan="50"/>
+            </tpf:Slider.Thumbs>
+        </tpf:Slider>
+    </Grid>
+</views:ViewBase>

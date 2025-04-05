@@ -1,0 +1,30 @@
+﻿<views:ViewBase x:Class="TPF.Demo.Views.WatermarkTextBoxDemoView"
+                xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+                xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                xmlns:tpf="http://schemas.tpf.com/xaml/presentation"
+                xmlns:views="clr-namespace:TPF.Demo.Views"
+                DataContext="{Binding RelativeSource={RelativeSource Self}}"
+                mc:Ignorable="d" 
+                d:DesignHeight="450" d:DesignWidth="800">
+    <views:ViewBase.Settings>
+        <StackPanel>
+            <StackPanel Margin="0 2">
+                <TextBlock Text="Watermark"/>
+                <TextBox Text="{Binding Watermark, ElementName=DemoWatermarkTextBox, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            </StackPanel>
+            <StackPanel Margin="0 2">
+                <TextBlock Text="WatermarkBehavior"/>
+                <tpf:ComboBox SelectedValue="{Binding WatermarkBehavior, ElementName=DemoWatermarkTextBox}" ItemsSource="{Binding WatermarkBehaviors}"/>
+            </StackPanel>
+            <StackPanel Margin="0 2">
+                <TextBlock Text="SelectionOnFocus"/>
+                <tpf:ComboBox SelectedValue="{Binding SelectionOnFocus, ElementName=DemoWatermarkTextBox}" ItemsSource="{Binding SelectionOnFocusModes}"/>
+            </StackPanel>
+        </StackPanel>
+    </views:ViewBase.Settings>
+    <Grid Margin="5">
+        <tpf:WatermarkTextBox x:Name="DemoWatermarkTextBox" Width="200" VerticalAlignment="Center"/>
+    </Grid>
+</views:ViewBase>

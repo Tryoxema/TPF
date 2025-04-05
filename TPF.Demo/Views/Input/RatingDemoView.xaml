@@ -1,0 +1,53 @@
+﻿<views:ViewBase x:Class="TPF.Demo.Views.RatingDemoView"
+                xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+                xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+                xmlns:tpf="http://schemas.tpf.com/xaml/presentation"
+                xmlns:views="clr-namespace:TPF.Demo.Views"
+                DataContext="{Binding RelativeSource={RelativeSource Self}}"
+                mc:Ignorable="d" 
+                d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Margin="5">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="120"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Label Content="Ganze Werte" Grid.Column="0" Grid.Row="0"/>
+        <tpf:Rating Grid.Column="1" Grid.Row="0" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+
+        <Label Content="Halbe Werte" Grid.Column="0" Grid.Row="1"/>
+        <tpf:Rating Grid.Column="1" Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Center" Precision="Half"/>
+
+        <Label Content="Genaue Werte" Grid.Column="0" Grid.Row="2"/>
+        <tpf:Rating Grid.Column="1" Grid.Row="2" HorizontalAlignment="Left" VerticalAlignment="Center" Precision="Exact"/>
+
+        <Label Content="ReadOnly" Grid.Column="0" Grid.Row="3"/>
+        <tpf:Rating Grid.Column="1" Grid.Row="3" HorizontalAlignment="Left" VerticalAlignment="Center" Value="3" IsReadOnly="True"/>
+
+        <Label Content="Mehr Sterne" Grid.Column="0" Grid.Row="4"/>
+        <tpf:Rating Grid.Column="1" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center" ItemsToGenerateCount="8"/>
+
+        <Label Content="Farbe" Grid.Column="0" Grid.Row="5"/>
+        <tpf:Rating Grid.Column="1" Grid.Row="5" HorizontalAlignment="Left" VerticalAlignment="Center">
+            <tpf:RatingItem SelectedBackground="Red" SelectedBorderBrush="Transparent"/>
+            <tpf:RatingItem SelectedBackground="Yellow" SelectedBorderBrush="Transparent"/>
+            <tpf:RatingItem SelectedBackground="ForestGreen" SelectedBorderBrush="Transparent"/>
+            <tpf:RatingItem SelectedBackground="Yellow" SelectedBorderBrush="Transparent"/>
+            <tpf:RatingItem SelectedBackground="Red" SelectedBorderBrush="Transparent"/>
+        </tpf:Rating>
+
+        <Label Content="Andere Form" Grid.Column="0" Grid.Row="6"/>
+        <tpf:Rating Grid.Column="1" Grid.Row="6" HorizontalAlignment="Left" VerticalAlignment="Center" Geometry="{StaticResource ArrowRightGlyph}"/>
+    </Grid>
+</views:ViewBase>

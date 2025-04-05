@@ -1,0 +1,49 @@
+﻿<views:ViewBase x:Class="TPF.Demo.Views.DialogHostDemoView"
+                xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+                xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                xmlns:tpf="http://schemas.tpf.com/xaml/presentation"
+                xmlns:views="clr-namespace:TPF.Demo.Views"
+                DataContext="{Binding RelativeSource={RelativeSource Self}}"
+                mc:Ignorable="d" 
+                d:DesignHeight="450" d:DesignWidth="800">
+    <views:ViewBase.Settings>
+        <StackPanel>
+            <StackPanel Margin="0 2">
+                <TextBlock Text="DialogContent"/>
+                <TextBox Text="{Binding DialogMessage, UpdateSourceTrigger=PropertyChanged}" Height="90" VerticalContentAlignment="Top" AcceptsReturn="True"/>
+            </StackPanel>
+            <CheckBox IsChecked="{Binding IsDialogOpen, ElementName=DemoDialogHost}" Content="IsDialogOpen" Margin="0 2"/>
+            <CheckBox IsChecked="{Binding CloseOnOverlayClick, ElementName=DemoDialogHost}" Content="CloseOnOverlayClick" Margin="0 2"/>
+        </StackPanel>
+    </views:ViewBase.Settings>
+    <Grid Margin="5">
+        <Border Width="400" Height="300" BorderThickness="1" BorderBrush="{tpf:ResourceLink Key=BorderBrush}">
+            <tpf:DialogHost x:Name="DemoDialogHost" DialogContent="{Binding DialogMessage}">
+                <tpf:DialogHost.DialogContentTemplate>
+                    <DataTemplate>
+                        <Grid Height="150" Width="250">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+
+                            <TextBlock Text="{Binding}" TextWrapping="Wrap" Margin="5"/>
+
+                            <Separator Grid.Row="1"/>
+
+                            <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Right" Margin="5">
+                                <tpf:Button Content="OK" Width="80" Command="{x:Static tpf:DialogHost.CloseDialog}"/>
+                                <tpf:Button Content="Abbrechen" Width="80" Margin="5 0 0 0" Command="{x:Static tpf:DialogHost.CloseDialog}"/>
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </tpf:DialogHost.DialogContentTemplate>
+
+                <tpf:Button Width="100" Height="30" Content="ShowDialog" Command="{x:Static tpf:DialogHost.OpenDialog}"/>
+            </tpf:DialogHost>
+        </Border>
+    </Grid>
+</views:ViewBase>

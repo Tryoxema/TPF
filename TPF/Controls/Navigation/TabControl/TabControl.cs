@@ -19,6 +19,7 @@ namespace TPF.Controls
         static TabControl()
         {
             DefaultStyleKeyProperty.OverrideMetadata(typeof(TabControl), new FrameworkPropertyMetadata(typeof(TabControl)));
+            TabStripPlacementProperty.OverrideMetadata(typeof(TabControl), new FrameworkPropertyMetadata(Dock.Top, TabStripPlacementPropertyChanged));
 
             RegisterCommands();
         }
@@ -298,6 +299,15 @@ namespace TPF.Controls
             set { SetValue(CloseTabOnMiddleMouseButtonDownProperty, BooleanBoxes.Box(value)); }
         }
         #endregion
+
+        private static void TabStripPlacementPropertyChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+        {
+            var instance = (TabControl)sender;
+
+            // Wenn die Position der Tabs geändert wird, nimmt der Bereich den Platz ein, den er an der alten Position eingenommen hat
+            // Deshalb rufen wir hier einmal InvalidateMeasure auf, um eine neuzuweisung des benötigten Platzes zu erzwingen
+            instance.TabPanel?.InvalidateMeasure();
+        }
 
         private readonly List<TabItem> _pinnedItems;
         public ReadOnlyCollection<TabItem> PinnedItems { get; private set; }
