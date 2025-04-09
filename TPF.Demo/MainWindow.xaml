@@ -9,6 +9,20 @@
                       mc:Ignorable="d"
                       Title="TPF Demo" 
                       Width="1280" Height="720">
+    <tpf:ChromelessWindow.LeftExtraTitleContent>
+        <StackPanel Orientation="Horizontal">
+            <ToggleButton IsChecked="{Binding IsMenuOpen, Mode=TwoWay}">
+                <ToggleButton.Template>
+                    <ControlTemplate TargetType="ToggleButton">
+                        <Border Background="Transparent">
+                            <Path Data="{StaticResource SearchGlyph}" Fill="{tpf:ResourceLink Key=SelectedTextBrush}" Margin="5" Stretch="Uniform"/>
+                        </Border>
+                    </ControlTemplate>
+                </ToggleButton.Template>
+            </ToggleButton>
+            <tpf:Divider Orientation="Vertical" LineStroke="{tpf:ResourceLink Key=SelectedTextBrush}" Margin="4"/>
+        </StackPanel>
+    </tpf:ChromelessWindow.LeftExtraTitleContent>
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -19,22 +33,59 @@
                         ShowDropDownButton="True" ShowCloseButton="True" CloseTabOnMiddleMouseButtonDown="True">
             <tpf:TabItem Header="Start" ShowCloseButton="False" CloseTabOnMiddleMouseButtonDown="False">
                 <Grid Margin="5">
-                    <ItemsControl ItemsSource="{Binding DemoItems}">
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <WrapPanel/>
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <tpf:Button Content="{Binding Name}" Width="200" Margin="5" Padding="0 20" FontWeight="SemiBold" Click="DemoItemButton_Click"/>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
+                    <ScrollViewer HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" BorderThickness="0">
+                        <ItemsControl ItemsSource="{Binding DemoItems}">
+                            <ItemsControl.ItemsPanel>
+                                <ItemsPanelTemplate>
+                                    <WrapPanel/>
+                                </ItemsPanelTemplate>
+                            </ItemsControl.ItemsPanel>
+                            <ItemsControl.ItemTemplate>
+                                <DataTemplate>
+                                    <tpf:Button Content="{Binding Name}" Width="190" Margin="5" Padding="0 20" FontWeight="SemiBold" Click="DemoItemButton_Click"/>
+                                </DataTemplate>
+                            </ItemsControl.ItemTemplate>
+                        </ItemsControl>
+                    </ScrollViewer>
                 </Grid>
             </tpf:TabItem>
         </tpf:TabControl>
 
+        <Border Grid.Row="0" Visibility="{Binding IsMenuOpen, Converter={StaticResource BooleanToVisibilityConverter}}" d:Visibility="Collapsed">
+            <tpf:SimplePanel>
+                <Border Background="#66000000" MouseUp="MenuDismissBorder_MouseUp"/>
+                <Border HorizontalAlignment="Left" Width="220" Background="{tpf:ResourceLink Key=PrimaryBrush}">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+
+                        <tpf:WatermarkTextBox Watermark="Suche" Margin="5" Text="{Binding MenuFilterString, UpdateSourceTrigger=PropertyChanged}" x:Name="MenuSearchBox"/>
+
+                        <ScrollViewer Grid.Row="1" HorizontalScrollBarVisibility="Disabled" VerticalScrollBarVisibility="Auto" BorderThickness="0" Margin="5">
+                            <ItemsControl ItemsSource="{Binding DemoItemsView.View}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <tpf:Button Content="{Binding Name}" Margin="0" BorderThickness="0" HorizontalContentAlignment="Left" FontWeight="SemiBold" Click="DemoItemButton_Click"/>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                                <ItemsControl.GroupStyle>
+                                    <GroupStyle>
+                                        <GroupStyle.HeaderTemplate>
+                                            <DataTemplate>
+                                                <TextBlock Text="{Binding Name}" FontWeight="Bold" Foreground="{tpf:ResourceLink Key=HeaderBrush}" Margin="0 4 0 0"/>
+                                            </DataTemplate>
+                                        </GroupStyle.HeaderTemplate>
+                                    </GroupStyle>
+                                </ItemsControl.GroupStyle>
+                            </ItemsControl>
+                        </ScrollViewer>
+                    </Grid>
+                </Border>
+            </tpf:SimplePanel>
+        </Border>
+        
         <StatusBar Grid.Row="1" Background="{tpf:ResourceLink Key=ApplicationBackground}" BorderBrush="{tpf:ResourceLink Key=BorderBrush}" BorderThickness="0 1 0 0">
             <StatusBarItem>
                 <StackPanel Orientation="Horizontal">

@@ -3,6 +3,7 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Windows;
+using System.Windows.Data;
 using System.Windows.Controls;
 using TPF.Demo.Views;
 using TPF.Collections;
@@ -32,9 +33,43 @@ namespace TPF.Demo
         }
         #endregion
 
+        bool _isMenuOpen;
+        public bool IsMenuOpen
+        {
+            get { return _isMenuOpen; }
+            set { if (SetProperty(ref _isMenuOpen, value) && value) MenuSearchBox.Focus(); }
+        }
+
+        string _menuFilterString;
+        public string MenuFilterString
+        {
+            get { return _menuFilterString; }
+            set { if (SetProperty(ref _menuFilterString, value)) DemoItemsView.View.Refresh(); }
+        }
+
         public ObservableCollection<ColorSkin> Skins { get; } = new ObservableCollection<ColorSkin>();
 
         public RangeObservableCollection<DemoItem> DemoItems { get; } = new RangeObservableCollection<DemoItem>();
+
+        CollectionViewSource _demoItemsView;
+        public CollectionViewSource DemoItemsView
+        {
+            get
+            {
+                if (_demoItemsView == null)
+                {
+                    _demoItemsView = new CollectionViewSource()
+                    {
+                        Source = DemoItems
+                    };
+
+                    _demoItemsView.GroupDescriptions.Add(new PropertyGroupDescription("Group"));
+                    _demoItemsView.Filter += DemoItemsView_Filter;
+                }
+
+                return _demoItemsView;
+            }
+        }
 
         private readonly Dictionary<string, Controls.TabItem> _existingTabItems = new Dictionary<string, Controls.TabItem>();
 
@@ -141,6 +176,26 @@ namespace TPF.Demo
             {
                 demoItem.OpenDemo?.Invoke();
             }
+
+            IsMenuOpen = false;
+            MenuFilterString = null;
+        }
+
+        private void DemoItemsView_Filter(object sender, FilterEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(MenuFilterString)) return;
+
+            if (e.Item is DemoItem item)
+            {
+                var filterString = MenuFilterString.ToLower();
+
+                e.Accepted = item.Name.ToLower().Contains(filterString) || item.Group.ToLower().Contains(filterString);
+            }
+        }
+
+        private void MenuDismissBorder_MouseUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+            IsMenuOpen = false;
         }
 
         #region StatusBar
