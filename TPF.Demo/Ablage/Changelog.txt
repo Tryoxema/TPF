@@ -28,6 +28,19 @@
 	Jede WizardPage kann über die Can- Show- und Content-Properties der vier Buttons frei konfigurieren, ob ein Button klickbar ist, überhaupt angezeigt werden soll und was der Inhalt ist.
 	Die Vier Buttons sind GoToPrevious, GoToNext, Finish und Cancel.
 	Für alle Buttons gibt es in der WizardCommands-Klasse ein entsprechendes Command mit dem gleichen Namen, die auch für die steuerung genutzt werden können.
+--Callout
+	Das Callout ist ein Control was wie ein ToolTip für das Darstellen zusätzlicher Informationen an einem anderen Element gemacht ist.
+	Der Hauptpunkt hierbei ist, dass das Callout einen konfigurierbaren Pfeil besitzt, der vom Control auf das Ziel zeigt.
+	Dieser Pfeil kann über die ArrowType-Property auch deaktiviert werden, wenn als ArrowType der Wert None verwendet wird.
+	Die Darstellung des Pfeils kann über die Properties ArrowBaseAnchorPoint1, ArrowBaseAnchorPoint2 und ArrowTargetAnchorPoint gesteuert werden.
+	Über die Type-Property kann die Form des Callouts selbst geändert werden und zwischen Rectangle, RoundedRectangle, Ellipse und Custom gewählt werden.
+	Wenn der Typ auf Custom gesetzt wird, kann über die CustomGeometry-Property eine eigene Form definiert werden.
+	Außerdem kann die Darstellung der Geometrie über Properties wie StrokeThickness, StrokeDashArray, CornerRadius und Stretch weiter konfiguriert werden.
+	Zusätzlich zum Callout-Control gibt es noch den CalloutService, über den ein Callout an jedes andere FrameworkElement angehangen werden kann.
+	Über die ShowPopup-Methode vom CalloutService kann ein Callout als Popup an einem anderen Element geöffnet werden.
+	Mit den CalloutPopupOptions wird dann die Platzierung, dass Offset, die Animation des Popups und die StaysOpen-Property festgelegt.
+	Schließen kann man diese Popups über die Methoden ClosePopup und CloseAllPopups, je nachdem was man braucht.
+	Der CalloutService stellt außerdem die 4 RoutedEvents CalloutOpening, CalloutOpened, CalloutClosing und CalloutClosed bereit, die auf dem Ziel ausgelöst werden.
 
 -Veränderte Controls
 --Poptip

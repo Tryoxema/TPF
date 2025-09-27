@@ -104,6 +104,7 @@ namespace TPF.Demo
                 new DemoItem("Badge", "Interaction", () => CreateTabItem("Badge", typeof(BadgeDemoView))),
                 new DemoItem("BusyIndicator", "Interaction", () => CreateTabItem("BusyIndicator", typeof(BusyIndicatorDemoView))),
                 new DemoItem("Buttons", "Interaction", () => CreateTabItem("Buttons", typeof(ButtonsDemoView))),
+                new DemoItem("Callout", "Interaction", () => CreateTabItem("Callout", typeof(CalloutDemoView))),
                 new DemoItem("Comparer", "Interaction", () => CreateTabItem("Comparer", typeof(ComparerDemoView))),
                 new DemoItem("DialogHost", "Interaction", () => CreateTabItem("DialogHost", typeof(DialogHostDemoView))),
                 new DemoItem("DragDrop", "Interaction", () => CreateTabItem("DragDrop", typeof(DragDropDemoView))),

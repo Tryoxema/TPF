@@ -79,7 +79,7 @@ namespace TPF.Demo.Views
                 .UseAnimation(UseAnimation);
 
             if (!string.IsNullOrWhiteSpace(NotificationHeader)) notification.Header(NotificationHeader);
-            if (!string.IsNullOrWhiteSpace(Message)) notification.Header(Message);
+            if (!string.IsNullOrWhiteSpace(Message)) notification.Message(Message);
             if (!string.IsNullOrWhiteSpace(BadgeText)) notification.Badge(BadgeText);
 
             if (DismissWithButton) notification.Dismiss().WithButton(DismissButtonText);

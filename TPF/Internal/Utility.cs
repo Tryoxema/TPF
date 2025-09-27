@@ -1,10 +1,13 @@
 ﻿using System;
+using System.Windows;
 using TPF.Internal.Interop;
 
 namespace TPF.Internal
 {
     internal static class Utility
     {
+        public static readonly Size InfiniteSize = new Size(double.PositiveInfinity, double.PositiveInfinity);
+        
         // Hilfsmethode um den oberen Teil eines 32-bit Integers zu extrahieren
         internal static int HIWORD(int i)
         {

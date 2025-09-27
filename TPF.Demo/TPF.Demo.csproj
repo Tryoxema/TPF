@@ -56,6 +56,9 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Converter\VisiblilityToBooleanConverter.cs" />
+    <Compile Include="Views\Interaction\CalloutDemoView.xaml.cs">
+      <DependentUpon>CalloutDemoView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Interaction\DragDropDemoView.xaml.cs">
       <DependentUpon>DragDropDemoView.xaml</DependentUpon>
     </Compile>
@@ -205,6 +208,10 @@
     <Page Include="Themes\VS2013Styles.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\Interaction\CalloutDemoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Interaction\DragDropDemoView.xaml">
       <SubType>Designer</SubType>

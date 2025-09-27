@@ -18,5 +18,10 @@ namespace TPF.Internal
 
             return (-epsilon < delta) && (epsilon > delta);
         }
+
+        internal static bool IsNumber(this double value)
+        {
+            return !double.IsNaN(value) && !double.IsInfinity(value);
+        }
     }
 }

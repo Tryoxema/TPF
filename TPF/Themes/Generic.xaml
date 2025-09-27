@@ -2924,6 +2924,7 @@
     <Style TargetType="tpf:NotificationsHost" x:Key="TPF.NotificationsHostStyle">
         <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
         <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="Margin" Value="12 0 12 12"/>
         <Setter Property="Focusable" Value="False"/>
         <Setter Property="ItemsPanel">
             <Setter.Value>
@@ -2935,7 +2936,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="tpf:NotificationsHost">
-                    <Border Margin="12 0 12 12" Padding="{TemplateBinding Padding}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True" UseLayoutRounding="True">
+                    <Border Padding="{TemplateBinding Padding}" Background="{TemplateBinding Background}" SnapsToDevicePixels="True" UseLayoutRounding="True">
                         <tpf:SimplePanel>
                             <tpf:Shadow ShadowDepth="Depth3" Background="{tpf:ResourceLink Key=PrimaryBrush}"/>
                             <ItemsPresenter SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"/>
@@ -6222,6 +6223,38 @@
         </Setter>
     </Style>
     <Style TargetType="tpf:Poptip" BasedOn="{StaticResource TPF.PoptipStyle}"/>
+
+    <!-- ==================== Callout ==================== -->
+    <Style TargetType="tpf:Callout" x:Key="TPF.CalloutStyle">
+        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Center"/>
+        <Setter Property="SnapsToDevicePixels" Value="True"/>
+        <Setter Property="Foreground" Value="{tpf:ResourceLink Key=TextBrush}"/>
+        <Setter Property="Background" Value="{tpf:ResourceLink Key=PrimaryBrush}"/>
+        <Setter Property="BorderBrush" Value="{tpf:ResourceLink Key=BorderBrush}"/>
+        <Setter Property="FocusVisualStyle" Value="{x:Null}"/>
+        <Setter Property="Padding" Value="8"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="tpf:Callout">
+                    <tpf:SimplePanel>
+                        <Canvas>
+                            <Path Data="{TemplateBinding ActualGeometry}" Stretch="{TemplateBinding Stretch}" Fill="{TemplateBinding Background}" UseLayoutRounding="True"
+                                  Stroke="{TemplateBinding BorderBrush}" StrokeThickness="{TemplateBinding StrokeThickness}" StrokeDashArray="{TemplateBinding StrokeDashArray}"/>
+                        </Canvas>
+
+                        <ContentPresenter x:Name="PART_ContentPresenter" Margin="{TemplateBinding Padding}"
+                                          TextElement.Foreground="{TemplateBinding Foreground}"
+                                          HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                          VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                    </tpf:SimplePanel>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="tpf:Callout" BasedOn="{StaticResource TPF.CalloutStyle}"/>
 
     <!-- ==================== DialogHost ==================== -->
     <Style TargetType="tpf:DialogHost" x:Key="TPF.DialogHostStyle">
