@@ -32,10 +32,16 @@ namespace TPF.Demo.Views
 
             var random = new Random();
 
+            SparklineTests.ResetOnChange = false;
+
+            SparklineTests.SuspendNotifications();
+
             for (int i = 0; i < 20; i++)
             {
                 SparklineTests.Add(new SparklineTest(i, random.Next(-20, 20)));
             }
+
+            SparklineTests.ResumeNotifications();
         }
     }
 }
