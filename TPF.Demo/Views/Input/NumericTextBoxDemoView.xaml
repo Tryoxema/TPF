@@ -41,6 +41,7 @@
             <CheckBox IsChecked="{Binding ShowButtons, ElementName=DemoNumericRangeBox}" Content="ShowButtons" Margin="0 2"/>
             <CheckBox IsChecked="{Binding IsReadOnly, ElementName=DemoNumericRangeBox}" Content="IsReadOnly" Margin="0 2"/>
             <CheckBox IsChecked="{Binding AllowCalculations, ElementName=DemoNumericRangeBox}" Content="AllowCalculations" Margin="0 2"/>
+            <CheckBox IsChecked="{Binding AllowValueChangeWithDirectionKeys, ElementName=DemoNumericRangeBox}" Content="AllowValueChangeWithDirectionKeys" Margin="0 2"/>
             <CheckBox IsChecked="{Binding HideTrailingZeros, ElementName=DemoNumericRangeBox}" Content="HideTrailingZeros" Margin="0 2"/>
             <CheckBox IsChecked="{Binding ApplyPositiveForeground, ElementName=DemoNumericRangeBox}" Content="ApplyPositiveForeground" Margin="0 2"/>
             <CheckBox IsChecked="{Binding ApplyZeroForeground, ElementName=DemoNumericRangeBox}" Content="ApplyZeroForeground" Margin="0 2"/>

@@ -59,6 +59,9 @@
 	NotificationBuilderExtensions wurden mit NotificationBuilder zusammen geführt und die Methoden umbenannt von z.B. SetHeader zu Header, um die Klasse besser an das Builder-Pattern anzupassen.
 	In dem Zusammenhang wurde die NotificationDismissBuilder-Klasse eingefügt, die die Methoden für das Erstellen von Dismiss-Bedingungen der Notification enthält.
 	Der NotificationManager hat außerdem eine Clear-Methode bekommen, mit der alle aktuellen Notifications entfernt werden.
+--NumericRangeBox
+	Die NumericRangeBox wurde um die Property AllowValueChangeWithDirectionKeys erweitert.
+	Über diese Property kann das verändern des Wertes mit den Pfeiltasten Hoch und Runter, sowie Bild auf und ab deaktiviert werden, wenn dieses Feature nicht gewünscht ist.
 
 -Veränderte sonstige Klassen
 --RangeObservableCollection

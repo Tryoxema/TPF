@@ -279,6 +279,19 @@ namespace TPF.Controls
         }
         #endregion
 
+        #region AllowValueChangeWithDirectionKeys DependencyProperty
+        public static readonly DependencyProperty AllowValueChangeWithDirectionKeysProperty = DependencyProperty.Register("AllowValueChangeWithDirectionKeys",
+            typeof(bool),
+            typeof(NumericRangeBox),
+            new PropertyMetadata(BooleanBoxes.TrueBox));
+
+        public bool AllowValueChangeWithDirectionKeys
+        {
+            get { return (bool)GetValue(AllowValueChangeWithDirectionKeysProperty); }
+            set { SetValue(AllowValueChangeWithDirectionKeysProperty, BooleanBoxes.Box(value)); }
+        }
+        #endregion
+
         #region SelectionOnFocus DependencyProperty
         public static readonly DependencyProperty SelectionOnFocusProperty = DependencyProperty.Register("SelectionOnFocus",
             typeof(SelectionOnFocus),
@@ -567,26 +580,38 @@ namespace TPF.Controls
                 }
                 case Key.Up:
                 {
-                    Value += SmallChange;
-                    e.Handled = true;
+                    if (AllowValueChangeWithDirectionKeys)
+                    {
+                        Value += SmallChange;
+                        e.Handled = true; 
+                    }
                     break;
                 }
                 case Key.Down:
                 {
-                    Value -= SmallChange;
-                    e.Handled = true;
+                    if (AllowValueChangeWithDirectionKeys)
+                    {
+                        Value -= SmallChange;
+                        e.Handled = true; 
+                    }
                     break;
                 }
                 case Key.PageUp:
                 {
-                    Value += LargeChange;
-                    e.Handled = true;
+                    if (AllowValueChangeWithDirectionKeys)
+                    {
+                        Value += LargeChange;
+                        e.Handled = true; 
+                    }
                     break;
                 }
                 case Key.PageDown:
                 {
-                    Value -= LargeChange;
-                    e.Handled = true;
+                    if (AllowValueChangeWithDirectionKeys)
+                    {
+                        Value -= LargeChange;
+                        e.Handled = true; 
+                    }
                     break;
                 }
             }
