@@ -60,9 +60,18 @@
 	In dem Zusammenhang wurde die NotificationDismissBuilder-Klasse eingefügt, die die Methoden für das Erstellen von Dismiss-Bedingungen der Notification enthält.
 	Der NotificationManager hat außerdem eine Clear-Methode bekommen, mit der alle aktuellen Notifications entfernt werden.
 
+-Veränderte sonstige Klassen
+--RangeObservableCollection
+	Die RangeObservableCollection wurde um die Funktion erweitert, das Auslösen der Notify-Events bei Bedarf auszusetzen und wieder zu starten.
+	Sobald die SuspendNotifications-Methode aufgerufen wird, werden alle NotifyCollectionChanged-Events und PropertyChanged-Events abgefangen und nicht mehr ausgelöst.
+	Intern verfolgt die Collection ob und was sich ändert und sobald die ResumeNotifications-Methode aufgerufen wird, werden bei Bedarf entsprechende Events ausgelöst.
+
 -Sonstige Änderungen
 --Neue Styles
 	Es wurde ein neuer Style für den Standard WPF RadioButton eingefügt.
+--.Net8-Support
+	Ab Version 0.7.0 ist TPF nun auch für .Net 8 verfügbar.
+	Der Support für .Net 5 wurde dafür eingestellt, da diese Version schon länger keinen offiziellen Support mehr hat
 
 ===== 0.6.9 =====
 -Neue Controls
