@@ -72,6 +72,7 @@
     <converter:IsLastItemConverter x:Key="IsLastItemConverter"/>
     <converter:DivideDoubleValueConverter x:Key="DivideDoubleValueConverter"/>
     <converter:IntToVisibilityConverter x:Key="IntToVisibilityConverter"/>
+    <converter:StringToVisibilityConverter x:Key="StringToVisibilityConverter"/>
     <converter:DateTimeToAngleConverter x:Key="ClockHourToAngleConverter" TimePart="Hour"/>
     <converter:DateTimeToAngleConverter x:Key="ClockMinuteToAngleConverter" TimePart="Minute"/>
     <converter:DateTimeToAngleConverter x:Key="ClockSecondToAngleConverter" TimePart="Second"/>
@@ -361,14 +362,14 @@
                             <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
-                        <Border x:Name="OptionBorder" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" 
+                        <Border x:Name="OptionBorder" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}"
 							    CornerRadius="100" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="1" VerticalAlignment="{TemplateBinding VerticalContentAlignment}">
                             <Grid Margin="2">
                                 <Ellipse x:Name="OptionVisual" Fill="{tpf:ResourceLink Key=TextBrush}" MinWidth="6" MinHeight="6" Opacity="0"/>
                             </Grid>
                         </Border>
 
-                        <ContentPresenter Grid.Column="1" Focusable="False" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" 
+                        <ContentPresenter Grid.Column="1" Focusable="False" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
 									  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                     </Grid>
                     <ControlTemplate.Triggers>
@@ -1525,7 +1526,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="tpf:Banner">
-                    <tpf:InfiniteSpaceProvider Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" 
+                    <tpf:InfiniteSpaceProvider Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}"
                                                CornerRadius="{TemplateBinding CornerRadius}" Padding="{TemplateBinding Padding}">
                         <tpf:SimplePanel ClipToBounds="True">
                             <ContentPresenter x:Name="PART_Content" RenderTransformOrigin="0.5,0.5" HorizontalAlignment="Left">
@@ -1650,7 +1651,7 @@
                         </tpf:SimplePanel>
                         <ContentPresenter x:Name="Content" Visibility="Hidden"/>
                     </tpf:SimplePanel>
-                    
+
                     <ControlTemplate.Triggers>
                         <Trigger Property="ShowContent" Value="True">
                             <Setter TargetName="Content" Property="Visibility" Value="Visible"/>
@@ -1995,13 +1996,13 @@
                                                   VerticalAlignment="{TemplateBinding VerticalContentAlignment}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                                   Content="{TemplateBinding Content}" ContentTemplate="{TemplateBinding ContentTemplate}" ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
                                                   ContentStringFormat="{TemplateBinding ContentStringFormat}" RecognizesAccessKey="True"/>
-                                <Path x:Name="Symbol" Data="M0,0 L6,0 3,4 Z" Fill="{tpf:ResourceLink Key=GlyphBrush}" Visibility="{TemplateBinding DropDownArrowVisibility}" 
+                                <Path x:Name="Symbol" Data="M0,0 L6,0 3,4 Z" Fill="{tpf:ResourceLink Key=GlyphBrush}" Visibility="{TemplateBinding DropDownArrowVisibility}"
                                       IsHitTestVisible="false" Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="5 3"/>
                             </Grid>
                         </Border>
                         <Popup IsOpen="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" StaysOpen="False" AllowsTransparency="True" PopupAnimation="Slide" Placement="Bottom">
                             <Border BorderThickness="1" BorderBrush="{TemplateBinding DropDownBorderBrush}" Background="{TemplateBinding DropDownBackground}" CornerRadius="{TemplateBinding CornerRadius}"
-                                    MinWidth="{TemplateBinding DropDownMinWidth}" MinHeight="{TemplateBinding DropDownMinHeight}" 
+                                    MinWidth="{TemplateBinding DropDownMinWidth}" MinHeight="{TemplateBinding DropDownMinHeight}"
                                     Width="{TemplateBinding DropDownWidth}" Height="{TemplateBinding DropDownHeight}"
                                     MaxWidth="{TemplateBinding DropDownMaxWidth}" MaxHeight="{TemplateBinding DropDownMaxHeight}">
                                 <ContentControl Content="{TemplateBinding DropDownContent}" ContentTemplate="{TemplateBinding DropDownContentTemplate}" ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
@@ -2083,10 +2084,10 @@
 
                         <Border x:Name="FocusVisual" IsHitTestVisible="False" Background="{x:Null}" Visibility="Collapsed"
                                 BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{tpf:ResourceLink Key=MouseOverAccentBrush}" CornerRadius="{TemplateBinding CornerRadius}"/>
-                        
+
                         <Popup IsOpen="{Binding IsDropDownOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" StaysOpen="False" AllowsTransparency="True" PopupAnimation="Slide" Placement="Bottom">
                             <Border BorderThickness="1" BorderBrush="{TemplateBinding DropDownBorderBrush}" Background="{TemplateBinding DropDownBackground}"
-                                    MinWidth="{TemplateBinding DropDownMinWidth}" MinHeight="{TemplateBinding DropDownMinHeight}" 
+                                    MinWidth="{TemplateBinding DropDownMinWidth}" MinHeight="{TemplateBinding DropDownMinHeight}"
                                     Width="{TemplateBinding DropDownWidth}" Height="{TemplateBinding DropDownHeight}"
                                     MaxWidth="{TemplateBinding DropDownMaxWidth}" MaxHeight="{TemplateBinding DropDownMaxHeight}">
                                 <ContentControl Content="{TemplateBinding DropDownContent}" ContentTemplate="{TemplateBinding DropDownContentTemplate}" ContentTemplateSelector="{TemplateBinding ContentTemplateSelector}"
@@ -2565,10 +2566,10 @@
                 <Border Grid.Row="0" Grid.ColumnSpan="3" Margin="-1 -1 -1 -0" Padding="{TemplateBinding HeaderPadding}" Background="{TemplateBinding HeaderBackground}" Visibility="{TemplateBinding HeaderVisibility}">
                     <TextBlock Text="{TemplateBinding SelectedTimeString}" Foreground="{TemplateBinding HeaderForeground}" FontSize="16" HorizontalAlignment="Center"/>
                 </Border>
-                
+
                 <ListBox x:Name="PART_HoursListBox" Width="60" Grid.Row="1" Grid.Column="0" BorderThickness="0" ScrollViewer.VerticalScrollBarVisibility="Hidden"/>
                 <ListBox x:Name="PART_MinutesListBox" Width="60" Grid.Row="1" Grid.Column="1" BorderThickness="1 0 0 0" ScrollViewer.VerticalScrollBarVisibility="Hidden"/>
-                <ListBox x:Name="PART_SecondsListBox" Width="60" Grid.Row="1" Grid.Column="2" BorderThickness="1 0 0 0" 
+                <ListBox x:Name="PART_SecondsListBox" Width="60" Grid.Row="1" Grid.Column="2" BorderThickness="1 0 0 0"
                          Visibility="{TemplateBinding ShowSeconds, Converter={StaticResource BooleanToVisibilityConverter}}" ScrollViewer.VerticalScrollBarVisibility="Hidden"/>
 
                 <Border Grid.Row="2" Grid.ColumnSpan="3" BorderThickness="0 1 0 0" BorderBrush="{TemplateBinding BorderBrush}" Visibility="{TemplateBinding Is24Hours, Converter={StaticResource InvertedBooleanToVisibilityConverter}}">
@@ -2625,17 +2626,17 @@
                             <RotateTransform Angle="{Binding SelectedTime, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource ClockSecondToAngleConverter}}"/>
                         </Border.RenderTransform>
                     </Border>
-                    
+
                     <tpf:SimplePanel x:Name="HoursPanel" Width="170" Height="170">
                         <tpf:RadialPanel x:Name="PART_NormalHoursPanel" RadiusRatio="0.85"/>
                         <tpf:RadialPanel x:Name="PART_ExtendedHoursPanel" RadiusRatio="0.58" Visibility="{TemplateBinding Is24Hours, Converter={StaticResource BooleanToVisibilityConverter}}"/>
                     </tpf:SimplePanel>
                     <tpf:RadialPanel x:Name="PART_MinutesPanel" Width="170" Height="170" RadiusRatio="0.85"/>
                     <tpf:RadialPanel x:Name="PART_SecondsPanel" Width="170" Height="170" RadiusRatio="0.85"/>
-                    
+
                     <Ellipse Fill="{tpf:ResourceLink Key=SelectedBrush}" Width="6" Height="6"/>
                 </tpf:SimplePanel>
-                
+
                 <Border Grid.Row="2" Grid.ColumnSpan="3" BorderThickness="0 1 0 0" BorderBrush="{TemplateBinding BorderBrush}" Visibility="{TemplateBinding Is24Hours, Converter={StaticResource InvertedBooleanToVisibilityConverter}}">
                     <Grid>
                         <Grid.ColumnDefinitions>
@@ -2649,7 +2650,7 @@
                 </Border>
             </Grid>
         </Border>
-        
+
         <ControlTemplate.Triggers>
             <Trigger Property="ActiveInputMode" Value="Hours">
                 <Setter TargetName="HoursPanel" Property="Visibility" Value="Visible"/>
@@ -2947,6 +2948,105 @@
         </Setter>
     </Style>
     <Style TargetType="tpf:NotificationsHost" BasedOn="{StaticResource TPF.NotificationsHostStyle}"/>
+
+    <!-- ==================== Snackbar ==================== -->
+    <Style TargetType="tpf:Snackbar" x:Key="TPF.SnackbarStyle">
+        <Setter Property="ActionButtonForeground" Value="{tpf:ResourceLink Key=SnackbarActionForegroundBrush}"/>
+        <Setter Property="Foreground" Value="{tpf:ResourceLink Key=SnackbarForegroundBrush}"/>
+        <Setter Property="Background" Value="{tpf:ResourceLink Key=SnackbarBackgroundBrush}"/>
+        <Setter Property="HorizontalAlignment" Value="Center"/>
+        <Setter Property="VerticalAlignment" Value="Bottom"/>
+        <Setter Property="StackThreshold" Value="400"/>
+        <Setter Property="Margin" Value="0 0 0 24"/>
+        <Setter Property="Padding" Value="16 12"/>
+        <Setter Property="CornerRadius" Value="6"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="tpf:Snackbar">
+                    <Border x:Name="PART_Root" MinWidth="300" MaxWidth="560" Opacity="0" Background="{TemplateBinding Background}" CornerRadius="{TemplateBinding CornerRadius}">
+                        <Grid Margin="{TemplateBinding Padding}">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto"/>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <TextBlock x:Name="PART_Icon" Grid.Row="0" Grid.Column="0" FontSize="16" Margin="0 0 10 0" VerticalAlignment="Center" Visibility="Collapsed"/>
+
+                            <TextBlock x:Name="PART_Message" Grid.Row="0" Grid.Column="1" VerticalAlignment="Center"
+                                       Text="{TemplateBinding CurrentText}" Foreground="{TemplateBinding Foreground}"
+                                       FontSize="13" TextWrapping="Wrap"/>
+
+                            <Button x:Name="PART_ActionButton" Grid.Row="0" Grid.Column="2"
+                                    Content="{TemplateBinding CurrentActionText}"
+                                    Foreground="{TemplateBinding ActionButtonForeground}"
+                                    Background="Transparent"
+                                    BorderThickness="0"
+                                    Cursor="Hand"
+                                    FontWeight="SemiBold" FontSize="13"
+                                    Margin="16 0 0 0" Padding="8 4"
+                                    VerticalAlignment="Center"
+                                    Visibility="{TemplateBinding CurrentActionText, Converter={StaticResource StringToVisibilityConverter}}">
+                                <Button.Template>
+                                    <ControlTemplate TargetType="Button">
+                                        <Border x:Name="ActionBorder" Background="Transparent" CornerRadius="4" Padding="{TemplateBinding Padding}">
+                                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="ActionBorder" Property="Background" Value="#11CECECE"/>
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </Button.Template>
+                            </Button>
+                        </Grid>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsActionStacked" Value="True">
+                            <Setter TargetName="PART_ActionButton" Property="Grid.Row" Value="1"/>
+                            <Setter TargetName="PART_ActionButton" Property="Grid.Column" Value="0"/>
+                            <Setter TargetName="PART_ActionButton" Property="Grid.ColumnSpan" Value="3"/>
+                            <Setter TargetName="PART_ActionButton" Property="HorizontalAlignment" Value="Right"/>
+                            <Setter TargetName="PART_ActionButton" Property="Margin" Value="0,8,0,0"/>
+                        </Trigger>
+                        <Trigger Property="CurrentSeverity" Value="Info">
+                            <Setter TargetName="PART_Icon" Property="Text" Value="ℹ"/>
+                            <Setter TargetName="PART_Icon" Property="Foreground" Value="#64B5F6"/>
+                            <Setter TargetName="PART_Icon" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                        <Trigger Property="CurrentSeverity" Value="Success">
+                            <Setter TargetName="PART_Icon" Property="Text" Value="✓"/>
+                            <Setter TargetName="PART_Icon" Property="Foreground" Value="#66BB6A"/>
+                            <Setter TargetName="PART_Root" Property="BorderBrush" Value="#2E7D32"/>
+                            <Setter TargetName="PART_Root" Property="BorderThickness" Value="0,0,0,2"/>
+                            <Setter TargetName="PART_Icon" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                        <Trigger Property="CurrentSeverity" Value="Warning">
+                            <Setter TargetName="PART_Icon" Property="Text" Value="⚠"/>
+                            <Setter TargetName="PART_Icon" Property="Foreground" Value="#FFA726"/>
+                            <Setter TargetName="PART_Root" Property="BorderBrush" Value="#EF6C00"/>
+                            <Setter TargetName="PART_Root" Property="BorderThickness" Value="0,0,0,2"/>
+                            <Setter TargetName="PART_Icon" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                        <Trigger Property="CurrentSeverity" Value="Error">
+                            <Setter TargetName="PART_Icon" Property="Text" Value="✕"/>
+                            <Setter TargetName="PART_Icon" Property="Foreground" Value="#EF5350"/>
+                            <Setter TargetName="PART_Root" Property="BorderBrush" Value="#C62828"/>
+                            <Setter TargetName="PART_Root" Property="BorderThickness" Value="0,0,0,2"/>
+                            <Setter TargetName="PART_Icon" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="tpf:Snackbar" BasedOn="{StaticResource TPF.SnackbarStyle}"/>
 
     <!-- ==================== Tile ==================== -->
     <Style TargetType="tpf:Tile" x:Key="TPF.TileStyle">
@@ -3819,14 +3919,14 @@
                                                   DisplayDate="{Binding DisplayDate, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" DateSelectionMode="{TemplateBinding DateSelectionMode}"
                                                   DisplayDateStart="{TemplateBinding DisplayDateStart}" DisplayDateEnd="{TemplateBinding DisplayDateEnd}"
                                                   SelectableDateStart="{TemplateBinding SelectableDateStart}" SelectableDateEnd="{TemplateBinding SelectableDateEnd}"/>
-                                    
+
                                     <tpf:Clock x:Name="Clock" Grid.Column="1" Style="{TemplateBinding ClockStyle}" DisplayMode="{TemplateBinding ClockDisplayMode}" Is24Hours="{TemplateBinding IsClock24Hours}"
                                                SelectedTime="{Binding Time, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"/>
                                 </Grid>
                             </Border>
                         </Popup>
-                        
-                        <Popup IsOpen="{Binding IsParsingToolTipOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" StaysOpen="False" AllowsTransparency="True" 
+
+                        <Popup IsOpen="{Binding IsParsingToolTipOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}" StaysOpen="False" AllowsTransparency="True"
                                Placement="Top" PlacementTarget="{Binding ElementName=Background}">
                             <ContentPresenter Content="{TemplateBinding ParsingToolTip}" ContentTemplate="{TemplateBinding ParsingToolTipTemplate}"/>
                         </Popup>
@@ -4275,11 +4375,11 @@
 
                 <tpf:SliderTrack x:Name="PART_Track" Grid.Row="2" Margin="0 2">
                     <tpf:SliderTrack.DecreaseRepeatButton>
-                        <RepeatButton Command="{x:Static tpf:Slider.DecreaseLarge}" Style="{StaticResource TPF.SliderRepeatButtonStyle}" 
+                        <RepeatButton Command="{x:Static tpf:Slider.DecreaseLarge}" Style="{StaticResource TPF.SliderRepeatButtonStyle}"
                                       Interval="{TemplateBinding Interval}" Delay="{TemplateBinding Delay}"/>
                     </tpf:SliderTrack.DecreaseRepeatButton>
                     <tpf:SliderTrack.IncreaseRepeatButton>
-                        <RepeatButton Command="{x:Static tpf:Slider.IncreaseLarge}" Style="{StaticResource TPF.SliderRepeatButtonStyle}" 
+                        <RepeatButton Command="{x:Static tpf:Slider.IncreaseLarge}" Style="{StaticResource TPF.SliderRepeatButtonStyle}"
                                       Interval="{TemplateBinding Interval}" Delay="{TemplateBinding Delay}"/>
                     </tpf:SliderTrack.IncreaseRepeatButton>
                     <tpf:SliderTrack.Thumb>
@@ -4340,16 +4440,16 @@
                              Ticks="{TemplateBinding Ticks}" TickBrush="{TemplateBinding TickBrush}" MinorTickBrush="{TemplateBinding MinorTickBrush}"
                              ActiveTickBrush="{TemplateBinding ActiveTickBrush}" ActiveMinorTickBrush="{TemplateBinding ActiveMinorTickBrush}"/>
                 <tpf:SliderLabelsControl x:Name="PART_BottomRightLabelsControl" Grid.Column="4" Visibility="Collapsed"/>
-                
+
                 <Border x:Name="TrackBackground" Width="6" Grid.Column="2" Background="{TemplateBinding TrackBrush}" CornerRadius="{TemplateBinding TrackCornerRadius}"/>
-                
+
                 <tpf:SliderTrack x:Name="PART_Track" Grid.Column="2" Margin="2 0">
                     <tpf:SliderTrack.DecreaseRepeatButton>
-                        <RepeatButton Command="{x:Static tpf:Slider.DecreaseLarge}" Style="{StaticResource TPF.SliderRepeatButtonStyle}" 
+                        <RepeatButton Command="{x:Static tpf:Slider.DecreaseLarge}" Style="{StaticResource TPF.SliderRepeatButtonStyle}"
                                       Interval="{TemplateBinding Interval}" Delay="{TemplateBinding Delay}"/>
                     </tpf:SliderTrack.DecreaseRepeatButton>
                     <tpf:SliderTrack.IncreaseRepeatButton>
-                        <RepeatButton Command="{x:Static tpf:Slider.IncreaseLarge}" Style="{StaticResource TPF.SliderRepeatButtonStyle}" 
+                        <RepeatButton Command="{x:Static tpf:Slider.IncreaseLarge}" Style="{StaticResource TPF.SliderRepeatButtonStyle}"
                                       Interval="{TemplateBinding Interval}" Delay="{TemplateBinding Delay}"/>
                     </tpf:SliderTrack.IncreaseRepeatButton>
                     <tpf:SliderTrack.Thumb>
@@ -4362,7 +4462,7 @@
                         <tpf:RangeSliderThumb Style="{TemplateBinding RangeThumbStyle}"/>
                     </tpf:SliderTrack.RangeThumb>
                     <tpf:SliderTrack.ThumbsControl>
-                        <tpf:SliderThumbsControl ItemsSource="{Binding Thumbs, RelativeSource={RelativeSource AncestorType=tpf:Slider}}" 
+                        <tpf:SliderThumbsControl ItemsSource="{Binding Thumbs, RelativeSource={RelativeSource AncestorType=tpf:Slider}}"
                                                  Orientation="{TemplateBinding Orientation}" IsDirectionReversed="{TemplateBinding IsDirectionReversed}"/>
                     </tpf:SliderTrack.ThumbsControl>
                 </tpf:SliderTrack>
@@ -4418,7 +4518,7 @@
                 <ControlTemplate TargetType="Thumb">
                     <tpf:SimplePanel>
                         <Border Width="1" Background="{TemplateBinding BorderBrush}" HorizontalAlignment="Center"/>
-                        <Border Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" 
+                        <Border Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}"
                                 Width="22" Height="22" CornerRadius="11" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <Grid>
                                 <Grid.ColumnDefinitions>
@@ -4444,7 +4544,7 @@
                 <ControlTemplate TargetType="Thumb">
                     <tpf:SimplePanel>
                         <Border Height="1" Background="{TemplateBinding BorderBrush}" VerticalAlignment="Center"/>
-                        <Border Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}" 
+                        <Border Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}"
                                 Width="22" Height="22" CornerRadius="11" HorizontalAlignment="Center" VerticalAlignment="Center">
                             <Grid>
                                 <Grid.RowDefinitions>
@@ -4733,7 +4833,7 @@
 
             <Border Grid.ColumnSpan="3" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}"/>
 
-            <RepeatButton Grid.Column="0" Width="15" Style="{StaticResource TPF.ResizeableScrollBarRepeatButtonStyle}" 
+            <RepeatButton Grid.Column="0" Width="15" Style="{StaticResource TPF.ResizeableScrollBarRepeatButtonStyle}"
                           Command="{x:Static tpf:ResizeableScrollBar.LineLeft}" Visibility="{TemplateBinding ButtonVisibility}">
                 <Path Width="5" Height="9" Data="M0,4.5 L5,0 5,9 z" Fill="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType=RepeatButton}}"/>
             </RepeatButton>
@@ -4759,7 +4859,7 @@
                 </tpf:ResizeableScrollBarTrack.IncreaseRepeatButton>
             </tpf:ResizeableScrollBarTrack>
 
-            <RepeatButton Grid.Column="2" Width="15" Style="{StaticResource TPF.ResizeableScrollBarRepeatButtonStyle}" 
+            <RepeatButton Grid.Column="2" Width="15" Style="{StaticResource TPF.ResizeableScrollBarRepeatButtonStyle}"
                           Command="{x:Static tpf:ResizeableScrollBar.LineRight}" Visibility="{TemplateBinding ButtonVisibility}">
                 <Path Width="5" Height="9" Data="M0,0 L0,9 5,4.5 z" Fill="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType=RepeatButton}}"/>
             </RepeatButton>
@@ -4775,7 +4875,7 @@
 
             <Border Grid.RowSpan="3" Background="{TemplateBinding Background}" BorderThickness="{TemplateBinding BorderThickness}" BorderBrush="{TemplateBinding BorderBrush}"/>
 
-            <RepeatButton Grid.Row="0" Height="15" Style="{StaticResource TPF.ResizeableScrollBarRepeatButtonStyle}" 
+            <RepeatButton Grid.Row="0" Height="15" Style="{StaticResource TPF.ResizeableScrollBarRepeatButtonStyle}"
                           Command="{x:Static tpf:ResizeableScrollBar.LineUp}" Visibility="{TemplateBinding ButtonVisibility}">
                 <Path Margin="0 0 0 0" Width="9" Height="5" Data="M0,5 L4.5,0 9,5 z" Fill="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType=RepeatButton}}"/>
             </RepeatButton>
@@ -4801,7 +4901,7 @@
                 </tpf:ResizeableScrollBarTrack.IncreaseRepeatButton>
             </tpf:ResizeableScrollBarTrack>
 
-            <RepeatButton Grid.Row="2" Height="15" Style="{StaticResource TPF.ResizeableScrollBarRepeatButtonStyle}" 
+            <RepeatButton Grid.Row="2" Height="15" Style="{StaticResource TPF.ResizeableScrollBarRepeatButtonStyle}"
                           Command="{x:Static tpf:ResizeableScrollBar.LineDown}" Visibility="{TemplateBinding ButtonVisibility}">
                 <Path Width="9" Height="5" Data="M0,0 L9,0 4.5,5 z" Fill="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType=RepeatButton}}"/>
             </RepeatButton>
@@ -6707,7 +6807,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="databar:StackedDataBarItem">
                     <databar:DataBarShape x:Name="PART_BarShape" Style="{TemplateBinding BarStyle}" HeightFactor="{TemplateBinding BarHeightFactor}" Fill="{TemplateBinding Background}"
-                                          Stroke="{TemplateBinding BorderBrush}" StrokeThickness="{TemplateBinding BarStrokeThickness}" 
+                                          Stroke="{TemplateBinding BorderBrush}" StrokeThickness="{TemplateBinding BarStrokeThickness}"
                                           Start="{TemplateBinding Start}" End="{TemplateBinding End}" ToolTipService.IsEnabled="{TemplateBinding ToolTipTemplate, Converter={StaticResource NullToBooleanConverter}}">
                         <databar:DataBarShape.ToolTip>
                             <ToolTip DataContext="{Binding Path=PlacementTarget.DataContext, RelativeSource={RelativeSource Self}}" Content="{Binding }" ContentTemplate="{TemplateBinding ToolTipTemplate}"/>
@@ -6951,7 +7051,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="datetimerange:GroupIntervalLabel">
                     <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="True">
-                        <TextBlock Text="{Binding Label}" Margin="{TemplateBinding Padding}" 
+                        <TextBlock Text="{Binding Label}" Margin="{TemplateBinding Padding}"
                                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                     </Border>
                 </ControlTemplate>
@@ -6972,7 +7072,7 @@
                 <ControlTemplate TargetType="datetimerange:ItemIntervalLabel">
                     <tpf:SimplePanel Background="{TemplateBinding Background}" Cursor="Hand">
                         <Border BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" SnapsToDevicePixels="True" Margin="0 0 0 3">
-                            <TextBlock Text="{Binding Label}" Margin="{TemplateBinding Padding}" 
+                            <TextBlock Text="{Binding Label}" Margin="{TemplateBinding Padding}"
                                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
                         </Border>
                         <Rectangle x:Name="Indicator" Height="3" VerticalAlignment="Bottom" Fill="{TemplateBinding BorderBrush}"/>
@@ -7116,7 +7216,7 @@
                                     <TextBlock Text="{TemplateBinding SubTitle}" Foreground="{tpf:ResourceLink Key=SelectedTextBrush}" FontSize="15" HorizontalAlignment="Center"/>
                                 </StackPanel>
                             </Border>
-                            
+
                             <Border Grid.Row="1" Padding="{TemplateBinding Padding}">
                                 <Grid>
                                     <Grid.RowDefinitions>
@@ -7133,7 +7233,7 @@
                                 </Grid>
                             </Border>
 
-                            <Image x:Name="Logo" Source="{Binding Path=Logo, RelativeSource={RelativeSource TemplatedParent}, TargetNullValue={x:Null}}" 
+                            <Image x:Name="Logo" Source="{Binding Path=Logo, RelativeSource={RelativeSource TemplatedParent}, TargetNullValue={x:Null}}"
                                    Width="{TemplateBinding LogoWidth}" Height="{TemplateBinding LogoHeight}" Margin="10" Grid.RowSpan="2"
                                    Stretch="{TemplateBinding LogoStretch}"/>
                         </Grid>
@@ -7184,7 +7284,7 @@
                             </Grid.RowDefinitions>
 
                             <Border Grid.Column="0" Grid.RowSpan="2" BorderBrush="{TemplateBinding BorderBrush}" Padding="{TemplateBinding SideContentPadding}"
-                                    BorderThickness="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SideContentBorderWidth, Converter={StaticResource DoubleToThicknessConverter}, ConverterParameter=0\,0\,#\,0}" 
+                                    BorderThickness="{Binding RelativeSource={RelativeSource TemplatedParent}, Path=SideContentBorderWidth, Converter={StaticResource DoubleToThicknessConverter}, ConverterParameter=0\,0\,#\,0}"
                                     Width="{TemplateBinding SideContentWidth}" Visibility="{TemplateBinding SideContentVisibility}">
                                 <ContentPresenter ContentSource="SideContent"/>
                             </Border>
@@ -7227,20 +7327,20 @@
 
                             <Border Grid.Row="1" Background="{TemplateBinding FooterBackground}" BorderThickness="0 1 0 0" BorderBrush="{TemplateBinding BorderBrush}">
                                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="{TemplateBinding FooterPadding}">
-                                    <tpf:Button Command="{x:Static tpf:WizardCommands.GoToPrevious}" 
-                                                Content="{TemplateBinding GoToPreviousButtonContent}" 
+                                    <tpf:Button Command="{x:Static tpf:WizardCommands.GoToPrevious}"
+                                                Content="{TemplateBinding GoToPreviousButtonContent}"
                                                 Visibility="{TemplateBinding GoToPreviousButtonVisibility}"
                                                 Margin="0 0 5 0" MinWidth="70" VerticalAlignment="Center"/>
-                                    <tpf:Button Command="{x:Static tpf:WizardCommands.GoToNext}" 
-                                                Content="{TemplateBinding GoToNextButtonContent}" 
+                                    <tpf:Button Command="{x:Static tpf:WizardCommands.GoToNext}"
+                                                Content="{TemplateBinding GoToNextButtonContent}"
                                                 Visibility="{TemplateBinding GoToNextButtonVisibility}"
                                                 Margin="0 0 5 0" MinWidth="70" VerticalAlignment="Center"/>
-                                    <tpf:Button Command="{x:Static tpf:WizardCommands.Finish}" 
-                                                Content="{TemplateBinding FinishButtonContent}" 
+                                    <tpf:Button Command="{x:Static tpf:WizardCommands.Finish}"
+                                                Content="{TemplateBinding FinishButtonContent}"
                                                 Visibility="{TemplateBinding FinishButtonVisibility}"
                                                 Margin="0 0 5 0" MinWidth="70" VerticalAlignment="Center"/>
-                                    <tpf:Button Command="{x:Static tpf:WizardCommands.Cancel}" 
-                                                Content="{TemplateBinding CancelButtonContent}" 
+                                    <tpf:Button Command="{x:Static tpf:WizardCommands.Cancel}"
+                                                Content="{TemplateBinding CancelButtonContent}"
                                                 Visibility="{TemplateBinding CancelButtonVisibility}"
                                                 Margin="0 0 5 0" MinWidth="70" VerticalAlignment="Center"/>
                                 </StackPanel>

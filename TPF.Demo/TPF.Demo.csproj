@@ -65,6 +65,9 @@
     <Compile Include="Views\Interaction\DialogHostDemoView.xaml.cs">
       <DependentUpon>DialogHostDemoView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Interaction\SnackbarDemoView.xaml.cs">
+      <DependentUpon>SnackbarDemoView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Navigation\HamburgerMenuDemoView.xaml.cs">
       <DependentUpon>HamburgerMenuDemoView.xaml</DependentUpon>
     </Compile>
@@ -218,6 +221,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Interaction\DialogHostDemoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Interaction\SnackbarDemoView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -46,6 +46,9 @@
             SecondaryPressedAccentBrush = BrushFromString("#005FB8");
             SecondaryHeaderBrush = BrushFromString("#005FB8");
             SecondaryProgressBarBrush = BrushFromString("#B6D9FF");
+            SnackbarForegroundBrush = BrushFromString("#FFFFFF");
+            SnackbarBackgroundBrush = BrushFromString("#2B2B2B");
+            SnackbarActionForegroundBrush = BrushFromString("#005FB8");
         }
 
         static SmoothLightSkin _instance;

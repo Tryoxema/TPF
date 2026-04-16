@@ -432,6 +432,33 @@ namespace TPF.Controls
             set { SetProperty(ref _secondaryProgressBarBrush, value); }
         }
         #endregion
+
+        #region SnackbarForegroundBrush
+        Brush _snackbarForegroundBrush;
+        public Brush SnackbarForegroundBrush
+        {
+            get { return _snackbarForegroundBrush; }
+            set { SetProperty(ref _snackbarForegroundBrush, value); }
+        }
+        #endregion
+
+        #region SnackbarBackgroundBrush
+        Brush _snackbarBackgroundBrush;
+        public Brush SnackbarBackgroundBrush
+        {
+            get { return _snackbarBackgroundBrush; }
+            set { SetProperty(ref _snackbarBackgroundBrush, value); }
+        }
+        #endregion
+
+        #region SnackbarActionForegroundBrush
+        Brush _snackbarActionForegroundBrush;
+        public Brush SnackbarActionForegroundBrush
+        {
+            get { return _snackbarActionForegroundBrush; }
+            set { SetProperty(ref _snackbarActionForegroundBrush, value); }
+        }
+        #endregion
         #endregion
 
         public event EventHandler<SkinChangingEventArgs> SkinChanging;
@@ -497,6 +524,9 @@ namespace TPF.Controls
             SecondaryPressedAccentBrush = skin.SecondaryPressedAccentBrush;
             SecondaryHeaderBrush = skin.SecondaryHeaderBrush;
             SecondaryProgressBarBrush = skin.SecondaryProgressBarBrush;
+            SnackbarForegroundBrush = skin.SnackbarForegroundBrush;
+            SnackbarBackgroundBrush = skin.SnackbarBackgroundBrush;
+            SnackbarActionForegroundBrush = skin.SnackbarActionForegroundBrush;
 
             // Alle Brushes müssen eingefroren werden, da an sonsten Fehler bei mehereren Threads auftreten können
             // Aus dem gleichen Grund kann auch kein DependencyObject als Basisklasse hierfür benutzt werden
@@ -541,6 +571,9 @@ namespace TPF.Controls
             SecondaryPressedAccentBrush.Freeze();
             SecondaryHeaderBrush.Freeze();
             SecondaryProgressBarBrush.Freeze();
+            SnackbarForegroundBrush.Freeze();
+            SnackbarBackgroundBrush.Freeze();
+            SnackbarActionForegroundBrush.Freeze();
 
             var changedEventArgs = new SkinChangedEventArgs(skin);
             // Bescheid sagen, dass der Skin geändert wurde

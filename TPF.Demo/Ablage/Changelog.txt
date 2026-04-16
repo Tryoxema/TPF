@@ -1,4 +1,23 @@
-﻿===== 0.7.0 =====
+﻿===== 0.7.1 =====
+-Neue Controls
+--Snackbar
+	Die Snackbar ist ein Control zum darstellen einer nicht invasiven Benachrichtigung am unteren Bereich einer Anwendung.
+	Das Control verwaltet eine MessageQueue um Nachrichten nacheinander abzuarbeiten und unterscheidet dabei aber zwischen normalen und priorisierten Nachrichten.
+	Eine Nachricht kann entweder über die Enqueue- oder EnqueueWithPriority-Methoden der Snackbar selbst oder ihrer MessageQueue eingereiht werden.
+	Die Nachricht besteht aus einem Text, einem Typen, einer Dauer, einem optionalen Text für einen ActionButton und ein Callback was von diesem Button ausgelöst wird.
+	Über EnqueueWithPriority eingereihte Nachrichten werden vor den über Enqueue eingereihten Nachrichten abgearbeitet aber allgemein gilt FIFO für die Nachrichten.
+	Sollte es notwendig sein die eingereihten Nachrichten komplett zu leeren, kann dies über die Clear-Methode der MessageQueue gemacht werden.
+	Die Snackbar selbst stellt ein ActionClicked-RoutedEvent bereit was ebenfalls beim klicken des ActionButtons ausgelöst wird.
+	Über die Property ActionButtonForeground kann der Vordergrund des ActionButtons gesetzt werden, sollte hier ein anderer Brush gewünscht sein.
+	Sobald Nachricht und ActionButton zusammen die Breite in der Property StackThreshold überschreiten, wird der ActionButton unterhalb der Nachricht angezeigt anstatt daneben.
+
+-Veränderte sonstige Klassen
+--ISkin, alle davon erbenden Klassen und ResourceManager:
+	Neue Property SnackbarForegroundBrush
+    Neue Property SnackbarBackgroundBrush
+    Neue Property SnackbarActionForegroundBrush
+
+===== 0.7.0 =====
 -Neue Controls
 --Blueprint
 	Der Blueprint ist ein simples Control, mit dem man ein einfaches Blueprint-Muster mit leichter Konfigurationsmöglichkeit zeichnen kann.

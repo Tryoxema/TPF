@@ -94,5 +94,11 @@ namespace TPF.Skins
         Brush SecondaryHeaderBrush { get; set; }
         // Eine Alternative zum ProgressBarBrush
         Brush SecondaryProgressBarBrush { get; set; }
+        // Der Vordergrund-Brush für Snackbars
+        Brush SnackbarForegroundBrush { get; set; }
+        // Der Hintergrund-Brush für Snackbars
+        Brush SnackbarBackgroundBrush { get; set; }
+        // Der Vordergrund-Brush für Snackbar-Actions
+        Brush SnackbarActionForegroundBrush { get; set; }
     }
 }

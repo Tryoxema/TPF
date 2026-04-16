@@ -60,7 +60,7 @@
 [ ] Flyout
 [X] Callout
 [X] DialogHost
-[ ] Snackbar
+[X] Snackbar
 [X] Comparer
 [X] Badge
 [ ] RotatorTile

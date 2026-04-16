@@ -46,6 +46,9 @@
             SecondaryPressedAccentBrush = BrushFromString("#005FB8");
             SecondaryHeaderBrush = BrushFromString("#005FB8");
             SecondaryProgressBarBrush = BrushFromString("#B6D9FF");
+            SnackbarForegroundBrush = BrushFromString("#000000");
+            SnackbarBackgroundBrush = BrushFromString("#FFFFFF");
+            SnackbarActionForegroundBrush = BrushFromString("#005FB8");
         }
 
         static SmoothDarkSkin _instance;

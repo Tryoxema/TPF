@@ -46,6 +46,9 @@
             SecondaryPressedAccentBrush = BrushFromString("#007ACC");
             SecondaryHeaderBrush = BrushFromString("#007ACC");
             SecondaryProgressBarBrush = BrushFromString("#90CAF9");
+            SnackbarForegroundBrush = BrushFromString("#000000");
+            SnackbarBackgroundBrush = BrushFromString("#FFFFFF");
+            SnackbarActionForegroundBrush = BrushFromString("#007ACC");
         }
 
         static VS2013DarkSkin _instance;

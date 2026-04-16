@@ -7,7 +7,7 @@
                       DataContext="{Binding RelativeSource={RelativeSource Self}}"
                       mc:Ignorable="d"
                       Title="Skin-Editor" 
-                      Height="625" Width="1200">
+                      Height="650" Width="1200">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
@@ -323,6 +323,15 @@
                         <Button Content="Apply" HorizontalAlignment="Right" Click="ApplySecondaryProgressBarBrushButton_Click"/>
                     </tpf:SimplePanel>
                 </StackPanel>
+
+                <StackPanel Margin="0 2">
+                    <TextBlock Text="SnackbarForegroundBrush" Foreground="{tpf:ResourceLink Key=TextBrush}"/>
+                    <Border BorderThickness="1" BorderBrush="Black" Height="20" Background="{tpf:ResourceLink Key=SnackbarForegroundBrush}"/>
+                    <tpf:SimplePanel Margin="0 2 0 0">
+                        <Button Content="Load" HorizontalAlignment="Left" Click="LoadSnackbarForegroundBrushButton_Click"/>
+                        <Button Content="Apply" HorizontalAlignment="Right" Click="ApplySnackbarForegroundBrushButton_Click"/>
+                    </tpf:SimplePanel>
+                </StackPanel>
             </StackPanel>
 
             <StackPanel Grid.Row="0" Grid.Column="1" Margin="5 0">
@@ -370,6 +379,15 @@
                         <Button Content="Apply" HorizontalAlignment="Right" Click="ApplySecondaryMouseOverTextBrushButton_Click"/>
                     </tpf:SimplePanel>
                 </StackPanel>
+
+                <StackPanel Margin="0 2">
+                    <TextBlock Text="SnackbarBackgroundBrush" Foreground="{tpf:ResourceLink Key=TextBrush}"/>
+                    <Border BorderThickness="1" BorderBrush="Black" Height="20" Background="{tpf:ResourceLink Key=SnackbarBackgroundBrush}"/>
+                    <tpf:SimplePanel Margin="0 2 0 0">
+                        <Button Content="Load" HorizontalAlignment="Left" Click="LoadSnackbarBackgroundBrushButton_Click"/>
+                        <Button Content="Apply" HorizontalAlignment="Right" Click="ApplySnackbarBackgroundBrushButton_Click"/>
+                    </tpf:SimplePanel>
+                </StackPanel>
             </StackPanel>
 
             <StackPanel Grid.Row="0" Grid.Column="2" Margin="5 0">
@@ -415,6 +433,15 @@
                     <tpf:SimplePanel Margin="0 2 0 0">
                         <Button Content="Load" HorizontalAlignment="Left" Click="LoadSecondaryPressedTextBrushButton_Click"/>
                         <Button Content="Apply" HorizontalAlignment="Right" Click="ApplySecondaryPressedTextBrushButton_Click"/>
+                    </tpf:SimplePanel>
+                </StackPanel>
+
+                <StackPanel Margin="0 2">
+                    <TextBlock Text="SnackbarActionForegroundBrush" Foreground="{tpf:ResourceLink Key=TextBrush}"/>
+                    <Border BorderThickness="1" BorderBrush="Black" Height="20" Background="{tpf:ResourceLink Key=SnackbarActionForegroundBrush}"/>
+                    <tpf:SimplePanel Margin="0 2 0 0">
+                        <Button Content="Load" HorizontalAlignment="Left" Click="LoadSnackbarActionForegroundBrushButton_Click"/>
+                        <Button Content="Apply" HorizontalAlignment="Right" Click="ApplySnackbarActionForegroundBrushButton_Click"/>
                     </tpf:SimplePanel>
                 </StackPanel>
             </StackPanel>

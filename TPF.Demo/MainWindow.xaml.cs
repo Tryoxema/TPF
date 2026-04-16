@@ -111,6 +111,7 @@ namespace TPF.Demo
                 new DemoItem("Notification", "Interaction", () => CreateTabItem("Notification", typeof(NotificationDemoView))),
                 new DemoItem("Poptip", "Interaction", () => CreateTabItem("Poptip", typeof(PoptipDemoView))),
                 new DemoItem("ProgressBar", "Interaction", () => CreateTabItem("ProgressBar", typeof(ProgressBarDemoView))),
+                new DemoItem("Snackbar", "Interaction", () => CreateTabItem("Snackbar", typeof(SnackbarDemoView))),
                 new DemoItem("StepProgressBar", "Interaction", () => CreateTabItem("StepProgressBar", typeof(StepProgressBarDemoView))),
 
                 new DemoItem("Dashboard", "Layout", () => CreateTabItem("Dashboard", typeof(DashboardDemoView))),

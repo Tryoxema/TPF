@@ -646,5 +646,50 @@ namespace TPF.Demo.Windows
             ResourceManager.Resources.SecondaryProgressBarBrush = new SolidColorBrush(PropertyColor);
         }
         #endregion
+
+        #region SnackbarForegroundBrush
+        private void LoadSnackbarForegroundBrushButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (ResourceManager.Resources.SnackbarForegroundBrush is SolidColorBrush brush)
+            {
+                PropertyColor = brush.Color;
+            }
+        }
+
+        private void ApplySnackbarForegroundBrushButton_Click(object sender, RoutedEventArgs e)
+        {
+            ResourceManager.Resources.SnackbarForegroundBrush = new SolidColorBrush(PropertyColor);
+        }
+        #endregion
+
+        #region SnackbarBackgroundBrush
+        private void LoadSnackbarBackgroundBrushButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (ResourceManager.Resources.SnackbarBackgroundBrush is SolidColorBrush brush)
+            {
+                PropertyColor = brush.Color;
+            }
+        }
+
+        private void ApplySnackbarBackgroundBrushButton_Click(object sender, RoutedEventArgs e)
+        {
+            ResourceManager.Resources.SnackbarBackgroundBrush = new SolidColorBrush(PropertyColor);
+        }
+        #endregion
+
+        #region SnackbarActionForegroundBrush
+        private void LoadSnackbarActionForegroundBrushButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (ResourceManager.Resources.SnackbarActionForegroundBrush is SolidColorBrush brush)
+            {
+                PropertyColor = brush.Color;
+            }
+        }
+
+        private void ApplySnackbarActionForegroundBrushButton_Click(object sender, RoutedEventArgs e)
+        {
+            ResourceManager.Resources.SnackbarActionForegroundBrush = new SolidColorBrush(PropertyColor);
+        }
+        #endregion
     }
 }

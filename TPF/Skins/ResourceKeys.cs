@@ -91,6 +91,12 @@
         // Eine Alternative zum HeaderBrush
         SecondaryHeaderBrush,
         // Eine Alternative zum ProgressBarBrush
-        SecondaryProgressBarBrush
+        SecondaryProgressBarBrush,
+        // Der Vordergrund-Brush für Snackbars
+        SnackbarForegroundBrush,
+        // Der Hintergrund-Brush für Snackbars
+        SnackbarBackgroundBrush,
+        // Der Vordergrund-Brush für Snackbar-Actions
+        SnackbarActionForegroundBrush,
     }
 }
