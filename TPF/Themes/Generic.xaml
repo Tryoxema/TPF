@@ -7263,6 +7263,55 @@
     </Style>
     <Style TargetType="tpf:SplashScreen" BasedOn="{StaticResource TPF.SplashScreenStyle}"/>
 
+    <!-- ==================== DesktopAlert ==================== -->
+    <Style TargetType="tpf:DesktopAlert" x:Key="TPF.DesktopAlertStyle">
+        <Setter Property="Background" Value="{tpf:ResourceLink Key=PrimaryBrush}"/>
+        <Setter Property="Foreground" Value="{tpf:ResourceLink Key=TextBrush}"/>
+        <Setter Property="BorderBrush" Value="{tpf:ResourceLink Key=BorderBrush}"/>
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="Cursor" Value="Hand"/>
+        <Setter Property="Padding" Value="12"/>
+        <Setter Property="Width" Value="320"/>
+        <Setter Property="Height" Value="80"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="tpf:DesktopAlert">
+                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}" CornerRadius="{TemplateBinding CornerRadius}"
+                            Padding="{TemplateBinding Padding}" SnapsToDevicePixels="True">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto"/>
+                            </Grid.ColumnDefinitions>
+
+                            <ContentPresenter Grid.Row="0" Grid.Column="0"
+                                              Content="{TemplateBinding Header}"
+                                              ContentTemplate="{TemplateBinding HeaderTemplate}"
+                                              TextElement.FontWeight="SemiBold"
+                                              TextElement.FontSize="14"/>
+
+                            <Button x:Name="PART_CloseButton" Grid.Row="0" Grid.Column="1" Content="✕"
+                                    Foreground="{TemplateBinding Foreground}"
+                                    Background="Transparent"
+                                    BorderThickness="0"
+                                    Cursor="Hand"
+                                    Padding="4 0"
+                                    Visibility="{TemplateBinding IsClosable, Converter={StaticResource BooleanToVisibilityConverter}}"/>
+
+                            <ContentPresenter Grid.Row="1" Grid.ColumnSpan="2" Margin="0 6 0 0"/>
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="tpf:DesktopAlert" BasedOn="{StaticResource TPF.DesktopAlertStyle}"/>
+
     <!-- ==================== WizardPage ==================== -->
     <Style TargetType="tpf:WizardPage" x:Key="TPF.WizardPageStyle">
         <Setter Property="Foreground" Value="{tpf:ResourceLink Key=TextBrush}"/>

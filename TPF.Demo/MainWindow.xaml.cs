@@ -107,6 +107,7 @@ namespace TPF.Demo
                 new DemoItem("Callout", "Interaction", () => CreateTabItem("Callout", typeof(CalloutDemoView))),
                 new DemoItem("Comparer", "Interaction", () => CreateTabItem("Comparer", typeof(ComparerDemoView))),
                 new DemoItem("DialogHost", "Interaction", () => CreateTabItem("DialogHost", typeof(DialogHostDemoView))),
+                new DemoItem("DesktopAlert", "Interaction", () => CreateTabItem("DesktopAlert", typeof(DesktopAlertDemoView))),
                 new DemoItem("DragDrop", "Interaction", () => CreateTabItem("DragDrop", typeof(DragDropDemoView))),
                 new DemoItem("Notification", "Interaction", () => CreateTabItem("Notification", typeof(NotificationDemoView))),
                 new DemoItem("Poptip", "Interaction", () => CreateTabItem("Poptip", typeof(PoptipDemoView))),

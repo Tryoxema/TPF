@@ -1,7 +1,7 @@
 ﻿===== 0.7.1 =====
 -Neue Controls
 --Snackbar
-	Die Snackbar ist ein Control zum darstellen einer nicht invasiven Benachrichtigung am unteren Bereich einer Anwendung.
+	Die Snackbar ist ein Control zum Darstellen einer nicht invasiven Benachrichtigung am unteren Bereich einer Anwendung.
 	Das Control verwaltet eine MessageQueue um Nachrichten nacheinander abzuarbeiten und unterscheidet dabei aber zwischen normalen und priorisierten Nachrichten.
 	Eine Nachricht kann entweder über die Enqueue- oder EnqueueWithPriority-Methoden der Snackbar selbst oder ihrer MessageQueue eingereiht werden.
 	Die Nachricht besteht aus einem Text, einem Typen, einer Dauer, einem optionalen Text für einen ActionButton und ein Callback was von diesem Button ausgelöst wird.
@@ -10,6 +10,16 @@
 	Die Snackbar selbst stellt ein ActionClicked-RoutedEvent bereit was ebenfalls beim klicken des ActionButtons ausgelöst wird.
 	Über die Property ActionButtonForeground kann der Vordergrund des ActionButtons gesetzt werden, sollte hier ein anderer Brush gewünscht sein.
 	Sobald Nachricht und ActionButton zusammen die Breite in der Property StackThreshold überschreiten, wird der ActionButton unterhalb der Nachricht angezeigt anstatt daneben.
+--DesktopAlert
+	Der DesktopAlert ist ein Control zum Anzeigen einer Benachrichtigung auf dem Desktop, außerhalb der Anwendung.
+	Das Control selbst wird nur zum Konfigurieren und Stylen verwendet, das tatsächliche Aufrufen und Positionieren wird vom DesktopAlertManager durchgeführt.
+	Als ContentControl mit Header kann der DesktopAlert für die Darstellung von so ziemlich allem genutzt werden und sonst über Styles und Templates frei Konfiguriert werden.
+	Über die Command-Property kann dem DesktopAlert ein beliebiges Command gegeben werden das ausgeführt wird, wenn das Control angeklickt wird.
+	Der DesktopAlertManager kann genutzt werden um eine DesktopAlert-Instanz anzuzeigen oder über eine DesktopAlertConfig ein solches generieren zu lassen.
+	Des weiteren steht über den DesktopAlertManager eine CloseAll-Funktion zur verfügung, um programmatisch alle Alerts eines Managers zu schließen.
+	Bei der Anzeige eines DesktopAlerts kann konfiguriert werden, ob dieser nach einer festen Zeitspanne automatisch geschlossen wird oder nicht.
+	Zusätzlich unterstützt der DesktopAlertManager 6 unterschiedliche Positionen für die Positionierung der Alerts, die im Kontruktor festgelegt werden.
+	DesktopAlerts können Oben links, Oben mittig, Oben rechts, Unten links, Unten mittig oder Unten rechts positioniert werden und werden automatisch gestapelt.
 
 -Veränderte sonstige Klassen
 --ISkin, alle davon erbenden Klassen und ResourceManager:

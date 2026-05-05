@@ -54,7 +54,7 @@
 [X] StepProgressBar
 [X] Rating
 [X] Notification
-[ ] DesktopAlert
+[X] DesktopAlert
 [ ] ToolTip???
 [X] Poptip
 [ ] Flyout
